@@ -8,14 +8,7 @@
 <body>
 	<div class="box">
 		<div class="box_box">
-			<!-- 注册 -->
-			<div class="login">
-				<h4>注册</h4>
-				<div>名字：<input type="text" id="login_name"></div>
-				<div>账号：<input type="text" id="login_user"></div>
-				<div>密码：<input type="password" id="login_pass"></div>
-				<div><button id="gotologin">返回登陆</button> <button id="login_btn">注册</button></div>
-			</div>
+			
 			<!-- 登录 -->
 			<div class="logon">
 				<a href="index.html" id="gotoindex" class="fl">←</a>
@@ -25,17 +18,35 @@
 				<div class="a clearfix"><a href="#" class="fl">问题?</a><a href="#" class="fr" id="go_login">注册</a></div>
 				<div><button id="logon_btn">登录</button></div>
 			</div>
+			<!-- 注册 -->
+			<div class="login">
+				<h4>注册</h4>
+				<div>名字：<input type="text" id="login_name"></div>
+				<div>账号：<input type="text" id="login_user"></div>
+				<div>密码：<input type="password" id="login_pass"></div>
+				<div><button id="gotologon">返回登陆</button> <button id="login_btn">注册</button></div>
+			</div>
 		</div>
 	</div>
 	<script src="js/jquery.js"></script>
 	<script>
+		var h = window.innerHeight;
+		document.querySelector('.box').style.height=h+'px';
 		$('#go_login').on('click',function(){
-			$('.logon').css({'display':'none'})
-			$('.login').css({'display':'block'})
+			$('.logon').css({
+				'display':'none'
+			})
+			$('.login').css({
+				'display':'block'
+			})
 		})
-		$('#gotologin').on('click',function(){
-				$('.logon').css({'display':'block'})
-				$('.login').css({'display':'none'})
+		$('#gotologon').on('click',function(){
+				$('.logon').css({
+					'display':'block'
+				})
+				$('.login').css({
+					'display':'none'
+				})
 		})
 	</script>
 </body>

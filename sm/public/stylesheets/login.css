@@ -24,7 +24,6 @@
 }
 .box{
 	width: 100%;
-	height: 670px;
 	background:url('https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4290710894,836426395&fm=26&gp=0.jpg') no-repeat;
 	background-size: 100% 100%;
 	padding-top: 180px;
@@ -35,6 +34,8 @@
 	text-align: center;
 	background-color: rgba(0,0,0,.5);
 	margin: 0 auto;
+	border-radius: 20px;
+	box-shadow: 1px 1px 6px 6px rgba(0,0,0,.6);
 }
 .logon h4,.login h4{
 	color:#fff;
@@ -73,4 +74,11 @@
 }
 #gotoindex{
 	font-size: 30px;
+}
+/*添加切换效果*/
+.logon{
+	transition: all 1s ease-out;
+}
+.login{
+	transition: all 1s ease-out;
 }
