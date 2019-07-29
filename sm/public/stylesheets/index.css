@@ -24,6 +24,9 @@
     top: 20px;
     right: 7%;
 }
+.out{
+    display: none;
+}
 .header span{
     font-size: 30px;
     line-height: 100px;

@@ -19,7 +19,7 @@ router.post('/login',function(req,res){
 			}else{
 				sql.con({
 					arr:[json.name,json.user,json.pass,json.img],
-					sql:'insert into usera(name,user,pass,img) values(?,?,?,?)',
+					sql:'insert into login(name,user,pass) values(?,?,?)',
 					success(data){
 						res.send('ok')
 					},
