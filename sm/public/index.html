@@ -9,8 +9,9 @@
     <div id="box">
         <div class="header">
             <span>学生管理系统</span>
-            <a href="login.html">注册或登录</a>
-            <p id="user">用户名:<i>1234</i></p>
+            <a class="go" href="login.html">注册或登录</a>
+            <a class="out" href="#">退出登录</a>
+            <p id="user">用户名:<i>未登录</i></p>
         </div>
         <div id="content" class="clearfix">
             <div id="left">
@@ -148,5 +149,33 @@
         </div>
     </div>
     <script src="js/jquery.js"></script>
+    <script>
+        if(localStorage.user){
+            $('.go').css({
+                display:'none'
+            });
+            $('.out').css({
+                display:'block'
+            });
+            var localStorageUser=JSON.parse(localStorage.user);
+            console.log(localStorageUser)
+            $('#user i').html(localStorageUser.name)
+
+        }else{
+            $('.go').css({
+                display:'block'
+            });
+            $('.out').css({
+                display:'none'
+            });
+        }
+        $('.out').on('click',function(){
+            var a=confirm('欢迎下次再来')
+            if(a){
+                localStorage.clear();
+                location.href='./login.html'
+            }
+        })
+    </script>
 </body>
 </html>
