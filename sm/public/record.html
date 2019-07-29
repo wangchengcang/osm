@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.box {
+			width: 80%;
+			height: auto;
+			margin: auto;
+		}
+
+		.title {
+			width: 100%;
+			height: 70px;
+			line-height: 70px;
+			text-align: center;
+		}
+
+		.xinx {
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			font-weight: bold;
+			border-bottom: 1px solid white;
+			background: #d1e2f9;
+			text-align: center;
+		}
+
+		td {
+			height: 22px !important;
+			padding: 0;
+		}
+
+		.z-text {
+			height: 22px; 
+			width: 200px;
+			float: right;
+			margin-right: 20px;
+			margin-top: 6px;
+		}
+
+		.zy {
+			text-align: center;
+			padding-top: 40px;
+			font-size: 18px;
+		}
+
+		.btn {
+			width: 60%;
+			height: 50px;
+			margin: auto;
+			line-height: 50px;
+		}
+		.open {
+			width: 150px;
+			height: 40px;
+			outline-style: none;
+			border-radius: 20px;
+			background: #7cb1fe;
+			border-style: none;
+		}
+		.input {
+			width: 150px;
+			height: 40px;
+			margin-left: 95px;
+			outline-style: none;
+			border-radius: 20px;
+			background: #7cb1fe;
+			border-style: none;
+		}
+		.close {
+			width: 150px;
+			height: 40px;
+			outline-style: none;
+			margin-left: 90px;
+			border-radius: 20px;
+			background: #7cb1fe;
+			border-style: none;
+		}
+		.box table{
+			width: 100%;
+		}
+		.box table tr td:nth-child(1){
+			width: 50%;
+			border-right: 1px solid white;
+			background:#d1e2f9;
+			line-height: 36px;
+		} 
+		.box table tr td:nth-child(2){
+			width: 50%;
+			background:#d1e2f9;
+			line-height: 36px;
+		} 
+		.box table tr td p{
+			padding-left: 10px;
+			float: left;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<div class="title">
+			<h3>新增记录</h3>
+		</div>
+		<div class="xinx">基本信息</div>
+		<table border="0" cellspacing="1" cellpadding="">
+
+			<tr>
+				<td>
+					<p>学号*</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>姓名*</p><input type="text" class="z-text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>性别*</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>身份证号</p><input type="text" class="z-text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>出生日期</p>*<input type="text" class="z-text">
+				</td>
+				<td>
+					<p>民族</p><input type="text" class="z-text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>籍贯</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>政治面貌</p><input type="text" class="z-text">
+				</td>
+			</tr>
+
+		</table>
+		<div class="xinx">联系信息</div>
+
+		<table border="0" cellspacing="1" cellpadding="">
+			<tr>
+				<td>
+					<p>联系电话</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>手机号码</p><input type="text" class="z-text">
+				</td>
+			</tr>
+			<tr>
+				<td>Email<input type="text" class="z-text"></td>
+				<td>
+					<p>毕业去向</p><input type="text" class="z-text">
+				</td>
+			</tr>
+		</table>
+
+		<div class="xinx">其他信息</div>
+		<table border="0" cellspacing="1" cellpadding="">
+			<tr>
+				<td>
+					<p> 村长与爱好</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p></p>照片<input type="text" class="z-text">
+				</td>
+			</tr>
+		</table>
+
+		<div class="xinx">家庭信息</div>
+		<table border="0" cellspacing="1" cellpadding="">
+			<tr>
+				<td>
+					<p>家长姓名</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>家长所在单位</p><input type="text" class="z-text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>家长任职职位</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>家长联系电话</p><input type="text" class="z-text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>家庭住址</p><input type="text" class="z-text">
+				</td>
+				<td>
+					<p>邮政编码</p><input type="text" class="z-text">
+				</td>
+			</tr>
+		</table>
+
+		<p class="zy">注意:每个附件的大小不得超出 3072K字节，否则系统拒绝接收。</p>
+		<div class="btn">
+			<button class="open">保存并关闭</button>
+			<button class="input">保存并录入下一条</button>
+			<button class="close">关闭</button>
+		</div>
+	</div>
+</body>
+
+</html>
