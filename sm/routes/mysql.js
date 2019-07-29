@@ -3,7 +3,7 @@ var pool=mysql.createPool({
 	host:'192.168.43.207',
 	user:'root',
 	password:'root',
-	database:'uuu'
+	database:'sm'
 })
 module.exports={
 	con(json){
