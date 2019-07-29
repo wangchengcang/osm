@@ -48,6 +48,72 @@
 					'display':'none'
 				})
 		})
+		var href='http://localhost:8000';
+		//注册
+		login_btn.onclick=function(){
+			if(/[\u4E00-\u9FA5]/g.test(login_user.value)||/[\u4E00-\u9FA5]/g.test(login_pass.value)){
+				alert('账号或密码不得为中文')
+			}else if(login_name.value==''){
+				alert('请编辑昵称')
+			}else if(login_user.value==''){
+				alert('请输入账号')
+			}else if(login_pass.value==''){
+				alert('请输入密码')
+			}else{
+				$.ajax({
+					type:'post',
+					url:href+'/users/zc',
+					data:{
+						name:login_name.value,
+						user:login_user.value,
+						pass:login_pass.value, 
+					},
+					success(data){
+						if(data=='ok'){
+							alert('注册成功');
+							$('.login').css({'display':'none'})
+							$('.logon').css({'display':'block'})
+						}else{
+							alert('该用户已被注册')
+							login_name.value='';
+							login_user.value='';
+							login_pass.value='';
+						}
+					}
+				})
+			}
+		}
+		//登录	
+		logon_btn.onclick=function(){
+			if(/[\u4E00-\u9FA5]/g.test(logon_user.value)||/[\u4E00-\u9FA5]/g.test(logon_pass.value)){
+				alert('内容不得为中文')
+			}else if(logon_user.value==''){
+				alert('请输入账号')
+			}else if(logon_pass.value==''){
+				alert('请输入密码')
+			}else{
+				$.ajax({
+					type:'post',
+					url:href+'/users/in',
+					data:{
+						user:logon_user.value,
+						pass:logon_pass.value,
+					},
+					success(data){
+						console.log(data)
+						if(data=='ok'){
+							alert('账号或密码错误');
+							logon_user.value='';
+							pass_in.value='';
+						}else{
+							alert('登录成功');
+							location.href='./index.html';
+							localStorage.user = JSON.stringify(data)
+						}
+					}
+				})
+			}
+		}
 	</script>
 </body>
 </html>
