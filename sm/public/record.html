@@ -11,11 +11,22 @@
 			margin: 0;
 			padding: 0;
 		}
-
+		.main{
+			width: 100%;
+			min-height:800px;
+			/* background-image:url(http://www.pptbz.com/Soft/UploadSoftPic/201401/2014011321565813.jpg) no-repeat; */
+			position: relative;
+		}
 		.box {
-			width: 80%;
-			height: auto;
+			width:80%;
+			height:800px;
 			margin: auto;
+			padding-bottom:20px;
+			position:absolute;
+			top:-800px;
+			left:50%;
+			margin-left: -40%;
+			background-color: #fff;
 		}
 
 		.title {
@@ -55,14 +66,19 @@
 		}
 
 		.btn {
-			width: 60%;
-			height: 50px;
-			margin: auto;
+			width:100%;
+			height:50px;
 			line-height: 50px;
+			text-align: center;
+		}
+		.btn button{
+			width: 25%;
+			cursor: pointer;
+			margin-right: 20px;
 		}
 		.open {
-			width: 150px;
-			height: 40px;
+			width:150px;
+			height:40px;
 			outline-style: none;
 			border-radius: 20px;
 			background: #7cb1fe;
@@ -71,7 +87,6 @@
 		.input {
 			width: 150px;
 			height: 40px;
-			margin-left: 95px;
 			outline-style: none;
 			border-radius: 20px;
 			background: #7cb1fe;
@@ -81,7 +96,6 @@
 			width: 150px;
 			height: 40px;
 			outline-style: none;
-			margin-left: 90px;
 			border-radius: 20px;
 			background: #7cb1fe;
 			border-style: none;
@@ -104,117 +118,307 @@
 			padding-left: 10px;
 			float: left;
 		}
+		.add{
+			width:150px;
+			height:40px;
+			outline-style: none;
+			border-radius: 20px;
+			background: #7cb1fe;
+			border-style: none;
+			cursor: pointer;
+			font-size: 18px;
+			position: absolute;
+			right: 10%;
+			top:40px;
+		}
+		.mian-table{
+			width:80%;
+			min-height:800px;
+			margin:auto;
+			/* background: #00B7FF; */
+		}
+		.newtrainees{
+			margin-top:20px;
+			width:100%;
+		}
+		.newtrainees tr td{
+			text-align: center;
+		}
+		.return{
+			text-decoration: none;
+			color: #000;
+			cursor: pointer;
+			font-size:18px;
+			position:absolute;
+			left: 10%;
+			top:40px;
+		}
 	</style>
 </head>
-
 <body>
-	<div class="box">
-		<div class="title">
-			<h3>新增记录</h3>
+	<div class="main">
+		<div class="mian-table">
+			<div class="title">
+				<h3>新增学员记录</h3>
+			</div>
+			<a href="index.html" class="return">返回</a>
+			<button type="button" class="add" id="newadd">新学员录入</button>
+			<table  border="2" cellspacing="0" class="newtrainees">
+				<tr>
+					<th>姓名</th>
+					<th>学号</th>
+					<th>年龄</th>
+					<th>身份证号</th>
+					<th>父母电话</th>
+					<th>籍贯</th>
+					<th>大区</th>
+					<th>学制</th>
+					<th>学籍</th>
+					<th>班级</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
 		</div>
-		<div class="xinx">基本信息</div>
-		<table border="0" cellspacing="1" cellpadding="">
-
-			<tr>
-				<td>
-					<p>学号*</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>姓名*</p><input type="text" class="z-text">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>性别*</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>身份证号</p><input type="text" class="z-text">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>出生日期</p>*<input type="text" class="z-text">
-				</td>
-				<td>
-					<p>民族</p><input type="text" class="z-text">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>籍贯</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>政治面貌</p><input type="text" class="z-text">
-				</td>
-			</tr>
-
-		</table>
-		<div class="xinx">联系信息</div>
-
-		<table border="0" cellspacing="1" cellpadding="">
-			<tr>
-				<td>
-					<p>联系电话</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>手机号码</p><input type="text" class="z-text">
-				</td>
-			</tr>
-			<tr>
-				<td>Email<input type="text" class="z-text"></td>
-				<td>
-					<p>毕业去向</p><input type="text" class="z-text">
-				</td>
-			</tr>
-		</table>
-
-		<div class="xinx">其他信息</div>
-		<table border="0" cellspacing="1" cellpadding="">
-			<tr>
-				<td>
-					<p> 村长与爱好</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p></p>照片<input type="text" class="z-text">
-				</td>
-			</tr>
-		</table>
-
-		<div class="xinx">家庭信息</div>
-		<table border="0" cellspacing="1" cellpadding="">
-			<tr>
-				<td>
-					<p>家长姓名</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>家长所在单位</p><input type="text" class="z-text">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>家长任职职位</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>家长联系电话</p><input type="text" class="z-text">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>家庭住址</p><input type="text" class="z-text">
-				</td>
-				<td>
-					<p>邮政编码</p><input type="text" class="z-text">
-				</td>
-			</tr>
-		</table>
-
-		<p class="zy">注意:每个附件的大小不得超出 3072K字节，否则系统拒绝接收。</p>
-		<div class="btn">
-			<button class="open">保存并关闭</button>
-			<button class="input">保存并录入下一条</button>
-			<button class="close">关闭</button>
+		<div class="box" id="anewadd">
+			<div class="title">
+				<h3>学生基本信息</h3>
+			</div>
+			<div class="xinx">基本信息</div>
+			<table border="0" cellspacing="1" cellpadding="" style="background:#d1e2f9;">
+				<tr>
+					<td>
+						<p>学号*</p><input type="text" class="z-text" id="id">
+					</td>
+					<td>
+						<p>姓名*</p><input type="text" class="z-text" id="aname">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>性别*</p><input type="text" class="z-text" id="xb">
+					</td>
+					<td>
+						<p>身份证号</p><input type="text" class="z-text" id="idsf">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>年龄</p><input type="number" class="z-text" id="age"> 
+					</td>
+					<td>
+						<p>出生日期</p>*<input type="text" class="z-text" id="cs">
+					</td>
+					
+				</tr>
+				<tr>
+					<td>
+						<p>民族</p><input type="text" class="z-text" id="mz">
+					</td>
+					<td>
+						<p>籍贯</p><input type="text" class="z-text" id="jg">
+					</td>
+					
+				</tr>
+				<tr>
+					<td>
+						<p>政治面貌</p><input type="text" class="z-text" id="mmao">
+					</td>
+					<td>
+						<p>照片</p><input type="file" class="z-text" id="myimg">
+					</td>
+				</tr>
+				<tr>
+					<td> 
+						<p>本人电话</p><input type="tel" class="z-text" id="mydh">
+					</td>
+					<td>
+						
+					</td>
+				</tr>
+			</table>
+			</table>
+			<div class="xinx">家庭信息</div>
+			<table border="0" cellspacing="1" cellpadding="" style="padding-bottom:20px;background:#d1e2f9;">
+				<tr>
+					<td>
+						<p>家长姓名</p><input type="text" class="z-text" id="jzname">
+					</td>
+					<td>
+						<p>家长所在单位</p><input type="text" class="z-text" id="jzdw">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>家长任职职位</p><input type="text" class="z-text" id="zjzw">
+					</td>
+					<td>
+						<p>家长联系电话</p><input type="tel" class="z-text" id="jzdh">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>家庭住址</p><input type="text" class="z-text" id="zhuzhi">
+					</td>
+					<td>
+						<p>邮政编码</p><input type="text" class="z-text" id="yz">
+					</td>
+				</tr>
+			</table>
+			<p class="zy">注意:每个附件的大小不得超出 3072K字节，否则系统拒绝接收。</p>
+			<div class="btn">
+				<button class="open" id="aopen">保存并关闭</button>
+				<button class="input" id="anextopen">保存并录入下一条</button>
+				<button class="close" id="aclose">关闭</button>
+			</div>
 		</div>
 	</div>
 </body>
-
+<script src="js/jquery.js"></script>
+<script>
+	aclose.onclick=function(){
+		anewadd.style.top=-800+'px';
+		anewadd.style.transition=0.5+'s';
+	}
+	newadd.onclick=function(){
+		anewadd.style.top=0+'px';
+		anewadd.style.transition=0.5+'s';
+	}
+	var href='http://localhost:8000';
+	//本人图片
+	var ximg='';
+	myimg.onchange=function(){
+		var a=myimg.files[0];
+		var b=new FormData;
+		b.append('img',a)
+		$.ajax({
+			type:'post',
+			url:href+'/users/img',
+			data:b,
+			contentType:false,
+			processData:false,
+			success(data){
+				ximg=href+data
+				console.log(ximg)
+			}
+		})
+	}
+	aopen.onclick=function(){
+		data()
+		anewadd.style.top=-800+'px';
+		anewadd.style.transition=0.5+'s';
+	}
+	anextopen.onclick=function(){
+		data()
+	}
+	function data(){
+		if(id.value==''){
+			alert('学号不能为空')
+		}else if(/[\u4E00-\u9FA5]/g.test(id.value)){
+			alert('学号不能为中文')
+			id.value='';
+		}else  if(name.value==''){
+			alert('姓名不得为空')
+		}else if(idsf.value=='' || /[\u4E00-\u9FA5]/g.test(idsf.value)){
+			alert('身份证号不得为空')
+			idsf.value='';
+		}else if(age==''){
+			alert('年龄不得为空')		
+		}else if(age==''){
+			alert('年龄不得为空')		
+		}else if(cs==''){
+			alert('出生日期不得为空')		
+		}else if(mz==''){
+			alert('民族不得为空')	
+		}else if(mz==''){
+			alert('民族不得为空')	
+		}else if(jg==''){
+			alert('籍贯不得为空')
+		}else if(mmao==''){
+			alert('请输入政治面貌')
+		}else if(mmao==''){
+			alert('请输入政治面貌')
+		}else if(ximg==''){
+			alert('请上传本人图片')
+		}else if(mydh==''){
+			alert('请输入本人电话号码')
+		}else if(/[\u4E00-\u9FA5]/g.test(mydh.value)){
+			alert('本人电话不得出现中文');
+			mydh.value='';
+		}else if(jzname==''){
+			alert('请输入父亲或母亲姓名');
+		}else if(jzdw==''){
+			alert('请输入父亲或母亲所在单位');
+		}else if(zjzw==''){
+			alert('请输入父亲或母亲职位');
+		}else if(jzdh==''){
+			alert('请输入父亲或母亲电话');
+		}else if(zhuzhi==''){
+			alert('请输入家庭住址')
+		}else if(yz==''){
+			alert('请输入邮政编码')
+		}else{
+			$.ajax({
+				type:'post',
+				url:href+'/users/arr',
+				data:{
+					id:id.value,
+					aname:aname.value,
+					xb:xb.value,
+					idsf:idsf.value,
+					age:age.value,
+					cs:cs.value,
+					mz:mz.value,
+					jg:jg.value,
+					mmao:mmao.value,
+					myimg:ximg,
+					mydh:mydh.value,
+					jzname:jzname.value,
+					jzdw:jzdw.value,
+					zjzw:zjzw.value,
+					jzdh:jzdh.value,
+					zhuzhi:zhuzhi.value,
+					yz:yz.value,
+				},
+				success(data){
+					if(data=='ok'){
+						alert('录入成功')
+						console.log($("input").length)
+						$("input").val('')
+					}else{
+						alert('该学院已被录入')
+					}
+				}
+			})
+		}
+		
+	}
+	// id
+	// name
+	// xb
+	// idsf
+	// age
+	// cs
+	// mz
+	// jg
+	// mmao
+	// myimg
+	// mydh
+	// jzname
+	// jzdw
+	// zjzw
+	// jzdh
+	// zhuzhi
+	// yz
+</script>
 </html>

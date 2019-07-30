@@ -6,6 +6,19 @@ var url=require('url');
 var querystring=require('querystring');
 var path=require('path');
 var router = express.Router();
+//本人图片
+router.use(multer({
+	dest:'./public/file'
+}).any())
+router.post('/img',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+ 	var f=req.files[0];
+ 	console.log(f)
+ 	var name=f.filename;
+	var newname=name+path.parse(f.originalname).ext;
+	fs.renameSync('./public/file/'+name,'./public/file/'+newname)
+	res.send('/file/'+newname)
+})
 // 注册
 router.post('/login',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*')
@@ -52,7 +65,26 @@ router.post('/logon',function(req,res){
 		
 	})
 })
-
-
-
+//录入学员人信息
+router.post('/arr',function(req,res){
+	var json=req.body;
+	console.log(json)
+	sql.con({
+		arr:[json.id],
+		sql:'select * from mydata where id=?',
+		success(data){
+			if(data.length){
+				res.send('no')
+			}else{
+				sql.con({
+					arr:[json.id,json.aname,json.xb,json.idsf,json.age,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.zjzw,json.jzdh,json.zhuzhi,json.yz],
+					sql:'insert into mydata(id,name,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+					success(data){
+						res.send('ok')
+					}
+				})
+			}
+		}
+	})
+})
 module.exports = router;
