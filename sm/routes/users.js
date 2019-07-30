@@ -77,13 +77,30 @@ router.post('/arr',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.id,json.aname,json.xb,json.idsf,json.age,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.zjzw,json.jzdh,json.zhuzhi,json.yz],
-					sql:'insert into mydata(id,name,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+					arr:[json.id,json.aname,json.gender,json.idsf,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.jzzw,json.jzdh,json.zhuzhi,json.yz,json.age,json.xj,json.bj,json.dq],//nation民族face面貌
+					sql:'insert into mydata(id,name,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage,xj,bj,dq) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
 					success(data){
 						res.send('ok')
+					},
+					error(err){
+						res.send(err)
 					}
 				})
 			}
+		}
+	})
+})
+//读取新学员信息
+router.get('/read',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	sql.con({
+		arr:[],
+		sql:'select * from mydata order by uid desc',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
 		}
 	})
 })

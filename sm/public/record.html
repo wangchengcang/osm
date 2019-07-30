@@ -153,6 +153,11 @@
 			left: 10%;
 			top:40px;
 		}
+		#see{
+			height:100%;
+			border:one;
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
@@ -163,7 +168,10 @@
 			</div>
 			<a href="index.html" class="return">返回</a>
 			<button type="button" class="add" id="newadd">新学员录入</button>
-			<table  border="2" cellspacing="0" class="newtrainees">
+			<!-- <table border="2" cellspacing="0" class="newtrainees">
+				
+			</table> -->
+			<table  border="2" cellspacing="0" class="newtrainees" id="biao">
 				<tr>
 					<th>姓名</th>
 					<th>学号</th>
@@ -172,21 +180,9 @@
 					<th>父母电话</th>
 					<th>籍贯</th>
 					<th>大区</th>
-					<th>学制</th>
 					<th>学籍</th>
 					<th>班级</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<th>详情</th>
 				</tr>
 			</table>
 		</div>
@@ -206,7 +202,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p>性别*</p><input type="text" class="z-text" id="xb">
+						<p>性别*</p><input type="text" class="z-text" id="gender">
 					</td>
 					<td>
 						<p>身份证号</p><input type="text" class="z-text" id="idsf">
@@ -243,7 +239,15 @@
 						<p>本人电话</p><input type="tel" class="z-text" id="mydh">
 					</td>
 					<td>
-						
+						<p>学籍</p><input type="tel" class="z-text" id="xj">
+					</td>
+				</tr>
+				<tr>
+					<td> 
+						<p>所在班级</p><input type="tel" class="z-text" id="bj">
+					</td>
+					<td>
+						<p>大区</p><input type="tel" class="z-text" id="dq">
 					</td>
 				</tr>
 			</table>
@@ -281,6 +285,7 @@
 				<button class="input" id="anextopen">保存并录入下一条</button>
 				<button class="close" id="aclose">关闭</button>
 			</div>
+			
 		</div>
 	</div>
 </body>
@@ -289,6 +294,7 @@
 	aclose.onclick=function(){
 		anewadd.style.top=-800+'px';
 		anewadd.style.transition=0.5+'s';
+		window.location.reload();
 	}
 	newadd.onclick=function(){
 		anewadd.style.top=0+'px';
@@ -313,39 +319,37 @@
 			}
 		})
 	}
+	//保存按钮
 	aopen.onclick=function(){
 		data()
-		anewadd.style.top=-800+'px';
-		anewadd.style.transition=0.5+'s';
+		window.location.reload();
 	}
+	//保存按钮并录入下一名学员
 	anextopen.onclick=function(){
 		data()
 	}
+	//录入学员信息
 	function data(){
 		if(id.value==''){
 			alert('学号不能为空')
 		}else if(/[\u4E00-\u9FA5]/g.test(id.value)){
 			alert('学号不能为中文')
 			id.value='';
-		}else  if(name.value==''){
+		}else if(aname.value==''){
 			alert('姓名不得为空')
+		}else if(gender.value==''){
+			alert('性别不能为空')
 		}else if(idsf.value=='' || /[\u4E00-\u9FA5]/g.test(idsf.value)){
 			alert('身份证号不得为空')
 			idsf.value='';
-		}else if(age==''){
-			alert('年龄不得为空')		
 		}else if(age==''){
 			alert('年龄不得为空')		
 		}else if(cs==''){
 			alert('出生日期不得为空')		
 		}else if(mz==''){
 			alert('民族不得为空')	
-		}else if(mz==''){
-			alert('民族不得为空')	
 		}else if(jg==''){
 			alert('籍贯不得为空')
-		}else if(mmao==''){
-			alert('请输入政治面貌')
 		}else if(mmao==''){
 			alert('请输入政治面貌')
 		}else if(ximg==''){
@@ -355,6 +359,12 @@
 		}else if(/[\u4E00-\u9FA5]/g.test(mydh.value)){
 			alert('本人电话不得出现中文');
 			mydh.value='';
+		}else if(xj==''){
+			alert('请输入学籍')
+		}else if(bj==''){
+			alert('请输入目前所在班级')
+		}else if(dq==''){
+			alert('请输入大区')
 		}else if(jzname==''){
 			alert('请输入父亲或母亲姓名');
 		}else if(jzdw==''){
@@ -367,14 +377,14 @@
 			alert('请输入家庭住址')
 		}else if(yz==''){
 			alert('请输入邮政编码')
-		}else{
+		}else {
 			$.ajax({
 				type:'post',
 				url:href+'/users/arr',
 				data:{
 					id:id.value,
 					aname:aname.value,
-					xb:xb.value,
+					gender:gender.value,
 					idsf:idsf.value,
 					age:age.value,
 					cs:cs.value,
@@ -385,23 +395,53 @@
 					mydh:mydh.value,
 					jzname:jzname.value,
 					jzdw:jzdw.value,
-					zjzw:zjzw.value,
+					jzzw:zjzw.value,
 					jzdh:jzdh.value,
 					zhuzhi:zhuzhi.value,
 					yz:yz.value,
+					xj:xj.value,
+					bj:bj.value,
+					dq:dq.value,
 				},
 				success(data){
 					if(data=='ok'){
 						alert('录入成功')
-						console.log($("input").length)
-						$("input").val('')
+						$("input").val('');
+						read()
 					}else{
-						alert('该学院已被录入')
+						alert('该学员已被录入')
 					}
 				}
 			})
 		}
-		
+	}
+	//读取新学员信息
+	read()
+	function read(){
+		$.ajax({
+			type:'get',
+			url:href+'/users/read',
+			success(data){
+				for(var i=0;i<data.length;i++){
+					var otr=document.createElement('tr')
+					otr.innerHTML=`
+							<td>${data[i].id}</td>
+							<td>${data[i].name}</td>
+							<td>${data[i].myage}</td>
+							<td>${data[i].idcard}</td>
+							<td>${data[i].address}</td>
+							<td>${data[i].place}</td>
+							<td>${data[i].dq}</td>
+							<td>${data[i].xj}</td>
+							<td>${data[i].bj}</td>
+							<td style="background-color: #ABEF98;"><buttuon id="see">查看</buttuon></td>	
+						</tr>
+					`
+					biao.appendChild(otr)
+				}
+				
+			}
+		})
 	}
 	// id
 	// name
@@ -420,5 +460,8 @@
 	// jzdh
 	// zhuzhi
 	// yz
+	// xj
+	// bj
+	// dq
 </script>
 </html>
