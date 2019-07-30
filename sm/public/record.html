@@ -202,7 +202,15 @@
 				</tr>
 				<tr>
 					<td>
+<<<<<<< HEAD
 						<p>性别*</p><input type="text" class="z-text" id="gender">
+=======
+						<p>性别*</p>
+						<select class="z-text" id="xb">
+						    <option value="男">男</option>
+						    <option value="女">女</option>
+						</select>
+>>>>>>> 3fefdd564c1dc59fd528c300c48592bfc2920630
 					</td>
 					<td>
 						<p>身份证号</p><input type="text" class="z-text" id="idsf">
@@ -219,7 +227,8 @@
 				</tr>
 				<tr>
 					<td>
-						<p>民族</p><input type="text" class="z-text" id="mz">
+						<p>民族</p>
+						<select class="z-text" id="mz"></select>
 					</td>
 					<td>
 						<p>籍贯</p><input type="text" class="z-text" id="jg">
@@ -291,6 +300,20 @@
 </body>
 <script src="js/jquery.js"></script>
 <script>
+	// 民族下拉列框开始
+	
+	var nations = ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
+		"土家族", "哈尼族", "哈萨克族", "傣族", "黎族", "傈僳族", "佤族", "畲族", "高山族", "拉祜族", "水族", "东乡族", "纳西族", "景颇族", "柯尔克孜族", "土族", 
+		"达斡尔族", "仫佬族", "羌族", "布朗族", "撒拉族", "毛南族", "仡佬族", "锡伯族", "阿昌族", "普米族", "塔吉克族", "怒族", "乌孜别克族", "俄罗斯族", "鄂温克族", 
+		"德昂族", "保安族", "裕固族", "京族", "塔塔尔族", "独龙族", "鄂伦春族", "赫哲族", "门巴族", "珞巴族", "基诺族"];
+	var option = "";
+	for(var i = 0; i <
+		nations.length; i++) {
+		option += '<option value="' + (i + 1) + '">' + nations[i] + '</option>';
+	}
+	$(option).appendTo("#mz");
+
+	// 民族下拉列框结束
 	aclose.onclick=function(){
 		anewadd.style.top=-800+'px';
 		anewadd.style.transition=0.5+'s';

@@ -67,6 +67,7 @@ router.post('/logon',function(req,res){
 })
 //录入学员人信息
 router.post('/arr',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
 	var json=req.body;
 	console.log(json)
 	sql.con({
