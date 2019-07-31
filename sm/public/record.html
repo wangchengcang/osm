@@ -255,6 +255,16 @@
 						<p>大区</p><input type="tel" class="z-text" id="dq">
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<p>学制</p>
+						<select class="z-text" id="system">
+							<option value="15个月">15个月</option>
+							<option value="2+1">2+1学制</option>
+							<option value="3+1">3+1学制</option>
+						</select>
+					</td>
+				</tr>
 			</table>
 			</table>
 			<div class="xinx">家庭信息</div>
@@ -303,8 +313,7 @@
 		"达斡尔族", "仫佬族", "羌族", "布朗族", "撒拉族", "毛南族", "仡佬族", "锡伯族", "阿昌族", "普米族", "塔吉克族", "怒族", "乌孜别克族", "俄罗斯族", "鄂温克族", 
 		"德昂族", "保安族", "裕固族", "京族", "塔塔尔族", "独龙族", "鄂伦春族", "赫哲族", "门巴族", "珞巴族", "基诺族"];
 	var option = "";
-	for(var i = 0; i <
-		nations.length; i++) {
+	for(var i = 0; i < nations.length; i++) {
 		option += '<option value="' + nations[i] + '">' + nations[i] + '</option>';
 	}
 	$(option).appendTo("#mz");
@@ -384,6 +393,8 @@
 			alert('请输入目前所在班级')
 		}else if(dq==''){
 			alert('请输入大区')
+		}else if(system==''){
+			alert('学制不能为空')
 		}else if(jzname==''){
 			alert('请输入父亲或母亲姓名');
 		}else if(jzdw==''){
@@ -421,6 +432,7 @@
 					xj:xj.value,
 					bj:bj.value,
 					dq:dq.value,
+					system:system.value,
 				},
 				success(data){
 					if(data=='ok'){
@@ -448,7 +460,7 @@
 							<td>${data[i].name}</td>
 							<td>${data[i].myage}</td>
 							<td>${data[i].idcard}</td>
-							<td>${data[i].address}</td>
+							<td>${data[i].parentelephone}</td>
 							<td>${data[i].place}</td>
 							<td>${data[i].dq}</td>
 							<td>${data[i].xj}</td>

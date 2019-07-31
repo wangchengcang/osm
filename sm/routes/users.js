@@ -78,8 +78,8 @@ router.post('/arr',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.id,json.aname,json.gender,json.idsf,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.jzzw,json.jzdh,json.zhuzhi,json.yz,json.age,json.xj,json.bj,json.dq],//nation民族face面貌
-					sql:'insert into mydata(id,name,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage,xj,bj,dq) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+					arr:[json.id,json.aname,json.gender,json.idsf,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.jzzw,json.jzdh,json.zhuzhi,json.yz,json.age,json.xj,json.bj,json.dq,json.system],//nation民族face面貌
+					sql:'insert into mydata(id,name,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage,xj,bj,dq,system) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
 					success(data){
 						res.send('ok')
 					},
@@ -110,7 +110,6 @@ router.get('/msg',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var thisUid=req.query
 	console.log(thisUid);
-
 	sql.con({
 		arr:[thisUid.i],
 		sql:'select * from mydata where uid = ?',
