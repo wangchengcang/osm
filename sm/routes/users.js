@@ -104,5 +104,22 @@ router.get('/read',function(req,res){
 			res.send(err)
 		}
 	})
-})
+});
+// 学生个人详细资料
+router.get('/msg',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var thisUid=req.query
+	console.log(thisUid);
+
+	sql.con({
+		arr:[thisUid.i],
+		sql:'select * from mydata where uid = ?',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});
 module.exports = router;
