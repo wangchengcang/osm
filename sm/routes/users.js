@@ -160,5 +160,20 @@ router.get('/r',function(req,res){
 			res.send(err)
 		}
 	})
-});			
+});		
+//搜索学生个人资料
+router.get('/s',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json=req.query
+	sql.con({
+		arr:[json.val],
+		sql:'select * from mydata where name like "%"?"%"',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});	
 module.exports = router;

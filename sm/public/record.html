@@ -34,8 +34,11 @@
 			height: 70px;
 			line-height: 70px;
 			text-align: center;
+			margin-bottom: 50px;
 		}
-
+		.title h3{
+			display: block;
+		}
 		.xinx {
 			width: 100%;
 			height: 40px;
@@ -129,7 +132,7 @@
 			font-size: 18px;
 			position: absolute;
 			right: 10%;
-			top:40px;
+			top:60px;
 		}
 		.mian-table{
 			width:80%;
@@ -162,11 +165,22 @@
 			height: 30px;
 		}
 		.select{
-			width: 150px;
-			height: 40px;
+			width: 161px;
+			height: 30px;
 			position: absolute;
-			top:40px;
-			right:100px;
+			top:65px;
+			right:400px;
+			background-color: #000;
+			border-radius: 30px;
+			transition: .5s;
+		}
+		.select input{
+			width: 100%;
+			height: 100%;
+			border-radius: 30px;
+			padding-left: 10px;
+			border:solid 2px #ccc;
+			outline: none;
 		}
 	</style>
 </head>
@@ -177,13 +191,14 @@
 				<h3>新增学员记录</h3>
 			</div>
 			<div class="select">
-				<input type="text"><button id="select">搜索</button>
+				<input type="search" id="search">
 			</div>
 			<a href="index.html" class="return">返回</a>
 			<button type="button" class="add" id="newadd">学员录入</button>
 			<!-- <table border="2" cellspacing="0" class="newtrainees">
 				
 			</table> -->
+			
 			<table  border="2" cellspacing="0" class="newtrainees" id="biao">
 				<tr>
 					<th>学号</th>
@@ -319,6 +334,7 @@
 </body>
 <script src="js/jquery.js"></script>
 <script>
+
 	// 民族下拉列框开始
 	
 	var nations = ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
@@ -489,10 +505,37 @@
 			}
 		})
 	}
+	// 查看学生资料
 	function chakan(msg){
 		location.href='./essentialinformation.html';
 		localStorage.setItem("which",JSON.stringify(msg));
 	}
+	// 搜索框
+	$('#search').on('focus',function(){
+		$('.select').css({'width':'300px'});
+	})
+	$('#search').on('blur',function(){
+		$('.select').css({'width':'161px'})
+		$(this).val('');
+	})
+	$('#search').on('input',function(){
+
+		$.ajax({
+			type:'get',
+			url:href+'/users/s',
+			data:{
+				val:search.value,
+			},
+			success(data){
+				console.log(data)
+				$('.newtrainees').css({'display':'none'})
+				$(`
+					<li>${data[0].place}</li>		
+				`).appendTo('.mian-table')
+			}
+
+		})
+	})
 	// id
 	// name
 	// xb
