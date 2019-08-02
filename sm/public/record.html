@@ -119,10 +119,10 @@
 			float: left;
 		}
 		.add{
-			width:150px;
-			height:40px;
+			width:100px;
+			height:35px;
 			outline-style: none;
-			border-radius: 20px;
+			border-radius:20px;
 			background: #7cb1fe;
 			border-style: none;
 			cursor: pointer;
@@ -161,6 +161,13 @@
 		.newtrainees tr{
 			height: 30px;
 		}
+		.select{
+			width: 150px;
+			height: 40px;
+			position: absolute;
+			top:40px;
+			right:100px;
+		}
 	</style>
 </head>
 <body>
@@ -169,8 +176,11 @@
 			<div class="title">
 				<h3>新增学员记录</h3>
 			</div>
+			<div class="select">
+				<input type="text"><button id="select">搜索</button>
+			</div>
 			<a href="index.html" class="return">返回</a>
-			<button type="button" class="add" id="newadd">新学员录入</button>
+			<button type="button" class="add" id="newadd">学员录入</button>
 			<!-- <table border="2" cellspacing="0" class="newtrainees">
 				
 			</table> -->
@@ -220,7 +230,7 @@
 						<p>年龄</p><input type="number" class="z-text" id="age"> 
 					</td>
 					<td>
-						<p>出生日期</p>*<input type="text" class="z-text" id="cs">
+						<p>出生日期</p>*<input type="date" class="z-text" id="cs">
 					</td>
 					
 				</tr>
@@ -325,7 +335,9 @@
 	aclose.onclick=function(){
 		anewadd.style.top=-800+'px';
 		anewadd.style.transition=0.5+'s';
-		window.location.reload();
+		setTiemout(function(){
+			window.location.reload();
+		},500)
 	}
 	newadd.onclick=function(){
 		anewadd.style.top=0+'px';
