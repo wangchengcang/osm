@@ -34,8 +34,11 @@
 			height: 70px;
 			line-height: 70px;
 			text-align: center;
+			margin-bottom: 50px;
 		}
-
+		.title h3{
+			display: block;
+		}
 		.xinx {
 			width: 100%;
 			height: 40px;
@@ -119,17 +122,17 @@
 			float: left;
 		}
 		.add{
-			width:150px;
-			height:40px;
+			width:100px;
+			height:35px;
 			outline-style: none;
-			border-radius: 20px;
+			border-radius:20px;
 			background: #7cb1fe;
 			border-style: none;
 			cursor: pointer;
 			font-size: 18px;
 			position: absolute;
 			right: 10%;
-			top:40px;
+			top:60px;
 		}
 		.mian-table{
 			width:80%;
@@ -158,6 +161,27 @@
 			border:one;
 			cursor: pointer;
 		}
+		.newtrainees tr{
+			height: 30px;
+		}
+		.select{
+			width: 161px;
+			height: 30px;
+			position: absolute;
+			top:65px;
+			right:400px;
+			background-color: #000;
+			border-radius: 30px;
+			transition: .5s;
+		}
+		.select input{
+			width: 100%;
+			height: 100%;
+			border-radius: 30px;
+			padding-left: 10px;
+			border:solid 2px #ccc;
+			outline: none;
+		}
 	</style>
 </head>
 <body>
@@ -166,11 +190,15 @@
 			<div class="title">
 				<h3>新增学员记录</h3>
 			</div>
+			<div class="select">
+				<input type="search" id="search">
+			</div>
 			<a href="index.html" class="return">返回</a>
-			<button type="button" class="add" id="newadd">新学员录入</button>
+			<button type="button" class="add" id="newadd">学员录入</button>
 			<!-- <table border="2" cellspacing="0" class="newtrainees">
 				
 			</table> -->
+			
 			<table  border="2" cellspacing="0" class="newtrainees" id="biao">
 				<tr>
 					<th>学号</th>
@@ -217,7 +245,7 @@
 						<p>年龄</p><input type="number" class="z-text" id="age"> 
 					</td>
 					<td>
-						<p>出生日期</p>*<input type="text" class="z-text" id="cs">
+						<p>出生日期</p>*<input type="date" class="z-text" id="cs">
 					</td>
 					
 				</tr>
@@ -306,6 +334,7 @@
 </body>
 <script src="js/jquery.js"></script>
 <script>
+
 	// 民族下拉列框开始
 	
 	var nations = ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
@@ -322,7 +351,9 @@
 	aclose.onclick=function(){
 		anewadd.style.top=-800+'px';
 		anewadd.style.transition=0.5+'s';
-		window.location.reload();
+		setTiemout(function(){
+			window.location.reload();
+		},500)
 	}
 	newadd.onclick=function(){
 		anewadd.style.top=0+'px';
@@ -466,7 +497,7 @@
 							<td>${data[i].xj}</td>
 							<td>${data[i].bj}</td>
 							<td style="background-color:#ABEF98;"><buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon></td>	
-						</tr>
+						
 					`
 					biao.appendChild(otr)
 				}
@@ -474,10 +505,37 @@
 			}
 		})
 	}
+	// 查看学生资料
 	function chakan(msg){
 		location.href='./essentialinformation.html';
 		localStorage.setItem("which",JSON.stringify(msg));
 	}
+	// 搜索框
+	$('#search').on('focus',function(){
+		$('.select').css({'width':'300px'});
+	})
+	$('#search').on('blur',function(){
+		$('.select').css({'width':'161px'})
+		$(this).val('');
+	})
+	$('#search').on('input',function(){
+
+		$.ajax({
+			type:'get',
+			url:href+'/users/s',
+			data:{
+				val:search.value,
+			},
+			success(data){
+				console.log(data)
+				$('.newtrainees').css({'display':'none'})
+				$(`
+					<li>${data[0].place}</li>		
+				`).appendTo('.mian-table')
+			}
+
+		})
+	})
 	// id
 	// name
 	// xb

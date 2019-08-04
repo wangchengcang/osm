@@ -24,20 +24,28 @@
 }
 .box{
 	width: 100%;
-	padding-top: 150px;
-	background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564565733384&di=216014cec8f979d00a31a63805163bd4&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F575e595c519f8.jpg') no-repeat;
-	background-size: 100% 100%;
+	background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565333386&di=2703372ce654131ba82657ffb89d00ae&imgtype=jpg&er=1&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2017-10-18%2F59e6f1d9d4063.jpg') no-repeat;
 	background-position: 0 0;
+	background-size: 100% 100%;
+}
+main{
+	width: 300px;
+	height: 50px;
+	margin: 0 auto;
+	color:#fff;
 }
 .box_box{
-	width: 50%;
-	height: 300px;
-	padding-top: 20px;
+	position: absolute;
+	top: 120px;
+	left:200px;
+	width: 70%;
+	height: 50%;
+	padding-top: 40px;
 	text-align: center;
-	background-color: rgba(0,0,0,.2);
+	background-color: rgba(0,0,0,.1);
 	margin: 0 auto;
 	border-radius: 20px;
-	box-shadow: 1px 1px 8px 8px rgba(0,0,0,.7);
+	box-shadow: 1px 1px 6px 6px rgba(0,0,0,.6);
 }
 .logon h4,.login h4{
 	color:#fff;
@@ -49,7 +57,7 @@
 .logon div,.login div{
 	color:#fff;
 }
-.logon div input,.login div input{
+.logon input,.login input{
 	width: 60%;
 	height: 30px;
 	outline: none;
@@ -62,21 +70,12 @@
 .logon button,.login button{
 	width: 15%;
 	height: 30px;
-	margin-top: 10px;
-	background-color: #03a9f4;
+	margin-top: 20px;
+	background-color: #714f43;
 	outline: none;
 	border:none;
 	border-radius: 20px;
 	color:#fff;
-}
-main{
-	width: 400px;
-	height: 50px;
-	line-height: 50px;
-	margin: 0 auto;
-	font-size: 15px;
-	color:#fff;
-	margin-top: 20px;
 }
 /*去注册按钮*/
 .a{
