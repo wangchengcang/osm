@@ -121,4 +121,6 @@ router.get('/msg',function(req,res){
 		}
 	})
 });
+
+
 module.exports = router;
