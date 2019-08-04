@@ -121,6 +121,64 @@ router.get('/msg',function(req,res){
 		}
 	})
 });
+<<<<<<< HEAD
 
 
+=======
+// 讲师
+router.post('/teacher',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	var json=req.body;
+	console.log(json)
+	sql.con({
+		arr:[json.classroom,json.door],
+		sql:'select * from teacher where class=? or door=?',
+		success(data){
+			if(data.length){
+				res.send('no')
+			}else{
+				sql.con({
+					arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people,],
+					sql:'insert into teacher(class,door,lecturer,curriculum,number) values(?,?,?,?,?)',
+					success(data){
+						res.send('ok')
+					},
+					error(err){
+						res.send(err)
+					}
+				})
+			}
+		}
+	})
+})
+//读取讲师
+router.get('/r',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	sql.con({
+		arr:[],
+		sql:'select * from teacher order by uid desc',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});		
+//搜索学生个人资料
+router.get('/s',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json=req.query
+	sql.con({
+		arr:[json.val],
+		sql:'select * from mydata where name like "%"?"%"',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});	
+>>>>>>> 2d798c943b959e2b38d00d5c1c70abadf7b9bfc9
 module.exports = router;
