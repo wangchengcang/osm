@@ -121,10 +121,6 @@ router.get('/msg',function(req,res){
 		}
 	})
 });
-<<<<<<< HEAD
-
-
-=======
 // 讲师
 router.post('/teacher',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*')
@@ -180,5 +176,4 @@ router.get('/s',function(req,res){
 		}
 	})
 });	
->>>>>>> 2d798c943b959e2b38d00d5c1c70abadf7b9bfc9
 module.exports = router;
