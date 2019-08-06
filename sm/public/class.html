@@ -23,6 +23,10 @@
             line-height: 60px;
             font-size: 30px;
             font-family: bold;
+<<<<<<< HEAD
+            background: #2cc9aa;
+=======
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
         }
 
         #con p a {
@@ -48,11 +52,43 @@
         #con table {
             width: 100%;
         }
+<<<<<<< HEAD
+        #con table tr th {
+            width: 18%;
+            height: 40px;
+            line-height: 40px;
+            background: #20b6ad;
+            font-size: 18px;
+            color:#fff;
+            border: none;
+        }
+=======
 
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
         #con table tr td {
-            width: 25%;
             height: 35px;
             line-height: 35px;
+<<<<<<< HEAD
+            border: none;
+        }
+        #con table tr:nth-child(odd)  input{
+            background: #ebfcf6;
+        }
+        #con table tr:nth-child(even) input{
+            /* background: #20b6ad; */
+        }   
+        #con table tr td input{
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            text-align: center;
+        }
+        #con table tr td button{
+            width: 100%;
+            height: 100%;
+=======
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
             text-align: center;
         }
         #content{
@@ -91,6 +127,23 @@
             margin: 10px;
             outline: none;
         }
+<<<<<<< HEAD
+        tr td{
+            text-align: center;
+            margin: 25px 0;
+        }
+        #ul li{
+            list-style: none;
+            float: right;
+            line-height: 30px;
+            font-size: 20px;
+            border-bottom: 1px solid black;
+        }
+        #ul li span{
+            margin: 0 20px;
+        }
+=======
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
     </style>
 </head>
 
@@ -104,6 +157,15 @@
             </p>
             <table border="2" cellspacing="0">
                 <tr>
+<<<<<<< HEAD
+                    <th>班级</th>
+					<th>阶段</th>
+                    <th>门牌号</th>
+                    <th>资产</th>
+                    <th>人数</th>
+					<th>修改信息</th>
+                </tr>
+=======
                     <td>班级</td>
                     <td>门牌号</td>
                     <td>资产</td>
@@ -184,12 +246,13 @@
                     <td>30</td>
                 </tr>
 >>>>>>> d2cbf9f7d50114b781c13b4bce04b8f4d07b7d05
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
             </table>
         </div>
         <div id="content">
             <h6>新增班级信息</h6>
             <p>班&nbsp;&nbsp;&nbsp;级 <input type="text"></p>
-            <p>门牌号 <input type="text"></p>
+            <p>门牌号&nbsp;<input type="text"></p>
             <p>资&nbsp;&nbsp;&nbsp;产 <input type="text"></p>
             <p>人&nbsp;&nbsp;&nbsp;数 <input type="text"></p>
             <div>
@@ -202,6 +265,129 @@
 
     <script src="js/jquery.js"></script>
     <script>
+<<<<<<< HEAD
+        var href='http://localhost:8000';
+        preservation.onclick=function(){
+            data();
+            setTimeout(()=>{
+                con.style.display='block';
+                content.style.display='none'; 
+            },1000)
+            window.location.reload();
+            
+        }
+        anext.onclick=function(){
+            data();
+        }
+        function data(){
+            if(bj.value == ''){
+                alert('班级不能为空');
+            }else if(/[\u4E00-\u9FA5]/g.test(bj.value)){
+                alert('班级不能为中文')
+            }else if(jd.value == ''){
+                alert('阶段不能为空');
+            }else if(mph.value == ''){
+                alert('门牌号不能为空');
+            }else if(/[\u4E00-\u9FA5]/g.test(mph.value)){
+                alert('门牌号不能为中文')
+            }else if(zc.value == ''){
+                alert('资产不能为空');
+            }else if(rs.value == ''){
+                alert('人数不能为空');
+            }else if(/[\u4E00-\u9FA5]/g.test(rs.value) || /[a-zA-Z]+/.test(rs.value)){
+                alert('人数不能为中文或英文');
+            }else{
+                $.ajax({
+                    type:'post',
+                    url:href+'/banji/grade',
+                    data:{
+                        class:bj.value,
+                        stage:jd.value,
+                        door:mph.value,
+                        assets:zc.value,
+                        number:rs.value,
+                    },
+                    success(data){
+                        if(data == 'ok'){
+                            alert('录入成功');
+                            $('#content input').val('')
+                            read();
+                        }else{
+                            alert('已录入过');
+                        }
+                        
+                    }
+                })
+            }
+           
+        }
+        read();
+        //读取班级信息
+        function read(){
+            $.ajax({
+                type:'get',
+                url:href+'/banji/read',
+                success(data){
+                    for(var i=0;i<data.length;i++){
+                        var tr=document.createElement('tr');
+                        tr.innerHTML=`
+                            <td><input type="text" value="${data[i].class}"></td>
+                            <td><input type="text" value="${data[i].stage}"></td>
+                            <td><input type="text" value="${data[i].door}"></td>
+                            <td><input type="text" value="${data[i].assets}"></td>
+                            <td><input type="text" value="${data[i].number}"></td>
+                            <td><button>修改信息</button></td>
+                        `;
+                        table.appendChild(tr)
+                    }
+                }
+            })
+        }
+        
+        btn.onclick=function(){
+            con.style.display='none';
+            content.style.display='block';
+            content.style.transition=0.5+'s';
+        }
+        aclose.onclick=function(){
+            con.style.display='block';
+            con.style.transition=0.5+'s';
+            content.style.display='none';
+        }
+
+        //搜索
+        $('#search').on('change',function(){
+            $.ajax({
+                type:'post',
+                url:href+'/banji/search',
+                data:{
+                    class:$("#search").val(),
+                    stage:$('#search').val(),
+                    door:$("#search").val()
+                },
+                success(data){
+                    console.log(data);
+                    if(data==null){
+                        // var li=document.createElement('li');
+                        // li.innerHTML=`<span>没有改班级</span>`;
+                    }else{
+                        for(var i=0;i<data.length;i++){
+                            var li=document.createElement('li');
+                            li.innerHTML=`
+                                        <span>${data[0].class}</span>
+                                        <span>${data[0].stage}</span>
+                                        <span>${data[0].door}</span>
+                                        <span>${data[0].assets}</span>
+                                        <span>${data[0].number}</span>
+                            `;
+                            ul.appendChild(li)
+                        }
+                    }
+                }
+            })
+        })
+=======
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
     </script>
 </body>
 
