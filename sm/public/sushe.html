@@ -2,159 +2,43 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-		<style type="text/css">
-			* {
-				margin: 0;
-				padding: 0;
-			}
-
-			.con {
-				width: 90%;
-				margin: 0 auto;
-			}
-
-			h3 {
-				margin-top: 10px;
-			}
-
-			h3 a{
-				text-decoration: none;
-				font-size: 24px;
-				padding: 0 10px;
-				color: #ccc;
-			}
-
-			.spn {
-				width: 100%;
-				border: 1px solid #ccc;
-				display: inline-block;
-			}
-
-			.dong {
-				width: 100%;
-				height: 30px;
-			}
-
-			.btn {
-				float: right;
-				width: 45px;
-				cursor: pointer;
-				height: 30px;
-				outline: none;
-				background: #42aae8;
-				border: none;
-				color: #fff;
-				border-radius: 10px;
-			}
-
-			.text {
-				float: right;
-				width: 200px;
-				height: 28px;
-				outline: none;
-				text-align: center;
-				line-height: 28px;
-				margin-right: 10px;
-				border-radius: 15px;
-				border: 1px solid #ccc;
-			}
-
-			.doer {
-				float: right;
-				height: 28px;
-				display: inline-block;
-				line-height: 28px;
-				color: royalblue;
-				font-weight: bold;
-				margin-right: 10px;
-			}
-
-			.texta {
-				float: right;
-				width: 100px;
-				height: 28px;
-				outline: none;
-				text-align: center;
-				line-height: 28px;
-				margin-right: 10px;
-				border-radius: 15px;
-				border: 1px solid #ccc;
-			}
-
-			table {
-				width: 100%;
-				border: 1px solid #e4dfdf;
-			}
-
-			table tr td {
-				height: 30px;
-				padding-top: 10px;
-				padding-bottom: 10px;
-				padding-left: 10px;
-			}
-
-			table tr:nth-child(even) {
-				background: #f5f9fb;
-			}
-
-			table tr td:nth-child(1) {
-				width: 10%;
-			}
-
-			table tr td:nth-child(2) {
-				width: 10%;
-			}
-
-			table tr td:nth-child(3) {
-				width: 10%;
-			}
-
-			table tr td:nth-child(4) {
-				width: 13%;
-			}
-
-			table tr td:nth-child(5) {
-				width: 10%;
-			}
-
-			table tr td:nth-child(6) {
-				width: 10%;
-			}
-
-			table tr td:nth-child(7) {
-				width: 10%;
-			}
-
-			table tr td:nth-child(8) {
-				width: 15%;
-			}
-
-			#ton {
-				width: 100px;
-				height: 25px;
-				color: #fff;
-				border: none;
-				background: #48a248;
-				border-radius: 5px;
-				cursor: pointer;
-				outline: none;
-			}
-		</style>
+		<title>学生宿舍管理</title>
+		<link rel="stylesheet" href="stylesheets/sushe.css">
 	</head>
 	<body>
+		<!-- //提示框 -->
+		<!-- <div id="tishi">
+			<div id="thi_a">
+				<span></span>
+			</div>
+		</div> -->
 		<div class="con">
 			<h3><a href="index.html">←</a>学生管理</h3>
 			<span class="spn"></span>
 			<div class="dong">
 				<button class="btn">搜索</button>
-				<input type="text" class="text">
-				<input type="text" class="texta" placeholder="名字">
-				<span class="doer">2栋</span>
-
+				<input type="text" class="text" placeholder="请输入学员名字 / 学号">
+				<!-- <input type="text" class="texta" placeholder="名字"> -->
+				<button id="doer">新学员住宿录入</button>
 			</div>
-			<table border="1" cellspacing="0" cellpadding="0">
-				<tr>
+			<div id="luru">
+				<table id="luru_a" cellspacing="0" cellpadding="0" style="border:none; border-bottom: 1px solid #ccc;">
+					<tr style="background-color: #fff;">
+						<td><span class="luru-left">学号：</span><input type="text" id="xh" class="luru_input"></td>
+						<td><span class="luru-left">姓名：</span><input type="text" id="namea" class="luru_input"></td>
+						<td><span class="luru-left">性别：</span><input type="text" id="xb" class="luru_input"></td>
+						<td><span class="luru-left">宿舍楼：</span><input type="text" id="sushe" class="luru_input"></td>
+						<td><span class="luru-left">寝室：</span><input type="text" id="qinshi" class="luru_input"></td>
+						<td><span class="luru-left">电话：</span><input type="text" id="dh" class="luru_input"></td>
+						<td><span class="luru-left">班主任：</span><input type="text" id="bzr" class="luru_input"></td>
+						<td><button id="Dormitory">录入</button><span id="close_lu">x</span></td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;男生</p>
+			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="male_xs">
+				<tr style="background-color: #2cc9aa; color: #fff;">
 					<td>学号</td>
 					<td>姓名</td>
 					<td>性别</td>
@@ -164,64 +48,161 @@
 					<td>班主任</td>
 					<td>操作</td>
 				</tr>
-				<tr>
-					<td>001</td>
-					<td>王某</td>
-					<td>男</td>
-					<td>2栋</td>
-					<td>120</td>
-					<td>134xxxx9999</td>
-					<td>李xx</td>
-					<td><button type="button" id="ton">添加缺勤记录</button></td>
-
+			</table>
+			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;女生</p>
+			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="female_xs">
+				<tr style="background-color: #2cc9aa; color: #fff;">
+					<td>学号</td>
+					<td>姓名</td>
+					<td>性别</td>
+					<td>宿舍楼</td>
+					<td>寝室</td>
+					<td>电话</td>
+					<td>班主任</td>
+					<td>操作</td>
 				</tr>
-				<tr>
-					<td>002</td>
-					<td>张某</td>
-					<td>男</td>
-					<td>2栋</td>
-					<td>120</td>
-					<td>134xxxx9999</td>
-					<td>李xx</td>
-					<td><button type="button" id="ton">添加缺勤记录</button></td>
-
-				</tr>
-				<tr>
-					<td>003</td>
-					<td>邢某</td>
-					<td>男</td>
-					<td>2栋</td>
-					<td>120</td>
-					<td>134xxxx9999</td>
-					<td>李xx</td>
-					<td><button type="button" id="ton">添加缺勤记录</button></td>
-
-
-				</tr>
-				<tr>
-					<td>004</td>
-					<td>邢某</td>
-					<td>男</td>
-					<td>2栋</td>
-					<td>120</td>
-					<td>134xxxx9999</td>
-					<td>李xx</td>
-					<td><button type="button" id="ton">添加缺勤记录</button></td>
-
-				</tr>
-				<tr>
-					<td>005</td>
-					<td>邢某</td>
-					<td>男</td>
-					<td>2栋</td>
-					<td>120</td>
-					<td>134xxxx9999</td>
-					<td>李xx</td>
-					<td><button type="button" id="ton">添加缺勤记录</button></td>
-
+			</table>
+			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;缺勤记录</p>
+			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="Absence">
+				<tr style="background-color: #2cc9aa; color: #fff;">
+					<td>学号</td>
+					<td>姓名</td>
+					<td>性别</td>
+					<td>宿舍楼</td>
+					<td>寝室</td>
+					<td>电话</td>
+					<td>班主任</td>
+					<td>操作</td>
 				</tr>
 			</table>
 		</div>
-
 	</body>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">
+		//返回当前屏幕宽度(空白空间)
+		// window.onload=function(){
+		// 	var h=window.screen.availHeight;
+		// 	tishi.style.width='100%';
+		// 	tishi.style.height=h+'px  ';
+		// 	tishi.style.position='absolute';
+		// 	tishi.style.top=0+'px';
+		// 	tishi.style.left=0+'px';
+		// 	tishi.style.background="rgba(0,0,0,.3)"
+		// 	tishi.style.Zindex=200;
+		// }
+		doer.onclick=function(){
+			luru.style.height=50+'px';
+			luru_a.style.top=0+'px';
+			luru.style.transition=0.5+'s';
+			luru_a.transition=0.6+'s';
+		}
+		close_lu.onclick=function(){
+			luru.style.height=0+'px';
+			luru_a.style.top=-50+'px';
+			luru.style.transition=0.5+'s';
+			luru_a.transition=0.6+'s';
+		}
+		Dormitory.onclick=function(){
+			if(xh.value==''){
+				alert('请输入学员学号')
+			}else if(/[\u4E00-\u9FA5]/g.test(xh.value)){
+				alert('学号内不得出现中文')
+			}else if(namea.value==''){
+				alert('请输入学员姓名')
+			}else if(xb.value==''){
+				alert('请输入学员性别')
+			}else if(sushe.value==''){
+				alert('请输入学员所在宿舍楼')
+			}else if(qinshi.value==''){
+				alert('请输入学员寝室门牌号')
+			}else if(dh.value==''){
+				alert('请输入学员手机号')
+			}else if(/[\u4E00-\u9FA5]/g.test(dh.value)){
+				alert('请输入学员电话')
+			}else if(bzr.value==''){
+				alert('请输入学员班主任姓名')
+			}else{
+				$.ajax({
+					type:'get',
+					url:'http://localhost:8000/users/dorm',
+					data:{
+						xh:xh.value,
+						name:namea.value,
+						xb:xb.value,
+						sushe:sushe.value,
+						qinshi:qinshi.value,
+						dh:dh.value,
+						bzr:bzr.value,
+					},
+					success(data){
+						if(data=='ok'){
+							alert('录入成功')
+							setTimeout(function(){
+								window.location.reload();
+							})
+							$('input').val('')
+							read()
+						}else{
+							alert('改学员已被录入')
+						}
+					}
+				})
+			}
+		}
+		//记录学员缺寝
+		function asence(data){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/users/queq',
+				data:{
+					uid:data,
+				},
+				success(data){
+					var otr=document.createElement('tr');
+					otr.innerHTML=`
+							<td>${data[0].xh}</td>
+							<td>${data[0].name}</td>
+							<td>${data[0].xb}</td>
+							<td>${data[0].sushe}</td>
+							<td>${data[0].qinshi}</td>
+							<td>${data[0].dh}</td>
+							<td>${data[0].bzr}</td>
+							<td><button type="button" id="ton">移除</button></td>
+					`;
+					Absence.appendChild(otr)
+				}
+			})
+		}
+		//读取寝室学员信息
+		read()
+		function read(){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/users/read_lu',
+				success(data){
+					for(var i=0;i<data.length;i++){
+						var otr=document.createElement('tr');
+						otr.innerHTML=`
+								<td>${data[i].xh}</td>
+								<td>${data[i].name}</td>
+								<td>${data[i].xb}</td>
+								<td>${data[i].sushe}</td>
+								<td>${data[i].qinshi}</td>
+								<td>${data[i].dh}</td>
+								<td>${data[i].bzr}</td>
+								<td><button type="button" id="ton" onclick="asence('${data[i].uid}')">添加缺勤记录</button></td>
+						`;
+						if(data[i].xb=='女'){
+							female_xs.appendChild(otr)
+						}else{
+							male_xs.appendChild(otr)
+						}
+						
+					}
+					
+				}
+			})
+		}
+		
+	</script>
 </html>

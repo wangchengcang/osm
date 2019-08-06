@@ -17,85 +17,45 @@
             margin: 0 auto;
         }
 
-        #con{
-        }
         #con p {
             text-align: center;
             height: 60px;
             line-height: 60px;
             font-size: 30px;
             font-family: bold;
-            background: #7cd6ef;
-            /* padding-left: 100px; */
         }
 
         #con p a {
             text-decoration: none;
             float: left;
-            margin-left: 25px;
             font-size: 30px;
-            color: black;
+            color: #ccc;
         }
 
         #btn {
-            width: 100%;
-            padding: 10px 15px;
+            padding: 6px 15px;
             background: #ccc;
             border-style: none;
             float: right;
-            margin: 15px 0;
+            margin-top: 15px;
+            margin-right: 15px;
             outline: none;
             border-radius: 30px;
             color: #fff;
             font-size: 20px;
         }
-        #search{
-            height: 30px;
-            border-radius: 15px;
-            float: right;
-            margin-top: 15px;
-            margin-right: 10px;
-            border-style: none;
-            outline: none;
-            padding-left: 10px;
-        }
 
         #con table {
             width: 100%;
         }
-        #con table tr th {
-            width: 18%;
-            height: 35px;
-            line-height: 35px;
-            background: #20b6ad;
-        }
+
         #con table tr td {
             width: 25%;
             height: 35px;
             line-height: 35px;
-        }
-        #con table tr:nth-child(odd)  input{
-            background: #ebfcf6;
-        }
-        #con table tr:nth-child(even) input{
-            /* background: #20b6ad; */
-        }   
-        #con table tr td input{
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
             text-align: center;
-        }
-        #con table tr td button{
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            border: none;
-            background: #20e8ed;
         }
         #content{
-            display:none;
         }
         #content h6{
             height: 60px;
@@ -120,7 +80,7 @@
         #content div{
             display: flex;
         }
-        #preservation,#anext,#aclose{
+        #preservation,#next,#aclose{
             height: 40px;
             line-height: 40px;
             color: #fff;
@@ -131,19 +91,6 @@
             margin: 10px;
             outline: none;
         }
-        tr td{
-            text-align: center;
-        }
-        #ul li{
-            list-style: none;
-            float: right;
-            line-height: 30px;
-            font-size: 20px;
-            border-bottom: 1px solid black;
-        }
-        #ul li span{
-            margin: 0 20px;
-        }
     </style>
 </head>
 
@@ -153,31 +100,10 @@
             <p>
                 <a href="index.html">←</a>
                 班级分布信息
-                <input type="search" id="search" placeholder="搜索班级信息">
+                <button id="btn">新增班级</button>
             </p>
-            <ul id='ul'>
-            </ul>
-            <button id="btn">新增班级</button>
-            <table border="2" cellspacing="0" id='table'>
+            <table border="2" cellspacing="0">
                 <tr>
-<<<<<<< HEAD
-                    <th>班级</th>
-					<th>阶段</th>
-                    <th>门牌号</th>
-                    <th>资产</th>
-                    <th>人数</th>
-					<th>修改信息</th>
-                </tr>
-            </table>
-        </div>
-        <div id="content">
-		    <h6>新增班级信息</h6>
-            <p>班&nbsp;&nbsp;&nbsp;级 <input type="text" id="bj"></p>
-            <p>阶&nbsp;&nbsp;&nbsp;段 <input type="text" id="jd"></p>
-            <p>门牌号&nbsp;<input type="text" id="mph"></p>
-            <p>资&nbsp;&nbsp;&nbsp;产 <input type="text" id="zc"></p>
-            <p>人&nbsp;&nbsp;&nbsp;数 <input type="text" id="rs"></p>
-=======
                     <td>班级</td>
                     <td>门牌号</td>
                     <td>资产</td>
@@ -266,10 +192,9 @@
             <p>门牌号 <input type="text"></p>
             <p>资&nbsp;&nbsp;&nbsp;产 <input type="text"></p>
             <p>人&nbsp;&nbsp;&nbsp;数 <input type="text"></p>
->>>>>>> 2d798c943b959e2b38d00d5c1c70abadf7b9bfc9
             <div>
                 <button id="preservation">保存并关闭</button>
-                <button id="anext">保存并录入下一条</button>
+                <button id="next">保存并录入下一条</button>
                 <button id="aclose">关闭</button>
             </div>
         </div>
@@ -277,121 +202,6 @@
 
     <script src="js/jquery.js"></script>
     <script>
-        var href='http://localhost:8000';
-        preservation.onclick=function(){
-            data();
-            setTimeout(()=>{
-                con.style.display='block';
-                content.style.display='none'; 
-            },1000)
-            window.location.reload();
-            
-        }
-        anext.onclick=function(){
-            data();
-        }
-        function data(){
-            if(bj.value == ''){
-                alert('班级不能为空');
-            }else if(/[\u4E00-\u9FA5]/g.test(bj.value)){
-                alert('班级不能为中文')
-            }else if(jd.value == ''){
-                alert('阶段不能为空');
-            }else if(mph.value == ''){
-                alert('门牌号不能为空');
-            }else if(/[\u4E00-\u9FA5]/g.test(mph.value)){
-                alert('门牌号不能为中文')
-            }else if(zc.value == ''){
-                alert('资产不能为空');
-            }else if(rs.value == ''){
-                alert('人数不能为空');
-            }else if(/[\u4E00-\u9FA5]/g.test(rs.value) || /[a-zA-Z]+/.test(rs.value)){
-                alert('人数不能为中文或英文');
-            }else{
-                $.ajax({
-                    type:'post',
-                    url:href+'/banji/grade',
-                    data:{
-                        class:bj.value,
-                        stage:jd.value,
-                        door:mph.value,
-                        assets:zc.value,
-                        number:rs.value,
-                    },
-                    success(data){
-                        if(data == 'ok'){
-                            alert('录入成功');
-                            $('#content input').val('')
-                            read();
-                        }else{
-                            alert('已录入过');
-                        }
-                        
-                    }
-                })
-            }
-           
-        }
-        read();
-        //读取班级信息
-        function read(){
-            $.ajax({
-                type:'get',
-                url:href+'/banji/read',
-                success(data){
-                    for(var i=0;i<data.length;i++){
-                        var tr=document.createElement('tr');
-                        tr.innerHTML=`
-                            <td><input type="text" value="${data[i].class}"></td>
-                            <td><input type="text" value="${data[i].stage}"></td>
-                            <td><input type="text" value="${data[i].door}"></td>
-                            <td><input type="text" value="${data[i].assets}"></td>
-                            <td><input type="text" value="${data[i].number}"></td>
-                            <td><button>修改信息</button></td>
-                        `;
-                        table.appendChild(tr)
-                    }
-                }
-            })
-        }
-        
-        btn.onclick=function(){
-            con.style.display='none';
-            content.style.display='block';
-            content.style.transition=0.5+'s';
-        }
-        aclose.onclick=function(){
-            con.style.display='block';
-            con.style.transition=0.5+'s';
-            content.style.display='none';
-        }
-
-        //搜索
-        $('#search').on('change',function(){
-            $.ajax({
-                type:'post',
-                url:href+'/banji/search',
-                data:{
-                    class:$("#search").val(),
-                    stage:$('#search').val(),
-                    door:$("#search").val()
-                },
-                success(data){
-                    console.log(data);
-                    for(var i=0;i<data.length;i++){
-                        var li=document.createElement('li');
-                        li.innerHTML=`
-                                    <span>${data[0].class}</span>
-                                    <span>${data[0].stage}</span>
-                                    <span>${data[0].door}</span>
-                                    <span>${data[0].assets}</span>
-                                    <span>${data[0].number}</span>
-                        `;
-                        ul.appendChild(li)
-                    }
-                }
-            })
-        })
     </script>
 </body>
 
