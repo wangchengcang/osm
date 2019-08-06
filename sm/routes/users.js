@@ -161,6 +161,23 @@ router.get('/r',function(req,res){
 		}
 	})
 });		
+//搜索讲师
+router.post('/sousuo',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+    var json=req.body;
+	console.log(json);
+	sql.con({
+		arr:[json.lecturer],
+		sql:'select * from teacher where lecturer like "%"?"%"',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
 //搜索学生个人资料
 router.get('/s',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
@@ -176,8 +193,6 @@ router.get('/s',function(req,res){
 		}
 	})
 });	
-<<<<<<< HEAD
-=======
 //新学员入住寝室录入
 router.get('/dorm',function(req,res){
 	var json=req.query;
@@ -230,5 +245,4 @@ router.get('/queq',function(req,res){
 		}
 	})
 })
->>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
 module.exports = router;
