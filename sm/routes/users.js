@@ -176,4 +176,59 @@ router.get('/s',function(req,res){
 		}
 	})
 });	
+<<<<<<< HEAD
+=======
+//新学员入住寝室录入
+router.get('/dorm',function(req,res){
+	var json=req.query;
+	console.log(json)
+	sql.con({
+		arr:[json.xh],
+		sql:'select * from dormitory where xh=?',
+		success(data){
+			if(data.length){
+				res.send('no')
+			}else{
+				sql.con({
+					arr:[json.xh,json.name,json.xb,json.sushe,json.qinshi,json.dh,json.bzr],
+					sql:'insert into dormitory(xh,name,xb,sushe,qinshi,dh,bzr) values(?,?,?,?,?,?,?)',
+					success(data){
+						res.send('ok')
+					},
+					error(err){
+						res.send(err)
+					}
+				})
+			}
+		}
+	})
+})
+//读取寝室学员信息
+router.get('/read_lu',function(req,res){
+	sql.con({
+		arr:[],
+		sql:'select * from dormitory order by uid desc',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
+//读取学员缺寝信息
+router.get('/queq',function(req,res){
+	var json=req.query;
+	sql.con({
+		arr:[json.uid],
+		sql:'select * from dormitory where uid=?',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
+>>>>>>> 6eb857a3fdcd11ec5b461d269f946bad1c3dd5d9
 module.exports = router;
