@@ -6,11 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-<<<<<<< HEAD
-=======
 var banji = require('./routes/banji')
 var curriculumRouter = require('./routes/curriculum');
->>>>>>> 6262b23175424f299163242e628db815d9e33852
 var app = express();
 
 // view engine setup

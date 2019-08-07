@@ -281,8 +281,6 @@ router.get('/queq',function(req,res){
 		}
 	})
 })
-<<<<<<< HEAD
-
 
 
 // 课程录入
@@ -325,6 +323,4 @@ router.get('/d',function(req,res){
 		}
 	})
 })
-=======
->>>>>>> 6262b23175424f299163242e628db815d9e33852
 module.exports = router;
