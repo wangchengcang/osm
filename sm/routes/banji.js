@@ -56,7 +56,6 @@ router.post('/search',function(req,res){
 	console.log(json);
 	sql.con({
 		arr:[json.class,json.stage,json.door],
-		// arr:[],
 		sql:'select * from class where class like "%"?"%" or stage like "%"?"%" or door like "%"?"%"',
 		success(data){
 			res.send(data);

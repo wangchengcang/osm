@@ -161,6 +161,23 @@ router.get('/r',function(req,res){
 		}
 	})
 });		
+//搜索讲师
+router.post('/sousuo',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+    var json=req.body;
+	console.log(json);
+	sql.con({
+		arr:[json.lecturer],
+		sql:'select * from teacher where lecturer like "%"?"%"',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
 //搜索学生个人资料
 router.get('/s',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
@@ -228,6 +245,7 @@ router.get('/queq',function(req,res){
 		}
 	})
 })
+<<<<<<< HEAD
 
 
 
@@ -271,4 +289,6 @@ router.get('/d',function(req,res){
 		}
 	})
 })
+=======
+>>>>>>> 6262b23175424f299163242e628db815d9e33852
 module.exports = router;

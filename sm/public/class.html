@@ -23,7 +23,7 @@
             line-height: 60px;
             font-size: 30px;
             font-family: bold;
-            background: #2cc9aa;
+            border-bottom: 1px solid black;
         }
 
         #con p a {
@@ -32,22 +32,39 @@
             font-size: 30px;
             color: #ccc;
         }
+        #con div{
+            width: 100%;
+            height: 50px;
+        }
 
         #btn {
-            padding: 6px 15px;
+            padding: 3px 15px;
             background: #ccc;
             border-style: none;
             float: right;
-            margin-top: 15px;
-            margin-right: 15px;
+            margin: 10px 15px;
             outline: none;
             border-radius: 30px;
             color: #fff;
             font-size: 20px;
         }
+        #search{
+            width: 25%;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 15px;
+            border-style: none;
+            outline: none;
+            padding-left: 10px;
+            float: left;
+            margin-top: 12px;
+            margin-left: 25px;
+            border: 1px #ccc solid;
+        }
 
         #con table {
             width: 100%;
+            margin-top: 25px;
         }
         #con table tr th {
             width: 18%;
@@ -80,8 +97,16 @@
             width: 100%;
             height: 100%;
             text-align: center;
+            border-style: none;
+            background: none;
+            outline: none;
+            margin-top: 1px;
+        }
+        #con table tr:nth-child(odd) td button{
+            background: #ebfcf6;
         }
         #content{
+            display: none;
         }
         #content h6{
             height: 60px;
@@ -106,7 +131,7 @@
         #content div{
             display: flex;
         }
-        #preservation,#next,#aclose{
+        #preservation,#anext,#aclose{
             height: 40px;
             line-height: 40px;
             color: #fff;
@@ -121,15 +146,18 @@
             text-align: center;
             margin: 25px 0;
         }
-        #ul li{
-            list-style: none;
-            float: right;
-            line-height: 30px;
-            font-size: 20px;
-            border-bottom: 1px solid black;
+        #con #ul{
+            width: 70%;
         }
-        #ul li span{
-            margin: 0 20px;
+        #con #ul tr td{
+            width: 20%;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border-bottom: 1px solid;
+        }
+        #con #ul tr:nth-child(even){
+            background: #ebfcf6;
         }
     </style>
 </head>
@@ -140,93 +168,23 @@
             <p>
                 <a href="index.html">←</a>
                 班级分布信息
-                <button id="btn">新增班级</button>
             </p>
-            <table border="2" cellspacing="0">
+            <div>
+                <input type="search" id="search" placeholder="班级信息搜索"> 
+                <button id="btn">新增班级</button>
+            </div>
+            
+            <!-- 搜索内容 -->
+            <table id="ul" cellspacing="0" cellpadding="0">
+            </table>
+            <table id="table" border="2" cellspacing="0">
                 <tr>
                     <th>班级</th>
 					<th>阶段</th>
                     <th>门牌号</th>
                     <th>资产</th>
                     <th>人数</th>
-					<th>修改信息</th>
-                </tr>
-                    <td>班级</td>
-                    <td>门牌号</td>
-                    <td>资产</td>
-                    <td>人数</td>
-                </tr>
-                <tr>
-                    <td>1809</td>
-                    <td>209</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>1809</td>
-                    <td>208</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>1810</td>
-                    <td>207</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>29</td>
-                </tr>
-                <tr>
-                    <td>1811</td>
-                    <td>206</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>1812</td>
-                    <td>205</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td>1901</td>
-                    <td>204</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>1902</td>
-                    <td>203</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>32</td>
-                </tr>
-                <tr>
-                    <td>1903</td>
-                    <td>202</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>27</td>
-                </tr>
-                <tr>
-                    <td>1904</td>
-                    <td>201</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>1905</td>
-                    <td>210</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>1906</td>
-                    <td>310</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>1907</td>
-                    <td>309</td>
-                    <td>空调一台，桌椅n套</td>
-                    <td>30</td>
+                    <th>修改信息</th>
                 </tr>
             </table>
         </div>
@@ -238,7 +196,7 @@
             <p>人&nbsp;&nbsp;&nbsp;数 <input type="text"></p>
             <div>
                 <button id="preservation">保存并关闭</button>
-                <button id="next">保存并录入下一条</button>
+                <button id="anext">保存并录入下一条</button>
                 <button id="aclose">关闭</button>
             </div>
         </div>
@@ -309,7 +267,7 @@
                 url:href+'/banji/read',
                 success(data){
                     for(var i=0;i<data.length;i++){
-                        var tr=document.createElement('tr');
+                        var tr = document.createElement('tr');
                         tr.innerHTML=`
                             <td><input type="text" value="${data[i].class}"></td>
                             <td><input type="text" value="${data[i].stage}"></td>
@@ -336,7 +294,7 @@
         }
 
         //搜索
-        $('#search').on('change',function(){
+        $('#search').on('input',function(){
             $.ajax({
                 type:'post',
                 url:href+'/banji/search',
@@ -346,21 +304,29 @@
                     door:$("#search").val()
                 },
                 success(data){
-                    console.log(data);
-                    if(data==null){
-                        // var li=document.createElement('li');
-                        // li.innerHTML=`<span>没有改班级</span>`;
+                    if(data==''){
+                        ul.innerHTML='';
+                        var tr=document.createElement('tr');
+                        tr.innerHTML=`<td style="color:red">没有该班级,请重新输入</td>`;
+                        $('#search').val('');
+                        ul.appendChild(tr);
+                        
                     }else{
-                        for(var i=0;i<data.length;i++){
-                            var li=document.createElement('li');
-                            li.innerHTML=`
-                                        <span>${data[0].class}</span>
-                                        <span>${data[0].stage}</span>
-                                        <span>${data[0].door}</span>
-                                        <span>${data[0].assets}</span>
-                                        <span>${data[0].number}</span>
-                            `;
-                            ul.appendChild(li)
+                        ul.innerHTML=''
+                        if(search.value ==''){
+                            ul.innerHTML='';
+                        }else{
+                            for(var i=0;i<data.length;i++){
+                                var tr=document.createElement('tr');
+                                tr.innerHTML=`
+                                            <td>${data[i].class}</td>
+                                            <td>${data[i].stage}</td>
+                                            <td>${data[i].door}</td>
+                                            <td>${data[i].assets}</td>
+                                            <td>${data[i].number}</td>
+                                `;
+                                ul.appendChild(tr)
+                            }
                         }
                     }
                 }
