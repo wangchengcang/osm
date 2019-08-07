@@ -2,14 +2,20 @@
 <html lang="zh-CN">
 
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>课程</title>
+=======
+    <meta charset="UTF-8">  
+    <title>Document</title>
+>>>>>>> cf2f9812faa09e5498aafae09911714ad6eb8a54
     <style>
         * {
             margin: 0;
             padding: 0;
         }
 
+<<<<<<< HEAD
         .demo {
             width: 80%;
             height: auto;
@@ -85,16 +91,119 @@
             background: #eee;
         }
     </style>
+=======
+    .demo{
+        width:80%;
+        height: auto;
+        margin:0 auto;
+        text-align: center;
+    }
+    td, th{
+        text-align:center;
+        border:1px solid #ddd;
+        font-size:1.2em;
+        width:13%;
+        height: 30px;
+    }
+    caption{
+        margin:0 0 .5em;
+        font-weight:bold;
+    }
+    /*demo styles*/
+    table{
+        border-collapse:collapse;
+        width:100%;
+        margin: 0 auto;
+        height:200px;
+        margin-left:30px;
+        float:left;
+        margin:40px 40px 0 0;
+        position: relative;
+    }
+    th{
+        background-color:#f4f4f4;
+    }
+    /* input */
+    td input{
+        border:1px solid orange;
+        background:yellow;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        position:absolute;
+        padding:8px 0;
+        text-align:center;
+        width:200px;
+        margin:-17px 0 0 4px;
+        font-size:1.4em;
+        right: 20px;
+    }
+    td.input{
+        padding:0;
+        position:relative;
+    }
+    td.hover{
+        background:#eee;
+    }
+    .luru{
+        width: 100%;
+        transition: 1s;
+        position: relative;
+    }
+    .luru>a{
+        color:red;
+        font-size: 20px;
+        position: absolute;
+        right: 10px;
+        top: -20px;
+        text-decoration: none;
+    }
+    .luru>div{
+        width: 25%;
+        float: left;
+    }
+    .luru>div input{
+        outline: none;
+        border:none;
+        border-bottom:solid 1px #000;
+    }
+    .active{
+        opacity: 0;
+        height: 0;
+    }
+    .show{
+        opacity: 1;
+        height: 50px;
+    }        
+    .active_btn{
+        display: none;
+    }
+</style>
+>>>>>>> cf2f9812faa09e5498aafae09911714ad6eb8a54
 </head>
 
 <body>
     <div class="demo">
+<<<<<<< HEAD
         <div>
             <a href="index.html">←</a>
             <p>课程安排</p>
         </div>
 
         <table border="2" cellspacing="0" cellpadding="0">
+=======
+        <h4>课程安排</h4>
+        <button id="luru_btn">录入</button>
+        <button id="submit" class="active_btn">提交</button>
+        <div class="luru active">
+            <a href="#">x</a>
+            <div>阶段：<input type="text" id="stage"></div>
+            <div>课程名称：<input type="text" id="curriculumName"></div>
+            <div>任课老师：<input type="text" id="teacher"></div>
+            <div>班主任：<input type="text" id="headmaster"></div>
+        </div>
+        <table>
+>>>>>>> cf2f9812faa09e5498aafae09911714ad6eb8a54
             <thead>
                 <tr>
                     <th scope="col">阶段</th>
@@ -103,6 +212,7 @@
                     <th scope="col">班主任</th>
                 </tr>
             </thead>
+<<<<<<< HEAD
             <tbody>
                 <tr>
                     <td>第一阶段</td>
@@ -111,6 +221,11 @@
                     <td>曲晓芳</td>
                 </tr>
                 <tr>
+=======
+            <tbody id="mytable">
+
+                <!-- <tr>
+>>>>>>> cf2f9812faa09e5498aafae09911714ad6eb8a54
                     <td>第二阶段</td>
                     <td>移动端初级</td>
                     <td>袁浩明</td>
@@ -153,7 +268,7 @@
                     <td>曲晓芳</td>
                 </tr>
                 <tr>
-                    <td>第九阶段</td>
+                    <td >第九阶段</td>
                     <td>vue.js</td>
                     <td>郝雪纲</td>
                     <td>曲晓芳</td>
@@ -174,6 +289,7 @@
                     <td>实训三</td>
                     <td>包装</td>
                     <td>xxx</td>
+<<<<<<< HEAD
                     <td>曲晓芳</td>
                 </tr>
             </tbody>
@@ -210,11 +326,95 @@
                 headmaster: headmaster.value,
             },
             success(data) {
+=======
+                    <td>xxx</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </style>
+</head> 
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    // 录入
+    var href='http://localhost:8000';  
+    $('#luru_btn').on('click',function(){
+        $('.luru').addClass('show')
+        $(this).addClass('active_btn');
+        $('#submit').removeClass('active_btn')    
+    })
+    // 取消录入
+    $('.luru>a').on('click',function(){
+        stage.value='';
+        curriculumName.value='';
+        teacher.value='';
+        headmaster.value='';
+        $('.luru').removeClass('show')
+        $('#luru_btn').removeClass('active_btn');
+        $('#submit').addClass('active_btn')
+
+    })
+    // 提交发送ajax
+    $('#submit').on('click',function(){
+        luru();
+        setTimeout(function(){
+            window.location.reload();
+        },1000)
+    })
+    function luru(){
+        if(stage.value==''){
+            alert('阶段输入不能为空')
+        }else if(curriculumName.value==''){
+            alert('请输入课程名称')
+        }else if(teacher.value==''){
+            alert('请输入讲师')
+        }else if(headmaster.value==''){
+            alert('请输入班主任')
+        }else{
+            $.ajax({
+                type:'post',
+                url:href+'/users/l',
+                data:{
+                    stage:stage.value,
+                    curriculumName:curriculumName.value,
+                    teacher:teacher.value,
+                    headmaster:headmaster.value
+                },
+                success(data){
+                    if(data=='ok'){
+                        alert('提交成功')
+                        duqu()
+                    }else{
+                        alert('提交失败')
+                        stage.value='';
+                        curriculumName.value='';
+                        teacher.value='';
+                        headmaster.value='';
+                    }
+                }
+            })
+        }
+    }
+    // 读取课程信息
+    duqu()
+    function duqu(){
+        $.ajax({
+            type:'get',
+            url:href+'/users/d',
+            success(data){
+>>>>>>> cf2f9812faa09e5498aafae09911714ad6eb8a54
                 console.log(data)
+                $.each(data, function(index, value){
+                    $(`<tr>
+                        <td>${value.stage}</td>
+                        <td>${value.curriculumName}</td>
+                        <td>${value.teacher}</td>
+                        <td>${value.headmaster}</td>
+                        </tr>`).appendTo('#mytable')
+                })
             }
         })
     }
-
 </script>
 
 </html>

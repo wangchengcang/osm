@@ -281,4 +281,50 @@ router.get('/queq',function(req,res){
 		}
 	})
 })
+<<<<<<< HEAD
+
+
+
+// 课程录入
+router.post('/l',function(req,res){
+    res.setHeader('Access-Control-Allow-Origin','*');
+    var json=req.body;
+    console.log(json)
+    sql.con({
+        arr:[json.stage],
+        sql:'select * from curriculum where stage=?',
+        success(data){
+            if(data.length){
+				res.send('no')
+			}else{
+                sql.con({
+                    arr:[json.stage,json.curriculumName,json.teacher,json.headmaster],
+                    sql:'insert into curriculum(stage,curriculumName,teacher,headmaster) values(?,?,?,?)',
+                    success(data){
+						res.send('ok')
+					},
+					error(err){
+						res.send(err)
+					}
+                })
+            }
+        }
+    })
+})
+// 读取课程信息
+router.get('/d',function(req,res){
+	var json=req.query;
+	sql.con({
+		arr:[],
+		sql:'select * from curriculum order by uid asc',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
+=======
+>>>>>>> 6262b23175424f299163242e628db815d9e33852
 module.exports = router;
