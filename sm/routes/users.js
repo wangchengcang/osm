@@ -125,7 +125,7 @@ router.get('/msg',function(req,res){
 router.post('/teacher',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*')
 	var json=req.body;
-	console.log(json)
+	console.log(json);
 	sql.con({
 		arr:[json.classroom,json.door],
 		sql:'select * from teacher where class=? or door=?',
@@ -134,7 +134,7 @@ router.post('/teacher',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people,],
+					arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people],
 					sql:'insert into teacher(class,door,lecturer,curriculum,number) values(?,?,?,?,?)',
 					success(data){
 						res.send('ok')
@@ -177,14 +177,50 @@ router.post('/sousuo',function(req,res){
 		}
 	})
 })
+//修改讲师
+router.get('/modify',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people,json.uid],
+		sql:'update teacher set class=?,door=?,lecturer=?,curriculum=?,number=? where uid=?',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
+//删除讲师
+router.get('/dels',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.uid],
+		sql:'delete from teacher where uid=?',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
 
 //搜索学生个人资料
 router.get('/s',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json=req.query
 	sql.con({
-		arr:[json.val],
-		sql:'select * from mydata where name like "%"?"%"',
+		arr:[json.val,json.name,json.gender,json.myage,json.place,json.dq],
+		//json.mytelephone,json.parentelephone,
+		sql:'select * from mydata where id like "%"?"%" or name like "%"?"%" or gender like "%"?"%" or myage like "%"?"%"or place like "%"?"%" or dq like "%"?"%"',
+		// or mytelephone like "%"?"%" or parentelephone like "%"?"%" 
 		success(data){
 			res.send(data)
 		},

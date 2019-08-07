@@ -75,6 +75,7 @@
             line-height: 40px;
             text-align: center;
             border: none;
+            background: #20b6ad;
         }
         #con table tr td {
             width: 15%;
@@ -89,6 +90,13 @@
         #con table tr:nth-child(even){
             /* background: #20b6ad; */
         } 
+        #con table tr td button{
+            width: 60%;
+            height: 80%;
+            border-style: none;
+            /* color: #fff; */
+            background: #fff;
+        }
 
         #ul{
             width: 70%;
@@ -129,7 +137,7 @@
             font-family: bold;
         }
 
-        #submit,#aclose{
+        #submit,#modifys,#aclose{
             width: 100px;
             height: 30px;
             line-height: 30px;
@@ -140,6 +148,9 @@
             outline: none;
             border-radius: 5px;
             margin: 0 10px;
+        }
+        #modifys{
+            display: none;
         }
     </style>
 </head>
@@ -152,7 +163,7 @@
             讲师信息
         </p>
         <div id="xinzeng">
-            <button id="btn">新增班级信息</button>
+            <button id="btn">新增讲师信息</button>
             <input type="search" id="search" placeholder="搜索讲师信息">
         </div>
         <div id="content">
@@ -164,6 +175,7 @@
                     <td>课程：<input type="text" id="curriculum"></td>
                     <td>人数：<input type="text" id="people"></td>
                     <td><button id='submit'>提交</button></td>
+                    <td><button id="modifys">修改</button></td>
                     <td><button id='aclose'>关闭</button></td>
                 </tr>
             </table>
@@ -178,7 +190,8 @@
                     <th>讲师</th>
                     <th>课程</th>
                     <th>人数</th>
-                    <th>操作</th>
+                    <th>修改</th>
+                    <th>删除</th>
                 </tr>
             </table>
         </div>
@@ -203,9 +216,8 @@
         // 点击录入
         submit.onclick = function () {
             luru();
-            duqu();
-            window.location.reload();
-            $('input').val('');
+            // duqu();
+            // window.location.reload();
             content.style.opacity='1';
             content.style.display='block';
         }
@@ -230,17 +242,18 @@
                     type: 'post',
                     url: href + '/users/teacher',
                     data: {
-                        classroom: classroom.value,
-                        door: door.value,
-                        lecturer: lecturer.value,
-                        curriculum: curriculum.value,
-                        people: people.value,
+                        classroom: classroom.value,//班级
+                        door: door.value,//门牌号
+                        lecturer: lecturer.value,//讲师
+                        curriculum: curriculum.value,//阶段
+                        people: people.value,//人数
                     },
                     success(data) {
-                        console.log(data)
+                        console.log(data);
                         if (data == 'ok') {
                             alert('录入成功');
-
+                            duqu();
+                            $('input').val('');
                         } else {
                             alert('该班级已存在');
                         }
@@ -263,7 +276,12 @@
                             <td>${data[i].lecturer}</td>
                             <td>${data[i].curriculum}</td>
                             <td>${data[i].number}</td>
-                            <td><button>修改</button></td>  
+                            <td>
+                                <button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
+                            </td> 
+                            <td>
+                                <button onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
+                            </td> 
                         `;
                         exhibition.appendChild(otr)
                     }
@@ -307,6 +325,58 @@
                 }
             })
         })
+        
+        //修改
+        function modify(uid,classrooms,doors,lecturers,curriculums,number){
+            console.log(uid,classrooms,doors,lecturers,curriculums,number);
+            content.style.opacity = '1';
+            content.style.display = 'block';
+            submit.style.display = 'none';
+            modifys.style.display = 'block';
+            classroom.value = classrooms;
+            door.value = doors;
+            lecturer.value = lecturers;
+            curriculum.value = curriculums;
+            people.value = number;
+            modifys.onclick=function(){
+                $.ajax({
+                    type: 'get',
+                    url: href + '/users/modify',
+                    data:{
+                        uid:uid,
+                        classroom: classroom.value,//班级
+                        door: door.value,//门牌号
+                        lecturer: lecturer.value,//讲师
+                        curriculum: curriculum.value,//阶段
+                        people: people.value,//人数
+                    },
+                    success(data){
+                        console.log(data);
+                        $('#content input').val('');
+                        duqu();
+                        alert('修改完成');
+                        window.location.reload();
+                    }
+                })
+            }
+        }
+
+        //删除讲师
+        function del(uid,classrooms,doors,lecturers,curriculums,number){
+            console.log(uid);
+            $.ajax({
+                type:'get',
+                url:href+'/users/dels',
+                data:{
+                    uid:uid,
+                },
+                success(data){
+                    console.log(data);
+                    alert('删除成功');
+                }
+            })
+            window.location.reload();
+        }   
     </script>
 </body>
 <!-- classroom班级 -->

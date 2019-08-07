@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .title {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            border-bottom: 1px solid black;
+        }
+
+        .title a {
+            float: left;
+            text-decoration: none;
+            color: black;
+            margin-left: 10px;
+        }
+
+        .title h3 {
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .select {
+            width: 100%;
+            height: 60px;
+        }
+
+        .select input {
+            height: 30px;
+            line-height: 30px;
+            border-radius: 15px;
+            padding-left: 10px;
+            margin: 15px 0 15px 15px;
+            float: left;
+            border-style: none;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        
+        .select button {
+            float: right;
+            border-radius: 20px;
+            background: #7cb1fe;
+            color: #fff;
+            padding: 6px 15px;
+            border-style: none;
+            font-size: 20px;
+            margin: 10px 15px;
+            outline: none;
+        }
+
+        #table{
+            width: 100%;
+        }
+        #table tr td{
+            line-height: 30px;
+            border-bottom: 1px solid black;
+            text-align: center;
+        }
+        
+        .main table {
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .main table tr th {
+            height: 35px;
+            line-height: 35px;
+            background: #20b6ad;
+            color: #fff;
+            border: none;
+        }
+
+        .main table tr td {
+            text-align: center;
+            line-height: 30px;
+            border: none;
+        }
+
+        .main table tr:nth-child(odd) {
+            background: #ebfcf6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="mian-table">
+            <div class="title">
+                <a href="index.html" class="return">返回</a>
+                <h3>学生基本资料</h3>
+            </div>
+            <div class="select">
+                <input type="search" id="search" placeholder="学生信息搜索">
+                <!-- <button type="button" class="add" id="newadd">学员录入</button> -->
+            </div>
+            <table id="table" cellspacing="0" cellpadding="0">
+                <!-- <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>身份证号</th>
+                    <th>父母电话</th>
+                    <th>籍贯</th>
+                    <th>大区</th>
+                    <th>学籍</th>
+                    <th>班级</th>
+                    <th>详情</th>
+                </tr> -->
+            </table>
+            <table border="2" cellspacing="0" class="newtrainees" id="biao">
+                <tbody>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>身份证号</th>
+                        <th>父母电话</th>
+                        <th>籍贯</th>
+                        <th>大区</th>
+                        <th>学籍</th>
+                        <th>班级</th>
+                        <th>详情</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script>
+        var href='http://localhost:8000';
+
+        //查看学生资料
+        function chakan(msg) {
+            location.href = './essentialinformation.html';
+            localStorage.setItem("which", JSON.stringify(msg));
+        }
+
+        //读取新学员信息
+        read()
+        function read() {
+            $.ajax({
+                type: 'get',
+                url: href + '/users/read',
+                success(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var otr = document.createElement('tr')
+                        otr.innerHTML = `
+							<td>${data[i].id}</td>
+							<td>${data[i].name}</td>
+							<td>${data[i].myage}</td>
+							<td>${data[i].idcard}</td>
+							<td>${data[i].parentelephone}</td>
+							<td>${data[i].place}</td>
+							<td>${data[i].dq}</td>
+							<td>${data[i].xj}</td>
+							<td>${data[i].bj}</td>
+							<td style="background-color:#ABEF98;"><buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon></td>	
+						
+					`
+                        biao.appendChild(otr)
+                    }
+
+                }
+            })
+        }
+
+        //搜索
+        $('#search').on('input', function () {
+            $.ajax({
+                type: 'get',
+                url: href + '/users/s',
+                data: {
+                    val: search.value,
+                    name: search.value,
+                    myage:search.value,
+                    mytelephone:search.value,
+                    parentelephone:search.value,
+                    gender: search.value,
+                    place: search.value,
+                    dq: search.value,
+                    xj:search.value,
+                    bj:search.value,
+                },
+                success(data) {
+                    // console.log(data)
+                    if(data==''){
+                        table.innerHTML='';
+                        var tr=document.createElement('tr');
+                        tr.innerHTML=`<td style="color:red">没有该班级,请重新输入</td>`;
+                        // $('#search').val('');
+                        table.appendChild(tr);
+                        
+                    }else{
+                        table.innerHTML=''
+                        if(search.value ==''){
+                            table.innerHTML='';
+                        }else{
+                            for(var i=0;i<data.length;i++){
+                                var tr=document.createElement('tr');
+                                tr.innerHTML=`
+                                        <td>${data[i].id}</td>
+                                        <td>${data[i].name}</td>
+                                        <td>${data[i].myage}</td>
+                                        <td>${data[i].mytelephone}</td>
+                                        <td>${data[i].parentelephone}</td>
+                                        <td>${data[i].gender}</td>
+                                        <td>${data[i].place}</td>
+                                        <td>${data[i].dq}</td>
+                                        <td>${data[i].xj}</td>
+                                        <td>${data[i].bj}</td>
+                                `;
+                                table.appendChild(tr)
+                            }
+                        }
+                    }
+                }
+
+            })
+        })
+    </script>
+</body>
+
+</html>
