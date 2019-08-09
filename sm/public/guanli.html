@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>综合积分管理</title>
+		<link rel="stylesheet" href="stylesheets/guanli.css">
+	</head>
+	<body>
+		<div class="con">
+			<div class="header">
+				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;基本信息</p>
+				班级：<select class="z-text" id="gender" style="width: 100px;height:40px;font-size: 18px;border: none;">
+					<option value="1809">1809</option>
+					<option value="1809">1810</option>
+					<option value="1809">1811</option>
+					<option value="1809">1812</option>
+					<option value="1809">1901</option>
+					<option value="1809">1902</option>
+					<option value="1809">1903</option>
+					<option value="1809">1904</option>
+					<option value="1809">1905</option>
+					<option value="1809">1906</option>
+				</select>
+				学号：<input type="text" id="xh" placeholder="学员学号" />
+				<span class="Tips">未匹配到该学员学号(请从新输入)</span>
+				姓名：<input type="text" id="xm" placeholder="学员姓名" />
+				时间：<input type="text" id="showDate" style="width:100px;border: none;background: none;text-align: center;" disabled="disabled" />
+				周几：<input type="text" id="getday" style="width:100px;border: none;background: none;text-align: center;" disabled="disabled" />
+				<br>
+				原因：<input type="text" id="Reason" placeholder="请输入扣分原因">
+				扣除积分：<select class="z-text" id="jf" style="width: 100px;height:40px;font-size: 18px;border: none;">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+					<option value="30">30</option>
+					<option value="35">35</option>
+					<option value="40">40</option>
+				</select>
+				<button id="Submission" class="activea">提交</button>
+			</div>
+			<div class="conc">
+				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;扣除积分信息</p>
+				<table cellspacing="0" cellpadding="0" class="tab-a" id="main_Violation">
+					
+					<!-- <tr>
+						<td>1809</td>
+						<td>xxx</td>
+						<td>2019-8-8</td>
+						<td>周二</td>
+						<td>旷课</td>
+						<td>-5</td>
+						<td>95</td>
+						<td><button id="modify">修改</button></td>
+					</tr> -->
+				</table>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">
+		//默认提交按钮是不可点击的,只有学号匹配成功方可点击
+		$("#Submission").attr("disabled",true);
+		//计算当前时间和日期
+		var en = '周 ';
+		$('#getday').val(en + new Date().getDay())
+		$(function() {
+			setInterval("getTime();", 1000); //每隔一秒运行一次
+		})
+		//取得系统当前时间
+		function getTime() {
+			var myDate = new Date();
+			var date = myDate.toLocaleDateString();
+			// var hours = myDate.getHours();
+			// var minutes = myDate.getMinutes();
+			// var seconds = myDate.getSeconds();"+hours+":"+minutes+":"+seconds
+			$("#showDate").val(date); //将值赋给div
+		}
+		$('#Reason').on('focus', function() {
+			$(this).css({
+				'width': '250px'
+			});
+			$(this).css({
+				'transition': '0.5s'
+			});
+		})
+		// onchange
+		// onblur
+		//去学生基本信息对比学号是否有记录(有则可录入，没则不可提交)
+		$('#xh').on('blur',function(){
+			$.ajax({
+				type: 'get',
+				url: 'http://localhost:8000/indexs/testing',
+				data: {
+					xh:xh.value
+				},
+				success(data){
+					if(data=='') {
+						$("#xm").val('')
+						$('.Tips').css({'opacity':'1'})
+						setTimeout(function(){
+							$('.Tips').css({'opacity':'0'})
+						},2000)
+						$("#Submission").attr("disabled",true);
+						$("#Submission").removeClass('active')
+						
+					}else{
+						alert('匹配学员成功')
+						$("#xm").val(data[0].name)
+						$("#Submission").attr("disabled",false);
+						$("#Submission").addClass('active')
+					}
+				}
+			})
+		})
+		//提交违纪学员
+		$('#Submission').on('click', function() {
+			var num = 100;
+			var e = parseInt(num - (jf.value));
+			console.log(e)
+			console.log(jf.value)
+			if (gender.value == '') {
+				alert('内容不得为空')
+			} else if (xh.value == '') {
+				alert('请输入学号')
+			} else if (/[\u4E00-\u9FA5]/g.test(xh.value)) {
+				alert('学号内不得出现中文')
+			} else if (xm.value == '') {
+				alert('请输入姓名')
+			} else if (showDate.value == '') {
+				alert('请输入日期')
+			} else if (getday.value == '') {
+				alert('请输入星期几')
+			} else if (Reason.value == '') {
+				alert('请输入扣分原因')
+			} else if (jf.value == '') {
+				alert('请输入扣除分数')
+			} else {
+				$.ajax({
+					type: 'get',
+					url: 'http://localhost:8000/indexs/integral',
+					data: {
+						bj: gender.value,
+						xh: xh.value,
+						name: xm.value,
+						date: showDate.value,
+						getday: getday.value,
+						reason: Reason.value,
+						f:e,
+						kf:jf.value,
+					},
+					success(data) {
+						if(data == 'ok') {
+							alert('记录成功')
+							read()
+							xh.value='';
+							xm.value='';
+							Reason.value='';
+							$("#Submission").attr("disabled",true);
+							$("#Submission").removeClass('active')
+						}else{
+							alert('该学院已被记录如像操作请修改')
+							xh.value='';
+							xm.value='';
+							Reason.value='';
+						}
+					}
+				})
+			}
+		})
+		//读取违规学员信息
+		read()
+		function read(){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/read',
+				success(data){
+					var str=`
+						<tr style="height: 50px;">
+							<td>班级</td>
+							<td>扣除人</td>
+							<td>时间</td>
+							<td>周几</td>
+							<td>原因</td>
+							<td>扣除分值</td>
+							<td>总分值</td>
+							<td>操作</td>
+						</tr>
+					`
+					for(var i=0;i<data.length;i++){
+						str+=`
+							<tr>
+								<td>${data[i].bj}</td>
+								<td>${data[i].name}</td>
+								<td>${data[i].date}</td>
+								<td>${data[i].getday}</td>
+								<td>${data[i].Reason}</td>
+								<td>${data[i].kf}</td>
+								<td>${data[i].f}</td>
+								<td><button id="modify">修改</button></td>
+							</tr>
+						`
+						
+					}
+					main_Violation.innerHTML=str
+				}
+			})
+		}
+	</script>
+</html>
