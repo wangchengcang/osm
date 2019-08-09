@@ -323,4 +323,21 @@ router.get('/d',function(req,res){
 		}
 	})
 })
+
+//修改课程
+router.get('/modifys',function(req,res){
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.stage,json.curriculumName,json.teacher,json.headmaster,json.uid],
+		sql:'update curriculum set stage=?,curriculumName=?,teacher=?,headmaster=? where uid=?',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
 module.exports = router;

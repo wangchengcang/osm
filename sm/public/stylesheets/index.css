@@ -94,17 +94,22 @@
 #right table{
     width: 100%;
 }
-#right #renshu tr td{
-    width: 33%;
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-}
-#right table tr td{
-    width: 11.1%;
+#right table tr th{
+    /* width: 11.1%; */
     height: 40px;
     line-height: 40px;
     text-align: center;
+    background: #2cc9aa;
+    color: #fff;
+}
+#right table tr td{
+    /* width: 11.1%; */
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+#right table tr:nth-child(odd){
+    background: #ebfcf6;
 }
 #footer{
     width: 100%;
