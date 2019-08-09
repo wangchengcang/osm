@@ -125,7 +125,7 @@ router.get('/msg',function(req,res){
 router.post('/teacher',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*')
 	var json=req.body;
-	console.log(json)
+	console.log(json);
 	sql.con({
 		arr:[json.classroom,json.door],
 		sql:'select * from teacher where class=? or door=?',
@@ -134,7 +134,7 @@ router.post('/teacher',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people,],
+					arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people],
 					sql:'insert into teacher(class,door,lecturer,curriculum,number) values(?,?,?,?,?)',
 					success(data){
 						res.send('ok')
@@ -161,13 +161,66 @@ router.get('/r',function(req,res){
 		}
 	})
 });		
+//搜索讲师
+router.post('/sousuo',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+    var json=req.body;
+	console.log(json);
+	sql.con({
+		arr:[json.lecturer],
+		sql:'select * from teacher where lecturer like "%"?"%"',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+//修改讲师
+router.get('/modify',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.classroom,json.door,json.lecturer,json.curriculum,json.people,json.uid],
+		sql:'update teacher set class=?,door=?,lecturer=?,curriculum=?,number=? where uid=?',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
+//删除讲师
+router.get('/dels',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.uid],
+		sql:'delete from teacher where uid=?',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
+
 //搜索学生个人资料
 router.get('/s',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json=req.query
 	sql.con({
-		arr:[json.val],
-		sql:'select * from mydata where name like "%"?"%"',
+		arr:[json.val,json.name,json.gender,json.myage,json.place,json.dq],
+		//json.mytelephone,json.parentelephone,
+		sql:'select * from mydata where id like "%"?"%" or name like "%"?"%" or gender like "%"?"%" or myage like "%"?"%"or place like "%"?"%" or dq like "%"?"%"',
+		// or mytelephone like "%"?"%" or parentelephone like "%"?"%" 
 		success(data){
 			res.send(data)
 		},
@@ -228,6 +281,7 @@ router.get('/queq',function(req,res){
 		}
 	})
 })
+<<<<<<< HEAD
 //录入缺勤学员
 router.get('/queqa',function(req,res){
 	var json=req.query;
@@ -249,6 +303,42 @@ router.get('/duquee',function(req,res){
 	sql.con({
 		arr:[json.uid],
 		sql:'select * from dormitory_copy order by uid desc',
+=======
+
+
+// 课程录入
+router.post('/l',function(req,res){
+    res.setHeader('Access-Control-Allow-Origin','*');
+    var json=req.body;
+    console.log(json)
+    sql.con({
+        arr:[json.stage],
+        sql:'select * from curriculum where stage=?',
+        success(data){
+            if(data.length){
+				res.send('no')
+			}else{
+                sql.con({
+                    arr:[json.stage,json.curriculumName,json.teacher,json.headmaster],
+                    sql:'insert into curriculum(stage,curriculumName,teacher,headmaster) values(?,?,?,?)',
+                    success(data){
+						res.send('ok')
+					},
+					error(err){
+						res.send(err)
+					}
+                })
+            }
+        }
+    })
+})
+// 读取课程信息
+router.get('/d',function(req,res){
+	var json=req.query;
+	sql.con({
+		arr:[],
+		sql:'select * from curriculum order by uid asc',
+>>>>>>> a31b18d49ef773bbbd2755c93eb79bd7a657cf98
 		success(data){
 			res.send(data)
 		},
@@ -257,6 +347,7 @@ router.get('/duquee',function(req,res){
 		}
 	})
 })
+<<<<<<< HEAD
 //移除学员缺勤记录
 router.get('/yc',function(req,res){
 	var json=req.query;
@@ -314,3 +405,6 @@ router.get('/updataa',function(req,res){
 	})
 })
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> a31b18d49ef773bbbd2755c93eb79bd7a657cf98

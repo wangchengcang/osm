@@ -56,8 +56,41 @@ router.post('/search',function(req,res){
 	console.log(json);
 	sql.con({
 		arr:[json.class,json.stage,json.door],
-		// arr:[],
 		sql:'select * from class where class like "%"?"%" or stage like "%"?"%" or door like "%"?"%"',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+
+//修改保存
+router.post('/modify',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.body;
+	console.log(json);
+	sql.con({
+		arr:[json.class,json.stage,json.door,json.assets,json.number,json.uid],
+		// sql:'insert into class(uid,class,stage,door,assets,number) values(?,?,?,?,?,?)',
+		sql:'update class set class=?,stage=?,door=?,assets=?,number=? where uid=?',
+		success(data){
+			res.send('ok')
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
+
+//删除
+router.get('/del',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	sql.con({
+		arr:[json.uid],
+		sql:'delete from class where uid=?',
 		success(data){
 			res.send(data);
 		},
