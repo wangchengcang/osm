@@ -5,184 +5,8 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>Document</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		.main{
-			width: 100%;
-			min-height:800px;
-			/* background-image:url(http://www.pptbz.com/Soft/UploadSoftPic/201401/2014011321565813.jpg) no-repeat; */
-			position: relative;
-		}
-		.box {
-			width:80%;
-			height:800px;
-			margin: auto;
-			padding-bottom:20px;
-			position:absolute;
-			top:-800px;
-			left:50%;
-			margin-left: -40%;
-			background-color: #fff;
-		}
-
-		.title {
-			width: 100%;
-			height: 70px;
-			line-height: 70px;
-			text-align: center;
-			margin-bottom: 50px;
-		}
-		.title h3{
-			display: block;
-		}
-		.xinx {
-			width: 100%;
-			height: 40px;
-			line-height: 40px;
-			font-weight: bold;
-			border-bottom: 1px solid white;
-			background: #d1e2f9;
-			text-align: center;
-		}
-
-		td {
-			height: 22px !important;
-			padding: 0;
-		}
-
-		.z-text {
-			height: 22px; 
-			width: 200px;
-			float: right;
-			margin-right: 20px;
-			margin-top: 6px;
-		}
-
-		.zy {
-			text-align: center;
-			padding-top: 40px;
-			font-size: 18px;
-		}
-
-		.btn {
-			width:100%;
-			height:50px;
-			line-height: 50px;
-			text-align: center;
-		}
-		.btn button{
-			width: 25%;
-			cursor: pointer;
-			margin-right: 20px;
-		}
-		.open {
-			width:150px;
-			height:40px;
-			outline-style: none;
-			border-radius: 20px;
-			background: #7cb1fe;
-			border-style: none;
-		}
-		.input {
-			width: 150px;
-			height: 40px;
-			outline-style: none;
-			border-radius: 20px;
-			background: #7cb1fe;
-			border-style: none;
-		}
-		.close {
-			width: 150px;
-			height: 40px;
-			outline-style: none;
-			border-radius: 20px;
-			background: #7cb1fe;
-			border-style: none;
-		}
-		.box table{
-			width: 100%;
-		}
-		.box table tr td:nth-child(1){
-			width: 50%;
-			border-right: 1px solid white;
-			background:#d1e2f9;
-			line-height: 36px;
-		} 
-		.box table tr td:nth-child(2){
-			width: 50%;
-			background:#d1e2f9;
-			line-height: 36px;
-		} 
-		.box table tr td p{
-			padding-left: 10px;
-			float: left;
-		}
-		.add{
-			width:100px;
-			height:35px;
-			outline-style: none;
-			border-radius:20px;
-			background: #7cb1fe;
-			border-style: none;
-			cursor: pointer;
-			font-size: 18px;
-			position: absolute;
-			right: 10%;
-			top:60px;
-		}
-		.mian-table{
-			width:80%;
-			min-height:800px;
-			margin:auto;
-			/* background: #00B7FF; */
-		}
-		.newtrainees{
-			margin-top:20px;
-			width:100%;
-		}
-		.newtrainees tr td{
-			text-align: center;
-		}
-		.return{
-			text-decoration: none;
-			color: #000;
-			cursor: pointer;
-			font-size:18px;
-			position:absolute;
-			left: 10%;
-			top:40px;
-		}
-		#see{
-			height:100%;
-			border:one;
-			cursor: pointer;
-		}
-		.newtrainees tr{
-			height: 30px;
-		}
-		.select{
-			width: 161px;
-			height: 30px;
-			position: absolute;
-			top:65px;
-			right:400px;
-			background-color: #000;
-			border-radius: 30px;
-			transition: .5s;
-		}
-		.select input{
-			width: 100%;
-			height: 100%;
-			border-radius: 30px;
-			padding-left: 10px;
-			border:solid 2px #ccc;
-			outline: none;
-		}
-	</style>
+	<title>新增学员信息</title>
+	<link rel="stylesheet" href="stylesheets/record.css">
 </head>
 <body>
 	<div class="main">
@@ -191,16 +15,14 @@
 				<h3>新增学员记录</h3>
 			</div>
 			<div class="select">
-				<input type="search" id="search">
+				<input type="search" id="search" placeholder="请输入学员姓名">
+				<button id="search_name">搜索</button>
 			</div>
 			<a href="index.html" class="return">返回</a>
+			<span class="returna" style="font-size: 25px;">←</span>
 			<button type="button" class="add" id="newadd">学员录入</button>
-			<!-- <table border="2" cellspacing="0" class="newtrainees">
-				
-			</table> -->
-			
-			<table  border="2" cellspacing="0" class="newtrainees" id="biao">
-				<tr>
+			<table cellspacing="0" class="newtrainees" id="biao">
+				<tr style="background-color: #2cc9aa; color: #fff;height:50px;">
 					<th>学号</th>
 					<th>姓名</th>
 					<th>年龄</th>
@@ -216,7 +38,7 @@
 		</div>
 		<div class="box" id="anewadd">
 			<div class="title">
-				<h3>学生基本信息</h3>
+				<h3>录入学生基本信息</h3>
 			</div>
 			<div class="xinx">基本信息</div>
 			<table border="0" cellspacing="1" cellpadding="" style="background:#d1e2f9;">
@@ -330,7 +152,25 @@
 			</div>
 			
 		</div>
+		<div class="search_display">
+			<li id="warning">未找到结果</li>
+			<table cellspacing="0" class="trainees" id="search_display">
+				<tr style="background-color: #2cc9aa; color: #fff;height:50px;" id="one">
+					<th>学号</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>身份证号</th>
+					<th>父母电话</th>
+					<th>籍贯</th>
+					<th>大区</th>
+					<th>学籍</th>
+					<th>班级</th>
+					<th>详情</th>
+				</tr>
+			</table>
+		</div>
 	</div>
+	<div class="footer"></div>
 </body>
 <script src="js/jquery.js"></script>
 <script>
@@ -381,7 +221,9 @@
 	//保存按钮
 	aopen.onclick=function(){
 		data()
-		window.location.reload();
+		setTimeout(function(){
+			window.location.reload();
+		})
 	}
 	//保存按钮并录入下一名学员
 	anextopen.onclick=function(){
@@ -486,17 +328,18 @@
 			success(data){
 				for(var i=0;i<data.length;i++){
 					var otr=document.createElement('tr')
+					otr.className='one-odd'
 					otr.innerHTML=`
-							<td>${data[i].id}</td>
-							<td>${data[i].name}</td>
-							<td>${data[i].myage}</td>
-							<td>${data[i].idcard}</td>
-							<td>${data[i].parentelephone}</td>
-							<td>${data[i].place}</td>
-							<td>${data[i].dq}</td>
-							<td>${data[i].xj}</td>
-							<td>${data[i].bj}</td>
-							<td style="background-color:#ABEF98;"><buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon></td>	
+							<td style="width:8%;">${data[i].id}</td>
+							<td style="width:9%;">${data[i].name}</td>
+							<td style="width:8%;">${data[i].myage}</td>
+							<td style="width:15%;">${data[i].idcard}</td>
+							<td style="width:14%;">${data[i].parentelephone}</td>
+							<td style="width:9%;">${data[i].place}</td>
+							<td style="width:9%;">${data[i].dq}</td>
+							<td style="width:9%;">${data[i].xj}</td>
+							<td style="width:8%;">${data[i].bj}</td>
+							<td><buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see">删除</buttuon></td>	
 						
 					`
 					biao.appendChild(otr)
@@ -513,13 +356,24 @@
 	// 搜索框
 	$('#search').on('focus',function(){
 		$('.select').css({'width':'300px'});
+		$('.search_display').css({'display':'block'});
+		$('#biao').css({'display':'none'});
+		$('.return').css({'display':'none'})
+		$('.returna').css({'display':'block'});
+	})
+	//返回
+	$('.returna').on('click',function(){
+		$('#search_display').css({'display':'block'})
+		setTimeout(function(){
+			window.location.reload();
+		})
+		$('.returna').css({'display':'none'});
+		$('.return').css({'display':'block'})
 	})
 	$('#search').on('blur',function(){
 		$('.select').css({'width':'161px'})
-		$(this).val('');
 	})
-	$('#search').on('input',function(){
-
+	$('#search_name').on('click',function(){
 		$.ajax({
 			type:'get',
 			url:href+'/users/s',
@@ -527,11 +381,30 @@
 				val:search.value,
 			},
 			success(data){
-				console.log(data)
+				$('#one').nextAll().remove();
+				if(data==''){
+					warning.style.display='block'
+				}else{
+					warning.style.display='none'
+				}
 				$('.newtrainees').css({'display':'none'})
-				$(`
-					<li>${data[0].place}</li>		
-				`).appendTo('.mian-table')
+				for(var i=0;i<data.length;i++){
+					$(`
+						<tr class="one-odd">
+							<td style="width:8%;">${data[i].id}</td>
+							<td style="width:9%;">${data[i].name}</td>
+							<td style="width:8%;">${data[i].myage}</td>
+							<td style="width:15%;">${data[i].idcard}</td>
+							<td style="width:14%;">${data[i].parentelephone}</td>
+							<td style="width:9%;">${data[i].place}</td>
+							<td style="width:9%;">${data[i].dq}</td>
+							<td style="width:9%;">${data[i].xj}</td>
+							<td style="width:8%;">${data[i].bj}</td>
+							<td><buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see">删除</buttuon></td>
+						</tr>
+					`).appendTo('#search_display')
+				}
+				
 			}
 
 		})

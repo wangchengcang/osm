@@ -6,36 +6,44 @@
 		<link rel="stylesheet" href="stylesheets/sushe.css">
 	</head>
 	<body>
-		<!-- //提示框 -->
-		<!-- <div id="tishi">
-			<div id="thi_a">
-				<span></span>
-			</div>
-		</div> -->
 		<div class="con">
-			<h3><a href="index.html">←</a>学生管理</h3>
+			<h3><a href="index.html">←</a>学生宿舍管理</h3>
 			<span class="spn"></span>
 			<div class="dong">
 				<button class="btn">搜索</button>
 				<input type="text" class="text" placeholder="请输入学员名字 / 学号">
-				<!-- <input type="text" class="texta" placeholder="名字"> -->
+				<p id="t">请输入学员名字 / 学号</p>
 				<button id="doer">新学员住宿录入</button>
 			</div>
 			<div id="luru">
 				<table id="luru_a" cellspacing="0" cellpadding="0" style="border:none; border-bottom: 1px solid #ccc;">
 					<tr style="background-color: #fff;">
-						<td><span class="luru-left">学号：</span><input type="text" id="xh" class="luru_input"></td>
+						<td><span class="luru-left">学号：</span><input type="text" id="xhee" class="luru_input"></td>
 						<td><span class="luru-left">姓名：</span><input type="text" id="namea" class="luru_input"></td>
-						<td><span class="luru-left">性别：</span><input type="text" id="xb" class="luru_input"></td>
-						<td><span class="luru-left">宿舍楼：</span><input type="text" id="sushe" class="luru_input"></td>
-						<td><span class="luru-left">寝室：</span><input type="text" id="qinshi" class="luru_input"></td>
-						<td><span class="luru-left">电话：</span><input type="text" id="dh" class="luru_input"></td>
-						<td><span class="luru-left">班主任：</span><input type="text" id="bzr" class="luru_input"></td>
-						<td><button id="Dormitory">录入</button><span id="close_lu">x</span></td>
+						<td><span class="luru-left">性别：</span><input type="text" id="xbb" class="luru_input"></td>
+						<td><span class="luru-left">宿舍楼：</span><input type="text" id="sushee" class="luru_input"></td>
+						<td><span class="luru-left">寝室：</span><input type="text" id="qinshii" class="luru_input"></td>
+						<td><span class="luru-left">电话：</span><input type="text" id="dhh" class="luru_input"></td>
+						<td><span class="luru-left">班主任：</span><input type="text" id="bzrr" class="luru_input"></td>
+						<td><button id="Dormitory">录入</button><button id="modifyx" style="display:none;">修改</button><span id="close_lu">x</span></td>
 					</tr>
 				</table>
 			</div>
-			<br>
+			<div id="Result">
+				<li id="warning">未找到搜索结果</li>
+				<ul id="result_main">
+					<li id="one">
+						<p style="width: 12%;float:left;text-align: center;">学号</p>
+						<p style="width: 12%;float:left;text-align: center;">姓名</p>
+						<p style="width: 12%;float:left;text-align: center;">性别</p>
+						<p style="width: 12%;float:left;text-align: center;">宿舍楼</p>
+						<p style="width: 12%;float:left;text-align: center;">寝室</p>
+						<p style="width: 12%;float:left;text-align: center;">电话</p>
+						<p style="width: 12%;float:left;text-align: center;">班主任</p>
+						<p style="width: 12%;float:left;text-align: center; float:right;cursor: pointer;" id="gb">关闭</p>
+					</li>
+				</ul>
+			</div>
 			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;男生</p>
 			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="male_xs">
 				<tr style="background-color: #2cc9aa; color: #fff;">
@@ -62,7 +70,7 @@
 					<td>操作</td>
 				</tr>
 			</table>
-			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;缺勤记录</p>
+			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;缺寝记录</p>
 			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="Absence">
 				<tr style="background-color: #2cc9aa; color: #fff;">
 					<td>学号</td>
@@ -79,60 +87,59 @@
 	</body>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
-		//返回当前屏幕宽度(空白空间)
-		// window.onload=function(){
-		// 	var h=window.screen.availHeight;
-		// 	tishi.style.width='100%';
-		// 	tishi.style.height=h+'px  ';
-		// 	tishi.style.position='absolute';
-		// 	tishi.style.top=0+'px';
-		// 	tishi.style.left=0+'px';
-		// 	tishi.style.background="rgba(0,0,0,.3)"
-		// 	tishi.style.Zindex=200;
-		// }
+		var int=document.querySelector('.text')
+		var btn=document.querySelector('.btn')
+		gb.onclick=function(){
+			int.value='';
+			Result.style.display='none';
+		}
 		doer.onclick=function(){
+			modifyx.style.display='none';
+			Dormitory.style.display='block';
 			luru.style.height=50+'px';
 			luru_a.style.top=0+'px';
 			luru.style.transition=0.5+'s';
 			luru_a.transition=0.6+'s';
+			$('input').val('')
 		}
 		close_lu.onclick=function(){
 			luru.style.height=0+'px';
 			luru_a.style.top=-50+'px';
 			luru.style.transition=0.5+'s';
 			luru_a.transition=0.6+'s';
+			$('input').val('')
 		}
 		Dormitory.onclick=function(){
-			if(xh.value==''){
+			if(xhee.value==''){
 				alert('请输入学员学号')
-			}else if(/[\u4E00-\u9FA5]/g.test(xh.value)){
+			}else if(/[\u4E00-\u9FA5]/g.test(xhee.value)){
 				alert('学号内不得出现中文')
 			}else if(namea.value==''){
 				alert('请输入学员姓名')
-			}else if(xb.value==''){
+			}else if(xbb.value==''){
 				alert('请输入学员性别')
-			}else if(sushe.value==''){
+			}else if(sushee.value==''){
 				alert('请输入学员所在宿舍楼')
-			}else if(qinshi.value==''){
+			}else if(qinshii.value==''){
 				alert('请输入学员寝室门牌号')
-			}else if(dh.value==''){
+			}else if(dhh.value==''){
 				alert('请输入学员手机号')
-			}else if(/[\u4E00-\u9FA5]/g.test(dh.value)){
+			}else if(/[\u4E00-\u9FA5]/g.test(dhh.value)){
 				alert('请输入学员电话')
-			}else if(bzr.value==''){
+			}else if(bzrr.value==''){
 				alert('请输入学员班主任姓名')
 			}else{
 				$.ajax({
 					type:'get',
 					url:'http://localhost:8000/users/dorm',
 					data:{
-						xh:xh.value,
+						xh:xhee.value,
 						name:namea.value,
-						xb:xb.value,
-						sushe:sushe.value,
-						qinshi:qinshi.value,
-						dh:dh.value,
-						bzr:bzr.value,
+						xb:xbb.value,
+						sushe:sushee.value,
+						qinshi:qinshii.value,
+						dh:dhh.value,
+						bzr:bzrr.value,
 					},
 					success(data){
 						if(data=='ok'){
@@ -149,8 +156,9 @@
 				})
 			}
 		}
-		//记录学员缺寝
+		//记录学员缺寝读取
 		function asence(data){
+			console.log(data)
 			$.ajax({
 				type:'get',
 				url:'http://localhost:8000/users/queq',
@@ -158,22 +166,77 @@
 					uid:data,
 				},
 				success(data){
-					var otr=document.createElement('tr');
-					otr.innerHTML=`
-							<td>${data[0].xh}</td>
-							<td>${data[0].name}</td>
-							<td>${data[0].xb}</td>
-							<td>${data[0].sushe}</td>
-							<td>${data[0].qinshi}</td>
-							<td>${data[0].dh}</td>
-							<td>${data[0].bzr}</td>
-							<td><button type="button" id="ton">移除</button></td>
-					`;
-					Absence.appendChild(otr)
+					console.log(data)
+					//存储
+					$.ajax({
+						type:'get',
+						url:'http://localhost:8000/users/queqa',
+						data:{
+							xh:data[0].xh,
+							name:data[0].name,
+							xb:data[0].xb,
+							sushe:data[0].sushe,
+							qinshi:data[0].qinshi,
+							dh:data[0].dh,
+							bzr:data[0].bzr,
+							uid:data[0].uid,
+						},
+						success(data){
+							if(data=='ok'){
+								duqu()
+							}
+							setTimeout(function(){
+								window.location.reload();
+							},200)
+						}
+					})
 				}
 			})
 		}
-		//读取寝室学员信息
+		// 读取缺勤学员
+		duqu()
+		function duqu(){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/users/duquee',
+				success(data){
+					// console.log(data)
+					for(var i=0;i<data.length;i++){
+						var otr=document.createElement('tr');
+						otr.innerHTML=`
+								<td>${data[i].xh}</td>
+								<td>${data[i].name}</td>
+								<td>${data[i].xb}</td>
+								<td>${data[i].sushe}</td>
+								<td>${data[i].qinshi}</td>
+								<td>${data[i].dh}</td>
+								<td>${data[i].bzr}</td>
+								<td><button type="button" id="ton" onclick="yc('${data[i].myuid}')">移除</button></td>
+						`;
+						Absence.appendChild(otr)
+					}
+				}
+			})
+		}
+		<!-- //移除学员缺勤记录 -->
+		function yc(uid){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/users/yc',
+				data:{
+					uid:uid,
+				},
+				success(data){
+					if(data=='ok'){
+						alert('移除成功')
+						setTimeout(function(){
+							window.location.reload();
+						})
+					}
+				}
+			})
+		}
+		<!-- //读取寝室学员信息 -->
 		read()
 		function read(){
 			$.ajax({
@@ -190,19 +253,122 @@
 								<td>${data[i].qinshi}</td>
 								<td>${data[i].dh}</td>
 								<td>${data[i].bzr}</td>
-								<td><button type="button" id="ton" onclick="asence('${data[i].uid}')">添加缺勤记录</button></td>
+								<td>
+									<button type="button" id="ton" onclick="asence('${data[i].uid}')">添加缺勤记录</button>
+									<button id="modify" onclick="modify('${data[i].uid}','${data[i].xh}','${data[i].name}','${data[i].xb}','${data[i].sushe}','${data[i].qinshi}','${data[i].dh}','${data[i].bzr}')">修改</button>
+									<button id="delet" onclick="AcademyDeletion('${data[i].uid}')">删除</button>
+									</td>
 						`;
+						<!-- //分类 -->
 						if(data[i].xb=='女'){
 							female_xs.appendChild(otr)
 						}else{
 							male_xs.appendChild(otr)
 						}
-						
 					}
-					
 				}
 			})
 		}
 		
+		<!-- //修改学员寝室信息 -->
+		function modify(uid,xh,name,xb,sushe,qinshi,dh,bzr){
+			console.log(uid,xh,name,xb,sushe,qinshi,dh,bzr)
+			modifyx.style.display='block';
+			Dormitory.style.display='none';
+			luru.style.height=50+'px';
+			luru_a.style.top=0+'px';
+			luru.style.transition=0.5+'s';
+			luru_a.transition=0.6+'s';
+			
+			xhee.value=xh;
+			namea.value=name;
+			xbb.value=xb;
+			sushee.value=sushe;
+			qinshii.value=qinshi;
+			dhh.value=dh;
+			bzrr.value=bzr
+			<!-- //修改mysql表 -->
+			modifyx.onclick=function(){
+				$.ajax({
+					type:'get',
+					url:'http://localhost:8000/users/updataa',
+					data:{
+						uid:uid,
+						xh:xhee.value,
+						name:namea.value,
+						xb:xbb.value,
+						sushe:sushee.value,
+						qinshi:qinshii.value,
+						dh:dhh.value,
+						bzr:bzrr.value,
+					},
+					success(data){
+						console.log(data)
+						read()
+						setTimeout(function(){
+							window.location.reload();
+						})
+						$('input').val('')
+					}
+				})
+			}
+		}
+		<!-- //删除学员 -->
+		function AcademyDeletion(uid){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/users/AcademyDeletion',
+				data:{
+					uid:uid
+				},
+				success(data){
+					read()
+					setTimeout(function(){
+						window.location.reload();
+					},20)
+				}
+			})
+		}
+		<!-- //搜索学员 -->
+		btn.onclick=function(){
+			if(int.value==''){
+				t.style.opacity="1"
+				setTimeout(function(){
+					t.style.opacity="0"	
+				},2000)
+			}else{
+				$.ajax({
+					type:'get',
+					url:'http://localhost:8000/users/search',
+					data:{
+						title:int.value,
+					},
+					success(data){
+						Result.style.display='block'
+						console.log(data)
+						if(data==''){
+							warning.style.display='block'
+							result_main.style.display='none'
+						}else{
+							$('#one').next().remove();
+							warning.style.display='none'
+							result_main.style.display='block'
+							var str=document.createElement('li');
+							str.innerHTML=`
+									<p style="width: 12%;float:left;text-align: center;">${data[0].xh}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[0].name}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[0].xb}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[0].sushe}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[0].qinshi}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[0].dh}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[0].bzr}</p>
+							`
+							result_main.appendChild(str)
+						}
+						
+					}
+				})
+			}
+		}
 	</script>
 </html>
