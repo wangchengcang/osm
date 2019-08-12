@@ -281,14 +281,13 @@ router.get('/queq',function(req,res){
 		}
 	})
 })
-<<<<<<< HEAD
 //录入缺勤学员
 router.get('/queqa',function(req,res){
 	var json=req.query;
 	console.log(json)
 	sql.con({
-		arr:[json.xh,json.name,json.xb,json.sushe,json.qinshi,json.dh,json.bzr,json.uid],
-		sql:'insert into dormitory_copy(xh,name,xb,sushe,qinshi,dh,bzr,myuid) values(?,?,?,?,?,?,?,?)',
+		arr:[json.xh,json.name,json.xb,json.sushe,json.qinshi,json.dh,json.bzr],
+		sql:'insert into dormitory_copy(xh,name,xb,sushe,qinshi,dh,bzr) values(?,?,?,?,?,?,?)',
 		success(data){
 			res.send('ok')
 		},
@@ -303,9 +302,14 @@ router.get('/duquee',function(req,res){
 	sql.con({
 		arr:[json.uid],
 		sql:'select * from dormitory_copy order by uid desc',
-=======
-
-
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
 // 课程录入
 router.post('/l',function(req,res){
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -338,7 +342,6 @@ router.get('/d',function(req,res){
 	sql.con({
 		arr:[],
 		sql:'select * from curriculum order by uid asc',
->>>>>>> a31b18d49ef773bbbd2755c93eb79bd7a657cf98
 		success(data){
 			res.send(data)
 		},
@@ -347,8 +350,6 @@ router.get('/d',function(req,res){
 		}
 	})
 })
-<<<<<<< HEAD
-
 //修改课程
 router.get('/modifys',function(req,res){
 	var json = req.query;
@@ -365,14 +366,12 @@ router.get('/modifys',function(req,res){
 	})
 })
 
-=======
-<<<<<<< HEAD
 //移除学员缺勤记录
 router.get('/yc',function(req,res){
 	var json=req.query;
 	sql.con({
 		arr:[json.uid],
-		sql:'delete from dormitory_copy where myuid=?',
+		sql:'delete from dormitory_copy where uid=?',
 		success(data){
 			res.send('ok')
 		},
@@ -424,7 +423,3 @@ router.get('/updataa',function(req,res){
 	})
 })
 module.exports = router;
-=======
->>>>>>> e44bb15f9cc06c680e7f3b6bb8efb9545913cbef
-module.exports = router;
->>>>>>> a31b18d49ef773bbbd2755c93eb79bd7a657cf98

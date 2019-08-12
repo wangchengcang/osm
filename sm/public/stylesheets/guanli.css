@@ -118,9 +118,20 @@ input{
 	width: 120px;
 	height: 40px;
 }
+#Submission_a{
+	width: 120px;
+	height: 40px;
+	position: relative;
+    top: -56px;
+    left: 443px;
+}
 .activea{
 	border: none;
 	background-color: #ccc;
+}
+.activeaa{
+	border:none;
+	background-color:#ccc;
 }
 .active{
 	border: none;

@@ -71,18 +71,7 @@
 				</tr>
 			</table>
 			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;缺寝记录</p>
-			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="Absence">
-				<tr style="background-color: #2cc9aa; color: #fff;">
-					<td>学号</td>
-					<td>姓名</td>
-					<td>性别</td>
-					<td>宿舍楼</td>
-					<td>寝室</td>
-					<td>电话</td>
-					<td>班主任</td>
-					<td>操作</td>
-				</tr>
-			</table>
+			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="Absence"></table>
 		</div>
 	</body>
 	<script src="js/jquery.js"></script>
@@ -185,9 +174,6 @@
 							if(data=='ok'){
 								duqu()
 							}
-							setTimeout(function(){
-								window.location.reload();
-							},200)
 						}
 					})
 				}
@@ -200,10 +186,21 @@
 				type:'get',
 				url:'http://localhost:8000/users/duquee',
 				success(data){
-					// console.log(data)
+					var str=`
+						<tr style="background-color: #2cc9aa; color: #fff;">
+							<td>学号</td>
+							<td>姓名</td>
+							<td>性别</td>
+							<td>宿舍楼</td>
+							<td>寝室</td>
+							<td>电话</td>
+							<td>班主任</td>
+							<td>操作</td>
+						</tr>
+					`;
 					for(var i=0;i<data.length;i++){
-						var otr=document.createElement('tr');
-						otr.innerHTML=`
+						str+=`
+							<tr>
 								<td>${data[i].xh}</td>
 								<td>${data[i].name}</td>
 								<td>${data[i].xb}</td>
@@ -211,10 +208,11 @@
 								<td>${data[i].qinshi}</td>
 								<td>${data[i].dh}</td>
 								<td>${data[i].bzr}</td>
-								<td><button type="button" id="ton" onclick="yc('${data[i].myuid}')">移除</button></td>
+								<td><button type="button" id="ton" onclick="yc('${data[i].uid}')">移除</button></td>
+							</tr>
 						`;
-						Absence.appendChild(otr)
 					}
+					Absence.innerHTML=str
 				}
 			})
 		}
@@ -229,9 +227,6 @@
 				success(data){
 					if(data=='ok'){
 						alert('移除成功')
-						setTimeout(function(){
-							window.location.reload();
-						})
 					}
 				}
 			})

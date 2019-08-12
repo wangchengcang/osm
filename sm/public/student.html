@@ -13,7 +13,7 @@
         }
 
         .main {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
         }
 
@@ -69,7 +69,7 @@
             width: 100%;
         }
         #table tr td{
-            line-height: 30px;
+            line-height: 50px;
             border-bottom: 1px solid black;
             text-align: center;
         }
@@ -89,13 +89,18 @@
 
         .main table tr td {
             text-align: center;
-            line-height: 30px;
+            line-height:50px;
             border: none;
         }
-
         .main table tr:nth-child(odd) {
             background: #ebfcf6;
         }
+		#see{
+			padding: 3px 13px;
+			background-color: #2CC9AA;
+			color: #fff;
+			cursor: pointer;
+		}
     </style>
 </head>
 
@@ -125,20 +130,6 @@
                 </tr> -->
             </table>
             <table border="2" cellspacing="0" class="newtrainees" id="biao">
-                <tbody>
-                    <tr>
-                        <th>学号</th>
-                        <th>姓名</th>
-                        <th>年龄</th>
-                        <th>身份证号</th>
-                        <th>父母电话</th>
-                        <th>籍贯</th>
-                        <th>大区</th>
-                        <th>学籍</th>
-                        <th>班级</th>
-                        <th>详情</th>
-                    </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -160,24 +151,38 @@
                 type: 'get',
                 url: href + '/users/read',
                 success(data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var otr = document.createElement('tr')
-                        otr.innerHTML = `
-							<td>${data[i].id}</td>
-							<td>${data[i].name}</td>
-							<td>${data[i].myage}</td>
-							<td>${data[i].idcard}</td>
-							<td>${data[i].parentelephone}</td>
-							<td>${data[i].place}</td>
-							<td>${data[i].dq}</td>
-							<td>${data[i].xj}</td>
-							<td>${data[i].bj}</td>
-							<td style="background-color:#ABEF98;"><buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon></td>	
-						
+					var str=`
+						<tr>
+						    <th>学号</th>
+						    <th>姓名</th>
+						    <th>年龄</th>
+						    <th>身份证号</th>
+						    <th>父母电话</th>
+						    <th>籍贯</th>
+						    <th>大区</th>
+						    <th>学籍</th>
+						    <th>班级</th>
+						    <th>详情</th>
+						</tr>
 					`
-                        biao.appendChild(otr)
+                    for (var i = 0; i < data.length; i++) {
+                        str+= `
+							<tr>
+								<td>${data[i].id}</td>
+								<td>${data[i].name}</td>
+								<td>${data[i].myage}</td>
+								<td>${data[i].idcard}</td>
+								<td>${data[i].parentelephone}</td>
+								<td>${data[i].place}</td>
+								<td>${data[i].dq}</td>
+								<td>${data[i].xj}</td>
+								<td>${data[i].bj}</td>
+								<td><buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon></td>	
+							</tr>
+						`
+                        
                     }
-
+					biao.innerHTML=str
                 }
             })
         }
