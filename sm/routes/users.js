@@ -286,8 +286,8 @@ router.get('/queqa',function(req,res){
 	var json=req.query;
 	console.log(json)
 	sql.con({
-		arr:[json.xh,json.name,json.xb,json.sushe,json.qinshi,json.dh,json.bzr,json.uid],
-		sql:'insert into dormitory_copy(xh,name,xb,sushe,qinshi,dh,bzr,myuid) values(?,?,?,?,?,?,?,?)',
+		arr:[json.xh,json.name,json.xb,json.sushe,json.qinshi,json.dh,json.bzr],
+		sql:'insert into dormitory_copy(xh,name,xb,sushe,qinshi,dh,bzr) values(?,?,?,?,?,?,?)',
 		success(data){
 			res.send('ok')
 		},
@@ -301,7 +301,11 @@ router.get('/queq',function(req,res){
 	var json=req.query;
 	sql.con({
 		arr:[json.uid],
+<<<<<<< HEAD
 		sql:'select * from dormitory where uid=?',
+=======
+		sql:'select * from dormitory_copy order by uid desc',
+>>>>>>> df412e17e9a10ab63a98eb3838324c33bbb0705b
 		success(data){
 			res.send(data)
 		},
@@ -350,7 +354,10 @@ router.get('/d',function(req,res){
 		}
 	})
 })
+<<<<<<< HEAD
 
+=======
+>>>>>>> df412e17e9a10ab63a98eb3838324c33bbb0705b
 //修改课程
 router.get('/modifys',function(req,res){
 	var json = req.query;
@@ -372,7 +379,7 @@ router.get('/yc',function(req,res){
 	var json=req.query;
 	sql.con({
 		arr:[json.uid],
-		sql:'delete from dormitory_copy where myuid=?',
+		sql:'delete from dormitory_copy where uid=?',
 		success(data){
 			res.send('ok')
 		},

@@ -48,12 +48,27 @@ router.get('/integral',function(req,res){
 })
 //读取违规学员信息
 router.get('/read',function(req,res){
-	var json=req.query;
+	 var json=req.query;
 	sql.con({
 		arr:[],
 		sql:'select * from integral order by uid desc',
 		success(data){
 			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
+//修改违纪学员信息
+
+router.get('/updatea',function(req,res){
+	var sjon=req.query;
+	sql.con({
+		arr:[json.bj,json.xh,json.name,json.date,json.getday,json.Reason,josn.f,json.kf,json.uid],
+		sql:'update integral set bj=?,xh=?,name=?,date=?,getday=?,Reason=?,f=?,kf=? where uid=?',
+		success(data){
+			res.send('ok')
 		},
 		error(err){
 			res.send(err)
