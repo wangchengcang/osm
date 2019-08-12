@@ -147,7 +147,7 @@
             color: #fff;
             border-style: none;
             outline: none;
-            border-radius: 5px;
+            border-radius: 15px;
             margin: 0 10px;
         }
         #modifys{
@@ -255,6 +255,7 @@
                             alert('录入成功');
                             duqu();
                             $('input').val('');
+                            window.location.reload();
                         } else {
                             alert('该班级已存在');
                         }
@@ -363,7 +364,7 @@
         }
 
         //删除讲师
-        function del(uid,classrooms,doors,lecturers,curriculums,number){
+        function del(uid){
             console.log(uid);
             $.ajax({
                 type:'get',
@@ -373,7 +374,12 @@
                 },
                 success(data){
                     console.log(data);
-                    alert('删除成功');
+                    if(data == data){
+                        alert('删除成功');
+                    }
+                    
+                    
+                    
                 }
             })
             window.location.reload();

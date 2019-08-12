@@ -28,10 +28,11 @@
 
 .title {
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
+	height: 50px;
+	line-height: 50px;
 	text-align: center;
 	margin-bottom: 50px;
+	font-size: 25px;
 }
 
 .xinx {
@@ -126,7 +127,7 @@ td {
 }
 
 .add {
-	width: 100px;
+	width: 110px;
 	height: 35px;
 	outline-style: none;
 	background-color: #2cc9aa;
@@ -137,6 +138,7 @@ td {
 	right: 5.1%;
 	color: #fff;
 	top: 50px;
+	border-radius: 25px;
 }
 
 .mian-table {
@@ -202,10 +204,13 @@ td {
 	border: none;
 	background-color: #2cc9aa;
 	color: #fff;
+	font-size: 18px;
 	position: absolute;
 	top: 0px;
     right:-85px;
 	cursor: pointer;
+	border-radius: 15px;
+	outline: none;
 }
 .select input {
 	width: 100%;
@@ -213,6 +218,7 @@ td {
 	padding-left: 10px;
 	border: solid 2px #2cc9aa;
 	outline: none;
+	border-radius: 15px;
 }
 
 .one-odd {

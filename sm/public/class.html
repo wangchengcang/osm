@@ -174,11 +174,10 @@
         }
 
         #con #ul tr td {
-            width: 20%;
             height: 35px;
             line-height: 35px;
             text-align: center;
-            border-bottom: 1px solid;
+            border-bottom: 2px solid #fff;
         }
 
         #con #ul tr:nth-child(even) {
@@ -235,11 +234,6 @@
         var href = 'http://localhost:8000';
         preservation.onclick = function () {
             data();
-            setTimeout(() => {
-                con.style.display = 'block';
-                content.style.display = 'none';
-            }, 1000)
-            window.location.reload();
         }
         anext.onclick = function () {
             data();
@@ -276,10 +270,14 @@
                     success(data) {
                         if (data == 'ok') {
                             alert('录入成功');
-                            $('#content input').val('')
+                            $('#content input').val('');
+                            con.style.display = 'block';
+                            content.style.display = 'none';
                             read();
+                            window.location.reload();
                         } else {
                             alert('已录入过');
+                            $('#content input').val('');
                         }
 
                     }
@@ -414,7 +412,7 @@
                 },
                 success(data){
                     console.log(data);
-                    
+                    alert('删除成功');
                 }
             })
             window.location.reload();

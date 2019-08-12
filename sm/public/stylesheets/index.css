@@ -54,8 +54,6 @@
 #content{
     width: 100%;
     min-height: 600px;
-	margin-bottom: 100px;
-    height: auto;
 }
 
 #left{
@@ -96,12 +94,17 @@
     text-align: center;
     background: #2cc9aa;
     color: #fff;
+    border: none;
 }
 #right table tr td{
     /* width: 11.1%; */
     height: 40px;
     line-height: 40px;
     text-align: center;
+    border:none;
+}
+#right table tr td:nth-child(9){
+    border-left: 1px solid black;
 }
 #right table tr:nth-child(odd){
     background: #ebfcf6;
