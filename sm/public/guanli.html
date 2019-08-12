@@ -4,8 +4,10 @@
 		<meta charset="utf-8">
 		<title>综合积分管理</title>
 		<link rel="stylesheet" href="stylesheets/guanli.css">
+		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
 	</head>
 	<body>
+		<div class="headera"><span id="fh"><i class="iconfont">&#xe66f;</i> 综合积分管理</span></div>
 		<div class="con">
 			<div class="header">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;基本信息</p>
@@ -40,6 +42,7 @@
 				</select>
 				<button id="Submission" class="activea">提交</button>
 				<button id="Submission_a" class="active" style="display:none;">提交修改</button>
+				<span id="gb" class="gb">x</span>
 			</div>
 			<div class="conc">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;扣除积分信息</p>
@@ -58,8 +61,13 @@
 			</div>
 		</div>
 	</body>
+	<script src="font_ps99atp86ak/iconfont.js"></script>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
+		//返回主页
+		fh.onclick=function(){
+			location.href='index.html'
+		}
 		//默认提交按钮是不可点击的,只有学号匹配成功方可点击
 		$("#Submission").attr("disabled", true);
 		//计算当前时间和日期
@@ -87,6 +95,17 @@
 				'transition': '0.5s'
 			});
 		})
+		//关闭
+		gb.onclick=function(){
+			Submission_a.style.display = 'none';
+			gb.style.display = 'none';
+			Submission.style.display = 'block';
+			xha.value='';
+			xm.value='';
+			Reasona.value='';
+			$("#Submission").attr("disabled", true);
+			$("#Submission").removeClass('active')
+		}
 		// onchange
 		// onblur
 		//去学生基本信息对比学号是否有记录(有则可录入，没则不可提交)
@@ -133,7 +152,7 @@
 				alert('内容不得为空')
 			} else if (xha.value == '') {
 				alert('请输入学号')
-			} else if (/[\u4E00-\u9FA5]/g.test(xh.value)) {
+			} else if (/[\u4E00-\u9FA5]/g.test(xha.value)) {
 				alert('学号内不得出现中文')
 			} else if (xm.value == '') {
 				alert('请输入姓名')
@@ -141,7 +160,7 @@
 				alert('请输入日期')
 			} else if (getday.value == '') {
 				alert('请输入星期几')
-			} else if (Reason.value == '') {
+			} else if (Reasona.value == '') {
 				alert('请输入扣分原因')
 			} else if (jf.value == '') {
 				alert('请输入扣除分数')
@@ -209,7 +228,7 @@
 								<td>${data[i].Reason}</td>
 								<td>${data[i].kf}</td>
 								<td>${data[i].f}</td>
-								<td><button id="modify" onclick="update('${data[i].uid}','${data[i].bj}','${data[i].xh}','${data[i].name}','${data[i].Reason}','${data[i].f}','${data[i].kf}')">修改</button></td>
+								<td><button id="modify" onclick="update('${data[i].uid}','${data[i].bj}','${data[i].xh}','${data[i].name}','${data[i].Reason}','${data[i].f}','${data[i].kf}')">添加记录</button></td>
 							</tr>
 						`
 					}
@@ -220,6 +239,7 @@
 		//修改违规学员信息
 		function update(uid, bj, xh, name, Reason, f, kf) {
 			Submission_a.style.display = 'block';
+			gb.style.display = 'block';
 			Submission.style.display = 'none';
 			console.log(uid, bj, xh, name, Reason, f, kf)
 			//f 扣除分后剩下的总分
@@ -230,9 +250,9 @@
 			var Deduction = parseInt(kf)
 
 			var max = parseInt(Total - jfvalue); //计算修改信息后还剩下的总积分
-			var nummax = parseInt(Deduction + jfvalue); //计算所扣除的总积分
+			// var nummax = parseInt(Deduction + jfvalue); //计算所扣除的总积分
 			console.log(max)
-			console.log(nummax)
+			// console.log(nummax)
 			xha.value = xh;
 			xm.value = name;
 			Reasona.value = Reason;
@@ -250,11 +270,12 @@
 						getday: getday.value,
 						Reason: Reasona.value,
 						f: max,
-						kf: nummax,
+						kf: jf.value,
 					},
 					success(data) {
 						if (data == 'ok') {
 							Submission_a.style.display = 'none';
+							gb.style.display = 'none';
 							Submission.style.display = 'block';
 							alert('修改成功')
 							read()

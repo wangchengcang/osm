@@ -297,15 +297,10 @@ router.get('/queqa',function(req,res){
 	})
 })
 //读取学员缺勤
-router.get('/queq',function(req,res){
-	var json=req.query;
+router.get('/duquee',function(req,res){
 	sql.con({
-		arr:[json.uid],
-<<<<<<< HEAD
-		sql:'select * from dormitory where uid=?',
-=======
+		arr:[],
 		sql:'select * from dormitory_copy order by uid desc',
->>>>>>> df412e17e9a10ab63a98eb3838324c33bbb0705b
 		success(data){
 			res.send(data)
 		},
@@ -354,10 +349,6 @@ router.get('/d',function(req,res){
 		}
 	})
 })
-<<<<<<< HEAD
-
-=======
->>>>>>> df412e17e9a10ab63a98eb3838324c33bbb0705b
 //修改课程
 router.get('/modifys',function(req,res){
 	var json = req.query;

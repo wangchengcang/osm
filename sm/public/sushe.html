@@ -21,7 +21,14 @@
 						<td><span class="luru-left">学号：</span><input type="text" id="xhee" class="luru_input"></td>
 						<td><span class="luru-left">姓名：</span><input type="text" id="namea" class="luru_input"></td>
 						<td><span class="luru-left">性别：</span><input type="text" id="xbb" class="luru_input"></td>
-						<td><span class="luru-left">宿舍楼：</span><input type="text" id="sushee" class="luru_input"></td>
+						<td>
+							<span class="luru-left">宿舍楼：</span>
+							<select class="z-text" id="sushee" class="luru_input" style="width: 80px;height:18px;font-size: 18px;border: none;">
+								<option value="F栋">F栋</option>
+								<option value="E栋">E栋</option>
+								<option value="C栋">C栋</option>
+							</select>
+						</td>
 						<td><span class="luru-left">寝室：</span><input type="text" id="qinshii" class="luru_input"></td>
 						<td><span class="luru-left">电话：</span><input type="text" id="dhh" class="luru_input"></td>
 						<td><span class="luru-left">班主任：</span><input type="text" id="bzrr" class="luru_input"></td>
@@ -227,6 +234,7 @@
 				success(data){
 					if(data=='ok'){
 						alert('移除成功')
+						duqu()
 					}
 				}
 			})

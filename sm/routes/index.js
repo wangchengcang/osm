@@ -63,10 +63,11 @@ router.get('/read',function(req,res){
 //修改违纪学员信息
 
 router.get('/updatea',function(req,res){
-	var sjon=req.query;
+	var json=req.query;
 	sql.con({
-		arr:[json.bj,json.xh,json.name,json.date,json.getday,json.Reason,josn.f,json.kf,json.uid],
-		sql:'update integral set bj=?,xh=?,name=?,date=?,getday=?,Reason=?,f=?,kf=? where uid=?',
+		arr:[json.bj,json.xh,json.name,json.date,json.getday,json.Reason,json.f,json.kf,json.uid],
+		// sql:'update integral set bj=?,xh=?,name=?,date=?,getday=?,Reason=?,f=?,kf=? where uid=?',
+		sql:'insert into integral(bj,xh,name,date,getday,Reason,f,kf) values(?,?,?,?,?,?,?,?)',
 		success(data){
 			res.send('ok')
 		},
