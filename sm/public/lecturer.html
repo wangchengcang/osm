@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>讲师</title>
+=======
+    <title>课程</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+>>>>>>> c70bd82e9257c9e67ea5b9f4c9b2423c9eaa5d17
     <style>
         * {
             margin: 0;
@@ -13,28 +18,38 @@
         }
 
         .box {
-            width: 80%;
+            width: 100%;
             height: auto;
-            padding-top: 20px;
             margin: 0 auto;
         }
+        .top{
+            background-color: #20b6ad;
 
-        .box a {
+        }
+
+        .top a {
             text-decoration: none;
             font-size: 26px;
             float: left;
+            margin-left: 5%;
+            margin-right: 15px;
+        }
+        .top a i{
+            color: #fff;
         }
 
-        .box p {
+        .top p {
             height: 60px;
-            text-align: center;
             line-height: 60px;
             font-size: 26px;
             border-bottom: 1px solid black;
+            color: #fff;
         }
         #xinzeng{
-            width: 100%;
+            width: 90%;
             height: 50px;
+            margin: 0 auto;
+            border-bottom: 1px #ccc dashed;
         }
         #search{
             width: 25%;
@@ -44,7 +59,6 @@
             padding-left: 10px;
             float: left;
             margin-top: 13px;
-            margin-left: 5%;
             border:1px solid #ccc;
             outline: none;
         }
@@ -62,14 +76,20 @@
             font-size: 20px;
         }
 
+        #con{
+            width: 90%;
+            margin: 25px auto;
+            /* margin-left:5%;  */
+        }
+
         #con table {
             width: 100%;
         }
-
-        #con{
-            margin-top: 25px;
-        }
+<<<<<<< HEAD
         #con table tr th {
+=======
+        #con table tr th{
+>>>>>>> c70bd82e9257c9e67ea5b9f4c9b2423c9eaa5d17
             height: 40px;
             line-height: 40px;
             text-align: center;
@@ -98,8 +118,16 @@
         }
 
         #ul{
-            width: 70%;
-            margin-left: 5%;
+            width: 90%;
+            margin: 30px auto;
+        }
+        #ul tr th {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: none;
+            background: #2cc9aa;
+            color: #fff;
         }
         #ul tr td{
             width: 20%;
@@ -113,7 +141,8 @@
         }
 
         #content{
-            margin-top:30px;
+            width: 90%;
+            margin: 30px auto;
             opacity: 0;
             display: none;
         }
@@ -156,11 +185,13 @@
 
 <body>
     <div class="box">
+        <div class="top">
+            <p>
+                <a href="index.html"><i class="iconfont">&#xe66f;</i></a>
+                讲师信息
+            </p>
+        </div>
         
-        <p>
-            <a href="index.html">←</a>
-            讲师信息
-        </p>
         <div id="xinzeng">
             <button id="btn" class='ye'>新增讲师信息</button>
             <input type="search" id="search" placeholder="搜索讲师信息">
@@ -239,8 +270,6 @@
         // 点击录入
         submit.onclick = function () {
             luru();
-            // duqu();
-            // window.location.reload();
             content.style.opacity='1';
             content.style.display='block';
         }
@@ -332,17 +361,29 @@
                         ul.innerHTML=''
                         if(search.value ==''){
                             ul.innerHTML='';
+                            con.style.display = 'flex';
                         }else{
+                            con.style.display = 'none';
+                            var tr = `
+                                <tr>
+                                    <th>班级</th>
+                                    <th>门牌号</th>
+                                    <th>讲师</th>
+                                    <th>课程</th>
+                                    <th>人数</th>
+                                </tr>
+                            `;
                             for(var i=0;i<data.length;i++){
-                                var tr=document.createElement('tr');
-                                tr.innerHTML=`
+                                tr +=`
+                                        <tr>
                                             <td>${data[i].class}</td>
                                             <td>${data[i].door}</td>
                                             <td>${data[i].lecturer}</td>
                                             <td>${data[i].curriculum}</td>
                                             <td>${data[i].number}</td>
+                                        </tr>
                                 `;
-                                ul.appendChild(tr)
+                                ul.innerHTML = tr;
                             }
                         }
                     }

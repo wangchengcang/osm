@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>班级</title>
+=======
+    <title>课程</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+>>>>>>> c70bd82e9257c9e67ea5b9f4c9b2423c9eaa5d17
     <style>
         * {
             margin: 0;
@@ -13,34 +18,42 @@
         }
 
         .box {
-            width: 80%;
+            width: 100%;
             height: auto;
             margin: 0 auto;
         }
 
-        #con p {
-            text-align: center;
+        #tops p {
             height: 60px;
             line-height: 60px;
-            font-size: 30px;
+            font-size: 26px;
             font-family: bold;
             border-bottom: 1px solid black;
+            background-color: #20b6ad;
+            color: #fff;
         }
 
-        #con p a {
+        #tops p a {
             text-decoration: none;
             float: left;
-            font-size: 30px;
-            color: #ccc;
+            margin-left: 5%;
+            margin-right: 15px;
+            line-height: 60px;
+        }
+        #tops a i{
+            color: #fff;
+            
         }
 
-        #con div {
-            width: 100%;
+        #middle {
+            width: 90%;
             height: 50px;
+            margin: 0 auto;
+            border-bottom: 1px dotted #ccc;
         }
 
         #btn {
-            padding: 3px 15px;
+            padding: 3px 20px;
             background: #ccc;
             border-style: none;
             float: right;
@@ -58,11 +71,15 @@
             border-radius: 15px;
             border-style: none;
             outline: none;
-            padding-left: 10px;
+            padding-left: 15px;
             float: left;
             margin-top: 12px;
-            margin-left: 25px;
             border: 1px #ccc solid;
+        }
+
+        #con{
+            width: 90%;
+            margin: 0 auto;
         }
 
         #con table {
@@ -71,7 +88,6 @@
         }
 
         #con table tr th {
-            /* width: 18%; */
             height: 40px;
             line-height: 40px;
             background: #2cc9aa;
@@ -116,6 +132,8 @@
         }
 
         #content {
+            width: 90%;
+            margin: 0 auto;
             display: none;
         }
 
@@ -124,7 +142,6 @@
             text-align: center;
             line-height: 60px;
             font-size: 30px;
-            font-family: bold;
         }
 
         #content p {
@@ -170,7 +187,7 @@
         }
 
         #con #ul {
-            width: 70%;
+            width: 100%;
         }
 
         #con #ul tr td {
@@ -188,16 +205,25 @@
 
 <body>
     <div class="box">
-        <div id="con">
+        <div id="tops">
             <p>
-                <a href="index.html">←</a>
+                <a href="index.html"><i class="iconfont">&#xe66f;</i></a>
                 班级分布信息
             </p>
+<<<<<<< HEAD
             <div>
                 <input type="search" id="search" placeholder="班级信息搜索">
                 <button id="btn" class="ye">新增班级</button>
             </div>
 
+=======
+        </div>
+        <div id="middle">
+            <input type="search" id="search" placeholder="班级信息搜索">
+            <button id="btn">新增班级</button>
+        </div>
+        <div id="con">
+>>>>>>> c70bd82e9257c9e67ea5b9f4c9b2423c9eaa5d17
             <!-- 搜索内容 -->
             <table id="ul" cellspacing="0" cellpadding="0">
             </table>
@@ -341,11 +367,15 @@
 
         btn.onclick = function () {
             con.style.display = 'none';
+            tops.style.display = 'none';
+            middle.style.display = 'none';
             content.style.display = 'block';
             content.style.transition = 0.5 + 's';
         }
         aclose.onclick = function () {
             con.style.display = 'block';
+            tops.style.display = 'block';
+            middle.style.display = 'block';
             con.style.transition = 0.5 + 's';
             content.style.display = 'none';
         }
@@ -369,20 +399,33 @@
                         ul.appendChild(tr);
 
                     } else {
-                        ul.innerHTML = ''
+                        ul.innerHTML = '';
                         if (search.value == '') {
                             ul.innerHTML = '';
+                            table.style.display = 'inline-table';
                         } else {
+                            table.style.display = 'none';
+                            var tr = `
+                                 <tr>
+                                    <th>班级</th>
+                                    <th>阶段</th>
+                                    <th>门牌号</th>
+                                    <th>资产</th>
+                                    <th>人数</th>
+                                </tr>
+                                `;
                             for (var i = 0; i < data.length; i++) {
-                                var tr = document.createElement('tr');
-                                tr.innerHTML = `
+                                // var tr = document.createElement('tr');
+                                tr += `
+                                        <tr>
                                             <td>${data[i].class}</td>
                                             <td>${data[i].stage}</td>
                                             <td>${data[i].door}</td>
                                             <td>${data[i].assets}</td>
                                             <td>${data[i].number}</td>
+                                        </tr>
                                 `;
-                                ul.appendChild(tr)
+                                ul.innerHTML = tr
                             }
                         }
                     }
@@ -393,9 +436,12 @@
         function modify(uid, classs, stage, door, assets, number) {
             console.log(uid, classs, stage, door, assets, number);
             con.style.display = 'none';
+            tops.style.display = 'none';
+            middle.style.display = 'none';
             content.style.display = 'block';
             modifys.style.display = 'block';
             preservation.style.display = 'none';
+            anext.style.display ='none';
             bj.value = classs;
             jd.value = stage;
             mph.value = door;
