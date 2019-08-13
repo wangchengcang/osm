@@ -23,6 +23,7 @@ router.post('/img',function(req,res){
 router.post('/login',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*')
 	var json=req.body;
+	console.log(json)
 	sql.con({
 		arr:[json.user],
 		sql:'select * from login where user=?',
@@ -31,8 +32,8 @@ router.post('/login',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.name,json.user,json.pass,json.img],
-					sql:'insert into login(name,user,pass) values(?,?,?)',
+					arr:[json.name,json.user,json.pass,json.state],
+					sql:'insert into login(name,user,pass,AR) values(?,?,?,?)',
 					success(data){
 						res.send('ok')
 					},

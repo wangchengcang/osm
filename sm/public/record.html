@@ -174,7 +174,36 @@
 </body>
 <script src="js/jquery.js"></script>
 <script>
-
+	//判断读者还是管理者
+	$('.eea').css({'display':'none'})
+	$('#newadd').css({'display':'none'})
+	$('#anewadd').css({'display':'none'})
+	if(localStorage.user){
+	    var localStorageUser=JSON.parse(localStorage.user);
+		audi=localStorageUser.uid;
+	}
+	console.log(audi)
+	window.onload=function (){
+		$.ajax({
+			type:'get',
+			url:'http://localhost:8000/indexs/state',
+			data:{
+				uid:audi,
+			},
+			success(data){
+				console.log(data)
+				if(data[0].AR=='yes'){
+					$('.eea').css({'display':'block'})
+					$('#newadd').css({'display':'block'})
+					$('#anewadd').css({'display':'block'})
+				}else{
+					$('.eea').css({'display':'none'})
+					$('#newadd').css({'display':'none'})
+					$('#anewadd').css({'display':'none'})
+				}
+			}
+		})
+	}
 	// 民族下拉列框开始
 	
 	var nations = ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
@@ -339,7 +368,7 @@
 							<td style="width:9%;">${data[i].dq}</td>
 							<td style="width:9%;">${data[i].xj}</td>
 							<td style="width:8%;">${data[i].bj}</td>
-							<td><buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see">删除</buttuon></td>	
+							<td><buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see eea">删除</buttuon></td>	
 						
 					`
 					biao.appendChild(otr)

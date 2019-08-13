@@ -13,9 +13,9 @@
 				<button class="btn">搜索</button>
 				<input type="text" class="text" placeholder="请输入学员名字 / 学号">
 				<p id="t">请输入学员名字 / 学号</p>
-				<button id="doer">新学员住宿录入</button>
+				<button id="doer" class="ye">新学员住宿录入</button>
 			</div>
-			<div id="luru">
+			<div id="luru" class="ye">
 				<table id="luru_a" cellspacing="0" cellpadding="0" style="border:none; border-bottom: 1px solid #ccc;">
 					<tr style="background-color: #fff;">
 						<td><span class="luru-left">学号：</span><input type="text" id="xhee" class="luru_input"></td>
@@ -61,7 +61,7 @@
 					<td>寝室</td>
 					<td>电话</td>
 					<td>班主任</td>
-					<td>操作</td>
+					<td class="ye">操作</td>
 				</tr>
 			</table>
 			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;女生</p>
@@ -74,15 +74,41 @@
 					<td>寝室</td>
 					<td>电话</td>
 					<td>班主任</td>
-					<td>操作</td>
+					<td class="ye">操作</td>
 				</tr>
 			</table>
-			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;缺寝记录</p>
+			<p class="classification ye"><span></span>&nbsp;&nbsp;&nbsp;缺寝记录</p>
 			<table cellspacing="0" cellpadding="0" style="margin-bottom:25px;" id="Absence"></table>
 		</div>
 	</body>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
+		//判断是否是管理者还是读者
+		$('.ye').css({'display':'none'})
+		if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+		window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'block'})
+					}else{
+						$('.ye').css({'display':'none'})
+					}
+				}
+			})
+		}
+		
+		
 		var int=document.querySelector('.text')
 		var btn=document.querySelector('.btn')
 		gb.onclick=function(){
@@ -202,7 +228,7 @@
 							<td>寝室</td>
 							<td>电话</td>
 							<td>班主任</td>
-							<td>操作</td>
+							<td class="ye">操作</td>
 						</tr>
 					`;
 					for(var i=0;i<data.length;i++){
@@ -215,7 +241,7 @@
 								<td>${data[i].qinshi}</td>
 								<td>${data[i].dh}</td>
 								<td>${data[i].bzr}</td>
-								<td><button type="button" id="ton" onclick="yc('${data[i].uid}')">移除</button></td>
+								<td class='ye'><button type="button" id="ton" onclick="yc('${data[i].uid}')">移除</button></td>
 							</tr>
 						`;
 					}
@@ -256,11 +282,11 @@
 								<td>${data[i].qinshi}</td>
 								<td>${data[i].dh}</td>
 								<td>${data[i].bzr}</td>
-								<td>
+								<td class="ye">
 									<button type="button" id="ton" onclick="asence('${data[i].uid}')">添加缺勤记录</button>
 									<button id="modify" onclick="modify('${data[i].uid}','${data[i].xh}','${data[i].name}','${data[i].xb}','${data[i].sushe}','${data[i].qinshi}','${data[i].dh}','${data[i].bzr}')">修改</button>
 									<button id="delet" onclick="AcademyDeletion('${data[i].uid}')">删除</button>
-									</td>
+								</td>
 						`;
 						<!-- //分类 -->
 						if(data[i].xb=='女'){

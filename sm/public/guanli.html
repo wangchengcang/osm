@@ -9,7 +9,7 @@
 	<body>
 		<div class="headera"><span id="fh"><i class="iconfont">&#xe66f;</i> 综合积分管理</span></div>
 		<div class="con">
-			<div class="header">
+			<div class="header ye">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;基本信息</p>
 				班级：<select class="z-text" id="gender" style="width: 100px;height:40px;font-size: 18px;border: none;">
 					<option value="1809">1809</option>
@@ -44,7 +44,7 @@
 				<button id="Submission_a" class="active" style="display:none;">提交修改</button>
 				<span id="gb" class="gb">x</span>
 			</div>
-			<div class="conc">
+			<div class="conc" style="margin-top: 20px;">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;扣除积分信息</p>
 				<table cellspacing="0" cellpadding="0" class="tab-a" id="main_Violation">
 					<!-- <tr>
@@ -64,6 +64,32 @@
 	<script src="font_ps99atp86ak/iconfont.js"></script>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
+		//判断是否是管理者还是读者
+		$('.ye').css({'display':'none'})
+		if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+		window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'block'})
+					}else{
+						$('.ye').css({'display':'none'})
+					}
+				}
+			})
+		}
+		
+		
 		//返回主页
 		fh.onclick=function(){
 			location.href='index.html'
@@ -215,7 +241,7 @@
 							<td>原因</td>
 							<td>扣除分值</td>
 							<td>总分值</td>
-							<td>操作</td>
+							<td class="ye">操作</td>
 						</tr>
 					`
 					for (var i = 0; i < data.length; i++) {
@@ -228,7 +254,7 @@
 								<td>${data[i].Reason}</td>
 								<td>${data[i].kf}</td>
 								<td>${data[i].f}</td>
-								<td><button id="modify" onclick="update('${data[i].uid}','${data[i].bj}','${data[i].xh}','${data[i].name}','${data[i].Reason}','${data[i].f}','${data[i].kf}')">添加记录</button></td>
+								<td class="ye"><button id="modify" onclick="update('${data[i].uid}','${data[i].bj}','${data[i].xh}','${data[i].name}','${data[i].Reason}','${data[i].f}','${data[i].kf}')">添加记录</button></td>
 							</tr>
 						`
 					}

@@ -76,4 +76,18 @@ router.get('/updatea',function(req,res){
 		}
 	})
 })
+//判断是否是管理员
+router.get('/state',function(req,res){
+	var json=req.query;
+	sql.con({
+		arr:[json.uid],
+		sql:'select * from login where uid=?',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
 module.exports = router;

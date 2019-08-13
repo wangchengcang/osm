@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>课程</title>
+    <title>班级</title>
     <style>
         * {
             margin: 0;
@@ -195,7 +195,7 @@
             </p>
             <div>
                 <input type="search" id="search" placeholder="班级信息搜索">
-                <button id="btn">新增班级</button>
+                <button id="btn" class="ye">新增班级</button>
             </div>
 
             <!-- 搜索内容 -->
@@ -208,12 +208,12 @@
                     <th>门牌号</th>
                     <th>资产</th>
                     <th>人数</th>
-                    <th>修改信息</th>
-                    <th>删除</th>
+                    <th class="ye">修改信息</th>
+                    <th class="ye">删除</th>
                 </tr>
             </table>
         </div>
-        <div id="content">
+        <div id="content" class="ye">
             <h6>新增班级信息</h6>
             <p>班&nbsp;&nbsp;&nbsp;级 <input type="text" id="bj"></p>
             <p>阶&nbsp;&nbsp;&nbsp;段 <input type="text" id="jd"></p>
@@ -231,6 +231,32 @@
 
     <script src="js/jquery.js"></script>
     <script>
+		//判断是否是管理者还是读者
+		$('.ye').css({'display':'none'})
+		if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+		window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'block'})
+					}else{
+						$('.ye').css({'display':'none'})
+					}
+				}
+			})
+		}
+		
+		
         var href = 'http://localhost:8000';
         preservation.onclick = function () {
             data();
@@ -301,10 +327,10 @@
                             <td>${data[i].assets}</td>
                             <td>${data[i].number}</td>
                             <td>
-                                <button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">修改信息</button>
+                                <button class="ye" onClick="modify('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">修改信息</button>
                             </td>
                             <td>
-                                <button onClick="del('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">删除</button>
+                                <button class="ye" onClick="del('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">删除</button>
                             </td>
                         `;
                         table.appendChild(tr)
