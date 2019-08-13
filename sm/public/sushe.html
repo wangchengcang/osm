@@ -4,11 +4,12 @@
 		<meta charset="utf-8">
 		<title>学生宿舍管理</title>
 		<link rel="stylesheet" href="stylesheets/sushe.css">
+		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
 	</head>
 	<body>
+		<h3><a href="index.html"><i class="iconfont">&#xe66f;</i></a>学生宿舍管理</h3>
 		<div class="con">
-			<h3><a href="index.html">←</a>学生宿舍管理</h3>
-			<span class="spn"></span>
+			
 			<div class="dong">
 				<button class="btn">搜索</button>
 				<input type="text" class="text" placeholder="请输入学员名字 / 学号">
@@ -37,7 +38,7 @@
 				</table>
 			</div>
 			<div id="Result">
-				<li id="warning">未找到搜索结果</li>
+				<li id="warning" style="color: red;border-bottom:1px solid;">未找到搜索结果</li>
 				<ul id="result_main">
 					<li id="one">
 						<p style="width: 12%;float:left;text-align: center;">学号</p>
@@ -223,7 +224,7 @@
 				}
 			})
 		}
-		<!-- //移除学员缺勤记录 -->
+		//移除学员缺勤记录
 		function yc(uid){
 			$.ajax({
 				type:'get',
@@ -239,7 +240,7 @@
 				}
 			})
 		}
-		<!-- //读取寝室学员信息 -->
+		//读取寝室学员信息
 		read()
 		function read(){
 			$.ajax({
@@ -262,7 +263,7 @@
 									<button id="delet" onclick="AcademyDeletion('${data[i].uid}')">删除</button>
 									</td>
 						`;
-						<!-- //分类 -->
+						//分类
 						if(data[i].xb=='女'){
 							female_xs.appendChild(otr)
 						}else{
@@ -273,7 +274,7 @@
 			})
 		}
 		
-		<!-- //修改学员寝室信息 -->
+		//修改学员寝室信息
 		function modify(uid,xh,name,xb,sushe,qinshi,dh,bzr){
 			console.log(uid,xh,name,xb,sushe,qinshi,dh,bzr)
 			modifyx.style.display='block';
@@ -290,7 +291,7 @@
 			qinshii.value=qinshi;
 			dhh.value=dh;
 			bzrr.value=bzr
-			<!-- //修改mysql表 -->
+			//修改mysql表
 			modifyx.onclick=function(){
 				$.ajax({
 					type:'get',
@@ -316,7 +317,7 @@
 				})
 			}
 		}
-		<!-- //删除学员 -->
+		//删除学员
 		function AcademyDeletion(uid){
 			$.ajax({
 				type:'get',
@@ -332,18 +333,19 @@
 				}
 			})
 		}
-		<!-- //搜索学员 -->
+		//搜索学员
 		btn.onclick=function(){
 			if(int.value==''){
-				t.style.opacity="1"
+				t.style.opacity="1";
 				setTimeout(function(){
-					t.style.opacity="0"	
+					t.style.opacity="0";
 				},2000)
 			}else{
 				$.ajax({
 					type:'get',
 					url:'http://localhost:8000/users/search',
 					data:{
+						xh:int.value,
 						title:int.value,
 					},
 					success(data){
@@ -351,22 +353,25 @@
 						console.log(data)
 						if(data==''){
 							warning.style.display='block'
-							result_main.style.display='none'
+							result_main.style.display='none';
 						}else{
 							$('#one').next().remove();
 							warning.style.display='none'
 							result_main.style.display='block'
-							var str=document.createElement('li');
-							str.innerHTML=`
-									<p style="width: 12%;float:left;text-align: center;">${data[0].xh}</p>
-									<p style="width: 12%;float:left;text-align: center;">${data[0].name}</p>
-									<p style="width: 12%;float:left;text-align: center;">${data[0].xb}</p>
-									<p style="width: 12%;float:left;text-align: center;">${data[0].sushe}</p>
-									<p style="width: 12%;float:left;text-align: center;">${data[0].qinshi}</p>
-									<p style="width: 12%;float:left;text-align: center;">${data[0].dh}</p>
-									<p style="width: 12%;float:left;text-align: center;">${data[0].bzr}</p>
+							for(var i=0;i<data.length;i++){
+								var str=document.createElement('li');
+								str.innerHTML=`
+									<p style="width: 12%;float:left;text-align: center;">${data[i].xh}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[i].name}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[i].xb}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[i].sushe}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[i].qinshi}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[i].dh}</p>
+									<p style="width: 12%;float:left;text-align: center;">${data[i].bzr}</p>
 							`
 							result_main.appendChild(str)
+							}
+							
 						}
 						
 					}

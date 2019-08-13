@@ -4,10 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
     <style>
         * {
             margin: 0;
             padding: 0;
+        }
+        .top{
+            width: 100%;
+            height: 60px;
+            background: #20b6ad;
+            color: #fff;
+        }
+        .top h4 {
+            line-height:60px;
+            border-bottom: 1px solid;
+            font-size: 22px;
+        }
+
+        .top h4 a {
+            text-decoration: none;
+            float: left;
+            line-height: 60px;
+            font-size: 16px;
+            margin-left: 5%;
+            margin-right: 20px;
+        }
+        .top h4 a {
+            color: #fff;
         }
 
         .demo {
@@ -15,21 +39,6 @@
             height: auto;
             margin: 0 auto;
             text-align: center;
-        }
-
-        .demo h4 {
-            text-align:center;
-            line-height:60px;
-            font-size: 30px;
-        }
-
-        .demo h4 a {
-            text-decoration: none;
-            float: left;
-            margin-left: 10px;
-            line-height: 60px;
-            color: black;
-            font-size: 16px;
         }
 
         #luru_btn {
@@ -121,7 +130,7 @@
 			outline: none;
 			position: absolute;
 			bottom: 0px;
-			right: 149px;
+			right: 110px;
 		}
 		#modifys{
 			width: 8%;
@@ -133,10 +142,10 @@
 			display:none;
 			position: absolute;
 			bottom:0px;
-			right: 149px;
+			right: 110px;
 		}
 		#Close{
-			width:40px;
+			width:6%;
 			height:30px;
 			margin:10px;
 			background-color: #2CC9AA;
@@ -145,17 +154,20 @@
 			display:none;
 			position: absolute;
 			bottom: 0px;
-			right: 96px;
+			right: 20px;
 		}
     </style>
 </head>
 
 <body>
-    <div class="demo">
+    <div class="top">
         <h4>
-            <a href="index.html">返回</a>
+            <a href="index.html">
+                <i class="iconfont">&#xe66f;</i></a>
             课程安排
         </h4>
+    </div>
+    <div class="demo">
         <div class="luru">
             <div>阶段：<input type="text" id="stage"></div>
             <div>课程名称：<input type="text" id="curriculumName"></div>

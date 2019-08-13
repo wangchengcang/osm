@@ -203,7 +203,7 @@ router.get('/dels',function(req,res){
 		arr:[json.uid],
 		sql:'delete from teacher where uid=?',
 		success(data){
-			res.send(data);
+			res.send('ok');
 		},
 		error(err){
 			res.send(err);
@@ -217,10 +217,8 @@ router.get('/s',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json=req.query
 	sql.con({
-		arr:[json.val,json.name,json.gender,json.myage,json.place,json.dq],
-		//json.mytelephone,json.parentelephone,
-		sql:'select * from mydata where id like "%"?"%" or name like "%"?"%" or gender like "%"?"%" or myage like "%"?"%"or place like "%"?"%" or dq like "%"?"%"',
-		// or mytelephone like "%"?"%" or parentelephone like "%"?"%" 
+		arr:[json.id,json.name,json.gender,json.myage,json.place,json.dq],
+		sql:'select * from mydata where id like "%"?"%" or name like "%"?"%" or gender like "%"?"%" or myage like "%"?"%"  or place like "%"?"%"  or dq like "%"?"%" ',
 		success(data){
 			res.send(data)
 		},
@@ -229,6 +227,21 @@ router.get('/s',function(req,res){
 		}
 	})
 });	
+//删除
+router.get('/del',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	sql.con({
+		arr:[json.uid],
+		sql:'delete from mydata where uid=?',
+		success(data){
+			res.send('ok');
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
 //新学员入住寝室录入
 router.get('/dorm',function(req,res){
 	var json=req.query;
@@ -298,9 +311,10 @@ router.get('/queqa',function(req,res){
 })
 //读取学员缺勤
 router.get('/duquee',function(req,res){
+	var json=req.query;
 	sql.con({
 		arr:[],
-		sql:'select * from dormitory_copy order by uid desc',
+		sql:'select * from dormitory_copy',
 		success(data){
 			res.send(data)
 		},
@@ -383,8 +397,8 @@ router.get('/yc',function(req,res){
 router.get('/search',function(req,res){
 	var json=req.query;
 	sql.con({
-		arr:[json.title],
-		sql:'select * from dormitory where name like "%"?"%"',
+		arr:[json.xh,json.title],
+		sql:'select * from dormitory where xh like "%"?"%" or name like "%"?"%"',
 		success(data){
 			res.send(data)
 		},

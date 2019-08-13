@@ -11,14 +11,21 @@
 }
 
 h3 {
-	margin-top: 10px;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	background-color: #20b6ad;
+	color: #fff;
 }
 
 h3 a {
 	text-decoration: none;
 	font-size: 24px;
 	padding: 0 10px;
-	color: #ccc;
+	margin: 0 15px 0 5%;
+}
+h3 a i{
+	color: #fff;
 }
 
 .spn {
@@ -230,12 +237,19 @@ table tr td:nth-child(8) {
 	min-height:20px;
 }
 #Result ul li{
-	
 	list-style:none;
 	width:100%;
-	height: 30px;
-	line-height:30px;
+	height: 40px;
+	line-height:40px;
 	font-size: 20px;
+	border-bottom: 1px solid;
+}
+#Result ul li:first-child{
+	background: #2cc9aa;
+	color: #fff;
+}
+#Result ul li:nth-child(even){
+	background: #ebfcf6;
 }
 #warning{
 	list-style: none;
