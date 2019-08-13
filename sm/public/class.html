@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>班级</title>
-
+    <title>课程</title>
     <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
     <style>
         * {
@@ -246,14 +245,13 @@
 
     <script src="js/jquery.js"></script>
     <script>
-		//判断是否是管理者还是读者
-		$('.ye').css({'display':'none'})
-		if(localStorage.user){
+        $('.ye').css({'display':'none'});
+        if(localStorage.user){
 		    var localStorageUser=JSON.parse(localStorage.user);
 			audi=localStorageUser.uid;
 		}
 		console.log(audi)
-		window.onload=function (){
+        window.onload=function (){
 			$.ajax({
 				type:'get',
 				url:'http://localhost:8000/indexs/state',
@@ -263,15 +261,13 @@
 				success(data){
 					console.log(data)
 					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'block'})
+						$('.ye').css({'display':'table-cell'})
 					}else{
 						$('.ye').css({'display':'none'})
 					}
 				}
 			})
 		}
-		
-		
         var href = 'http://localhost:8000';
         preservation.onclick = function () {
             data();
@@ -345,7 +341,7 @@
                                 <button class="ye" onClick="modify('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">修改信息</button>
                             </td>
                             <td>
-                                <button class="ye" onClick="del('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">删除</button>
+                                <button class='ye onClick="del('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">删除</button>
                             </td>
                         `;
                         table.appendChild(tr)
@@ -391,7 +387,7 @@
                         ul.innerHTML = '';
                         if (search.value == '') {
                             ul.innerHTML = '';
-                            table.style.display = 'inline-table';
+                            table.style.display = 'block';
                         } else {
                             table.style.display = 'none';
                             var tr = `
