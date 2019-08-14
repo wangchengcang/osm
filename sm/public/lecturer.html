@@ -21,7 +21,6 @@
         }
         .top{
             background-color: #20b6ad;
-
         }
 
         .top a {
@@ -39,7 +38,6 @@
             height: 60px;
             line-height: 60px;
             font-size: 26px;
-            border-bottom: 1px solid black;
             color: #fff;
         }
         #xinzeng{
@@ -52,7 +50,6 @@
             width: 25%;
             height: 30px;
             line-height: 30px;
-            border-radius: 15px;
             padding-left: 10px;
             float: left;
             margin-top: 13px;
@@ -61,22 +58,22 @@
         }
 
         #btn {
-            padding: 4px 10px;
-            background: #ccc;
-            border-style: none;
-            float: right;
-            margin-top: 10px;
-            margin-right: 15px;
-            outline: none;
-            border-radius: 30px;
-            color: #fff;
-            font-size: 20px;
+            padding: 7px 24px;
+			background-color: #20b6ad;
+			border-style: none;
+			float: right;
+			margin-top: 10px;
+			margin-right: 15px;
+			outline: none;
+			/* border-radius: 30px; */
+			color: #fff;
+			font-size: 17px;
         }
 
         #con{
-            width: 90%;
-            margin: 25px auto;
-            /* margin-left:5%;  */
+            width:90%;
+            margin:0px auto;
+			margin-top:20px;
         }
 
         #con table {
@@ -87,7 +84,7 @@
             line-height: 40px;
             text-align: center;
             border: none;
-            background: #2cc9aa;
+            background-color: #20b6ad;
             color: #fff;
         }
         #con table tr td {
@@ -100,9 +97,6 @@
         #con table tr:nth-child(odd){
             background: #ebfcf6;
         }
-        #con table tr:nth-child(even){
-            /* background: #20b6ad; */
-        } 
         #con table tr td button{
             width: 60%;
             height: 80%;
@@ -113,14 +107,14 @@
 
         #ul{
             width: 90%;
-            margin: 30px auto;
+            margin:0px auto;
         }
         #ul tr th {
             height: 40px;
             line-height: 40px;
             text-align: center;
             border: none;
-            background: #2cc9aa;
+            background:#20b6ad;
             color: #fff;
         }
         #ul tr td{
@@ -133,22 +127,26 @@
         #ul tr:nth-child(even){
             background: #ebfcf6;
         }
-
         #content{
-            width: 90%;
-            margin: 30px auto;
-            opacity: 0;
-            display: none;
+            width:90%;
+			height:30px;
+            margin:0px auto;
+			margin-top:10px;
+            opacity:0;
+            display:none;
         }
         #content table {
-            width: 100%;
-            border-bottom: 1px solid black;
+            width:100%;
+			margin: 0 auto;
+			margin-top:10px ;
         }
         #content table tr td{
             width: 19%;
         }
         #content table tr td input{
-            width: 60%;
+            width: 67%;
+			height: 26px;
+			font-size: 17px;
         }
 
         #content h6 {
@@ -163,12 +161,11 @@
             width: 100px;
             height: 30px;
             line-height: 30px;
-            font-size: 20px;
+            font-size: 18px;
             background: #20b6ad;
-            color: #fff;
+            color:#fff;
             border-style: none;
             outline: none;
-            border-radius: 15px;
             margin: 0 10px;
         }
         #modifys{
@@ -187,7 +184,7 @@
         </div>
         
         <div id="xinzeng">
-            <button id="btn" class='ye'>新增讲师信息</button>
+            <button id="btn" class="ye">新增讲师信息</button>
             <input type="search" id="search" placeholder="搜索讲师信息">
         </div>
         <div id="content" class="ye">
@@ -198,16 +195,16 @@
                     <td>讲师：<input type="text" id="lecturer"></td>
                     <td>课程：<input type="text" id="curriculum"></td>
                     <td>人数：<input type="text" id="people"></td>
-                    <td><button id='submit'>提交</button></td>
+                    <td><button id="submit">提交</button></td>
                     <td><button id="modifys">修改</button></td>
-                    <td><button id='aclose'>关闭</button></td>
+                    <td><button id="aclose">关闭</button></td>
                 </tr>
             </table>
         </div>
         <!-- 搜索 -->
         <table id='ul' cellspacing="0" cellpadding="0"></table>
         <div id="con">
-            <table border="2" cellspacing="0" id="exhibition">
+            <table border="0" style="border: 2px solid #20b6ad;" cellspacing="0" id="exhibition">
                 <tr>
                     <th>班级</th>
                     <th>门牌号</th>
@@ -237,6 +234,7 @@
             content.style.opacity='0';
             content.style.display='none';
             content.style.transition=0.5+'s';
+			$('input').val('');
         }
         // 点击录入
         submit.onclick = function () {
@@ -300,11 +298,19 @@
                             <td>${data[i].lecturer}</td>
                             <td>${data[i].curriculum}</td>
                             <td>${data[i].number}</td>
+<<<<<<< HEAD
                             <td class="ye">
                                 <button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
                             </td> 
                             <td class="ye">
                                 <button onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
+=======
+                            <td>
+                                <button class="ye" style="background-color:#20b6ad;color:#fff;" onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
+                            </td> 
+                            <td>
+                                <button class="ye" style="background-color:#20b6ad;color:#fff;" onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
+>>>>>>> a7d67fc5abde09ec153f8024b24b01dcf7e1b5d4
                             </td> 
                         `;
                         exhibition.appendChild(otr)
