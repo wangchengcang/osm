@@ -8,7 +8,7 @@
 	<style>
 		#mask{
 			width:100%;
-			position:fixed;
+			position: fixed;
 			left:0;
 			bottom:0;
 			background-color: red;
@@ -38,7 +38,16 @@
                     <li><a href="lecturer.html"><i class="iconfont">&#xe601;</i> 讲师</a></li>
                     <li><a href="class.html"><i class="iconfont">&#xe686;</i> 班级</a></li>
                     <li><a href="curriculum.html"><i class="iconfont">&#xe506;</i> 课程</a></li>
-                    <li><a href="student.html"><i class="iconfont">&#xe513;</i> 学生</a></li>
+                    <li id="student">
+                        <a href="javascript:;">
+                        <i class="iconfont">&#xe513;</i> 学生</a>
+                        <ul>
+                            <li><a href="student.html">学生基本信息</a></li>
+                            <li><a href="state.html">学生当前状态</a></li>
+                            <li><a href="http://z.cimns.com:8081/">作业上传</a></li>
+                            <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
+                        </ul>
+                    </li>
                     <li><a href="sushe.html"><i class="iconfont">&#xe504;</i> 宿舍</a></li>
                     <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
                 </ul>
@@ -167,6 +176,21 @@
 	<script src="font_ps99atp86ak/iconfont.js"></script>
     <script src="js/jquery.js"></script>
     <script>
+        $('#student a').on('click',function(){
+            if($('#student ul').css("height")=="0px"){
+                $('#student ul').css({
+                    // display:'block',
+                    "height":"300px",
+                    transition:'1s',
+                })
+            }else{
+                $('#student ul').css({
+                    // display:'none',
+                    "height":"0",
+                    transition:'1s',
+                })           
+            }
+        })
 		
 		//未登录是遮罩层
 		var audi='';
