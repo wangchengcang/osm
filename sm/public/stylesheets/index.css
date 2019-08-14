@@ -115,7 +115,7 @@
     border:none;
 }
 #right table tr td:nth-child(9){
-    border-left: 1px solid black;
+    border-left:2px solid #2CC9AA;
 }
 #right table tr:nth-child(odd){
     background: #ebfcf6;
@@ -123,6 +123,7 @@
 #footer{
     width: 100%;
     height: 125px;
+	    margin-top: 81px;
     /* background: #e2e1e1; */
     background-color:rgb(40, 44, 52);
 	color: #999;
