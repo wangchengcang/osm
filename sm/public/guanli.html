@@ -1,54 +1,5 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-	<head>
-		<meta charset="utf-8">
-		<title>综合积分管理</title>
-		<link rel="stylesheet" href="stylesheets/guanli.css">
-		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
-	</head>
-	<body>
-		<div class="headera"><span id="fh"><i class="iconfont">&#xe66f;</i> 综合积分管理</span></div>
-		<div class="con">
-			<div class="header ye">
-				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;基本信息</p>
-				班级：<select class="z-text" id="gender" style="width: 100px;height:40px;font-size: 18px;border: none;">
-					<option value="1809">1809</option>
-					<option value="1809">1810</option>
-					<option value="1809">1811</option>
-					<option value="1809">1812</option>
-					<option value="1809">1901</option>
-					<option value="1809">1902</option>
-					<option value="1809">1903</option>
-					<option value="1809">1904</option>
-					<option value="1809">1905</option>
-					<option value="1809">1906</option>
-				</select>
-				学号：<input type="text" id="xha" placeholder="学员学号" />
-				<span class="Tips">未匹配到该学员学号(请从新输入)</span>
-				姓名：<input type="text" id="xm" placeholder="学员姓名" />
-				时间：<input type="text" id="showDate" style="width:100px;border: none;background: none;text-align: center;" disabled="disabled" />
-				周几：<input type="text" id="getday" style="width:100px;border: none;background: none;text-align: center;" disabled="disabled" />
-				<br>
-				原因：<input type="text" id="Reasona" placeholder="请输入扣分原因">
-				扣除积分：<select class="z-text" id="jf" style="width: 100px;height:40px;font-size: 18px;border: none;">
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="15">15</option>
-					<option value="20">20</option>
-					<option value="25">25</option>
-					<option value="30">30</option>
-					<option value="35">35</option>
-					<option value="40">40</option>
-				</select>
-				<button id="Submission" class="activea">提交</button>
-				<button id="Submission_a" class="active" style="display:none;">提交修改</button>
-				<span id="gb" class="gb">x</span>
-			</div>
-			<div class="conc" style="margin-top: 20px;">
-				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;扣除积分信息</p>
-				<table cellspacing="0" cellpadding="0" class="tab-a" id="main_Violation">
-=======
 <head>
 	<meta charset="utf-8">
 	<title>综合积分管理</title>
@@ -96,17 +47,6 @@
 		<div class="conc" style="margin-top: 20px;">
 			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;扣除积分信息</p>
 			<table cellspacing="0" cellpadding="0" class="tab-a" id="main_Violation">
-					<!-- <tr>
-						<td>1809</td>
-						<td>xxx</td>
-						<td>2019-8-8</td>
-						<td>周二</td>
-						<td>旷课</td>
-						<td>-5</td>
-						<td>95</td>
-						<td><button id="modify">修改</button></td>
-					</tr> -->
->>>>>>> a7d67fc5abde09ec153f8024b24b01dcf7e1b5d4
 				</table>
 			</div>
 		</div>
@@ -130,18 +70,15 @@
 				},
 				success(data){
 					console.log(data)
-<<<<<<< HEAD
 					if(data[0].AR=='yes'){
-						// $('.ye').css({'display':'block'})
 						$('.ye').css({'display':'table-cell'}) || $('.ye').css({'display':'block'})
-=======
+					}
 					if(data.length){
 						if(data[0].AR=='yes'){
-							$('.ye').css({'display':'block'})
+							$('.ye').css({'display':'block'}) ||$('.ye').css({'display':'table-cell'})
 						}else{
 							$('.ye').css({'display':'none'})
 						}
->>>>>>> a7d67fc5abde09ec153f8024b24b01dcf7e1b5d4
 					}else{
 						console.log('您是学生，没有权限去操作页面')
 					}
