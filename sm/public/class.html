@@ -250,8 +250,9 @@
 				},
 				success(data){
 					console.log(data)
-					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'table-cell'})
+					if(data[0].AR==='yes'){
+                        $('.ye').css({'display':'table-cell'}) ||
+                        $('.ye').css({'display':'block'})
 					}else{
 						$('.ye').css({'display':'none'})
 					}

@@ -138,29 +138,6 @@
 
     <script src="js/jquery.js"></script>
     <script>
-        $('.ye').css({'display':'none'});
-        if(localStorage.user){
-		    var localStorageUser=JSON.parse(localStorage.user);
-			audi=localStorageUser.uid;
-		}
-		console.log(audi)
-        window.onload=function (){
-			$.ajax({
-				type:'get',
-				url:'http://localhost:8000/indexs/state',
-				data:{
-					uid:audi,
-				},
-				success(data){
-					console.log(data)
-					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'initial'})
-					}else{
-						$('.ye').css({'display':'none'})
-					}
-				}
-			})
-		}
         var href = 'http://localhost:8000';
 
         //查看学生资料
@@ -300,6 +277,30 @@
             })
             window.location.reload();
         }
+        //判断是否是管理者
+        $('.ye').css({'display':'none'});
+        if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+        window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'initial'}) || $('.ye').css({'display':'block'})
+					}else{
+						$('.ye').css({'display':'none'})
+					}
+				}
+			})
+		}
     </script>
 </body>
 

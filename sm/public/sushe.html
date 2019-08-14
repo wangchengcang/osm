@@ -64,7 +64,7 @@
 				<td>寝室</td>
 				<td>电话</td>
 				<td>班主任</td>
-				<td>操作</td>
+				<td class="ye">操作</td>
 			</tr>
 		</table>
 		<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;女生</p>
@@ -77,7 +77,7 @@
 				<td>寝室</td>
 				<td>电话</td>
 				<td>班主任</td>
-				<td>操作</td>
+				<td class="ye">操作</td>
 			</tr>
 		</table>
 		<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;缺寝记录</p>
@@ -103,7 +103,7 @@
 			success(data){
 				console.log(data)
 				if(data[0].AR=='yes'){
-					$('.ye').css({'display':'table-cell'})
+					$('.ye').css({'display':'table-cell'}) || $('.ye').css({'display':'block'})
 				}else{
 					$('.ye').css({'display':'none'})
 				}
