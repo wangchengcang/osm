@@ -47,16 +47,6 @@
 			<div class="conc" style="margin-top: 20px;">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;扣除积分信息</p>
 				<table cellspacing="0" cellpadding="0" class="tab-a" id="main_Violation">
-					<!-- <tr>
-						<td>1809</td>
-						<td>xxx</td>
-						<td>2019-8-8</td>
-						<td>周二</td>
-						<td>旷课</td>
-						<td>-5</td>
-						<td>95</td>
-						<td><button id="modify">修改</button></td>
-					</tr> -->
 				</table>
 			</div>
 		</div>
@@ -81,7 +71,8 @@
 				success(data){
 					console.log(data)
 					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'block'})
+						// $('.ye').css({'display':'block'})
+						$('.ye').css({'display':'table-cell'}) || $('.ye').css({'display':'block'})
 					}else{
 						$('.ye').css({'display':'none'})
 					}

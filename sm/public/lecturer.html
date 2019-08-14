@@ -222,30 +222,7 @@
     </div>
     <script src="js/jquery.js"></script>
     <script>
-		//判断是否是管理者还是读者
-		$('.ye').css({'display':'none'})
-		if(localStorage.user){
-		    var localStorageUser=JSON.parse(localStorage.user);
-			audi=localStorageUser.uid;
-		}
-		console.log(audi)
-		window.onload=function (){
-			$.ajax({
-				type:'get',
-				url:'http://localhost:8000/indexs/state',
-				data:{
-					uid:audi,
-				},
-				success(data){
-					console.log(data)
-					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'table-cell'})
-					}else{
-						$('.ye').css({'display':'none'})
-					}
-				}
-			})
-		}
+		
         var href = 'http://localhost:8000';
 
         //点击新增讲师
@@ -323,11 +300,11 @@
                             <td>${data[i].lecturer}</td>
                             <td>${data[i].curriculum}</td>
                             <td>${data[i].number}</td>
-                            <td>
-                                <button class="ye" onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
+                            <td class="ye">
+                                <button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
                             </td> 
-                            <td>
-                                <button class="ye" onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
+                            <td class="ye">
+                                <button onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
                             </td> 
                         `;
                         exhibition.appendChild(otr)
@@ -441,6 +418,33 @@
             })
             window.location.reload();
         }   
+
+
+        //判断是否是管理者还是读者
+		$('.ye').css({'display':'none'})
+		if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+		window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+                    console.log(data);
+                    console.log(data[0].AR);
+					if(data[0].AR==='yes'){
+                        $('.ye').css({'display':'table-cell'})
+					}else{
+                        $('.ye').css({'display':'none'})
+					}
+				}
+			})
+		}
     </script>
 </body>
 <!-- classroom班级 -->

@@ -436,4 +436,37 @@ router.get('/updataa',function(req,res){
 		}
 	})
 })
+//意见反馈录入
+router.get('/nms',function(req,res){
+	// res.setHeader('Access-Control-Allow-Origin','*')
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.nm,json.sm,json.class,json.teacher,json.yijian],
+		sql:'insert into feedback(nm,sm,class,teacher,yijian) values(?,?,?,?,?)',
+		success(data){
+			res.send('ok');
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+//意见反馈读取
+router.get('/fkdq',function(req,res){
+	sql.con({
+		arr:[],
+		sql:'select * from feedback',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+
+	})
+})
+
+
+
 module.exports = router;

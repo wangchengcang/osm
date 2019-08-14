@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>反馈</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100%;
+            height: auto;
+        }
+
+        #tops p {
+            height: 60px;
+            line-height: 60px;
+            font-size: 26px;
+            font-family: bold;
+            border-bottom: 1px solid black;
+            background-color: #20b6ad;
+            color: #fff;
+        }
+
+        #tops p a {
+            text-decoration: none;
+            float: left;
+            margin-left: 5%;
+            margin-right: 15px;
+            line-height: 60px;
+        }
+
+        #tops a i {
+            color: #fff;
+        }
+
+        #nm,
+        #sm {
+            width: 90%;
+            height: 220px;
+            margin: 10px auto;
+            border: 2px solid;
+        }
+
+        #nm h6,
+        #sm h6 {
+            text-align: center;
+            font-size: 22px;
+            line-height: 40px;
+            border-bottom: 1px solid;
+        }
+
+        #nm p,
+        #sm p {
+            display: inline-block;
+            width: 47%;
+            margin-left: 2%;
+        }
+
+        #nm p input,
+        #sm p input {
+            width: 80%;
+            line-height: 40px;
+            margin: 10px auto;
+            border: none;
+            border-bottom: 1px solid;
+            outline: none;
+            
+        }
+
+        #nm button,
+        #sm button {
+            padding: 8px 16px;
+            border-style: none;
+            color: #fff;
+            background: #2cc9aa;
+            float: right;
+            margin-right: 60px;
+            border-radius: 4px;
+            font-size: 20px;
+        }
+
+        #con {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        #con #nmTable,
+        #con #smTable {
+            width: 100%;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        #con #nmTable tr th,
+        #con #smTable tr th {
+            height: 40px;
+            background: #20b6ad;
+            color: #fff;
+            width: 25%;
+            border: none;
+        }
+
+        #con #nmTable tr td,
+        #con #smTable tr td {
+            height: 40px;
+            width: 25%;
+            border: none;
+        }
+
+        #con #nmTable tr:nth-child(odd),
+        #con #smTable tr:nth-child(odd) {
+            height: 40px;
+            background: #ebfcf6;
+            width: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="tops">
+            <p>
+                <a href="index.html"><i class="iconfont"></i></a>
+                当前学生反馈信息
+            </p>
+        </div>
+        <!-- 匿名提交 -->
+        <div id="nm" class="ye">
+            <h6>匿名反馈信息</h6>
+            <p>姓名：<input type="text" placeholder="匿名(名字随便写)" id="nmxm"></p>
+            <p>班级：<input type="text" placeholder="班级" id="nmbj"></p>
+            <p>讲师：<input type="text" placeholder="讲师" id="nmjs"></p>
+            <p>意见：<input type="text" placeholder="匿名反馈课程、讲师、意见等" id="nmyj"></p>
+            <button id="nmBtn">匿名提交</button>
+        </div>
+        <!-- 实名提交 -->
+        <div id="sm" class="ye">
+            <h6>实名反馈信息</h6>
+            <p>姓名：<input type="text" placeholder="实名(必须是自己的真实姓名)" id="smxm"></p>
+            <p>班级：<input type="text" placeholder="班级" id="smbj"></p>
+            <p>讲师：<input type="text" placeholder="讲师" id="smjs"></p>
+            <p>意见：<input type="text" placeholder="实名反馈哪里没学会" id="smyj"></p>
+            <button id="smBtn">实名提交</button>
+        </div>
+        <div id="con">
+            <table id="nmTable" border="2" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>名字(匿名)</th>
+                    <th>班级</th>
+                    <th>讲师</th>
+                    <th>意见</th>
+                </tr>
+            </table>
+            <table id="smTable" border="2" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>名字(实名)</th>
+                    <th>班级</th>
+                    <th>讲师</th>
+                    <th>意见</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script>
+        //判断是不是管理者
+        $('.ye').css({'display':'block'});
+        if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+        window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+                        $('.ye').css({'display':'none'})
+					}else{
+						$('.ye').css({'display':'block'})
+					}
+				}
+			})
+		}
+
+        var href = 'http://localhost:8000';
+        //匿名
+        nmBtn.onclick = function () {
+            if (nmxm.value == '') {
+                alert('匿名必须得输入');
+            }else if(nmbj.value == ''){
+                alert('班级不得为空');
+            }else if(nmjs.value == ''){
+                alert('讲师不得为空');
+            }else if(nmyj.value == ''){
+                alert('意见不得为空');
+            } else {
+                $.ajax({
+                    type: 'get',
+                    url: href + '/users/nms',
+                    data: {
+                        nm: nmxm.value,
+                        sm: smxm.value,
+                        class: nmbj.value,
+                        teacher: nmjs.value,
+                        yijian: nmyj.value,
+                    },
+                    success(data) {
+                        // console.log(data);
+                        if (data == 'ok') {
+                            alert('反馈成功');
+                            read();
+                        }
+                    }
+                })
+            }
+        }
+        //实名
+        smBtn.onclick = function () {
+            if(smxm.value == ''){
+                alert('必须得输入真实姓名');
+            }else if(smbj.value == ''){
+                alert('班级不得为空');
+            }else if(smjs.value == ''){
+                alert('讲师不得为空');
+            }else if(smyj.value == ''){
+                alert('意见不得为空');
+            } else {
+                $.ajax({
+                    type: 'get',
+                    url: href + '/users/nms',
+                    data: {
+                        nm: nmxm.value,
+                        sm: smxm.value,
+                        class: smbj.value,
+                        teacher: smjs.value,
+                        yijian: smyj.value,
+                    },
+                    success(data) {
+                        // console.log(data);
+                        if(data == 'ok'){
+                           alert('反馈成功'); 
+                           read();
+                        }
+                    }
+                })
+            }
+        }
+        //读取
+        read();
+        function read(){
+            $.ajax({
+                type:'get',
+                url:href +'/users/fkdq',
+                success(data){
+                    console.log(data);
+                    for(var i=0;i<data.length;i++){
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${data[i].nm || data[i].sm}</td>
+                            <td>${data[i].class}</td>
+                            <td>${data[i].teacher}</td>
+                            <td>${data[i].yijian}</td>
+                        `;
+                        // nmTable.appendChild(tr)
+                        console.log(data[i].nm);
+                        if(data[i].nm){
+                            nmTable.appendChild(tr)
+                        }else{
+                            smTable.appendChild(tr)
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

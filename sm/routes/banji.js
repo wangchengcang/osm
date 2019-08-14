@@ -7,6 +7,7 @@ var sql=require('./mysql.js');
 // var path=require('path');
 var router = express.Router();
 
+//班级录入
 router.post('/grade',function(req,res){
     res.setHeader('Access-Control-Allow-Origin','*');
     var json=req.body;
