@@ -40,7 +40,7 @@
 
 		.htop {
 			width: 100%;
-			height: 200px;
+			height: 100px;
 			margin-top: 20px;
 		}
 
@@ -67,6 +67,7 @@
 
 		table tr td {
 			height: 30px;
+			text-align: center;
 		}
 
 		table tr:nth-child(1) {
@@ -122,37 +123,29 @@
 	<div class="con">
 		<div class="htop">
 			<h3>基本信息</h3>
-			班级：<input type="text">
-			学生姓名：<input type="text">
-			学号：<input type="text">
-			开始时间：<input type="text">
-			结束时间：<input type="text"><br>
-			<button type="button" id="btn">检索</button>
-			<button type="button" id="btn">导出</button>
+			学生姓名：<input type="text" id="student_name" style="width:8%">
+			班级：<input type="text" id="class_room" style="width:8%">
+			学号：<input type="text" id="student_number" style="width:8%">
+			开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:6%">
+			结束时间：<input type="text" id="end_time">
+			原因：<input type="text" id="reason">
+			<button type="button" id="btn">提交</button>
 		</div>
 		<div class="cent">
 			<h3>统计信息</h3>
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td></td>
-					<td><input type="checkbox"></td>
-					<td>年级班费</td>
-					<td>总出勤天数</td>
-					<td>事假积累天数</td>
-					<td>病假积累天数</td>
-					<td>休学人数（学期）</td>
-					<td>休学人数（学年）</td>
-					<td>缺课天数</td>
-					<td>出勤率（事假）</td>
-					<td>出勤率（病假）</td>
-					<td>出勤率（总体）</td>
+					<td>班级</td>
+					<td>总人数</td>
+					<td>请假人数</td>
+					<td>出勤率（假）</td>
+					<td>休学人数</td>
+					<td>出勤率（请假加休学）</td>
+					<td>不就业人数</td>
 				</tr>
 				<tr>
-					<td>1</td>
-					<td><input type="checkbox"></td>
-					<td>111</td>
-					<td>111</td>
-					<td>111</td>
+					<td></td>
 					<td>111</td>
 					<td>111</td>
 					<td>111</td>
@@ -166,5 +159,45 @@
 	</div>
 
 </body>
+	<script src="js/jquery.js"> </script>
+	<script>
+		//计算当前时间和日期
+		var mydate=new Date();
+		var myddy=mydate.getDay();//获取存储当前日期
+		var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+		$('#getday').val(weekday[myddy])
+		$(function() {
+			setInterval("getTime();", 1000); //每隔一秒运行一次
+		})
+		//取得系统当前时间
+		function getTime() {
+			var myDate = new Date();
+			var date = myDate.toLocaleDateString();
+			// var hours = myDate.getHours();
+			// var minutes = myDate.getMinutes();
+			// var seconds = myDate.getSeconds();"+hours+":"+minutes+":"+seconds
+			$("#start_time").val(date); //将值赋给div
+		}
 
+
+        var href = 'http://localhost:8000';
+		// 录入请假名单
+		$('#btn').on('click',function(){
+			$.ajax({
+				type:'post',
+				url:href+'/state/luru',
+				data:{
+					class:class_room.value,
+					name:student_name.value,
+					number:student_number.value,
+					start:start_time.value,
+					end:end_time.value,
+					reason:reason.value
+				},
+				success(data){
+					console.log(data)
+				}
+			})
+		})
+	</script>
 </html>
