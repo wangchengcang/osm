@@ -5,123 +5,98 @@
 	<meta charset="utf-8">
 	<title>学生当前状态</title>
 	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
 	<style type="text/css">
-		* {
-			margin: 0;
-			padding: 0;
-		}
+	* {
+		margin: 0;
+		padding: 0;
+	}
 
-		#tops p {
-            height: 60px;
-            line-height: 60px;
-            font-size: 26px;
-            font-family: bold;
-            border-bottom: 1px solid black;
-            background-color: #20b6ad;
-            color: #fff;
-        }
+	#tops p {
+		height: 60px;
+		line-height: 60px;
+		font-size: 26px;
+		font-family: bold;
+		border-bottom: 1px solid black;
+		background-color: #20b6ad;
+		color: #fff;
+	}
 
-        #tops p a {
-            text-decoration: none;
-            float: left;
-            margin-left: 5%;
-            margin-right: 15px;
-            line-height: 60px;
-        }
-        #tops a i{
-            color: #fff;
-            
-        }
-		.con {
-			width: 90%;
-			min-height: 500px;
-			margin: 0 auto;
-		}
+	#tops p a {
+		text-decoration: none;
+		float: left;
+		margin-left: 5%;
+		margin-right: 15px;
+		line-height: 60px;
+	}
+	#tops a i{
+		color: #fff;
 
-		.htop {
-			width: 100%;
-			height: 100px;
-			margin-top: 20px;
-		}
-		.htop input{
-			width:100px;
-			height: 30px;
-			margin-top: 20px;
-			font-size: 18px;
-		}
-		h3 {
-			border-left: 5px solid #000;
-			padding-left: 10px;
-			margin-bottom: 10px;
-		}
+	}
+	.con {
+		width: 90%;
+		min-height: 500px;
+		margin: 0 auto;
+	}
 
-		#btn{
-			width: 100px;
-			height: 33px;
-			background: #16ac98;
-			border: none;
-			color: #fff;
-			text-align: center;
-			line-height: 30px;
-<<<<<<< HEAD
-=======
-			margin-top: 10px;
->>>>>>> 07ffa91a847fd074ba6d6d39d4de00315af5d82b
-		}
+	.htop {
+		width: 100%;
+		height: 100px;
+		margin-top: 20px;
+	}
+	.htop input{
+		width:100px;
+		height: 30px;
+		margin-top: 20px;
+		font-size: 18px;
+	}
+	h3 {
+		border-left: 5px solid #000;
+		padding-left: 10px;
+		margin-bottom: 10px;
+	}
 
-		table {
-			width: 100%;
-		}
+	#btn{
+		width: 100px;
+		height: 33px;
+		background: #16ac98;
+		border: none;
+		color: #fff;
+		text-align: center;
+		line-height: 30px;
+		margin-top: 10px;
+	}
 
-		table tr td {
-			height: 30px;
-			text-align: center;
-		}
+	table {
+		width: 100%;
+	}
 
-		table tr:nth-child(1) {
-			background: #16AC98;
-			color: #fff;
-			font-size: 14px;
-		}
+	table tr td {
+		height: 30px;
+		text-align: center;
+	}
 
-		table tr td:nth-child(1) {
-			width: 30px;
-			text-align: center;
-		}
+	table tr:nth-child(1) {
+		background: #16AC98;
+		color: #fff;
+		font-size: 14px;
+	}
 
-		input[type=checkbox] {
-			margin-right: 5px;
-			cursor: pointer;
-			font-size: 14px;
-			width: 15px;
-			height: 12px;
-			position: relative;
-		}
+	table tr td:nth-child(1) {
+		width: 30px;
+		text-align: center;
+	}
 
-		input[type=checkbox]:after {
-			position: absolute;
-			width: 10px;
-			height: 15px;
-			top: 0;
-			content: " ";
-			background-color: #fff;
-			color: #fff;
-			display: inline-block;
-			visibility: visible;
-			padding: 0px 3px;
-			border-radius: 3px;
-			border: 1px solid #ccc;
-		}
 
-		input[type=checkbox]:checked:after {
-			content: "✓";
-			font-size: 12px;
-			color: #000;
-		}
-		#end_time{
-			width: 150px;
-		}
-	</style>
+	#end_time{
+		width: 150px;
+	}
+	.htop input{
+		border:none;
+		outline: none;
+		border-bottom:solid 1px #000;
+	}
+</style>
 </head>
 
 <body>
@@ -134,12 +109,12 @@
 	<div class="con">
 		<div class="htop">
 			<h3>基本信息</h3>
-			学生姓名：<input type="text" id="student_name" style="width:8%">
-			班级：<input type="text" id="class_room" style="width:8%">
-			学号：<input type="text" id="student_number" style="width:8%">
+			班级：<input type="text" id="class_room" style="width:10%" placeholder="请输入班级">
+			学号：<input type="text" id="student_number" style="width:10%" placeholder="学员学号">
+			学生姓名：<input type="text" id="student_name" style="width:10%" placeholder="请输入学生姓名">
 			开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:6%"> 
-			结束时间：<input type="date" id="end_time">
-			原因：<input type="text" id="reason">
+			结束时间：<input type="date" id="end_time" placeholder="请输入返校时间">
+			原因：<input type="text" id="reason" style="width:14%" placeholder="请填写请假原因">
 			<button type="button" id="btn">提交</button>
 
 		</div>
@@ -149,6 +124,7 @@
 				<tr>
 					<td></td>
 					<td>班级</td>
+					<td>门牌</td>
 					<td>总人数</td>
 					<td>请假人数</td>
 					<td>出勤率（假）</td>
@@ -156,23 +132,14 @@
 					<td>出勤率（请假加休学）</td>
 					<td>不就业人数</td>
 				</tr>
-				<tr>
-					<td></td>
-					<td>111</td>
-					<td>111</td>
-					<td>111</td>
-					<td>111</td>
-					<td>111</td>
-					<td>111</td>
-					<td>111</td>
-				</tr>
+				
 			</table>
 		</div>
 	</div>
 
 </body>
-	<script src="js/jquery.js"> </script>
-	<script>
+<script src="js/jquery.js"> </script>
+<script>
 		//计算当前时间和日期
 		var mydate=new Date();
 		var myddy=mydate.getDay();//获取存储当前日期
@@ -192,24 +159,100 @@
 		}
 
 
-        var href = 'http://localhost:8000';
+		var href = 'http://localhost:8000';
 		// 录入请假名单
 		$('#btn').on('click',function(){
+			if(class_room.value==''){
+				alert('请输入班级')
+			}else if(student_name.value==''){
+				alert('请输入姓名')
+			}else if(student_number.value==''){
+				alert('请输入学号')
+			}else if(end_time.value==''){
+				alert('请输入返校时间')
+			}else if(reason.value==''){
+				alert('请输入请假原因')
+			}else{
+				$.ajax({
+					type:'get',
+					url:href+'/state/luru',
+					data:{
+						aclass:class_room.value,
+						aname:student_name.value,
+						anumber:student_number.value,
+						astart:start_time.value,
+						aend:end_time.value,
+						areason:reason.value
+					},
+					success(data){
+						console.log(data)
+					}
+				})
+			}
+		})
+
+
+
+
+
+		//获取请假名单
+		function getLeave(){
+			$.ajax({
+					type:'get',
+					async:false,
+					url:href+'/state/getL',
+					success(res){
+						console.log(res)
+						for(var i=0; i<res.length; i++){
+							if(res[i].classa=='1809'){
+								console.log()
+							}
+						}
+					}
+				})
+			
+		}
+		// 获取所有班级
+		$.ajax({
+			type:'get',
+			url:href+'/state/class',
+			success(data){
+				console.log(data)
+				for(var i=0; i<data.length;i++){
+					$(`
+						<tr onclick="look(${data[i].class})" id="thisTr">
+						<td></td>
+						<td>${data[i].class}</td>
+						<td>${data[i].door}</td>
+						<td>${data[i].number}</td>
+						<td></td>
+						<td></td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						</tr>
+						`).appendTo('table')
+				}
+			}
+		})
+		// 查看每个班级请假名单
+		function look(index){
+			console.log(index)
 			$.ajax({
 				type:'get',
-				url:href+'/state/luru',
 				data:{
-					aclass:class_room.value,
-					aname:student_name.value,
-					anumber:student_number.value,
-					astart:start_time.value,
-					aend:end_time.value,
-					areason:reason.value
+					class:index
 				},
+				url:href+'/state/read',
 				success(data){
-					console.log(data)
+					if(data.length){
+						console.log(data)
+						// localStorage.res = JSON.stringify(data)
+					}else{
+						console.log('该班级没人请假')
+					}
 				}
 			})
-		})
+		}
 	</script>
-</html>
+	</html>

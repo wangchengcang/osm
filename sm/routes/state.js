@@ -2,6 +2,7 @@ var express = require('express');
 var sql=require('./mysql.js');
 var router = express.Router();
 
+// 录入请假人
 router.get('/luru',function(req,res){
     var json=req.query;
     console.log(json) 
@@ -16,17 +17,56 @@ router.get('/luru',function(req,res){
 		}
 	})
 })
-    // sql.con({
-   //      arr:[json.number],
-   //      sql:'select * from leave where number=?',
-   //      success(data){
-   //          if(data.length){
-			// 	res.send('no')
-			// }else{
-               
-            // }
-        // }
-    
-// })
+
+
+// 获取所有请假名单
+router.get('/getL',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	var json=req.query;
+    console.log(json) 
+	sql.con({
+		arr:[],
+		sql:'select * from leaves',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});
+
+
+
+// 根据班级名获取请假名单
+router.get('/read',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	var json=req.query;
+    console.log(json) 
+	sql.con({
+		arr:[json.class],
+		sql:'select * from leaves where classa=?',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});
+// 获取所有的班级
+router.get('/class',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	sql.con({
+		arr:[],
+		sql:'select * from class',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});
 
 module.exports = router;
