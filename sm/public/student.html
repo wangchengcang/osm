@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学生</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+    <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
     <style>
         * {
             margin: 0;
@@ -13,7 +15,7 @@
         }
 
         .main {
-            width: 90%;
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -22,18 +24,28 @@
             height: 60px;
             line-height: 60px;
             border-bottom: 1px solid black;
+            background-color: #20b6ad;
         }
 
         .title a {
             float: left;
             text-decoration: none;
             color: black;
-            margin-left: 10px;
+            margin: 0 15px 0 5%;
         }
 
-        .title h3 {
-            text-align: center;
-            font-size: 30px;
+        .title a i {
+            color: #fff;
+        }
+
+        .title p {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .mian-table {
+            width: 90%;
+            margin: 0 auto;
         }
 
         .select {
@@ -52,7 +64,7 @@
             border: 1px solid #ccc;
             outline: none;
         }
-        
+
         .select button {
             float: right;
             border-radius: 20px;
@@ -65,15 +77,16 @@
             outline: none;
         }
 
-        #table{
+        #table {
             width: 100%;
         }
-        #table tr td{
+
+        #table tr td {
             line-height: 50px;
             border-bottom: 1px solid black;
             text-align: center;
         }
-        
+
         .main table {
             width: 100%;
             margin-top: 25px;
@@ -89,45 +102,35 @@
 
         .main table tr td {
             text-align: center;
-            line-height:50px;
+            line-height: 50px;
             border: none;
         }
+
         .main table tr:nth-child(odd) {
             background: #ebfcf6;
         }
-		#see{
-			padding: 3px 13px;
-			background-color: #2CC9AA;
-			color: #fff;
-			cursor: pointer;
-		}
+
+        #see {
+            padding: 3px 13px;
+            background-color: #2CC9AA;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <div class="main">
+        <div class="title">
+            <a href="index.html" class="return"><i class="iconfont">&#xe66f;</i></a>
+            <p>学生基本资料</p>
+        </div>
         <div class="mian-table">
-            <div class="title">
-                <a href="index.html" class="return">返回</a>
-                <h3>学生基本资料</h3>
-            </div>
             <div class="select">
                 <input type="search" id="search" placeholder="学生信息搜索">
                 <!-- <button type="button" class="add" id="newadd">学员录入</button> -->
             </div>
-            <table id="table" cellspacing="0" cellpadding="0">
-                <!-- <tr>
-                    <th>学号</th>
-                    <th>姓名</th>
-                    <th>年龄</th>
-                    <th>身份证号</th>
-                    <th>父母电话</th>
-                    <th>籍贯</th>
-                    <th>大区</th>
-                    <th>学籍</th>
-                    <th>班级</th>
-                    <th>详情</th>
-                </tr> -->
+            <table id="table"  cellspacing="0" cellpadding="0">
             </table>
             <table border="2" cellspacing="0" class="newtrainees" id="biao">
             </table>
@@ -136,7 +139,7 @@
 
     <script src="js/jquery.js"></script>
     <script>
-        var href='http://localhost:8000';
+        var href = 'http://localhost:8000';
 
         //查看学生资料
         function chakan(msg) {
@@ -151,10 +154,11 @@
                 type: 'get',
                 url: href + '/users/read',
                 success(data) {
-					var str=`
+                    var str = `
 						<tr>
 						    <th>学号</th>
-						    <th>姓名</th>
+                            <th>姓名</th>
+                            <th>班级</th>
 						    <th>年龄</th>
 						    <th>身份证号</th>
 						    <th>父母电话</th>
@@ -164,12 +168,13 @@
 						    <th>班级</th>
 						    <th>详情</th>
 						</tr>
-					`
+					`;
                     for (var i = 0; i < data.length; i++) {
-                        str+= `
+                        str += `
 							<tr>
 								<td>${data[i].id}</td>
-								<td>${data[i].name}</td>
+                                <td>${data[i].name}</td>
+                                <td>${data[i].class}</td>
 								<td>${data[i].myage}</td>
 								<td>${data[i].idcard}</td>
 								<td>${data[i].parentelephone}</td>
@@ -177,12 +182,14 @@
 								<td>${data[i].dq}</td>
 								<td>${data[i].xj}</td>
 								<td>${data[i].bj}</td>
-								<td><buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon></td>	
+                                <td>
+                                    <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
+                                    <buttuon id="see" class="ye" onClick="del('${data[i].uid}')">删除</buttuon>
+                                </td>	
 							</tr>
-						`
-                        
+						`;
                     }
-					biao.innerHTML=str
+                    biao.innerHTML = str
                 }
             })
         }
@@ -193,53 +200,111 @@
                 type: 'get',
                 url: href + '/users/s',
                 data: {
-                    val: search.value,
+                    id: search.value,
                     name: search.value,
-                    myage:search.value,
-                    mytelephone:search.value,
-                    parentelephone:search.value,
                     gender: search.value,
+                    myage: search.value,
                     place: search.value,
                     dq: search.value,
-                    xj:search.value,
-                    bj:search.value,
                 },
                 success(data) {
-                    // console.log(data)
-                    if(data==''){
-                        table.innerHTML='';
-                        var tr=document.createElement('tr');
-                        tr.innerHTML=`<td style="color:red">没有该班级,请重新输入</td>`;
+                    console.log(data)
+                    if (data == '') {
+                        table.innerHTML = '';
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = `<td style="color:red">没有该班级,请重新输入</td>`;
                         // $('#search').val('');
                         table.appendChild(tr);
-                        
-                    }else{
-                        table.innerHTML=''
-                        if(search.value ==''){
-                            table.innerHTML='';
-                        }else{
-                            for(var i=0;i<data.length;i++){
-                                var tr=document.createElement('tr');
-                                tr.innerHTML=`
-                                        <td>${data[i].id}</td>
-                                        <td>${data[i].name}</td>
-                                        <td>${data[i].myage}</td>
-                                        <td>${data[i].mytelephone}</td>
-                                        <td>${data[i].parentelephone}</td>
-                                        <td>${data[i].gender}</td>
-                                        <td>${data[i].place}</td>
-                                        <td>${data[i].dq}</td>
-                                        <td>${data[i].xj}</td>
-                                        <td>${data[i].bj}</td>
+
+                    } else {
+                        table.innerHTML = '';
+                        if (search.value == '') {
+                            table.innerHTML = '';
+                            biao.style.display = 'inline-table';
+                        } else {
+                            biao.style.display = 'none';
+                            var str = `
+                                    <tr>
+                                        <th>学号</th>
+                                        <th>姓名</th>
+                                        <th>班级</th>
+                                        <th>年龄</th>
+                                        <th>身份证号</th>
+                                        <th>父母电话</th>
+                                        <th>籍贯</th>
+                                        <th>大区</th>
+                                        <th>学籍</th>
+                                        <th>班级</th>
+                                        <th>详情</th>
+                                    </tr>
                                 `;
-                                table.appendChild(tr)
+                            for (var i = 0; i < data.length; i++) {
+                                str += `
+							        <tr>
+                                    <td>${data[i].id}</td>
+                                    <td>${data[i].name}</td>
+                                    <td>${data[i].class}</td>
+                                    <td>${data[i].myage}</td>
+                                    <td>${data[i].idcard}</td>
+                                    <td>${data[i].parentelephone}</td>
+                                    <td>${data[i].place}</td>
+                                    <td>${data[i].dq}</td>
+                                    <td>${data[i].xj}</td>
+                                    <td>${data[i].bj}</td>
+                                    <td>
+                                        <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
+                                    </td>	
+                                </tr>
+						        `;
                             }
+                            table.innerHTML = str
                         }
                     }
                 }
 
             })
         })
+        //删除
+        function del(uid) {
+            console.log(uid);
+            $.ajax({
+                type: 'get',
+                url: href + '/users/del',
+                data: {
+                    uid: uid,
+                },
+                success(data) {
+                    if (data == 'ok') {
+                        alert('删除成功');
+                    }
+                }
+            })
+            window.location.reload();
+        }
+        //判断是否是管理者
+        $('.ye').css({'display':'none'});
+        if(localStorage.user){
+		    var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+        window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'initial'}) || $('.ye').css({'display':'block'})
+					}else{
+						$('.ye').css({'display':'none'})
+					}
+				}
+			})
+		}
     </script>
 </body>
 

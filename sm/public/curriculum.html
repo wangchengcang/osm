@@ -4,10 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+    <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
     <style>
         * {
             margin: 0;
             padding: 0;
+        }
+        .top{
+            width: 100%;
+            height: 60px;
+            background: #20b6ad;
+            color: #fff;
+        }
+        .top h4 {
+            line-height:60px;
+            border-bottom: 1px solid;
+            font-size: 22px;
+        }
+
+        .top h4 a {
+            text-decoration: none;
+            float: left;
+            line-height: 60px;
+            font-size: 16px;
+            margin-left: 5%;
+            margin-right: 20px;
+        }
+        .top h4 a {
+            color: #fff;
         }
 
         .demo {
@@ -15,21 +40,6 @@
             height: auto;
             margin: 0 auto;
             text-align: center;
-        }
-
-        .demo h4 {
-            text-align:center;
-            line-height:60px;
-            font-size: 30px;
-        }
-
-        .demo h4 a {
-            text-decoration: none;
-            float: left;
-            margin-left: 10px;
-            line-height: 60px;
-            color: black;
-            font-size: 16px;
         }
 
         #luru_btn {
@@ -66,6 +76,7 @@
             font-size: 16px;
             height: 50px;
             border: none;
+			color: #000;
         }
 		
         .luru {
@@ -121,7 +132,7 @@
 			outline: none;
 			position: absolute;
 			bottom: 0px;
-			right: 149px;
+			right: 110px;
 		}
 		#modifys{
 			width: 8%;
@@ -133,10 +144,10 @@
 			display:none;
 			position: absolute;
 			bottom:0px;
-			right: 149px;
+			right: 110px;
 		}
 		#Close{
-			width:40px;
+			width:6%;
 			height:30px;
 			margin:10px;
 			background-color: #2CC9AA;
@@ -145,22 +156,26 @@
 			display:none;
 			position: absolute;
 			bottom: 0px;
-			right: 96px;
+			right: 20px;
 		}
     </style>
 </head>
 
 <body>
-    <div class="demo">
+    <div class="top">
         <h4>
-            <a href="index.html">返回</a>
+            <a href="index.html">
+                <i class="iconfont">&#xe66f;</i></a>
             课程安排
         </h4>
-        <div class="luru">
-            <div>阶段：<input type="text" id="stage"></div>
-            <div>课程名称：<input type="text" id="curriculumName"></div>
-            <div>任课老师：<input type="text" id="teacher"></div>
-            <div>班主任：<input type="text" id="headmaster"></div>
+
+    </div>
+    <div class="demo">
+        <div class="luru ye">
+            <div>阶段：<input type="text" id="stage" placeholder="请输入阶段"></div>
+            <div>课程名称：<input type="text" id="curriculumName" placeholder="请输入课程名称"></div>
+            <div>任课老师：<input type="text" id="teacher" placeholder="请输入任课老师"></div>
+            <div>班主任：<input type="text" id="headmaster" placeholder="请输入班主任"></div>
             <button id="submit">提交</button>
             <button id="modifys">修改并保存</button>
 			<button id="Close">关闭</button>
@@ -172,7 +187,7 @@
                     <th scope="col">课程名称</th>
                     <th scope="col">任课老师</th>
                     <th scope="col">班主任</th>
-                    <th>操作</th>
+                    <th class="ye">操作</th>
                 </tr>
             </thead>
             <tbody id="mytable">
@@ -183,6 +198,32 @@
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
+	//判断是否是管理者还是读者
+	$('.ye').css({'display':'none'})
+	if(localStorage.user){
+	    var localStorageUser=JSON.parse(localStorage.user);
+		audi=localStorageUser.uid;
+	}
+	console.log(audi)
+	window.onload=function (){
+		$.ajax({
+			type:'get',
+			url:'http://localhost:8000/indexs/state',
+			data:{
+				uid:audi,
+			},
+			success(data){
+				console.log(data)
+				if(data[0].AR=='yes'){
+					$('.ye').css({'display':'block'})
+				}else{
+					$('.ye').css({'display':'none'})
+				}
+			}
+		})
+	}
+	
+	
     // 新增课程
     var href = 'http://localhost:8000';
     $('#luru_btn').on('click', function () {
@@ -256,7 +297,7 @@
                         <td>${value.curriculumName}</td>
                         <td>${value.teacher}</td>
                         <td>${value.headmaster}</td>
-                        <td><button class="btn" onClick="modify('${value.uid}','${value.stage}','${value.curriculumName}','${value.teacher}','${value.headmaster}')">修改</button></td>
+                        <td><button class="btn ye" onClick="modify('${value.uid}','${value.stage}','${value.curriculumName}','${value.teacher}','${value.headmaster}')">修改</button></td>
                         </tr>`).appendTo('#mytable')
                 })
             }

@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<!-- <link rel="stylesheet" type="text/css" href="css/style1.css" /> -->
+	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
 	<style type="text/css">
 	* {
 		margin: 0;
@@ -78,12 +79,14 @@
 	<div class="con">
 		<a href="student.html" id="back_record">返回</a>
 		<p>学生基本信息</p>
-		<table border="2" cellspacing="0" cellpadding="0" id="msg_box">
-	
-		</table>
+		<table border="2" cellspacing="0" cellpadding="0" id="msg_box"></table>
 	</div>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
+		
+		
+		
+		
 		if(localStorage.which){
 			var thisUid=localStorage.which;
 			console.log(thisUid)
@@ -108,6 +111,10 @@
 				<td colspan="2">${data[0].name}</td>
 				</tr>
 				<tr>
+				<td>班级</td>
+				<td colspan="2">${data[0].class}</td>
+				</tr>
+				<tr>
 				<td>性别</td>
 				<td colspan="2">${data[0].gender}</td>
 				</tr>
@@ -121,7 +128,7 @@
 				</tr>
 				<tr>
 				<td>民族</td>
-				<td colspan="2">${data[0].nation}</td>
+				<td colspan="3">${data[0].nation}</td>
 				</tr>
 				<tr>
 				<td>学历</td>

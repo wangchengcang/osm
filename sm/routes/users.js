@@ -23,6 +23,7 @@ router.post('/img',function(req,res){
 router.post('/login',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*')
 	var json=req.body;
+	console.log(json)
 	sql.con({
 		arr:[json.user],
 		sql:'select * from login where user=?',
@@ -31,8 +32,8 @@ router.post('/login',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.name,json.user,json.pass,json.img],
-					sql:'insert into login(name,user,pass) values(?,?,?)',
+					arr:[json.name,json.user,json.pass,json.state],
+					sql:'insert into login(name,user,pass,AR) values(?,?,?,?)',
 					success(data){
 						res.send('ok')
 					},
@@ -78,8 +79,8 @@ router.post('/arr',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.id,json.aname,json.gender,json.idsf,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.jzzw,json.jzdh,json.zhuzhi,json.yz,json.age,json.xj,json.bj,json.dq,json.system],//nation民族face面貌
-					sql:'insert into mydata(id,name,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage,xj,bj,dq,system) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+					arr:[json.id,json.aname,json.calsss,json.gender,json.idsf,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.jzzw,json.jzdh,json.zhuzhi,json.yz,json.age,json.xj,json.bj,json.dq,json.system],//nation民族face面貌
+					sql:'insert into mydata(id,name,class,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage,xj,bj,dq,system) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
 					success(data){
 						res.send('ok')
 					},
@@ -203,7 +204,7 @@ router.get('/dels',function(req,res){
 		arr:[json.uid],
 		sql:'delete from teacher where uid=?',
 		success(data){
-			res.send(data);
+			res.send('ok');
 		},
 		error(err){
 			res.send(err);
@@ -217,10 +218,8 @@ router.get('/s',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json=req.query
 	sql.con({
-		arr:[json.val,json.name,json.gender,json.myage,json.place,json.dq],
-		//json.mytelephone,json.parentelephone,
-		sql:'select * from mydata where id like "%"?"%" or name like "%"?"%" or gender like "%"?"%" or myage like "%"?"%"or place like "%"?"%" or dq like "%"?"%"',
-		// or mytelephone like "%"?"%" or parentelephone like "%"?"%" 
+		arr:[json.id,json.name,json.gender,json.myage,json.place,json.dq],
+		sql:'select * from mydata where id like "%"?"%" or name like "%"?"%" or gender like "%"?"%" or myage like "%"?"%"  or place like "%"?"%"  or dq like "%"?"%" ',
 		success(data){
 			res.send(data)
 		},
@@ -229,6 +228,21 @@ router.get('/s',function(req,res){
 		}
 	})
 });	
+//删除
+router.get('/del',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	sql.con({
+		arr:[json.uid],
+		sql:'delete from mydata where uid=?',
+		success(data){
+			res.send('ok');
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
 //新学员入住寝室录入
 router.get('/dorm',function(req,res){
 	var json=req.query;
@@ -297,15 +311,11 @@ router.get('/queqa',function(req,res){
 	})
 })
 //读取学员缺勤
-router.get('/queq',function(req,res){
+router.get('/duquee',function(req,res){
 	var json=req.query;
 	sql.con({
-		arr:[json.uid],
-<<<<<<< HEAD
-		sql:'select * from dormitory where uid=?',
-=======
-		sql:'select * from dormitory_copy order by uid desc',
->>>>>>> df412e17e9a10ab63a98eb3838324c33bbb0705b
+		arr:[],
+		sql:'select * from dormitory_copy',
 		success(data){
 			res.send(data)
 		},
@@ -354,10 +364,6 @@ router.get('/d',function(req,res){
 		}
 	})
 })
-<<<<<<< HEAD
-
-=======
->>>>>>> df412e17e9a10ab63a98eb3838324c33bbb0705b
 //修改课程
 router.get('/modifys',function(req,res){
 	var json = req.query;
@@ -392,8 +398,8 @@ router.get('/yc',function(req,res){
 router.get('/search',function(req,res){
 	var json=req.query;
 	sql.con({
-		arr:[json.title],
-		sql:'select * from dormitory where name like "%"?"%"',
+		arr:[json.xh,json.title],
+		sql:'select * from dormitory where xh like "%"?"%" or name like "%"?"%"',
 		success(data){
 			res.send(data)
 		},
@@ -430,4 +436,37 @@ router.get('/updataa',function(req,res){
 		}
 	})
 })
+//意见反馈录入
+router.get('/nms',function(req,res){
+	// res.setHeader('Access-Control-Allow-Origin','*')
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.nm,json.sm,json.class,json.teacher,json.yijian],
+		sql:'insert into feedback(nm,sm,class,teacher,yijian) values(?,?,?,?,?)',
+		success(data){
+			res.send('ok');
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+//意见反馈读取
+router.get('/fkdq',function(req,res){
+	sql.con({
+		arr:[],
+		sql:'select * from feedback',
+		success(data){
+			res.send(data);
+		},
+		error(err){
+			res.send(err);
+		}
+
+	})
+})
+
+
+
 module.exports = router;

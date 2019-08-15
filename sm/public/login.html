@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>登录/注册</title>
 	<link rel="stylesheet" href="stylesheets/login.css">
+	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
 </head>
 <body>
 	<div class="box">
@@ -14,16 +15,22 @@
 				<h4>登录</h4>
 				<div>账号：<input type="text" id="logon_user" placeholder="请输入账号"></div>
 				<div>密码：<input type="password" id="logon_pass" placeholder="请输入密码"></div>
-				<div class="a clearfix"><a href="#" class="fr" id="go_login">注册</a></div>
+				<div class="a clearfix"><a href="#" class="fr" id="go_login" style="color: #fff;">注册</a></div>
 				<div><button id="logon_btn">登录</button></div>
-				<main>
-					<label class="fl"><input type="radio" name="id" value="男生" id="teacher">老师</label>
-					<label class="fr"><input type="radio" name="id" value="女生" id="student">学生</label>
-				</main>
 			</div>
 			<!-- 注册 -->
 			<div class="login">
 				<h4>注册</h4>
+				<main>
+					<label class="fl">
+						<input type="radio" name="ARadio" value="yes" id="teacher">
+						<p>管理者</p>
+					</label>
+					<label class="fr">
+						<input type="radio" name="ARadio" value="not" id="student">
+						<p>读者</p>
+					</label>
+				</main>
 				<div>名字：<input type="text" id="login_name" placeholder="请输入昵称"></div>
 				<div>账号：<input type="text" id="login_user" placeholder="请输入账号"></div>
 				<div>密码：<input type="password" id="login_pass" placeholder="请输入密码"></div>
@@ -32,7 +39,67 @@
 		</div>
 	</div>
 	<script src="js/jquery.js"></script>
-	<script>
+	<script>	
+	//判断是否是管理者还是读者checked
+		// student.checked=true;
+		var ATF=$('input:radio[name="ARadio"]')
+		for(var i=0;i<ATF.length;i++){
+			ATF[i].index=i;
+			ATF[i].onclick=function(){
+				for(var i=0;i<ATF.length;i++){
+					ATF[i].checked=false;
+				}
+				ATF[this.index].checked=true;
+				//判断用户以什么身份进入学生管理系统
+				var state='';
+				state=$('input:radio[name="ARadio"]:checked').val();
+				console.log(state)
+				// if(state==''){
+				// 	$("#login_btn").attr("disabled", true);
+				// 	$("#login_btn").addClass('active')
+				// }else{
+				// 	$("#login_btn").attr("disabled", false);
+				// 	$("#login_btn").removeClass('active')
+				// }
+				login_btn.onclick=function(){
+					if(state==''){
+						alert('请选择以什么身份进入')
+					}else if(/[\u4E00-\u9FA5]/g.test(login_user.value)||/[\u4E00-\u9FA5]/g.test(login_pass.value)){
+						alert('账号或密码不得为中文')
+					}else if(login_name.value==''){
+						alert('请编辑昵称')
+					}else if(login_user.value==''){
+						alert('请输入账号')
+					}else if(login_pass.value==''){
+						alert('请输入密码')
+					}else{
+						$.ajax({
+							type:'post',
+							url:href+'/users/login',
+							data:{
+								name:login_name.value,
+								user:login_user.value,
+								pass:login_pass.value, 
+								state:state,
+							},
+							success(data){
+								if(data=='ok'){
+									alert('注册成功');
+									logon_user.value=login_user.value;
+									logon_pass.value=login_pass.value;
+									$('.login').css({'display':'none'})
+									$('.logon').css({'display':'block'})
+								}else{
+									alert('该用户已被注册')
+									login_user.value='';
+									login_pass.value='';
+								}
+							}
+						})
+					}
+				}
+			}
+		}
 		var h = window.innerHeight;
 		document.querySelector('.box').style.height=h+'px';
 		$('#go_login').on('click',function(){
@@ -53,39 +120,39 @@
 		})
 		var href='http://localhost:8000';
 		//注册
-		login_btn.onclick=function(){
-			if(/[\u4E00-\u9FA5]/g.test(login_user.value)||/[\u4E00-\u9FA5]/g.test(login_pass.value)){
-				alert('账号或密码不得为中文')
-			}else if(login_name.value==''){
-				alert('请编辑昵称')
-			}else if(login_user.value==''){
-				alert('请输入账号')
-			}else if(login_pass.value==''){
-				alert('请输入密码')
-			}else{
-				$.ajax({
-					type:'post',
-					url:href+'/users/login',
-					data:{
-						name:login_name.value,
-						user:login_user.value,
-						pass:login_pass.value, 
-					},
-					success(data){
-						if(data=='ok'){
-							alert('注册成功');
-							$('.login').css({'display':'none'})
-							$('.logon').css({'display':'block'})
-						}else{
-							alert('该用户已被注册')
-							login_name.value='';
-							login_user.value='';
-							login_pass.value='';
-						}
-					}
-				})
-			}
-		}
+		// login_btn.onclick=function(){
+		// 	if(/[\u4E00-\u9FA5]/g.test(login_user.value)||/[\u4E00-\u9FA5]/g.test(login_pass.value)){
+		// 		alert('账号或密码不得为中文')
+		// 	}else if(login_name.value==''){
+		// 		alert('请编辑昵称')
+		// 	}else if(login_user.value==''){
+		// 		alert('请输入账号')
+		// 	}else if(login_pass.value==''){
+		// 		alert('请输入密码')
+		// 	}else{
+		// 		$.ajax({
+		// 			type:'post',
+		// 			url:href+'/users/login',
+		// 			data:{
+		// 				name:login_name.value,
+		// 				user:login_user.value,
+		// 				pass:login_pass.value, 
+		// 			},
+		// 			success(data){
+		// 				if(data=='ok'){
+		// 					alert('注册成功');
+		// 					$('.login').css({'display':'none'})
+		// 					$('.logon').css({'display':'block'})
+		// 				}else{
+		// 					alert('该用户已被注册')
+		// 					login_name.value='';
+		// 					login_user.value='';
+		// 					login_pass.value='';
+		// 				}
+		// 			}
+		// 		})
+		// 	}
+		// }
 		//登录	
 		logon_btn.onclick=function(){
 			if(/[\u4E00-\u9FA5]/g.test(logon_user.value)||/[\u4E00-\u9FA5]/g.test(logon_pass.value)){
