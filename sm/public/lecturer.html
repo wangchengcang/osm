@@ -55,6 +55,7 @@
             margin-top: 13px;
             border:1px solid #ccc;
             outline: none;
+            border-radius: 20px;
         }
 
         #btn {
@@ -65,7 +66,7 @@
 			margin-top: 10px;
 			margin-right: 15px;
 			outline: none;
-			/* border-radius: 30px; */
+			border-radius: 30px;
 			color: #fff;
 			font-size: 17px;
         }
@@ -101,7 +102,6 @@
             width: 60%;
             height: 80%;
             border-style: none;
-            /* color: #fff; */
             background: #fff;
         }
 
@@ -146,7 +146,10 @@
         #content table tr td input{
             width: 67%;
 			height: 26px;
-			font-size: 17px;
+            font-size: 17px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid;
         }
 
         #content h6 {
@@ -167,6 +170,7 @@
             border-style: none;
             outline: none;
             margin: 0 10px;
+            border-radius: 20px;
         }
         #modifys{
             display: none;
@@ -190,11 +194,11 @@
         <div id="content" class="ye">
             <table cellspacing="0" cellpadding="0">
                 <tr>
-                    <td>班级：<input type="text" id="classroom"></td>
-                    <td>门牌号：<input type="text" id="door"></td>
-                    <td>讲师：<input type="text" id="lecturer"></td>
-                    <td>课程：<input type="text" id="curriculum"></td>
-                    <td>人数：<input type="text" id="people"></td>
+                    <td>班级：<input type="text" id="classroom" placeholder="请输入班级"></td>
+                    <td>门牌号：<input type="text" id="door" placeholder="请输入门牌号"></td>
+                    <td>讲师：<input type="text" id="lecturer" placeholder="请输入讲师"></td>
+                    <td>课程：<input type="text" id="curriculum" placeholder="请输入课程"></td>
+                    <td>人数：<input type="text" id="people" placeholder="请输入人数"></td>
                     <td><button id="submit">提交</button></td>
                     <td><button id="modifys">修改</button></td>
                     <td><button id="aclose">关闭</button></td>
@@ -435,7 +439,8 @@
                     console.log(data);
                     console.log(data[0].AR);
 					if(data[0].AR==='yes'){
-                        $('.ye').css({'display':'table-cell'})
+                        $('.ye').css({'display':'table-cell','opacity':'1'})
+                        $('#content').css({'display':'none','opacity':'0'})
 					}else{
                         $('.ye').css({'display':'none'})
 					}

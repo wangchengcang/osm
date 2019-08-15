@@ -129,8 +129,7 @@
 
         #content {
             width: 90%;
-            margin: 0 auto;
-			margin-top: 10px;
+            margin: 10px auto;
         }
         #content p {
             height: 40px;
@@ -144,7 +143,10 @@
 			width: 174px;
 			height: 25px;
 			line-height: 25px;
-			font-size: 17px;
+            font-size: 17px;
+            border: none;
+            border-bottom: 1px solid;
+            outline: none;
         }
 
         #content div {
@@ -156,7 +158,7 @@
         #anext,
         #aclose {
             height: 30px;
-			line-height: 40px;
+			line-height: 30px;
 			color: #fff;
 			font-size: 15px;
 			line-height: 28px;
@@ -164,7 +166,8 @@
 			border-style: none;
 			margin-top: 5px;
 			margin-left: 7px;
-			outline: none;
+            outline: none;
+            border-radius: 20px;
         }
         #modifys{
             display: none;
@@ -203,12 +206,12 @@
         <div id="middle">
             <input type="search" id="search" placeholder="班级信息搜索">
         </div>
-		<div id="content">
-		    <p>班级 <input type="text" id="bj"></p>
-		    <p>阶段 <input type="text" id="jd"></p>
-		    <p>门牌号 <input type="text" id='mph'></p>
-		    <p>资产 <input type="text" id="zc"></p>
-		    <p>人数 <input type="text" id="rs"></p>
+		<div id="content" class="yes">
+		    <p>班级 <input type="text" id="bj" placeholder="请输入班级"></p>
+		    <p>阶段 <input type="text" id="jd" placeholder="请输入阶段"></p>
+		    <p>门牌号 <input type="text" id='mph' placeholder="请输入门牌号"></p>
+		    <p>资产 <input type="text" id="zc" placeholder="请输入资产"></p>
+		    <p>人数 <input type="text" id="rs" placeholder="请输入人数"></p>
 		    <div>
 		        <button id="preservation" style="background-color:#2cc9aa;">提交</button>
 		        <button id="modifys" style="background-color:#2cc9aa;">修改并保存</button> 
@@ -235,7 +238,9 @@
 
     <script src="js/jquery.js"></script>
     <script>
+        //判断是否是管理者
         $('.ye').css({'display':'none'});
+        $('.yes').css({'display':'none'});
         if(localStorage.user){
 		    var localStorageUser=JSON.parse(localStorage.user);
 			audi=localStorageUser.uid;
@@ -251,10 +256,11 @@
 				success(data){
 					console.log(data)
 					if(data[0].AR==='yes'){
-                        $('.ye').css({'display':'table-cell'}) ||
-                        $('.ye').css({'display':'block'})
+                        $('.ye').css({'display':'table-cell'})
+                        $('.yes').css({'display':'block'})
 					}else{
-						$('.ye').css({'display':'none'})
+                        $('.ye').css({'display':'none'})
+                        $('.yes').css({'display':'none'})
 					}
 				}
 			})
@@ -367,9 +373,11 @@
                         ul.innerHTML = '';
                         if (search.value == '') {
                             ul.innerHTML = '';
-                            table.style.display = 'block';
+                            table.style.display = 'inline-table';
+                            content.style.display = 'block';
                         } else {
                             table.style.display = 'none';
+                            content.style.display = 'none';
                             var tr = `
                                  <tr>
                                     <th>班级</th>
