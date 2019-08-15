@@ -28,6 +28,7 @@
 				<tr style="background-color: #2cc9aa; color: #fff;height:50px;">
 					<th>学号</th>
 					<th>姓名</th>
+					<th>班级</th>
 					<th>年龄</th>
 					<th>身份证号</th>
 					<th>父母电话</th>
@@ -117,6 +118,9 @@
 							<option value="3+1">3+1学制</option>
 						</select>
 					</td>
+					<td>
+						<p>班级</p><input type="text" class="z-text" id="class">
+					</td>
 				</tr>
 			</table>
 			</table>
@@ -158,9 +162,10 @@
 		<div class="search_display">
 			<li id="warning">未找到结果</li>
 			<table cellspacing="0" class="trainees" id="search_display">
-				<tr style="background-color: #2cc9aa; color: #fff;height:50px;" id="one">
+				<tr style="background: #2cc9aa; color: #fff;height:50px;" id="one">
 					<th>学号</th>
 					<th>姓名</th>
+					<th>班级</th>
 					<th>年龄</th>
 					<th>身份证号</th>
 					<th>父母电话</th>
@@ -319,6 +324,7 @@
 				data: {
 					id: id.value,
 					aname: aname.value,
+					class: classs.value,
 					gender: gender.value,
 					idsf: idsf.value,
 					age: age.value,
@@ -362,19 +368,20 @@
 					var otr = document.createElement('tr')
 					otr.className = 'one-odd'
 					otr.innerHTML = `
-							<td style="width:8%;">${data[i].id}</td>
-							<td style="width:9%;">${data[i].name}</td>
+							<td style="width:7%;">${data[i].id}</td>
+							<td style="width:8%;">${data[i].name}</td>
+							<td style="width:8%;">${data[i].class}</td>
 							<td style="width:8%;">${data[i].myage}</td>
 							<td style="width:15%;">${data[i].idcard}</td>
 							<td style="width:14%;">${data[i].parentelephone}</td>
-							<td style="width:9%;">${data[i].place}</td>
-							<td style="width:9%;">${data[i].dq}</td>
-							<td style="width:9%;">${data[i].xj}</td>
+							<td style="width:8%;">${data[i].place}</td>
+							<td style="width:8%;">${data[i].dq}</td>
+							<td style="width:8%;">${data[i].xj}</td>
 							<td style="width:8%;">${data[i].bj}</td>
-							<td><buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see eea">删除</buttuon></td>	
-						
-					`
-							
+							<td>
+								<buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see eea">删除</buttuon>
+							</td>	
+					`;	
 					biao.appendChild(otr)
 				}
 
@@ -414,6 +421,7 @@
 			data: {
 				id: $("#search").val(),
 				name: $('#search').val(),
+				class: $('#search').val(),
 				gender: $("#search").val(),
 				myage: $("#search").val(),
 				place: $('#search').val(),
@@ -431,17 +439,18 @@
 				for (var i = 0; i < data.length; i++) {
 					$(`
 						<tr class="one-odd">
-							<td style="width:8%;">${data[i].id}</td>
-							<td style="width:9%;">${data[i].name}</td>
+							<td style="width:7%;">${data[i].id}</td>
+							<td style="width:8%;">${data[i].name}</td>
+							<td style="width:8%;">${data[i].class}</td>
 							<td style="width:8%;">${data[i].myage}</td>
 							<td style="width:15%;">${data[i].idcard}</td>
 							<td style="width:14%;">${data[i].parentelephone}</td>
-							<td style="width:9%;">${data[i].place}</td>
-							<td style="width:9%;">${data[i].dq}</td>
-							<td style="width:9%;">${data[i].xj}</td>
+							<td style="width:8%;">${data[i].place}</td>
+							<td style="width:8%;">${data[i].dq}</td>
+							<td style="width:8%;">${data[i].xj}</td>
 							<td style="width:8%;">${data[i].bj}</td>
 							<td>
-								<buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see" onClick="del('${data[i].uid}')">删除</buttuon>
+								<buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
 							</td>
 						</tr>
 					`).appendTo('#search_display')

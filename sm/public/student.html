@@ -157,7 +157,8 @@
                     var str = `
 						<tr>
 						    <th>学号</th>
-						    <th>姓名</th>
+                            <th>姓名</th>
+                            <th>班级</th>
 						    <th>年龄</th>
 						    <th>身份证号</th>
 						    <th>父母电话</th>
@@ -172,7 +173,8 @@
                         str += `
 							<tr>
 								<td>${data[i].id}</td>
-								<td>${data[i].name}</td>
+                                <td>${data[i].name}</td>
+                                <td>${data[i].class}</td>
 								<td>${data[i].myage}</td>
 								<td>${data[i].idcard}</td>
 								<td>${data[i].parentelephone}</td>
@@ -225,6 +227,7 @@
                                     <tr>
                                         <th>学号</th>
                                         <th>姓名</th>
+                                        <th>班级</th>
                                         <th>年龄</th>
                                         <th>身份证号</th>
                                         <th>父母电话</th>
@@ -240,6 +243,7 @@
 							        <tr>
                                     <td>${data[i].id}</td>
                                     <td>${data[i].name}</td>
+                                    <td>${data[i].class}</td>
                                     <td>${data[i].myage}</td>
                                     <td>${data[i].idcard}</td>
                                     <td>${data[i].parentelephone}</td>
@@ -249,7 +253,6 @@
                                     <td>${data[i].bj}</td>
                                     <td>
                                         <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
-                                        <buttuon id="see" onClick="del('${data[i].uid}')">删除</buttuon>
                                     </td>	
                                 </tr>
 						        `;
