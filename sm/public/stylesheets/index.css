@@ -81,6 +81,9 @@
     text-align: center;
     /* border-bottom:1px solid #ccc; */
 }
+#left ul li:hover{
+	background-color: #2CC9AA;
+}
 #left ul li a{
     text-decoration: none;
     color: black;
@@ -186,19 +189,66 @@
      background: #20262c;
      font-size: 20px;
 }
-#student ul li a{
-    margin-right: -25%;
+#student ul li {
+	text-align: left;
     font-size: 22px;
 }
-
-
-
-
-
-
-
-
-
+#student ul li a{
+	 margin-left: 101px;
+}
+#student ul li span{
+	font-family:"楷体";
+	font-size: 24px;
+	 margin-left: 101px;
+	 color: #fff;
+	 cursor: pointer;
+}
+#achievement{
+	width:90%;
+	min-height: 600px;
+	margin: 0 auto;
+	margin-top:20px;
+}
+#achievement table{
+	width: 100%;
+	height: 40%;
+}
+#achievement table tr{
+	height:40px;
+}
+#achievement table td input{
+	width: 100%;
+	height: 100%;
+	border: none;
+	font-size: 18px;
+	text-indent: 10px;
+}
+table tr:nth-child(1){
+	background-color:#2CC9AA ;
+	color: #fff;
+}
+.one{
+	border:2px solid #2CC9AA;
+}
+.active{
+	background-color: #2CC9AA;
+}
+.operation{
+	width: 100%;
+	height:50px;
+	text-align: center;
+	margin-top: 20px;
+}
+.operation button{
+	width:150px;
+	height:40px;
+	font-size: 20px;
+	background-color: #2CC9AA;
+	color: #fff;
+	border: none;
+	text-align: center;
+}
+	
 
 
 
