@@ -43,22 +43,30 @@
 			height: 100px;
 			margin-top: 20px;
 		}
-
+		.htop input{
+			width:100px;
+			height: 30px;
+			margin-top: 20px;
+			font-size: 18px;
+		}
 		h3 {
 			border-left: 5px solid #000;
 			padding-left: 10px;
 			margin-bottom: 10px;
 		}
 
-		#btn {
+		#btn{
+			width: 100px;
+			height: 33px;
 			background: #16ac98;
 			border: none;
 			color: #fff;
-			width: 60px;
-			height: 30px;
 			text-align: center;
 			line-height: 30px;
+<<<<<<< HEAD
+=======
 			margin-top: 10px;
+>>>>>>> 07ffa91a847fd074ba6d6d39d4de00315af5d82b
 		}
 
 		table {
@@ -110,6 +118,9 @@
 			font-size: 12px;
 			color: #000;
 		}
+		#end_time{
+			width: 150px;
+		}
 	</style>
 </head>
 
@@ -123,13 +134,14 @@
 	<div class="con">
 		<div class="htop">
 			<h3>基本信息</h3>
-			班级：<input type="text">
-			学生姓名：<input type="text">
-			学号：<input type="text">
-			开始时间：<input type="text">
-			结束时间：<input type="text">
-			<button type="button" id="btn">检索</button>
-			<button type="button" id="btn">导出</button>
+			学生姓名：<input type="text" id="student_name" style="width:8%">
+			班级：<input type="text" id="class_room" style="width:8%">
+			学号：<input type="text" id="student_number" style="width:8%">
+			开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:6%"> 
+			结束时间：<input type="date" id="end_time">
+			原因：<input type="text" id="reason">
+			<button type="button" id="btn">提交</button>
+
 		</div>
 		<div class="cent">
 			<h3>统计信息</h3>
@@ -184,15 +196,15 @@
 		// 录入请假名单
 		$('#btn').on('click',function(){
 			$.ajax({
-				type:'post',
+				type:'get',
 				url:href+'/state/luru',
 				data:{
-					class:class_room.value,
-					name:student_name.value,
-					number:student_number.value,
-					start:start_time.value,
-					end:end_time.value,
-					reason:reason.value
+					aclass:class_room.value,
+					aname:student_name.value,
+					anumber:student_number.value,
+					astart:start_time.value,
+					aend:end_time.value,
+					areason:reason.value
 				},
 				success(data){
 					console.log(data)
