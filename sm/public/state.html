@@ -67,22 +67,22 @@
 		margin-top: 10px;
 	}
 
-	table {
+	#cent_table {
 		width: 100%;
 	}
 
-	table tr td {
+	#cent_table tr td {
 		height: 30px;
 		text-align: center;
 	}
 
-	table tr:nth-child(1) {
+	#cent_table tr:nth-child(1) {
 		background: #16AC98;
 		color: #fff;
 		font-size: 14px;
 	}
 
-	table tr td:nth-child(1) {
+	#cent_table tr td:nth-child(1) {
 		width: 30px;
 		text-align: center;
 	}
@@ -95,6 +95,33 @@
 		border:none;
 		outline: none;
 		border-bottom:solid 1px #000;
+	}
+	#thisTr td{
+		border: solid 1px #000;
+	}
+	#mytable{
+		width: 100%;
+		height: auto;
+		transition: 3s;
+		margin-top: 30px;
+		opacity: 0;
+	}
+	#mytable caption{
+		background-color: black;
+		color:#fff;
+		height: 30px;
+		line-height: 30px;
+	}
+	#mytable tr td,#mytable tr th{
+		border:solid 1px #000;
+		text-align: center;
+	}
+	#mytbody tr td button{
+		width: 50px;
+		height: 100%;
+		background-color:#8512;
+		border:none;
+		outline: none;
 	}
 </style>
 </head>
@@ -120,9 +147,8 @@
 		</div>
 		<div class="cent">
 			<h3>统计信息</h3>
-			<table border="0" cellspacing="0" cellpadding="0">
+			<table border="0" cellspacing="0" cellpadding="0" id="cent_table">
 				<tr>
-					<td></td>
 					<td>班级</td>
 					<td>门牌</td>
 					<td>总人数</td>
@@ -132,7 +158,23 @@
 					<td>出勤率（请假加休学）</td>
 					<td>不就业人数</td>
 				</tr>
-				
+			</table>
+			<table border="0" cellspacing="0" cellpadding="0" id="mytable">
+				<caption>班级请假详情</caption>
+				<thead>
+					<tr>
+						<th>班级</th>
+						<th>姓名</th>
+						<th>学号</th>
+						<th>请假日期</th>
+						<th>归校日期</th>
+						<th>请假原因</th>
+						<th>是否已返校</th>
+					</tr>
+				</thead>
+				<tbody id="mytbody">
+					
+				</tbody>	
 			</table>
 		</div>
 	</div>
@@ -185,6 +227,12 @@
 						areason:reason.value
 					},
 					success(data){
+						class_room.value='';
+						student_name.value='';
+						student_number.value='';
+						start_time.value='';
+						end_time.value='';
+						reason.value='';
 						console.log(data)
 					}
 				})
@@ -198,18 +246,13 @@
 		//获取请假名单
 		function getLeave(){
 			$.ajax({
-					type:'get',
-					async:false,
-					url:href+'/state/getL',
-					success(res){
-						console.log(res)
-						for(var i=0; i<res.length; i++){
-							if(res[i].classa=='1809'){
-								console.log()
-							}
-						}
-					}
-				})
+				type:'get',
+				async:false,
+				url:href+'/state/getL',
+				success(res){
+					console.log(res)
+				}
+			})
 			
 		}
 		// 获取所有班级
@@ -221,7 +264,6 @@
 				for(var i=0; i<data.length;i++){
 					$(`
 						<tr onclick="look(${data[i].class})" id="thisTr">
-						<td></td>
 						<td>${data[i].class}</td>
 						<td>${data[i].door}</td>
 						<td>${data[i].number}</td>
@@ -231,12 +273,14 @@
 						<td>111</td>
 						<td>111</td>
 						</tr>
-						`).appendTo('table')
+						`).appendTo('#cent_table')
 				}
 			}
 		})
 		// 查看每个班级请假名单
 		function look(index){
+			mytbody.innerHTML='';
+			// mytable.style.opacity=0;
 			console.log(index)
 			$.ajax({
 				type:'get',
@@ -247,10 +291,41 @@
 				success(data){
 					if(data.length){
 						console.log(data)
-						// localStorage.res = JSON.stringify(data)
+						mytable.style.opacity=1;
+						for(var i=0; i<data.length; i++){
+							$(`<tr>
+								<td>${data[i].classa}</td>
+								<td>${data[i].namea}</td>
+								<td>${data[i].numbera}</td>
+								<td>${data[i].starta}</td>
+								<td>${data[i].enta}</td>
+								<td>${data[i].resona}</td>
+								<td><button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button></td>
+								</tr>`).appendTo('#mytbody')
+						}
 					}else{
-						console.log('该班级没人请假')
+						console.log('该班级没dddd人请假')
 					}
+				}
+			})
+		}
+		// 确认返校
+		function queren(num,thisclass){
+			console.log(num,thisclass);
+			$.ajax({
+				type:'get',
+				url:href+'/state/yes',
+				data:{
+					num,
+				},
+				success(data){
+					console.log(data)
+					if(data=='ok'){
+						look(thisclass)
+					}else{
+						alert('嘿!你报错了')
+					}
+					
 				}
 			})
 		}

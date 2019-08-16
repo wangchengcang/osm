@@ -69,4 +69,22 @@ router.get('/class',function(req,res){
 	})
 });
 
+
+
+// 确认返校 删除该学生请假信息
+router.get('/yes',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	var json=req.query;
+    console.log(json) 
+	sql.con({
+		arr:[json.num],
+		sql:'delete from leaves where numbera=?',
+		success(data){
+			res.send('ok')
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});
 module.exports = router;
