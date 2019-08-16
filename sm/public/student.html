@@ -190,6 +190,7 @@
 						`;
                     }
                     biao.innerHTML = str
+                    gl()
                 }
             })
         }
@@ -282,13 +283,13 @@
             window.location.reload();
         }
         //判断是否是管理者
-        $('.ye').css({'display':'none'});
-        if(localStorage.user){
-		    var localStorageUser=JSON.parse(localStorage.user);
-			audi=localStorageUser.uid;
-		}
-		console.log(audi)
-        window.onload=function (){
+        function gl(){
+            $('.ye').css({'display':'none'});
+            if(localStorage.user){
+                var localStorageUser=JSON.parse(localStorage.user);
+                audi=localStorageUser.uid;
+            }
+            console.log(audi)
 			$.ajax({
 				type:'get',
 				url:'http://localhost:8000/indexs/state',
