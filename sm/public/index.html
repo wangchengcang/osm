@@ -169,7 +169,7 @@
             success(data) {
                 for (var i = 0; i < data.length; i++) {
                     console.log(data);
-                    datas = data[i].stage;
+                    datas = data;
                     console.log(datas);
                 }
             }
@@ -190,12 +190,12 @@
                         tr.innerHTML = `
                             <td>${data[i].class}(${data[i].stage})</td>
                             <td>${data[i].number}</td>
-                            <td>${datas}</td>
-                            <td>${datas}</td>
-                            <td>${datas}</td>
-                            <td>${datas}</td>
-                            <td>${datas}</td>
-                            <td>${datas}</td>
+                            <td>${datas[i].stage}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>123</td>
                         `;
                         table.appendChild(tr)
