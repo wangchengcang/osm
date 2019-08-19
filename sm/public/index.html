@@ -43,14 +43,9 @@
                         <a href="javascript:;">
                         <i class="iconfont">&#xe513;</i> 学生</a>
                         <ul>
-<<<<<<< HEAD
-                            <li><a href="student.html">学生基本信息</a></li>
-                            <li><a href="state.html">学生当前状态</a></li>
-=======
                             <li><a href="student.html">基本信息</a></li>
                             <li><a href="state.html">当前状态</a></li>
                             <li><a href="achievement.html">成绩录入</a></li>
->>>>>>> e4cdf31472125e7009c79d73f70e6f519d31393a
                             <li><a href="http://z.cimns.com:8081/">作业上传</a></li>
                             <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
                             <li><a href="fankui.html">学生反馈</a></li>
@@ -172,18 +167,63 @@
         
         //休学人数
         $.ajax({
-            type: 'get',
+            type:'get',
             async:false,
-            url: href + '/banji/read',
-            async: false,
-            success(data) {
-                for (var i = 0; i < data.length; i++) {
-                    datas = data;
+            url:href+'/state/getL',
+            success(res){
+                console.log(res);
+                var mb = [];
+                for(var i=0;i<res.length;i++){
+                    if(res[i].ora == 'true'){
+                        mb.push(res[i].classa);
+                    }					
+                }
+                console.log(mb);
+                objs = {};
+                for (var i = 0, l = mb.length; i < l; i++) {
+                    var item = mb[i];
+                    objs[item] = (objs[item] + 1) || 1;
+                }
+                console.log(objs)
+                }
+            })
+            var jsons = JSON.stringify(objs);
+            // console.log(jsons)
+            var ens=jsons.split(',')
+            var suspend =[];//截取到的数据放在这里
+            for(var i=0;i<ens.length;i++){
+                all = ens[i].split(':')[1][0]
+                suspend.push(all)//追加到alls里
+            }
+        //退学人数
+        $.ajax({
+            type:'get',
+            async:false,
+            url:href+'/state/getL',
+            success(res){
+                console.log(res);
+                var mb = [];
+                for(var i=0;i<res.length;i++){
+                    if(res[i].resona == '退学'){
+                        mb.push(res[i].classa);
+                    }					
+                }
+                // console.log(arr);
+                console.log(mb);
+                tx = {};
+                for (var i = 0, l = mb.length; i < l; i++) {
+                    var item = mb[i];
+                    tx[item] = (tx[item] + 1) || 1;
                 }
             }
         })
-        //退学人数
-
+        var jsons = JSON.stringify(tx);
+        var txs=jsons.split(',')
+        var outs =[];//截取到的数据放在这里
+        for(var i=0;i<txs.length;i++){
+            all = txs[i].split(':')[1][0]
+            outs.push(all)//追加到outs里
+        }
 
 
         //末班人数
@@ -271,16 +311,20 @@
                     // console.log(datas)
                     for (var i = 0; i < data.length; i++) {
                         var tr = document.createElement('tr');
-                        if(alls[i] == undefined){
-                            alls[i] = 0
+                        if(alls[i] == undefined || suspend[i] == undefined){
+                            alls[i] = 0;
+                            suspend[i] = 0;
+                        }
+                        if(outs[i] == undefined){
+                            outs[i] = 0;
                         }
                         tr.innerHTML = `
                             <td>${data[i].class}(${data[i].stage})</td>
                             <td>${data[i].number}</td>
-                            <td></td>
-                            <td></td>
+                            <td>${suspend[i]}</td>
+                            <td>${outs[i]}</td>
                             <td>${adopts[i]}</td>
-                            <td>${Math.round((data[i].number - adopts[i] - 1 - 1) / data[i].number * 100) + '%'}</td>
+                            <td>${Math.round((data[i].number - suspend[i] -outs[i] - adopts[i]) / data[i].number * 100) + '%'}</td>
                             <td>${alls[i]}</td>
                             <td>${alls[i]}</td>
                             <td>${reasons}</td>

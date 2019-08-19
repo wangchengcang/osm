@@ -216,10 +216,14 @@
 				alert('请输入姓名')
 			}else if(student_number.value==''){
 				alert('请输入学号')
-			}else if(end_time.value==''){
-				alert('请输入返校时间')
 			}else if(reason.value==''){
 				alert('请输入请假原因')
+			}else if(!reason.value){
+				if(reason.value == '退学'){
+					end_time.value=='';	
+				}else{
+					alert('请输入返校时间')
+				}
 			}else{
 				$.ajax({
 					type:'get',
@@ -254,7 +258,7 @@
 						var stopNumber=student_number.value;
 						var stopName=student_name.value;
 						// 判断请假时长大于三天的话 就归为休学 通过学生名字修改数据库信息
-						if(time>3){
+						if(30>time>3){
 							console.log(stopName+'是休学')
 							var ora=true;
 							$.ajax({
@@ -280,8 +284,8 @@
 				})
 			}
 		})
-		
 
+		
 		getLeave()
 		//获取请假名单
 		function getLeave(){
@@ -290,43 +294,49 @@
 				async:false,
 				url:href+'/state/getL',
 				success(res){
+					// console.log(res);
 					var arr=[];
-					console.log(res);
+					var mb = [];
 					for(var i=0;i<res.length;i++){
 						datas = res;
-						arr.push(datas[i].classa);						
+						arr.push(datas[i].classa);
+						if(datas[i].ora == 'true'){
+							mb.push(res[i].classa);
+						}
 					}
-					console.log(arr);
+					//请假
 					obj = {};
 					for (var i = 0, l = arr.length; i < l; i++) {
 						var item = arr[i];
 						obj[item] = (obj[item] + 1) || 1;
 					}
-					console.log(obj)
+					//末班
+					objs = {};
+					for (var i = 0, l = mb.length; i < l; i++) {
+						var item = mb[i];
+						objs[item] = (objs[item] + 1) || 1;
+					}
 				}
 			})
 		}
 		
-		
-
-
-
-
-
-		
 		//把对象转化为字符串
 		var jsona = JSON.stringify(obj);
-		console.log(jsona)
 		var en=jsona.split(',')
 		var alls =[];//截取到的数据放在这里
 		for(var i=0;i<en.length;i++){
 			all = en[i].split(':')[1][0]
-			// console.log(all)
 			alls.push(all)//追加到alls里
 		}
-		
-		
-		// console.log(alls)
+
+		//把对象转化为字符串
+		var jsons = JSON.stringify(objs);
+		var en=jsons.split(',')
+		var mbs =[];//截取到的数据放在这里
+		for(var i=0;i<en.length;i++){
+			all = en[i].split(':')[1][0]
+			mbs.push(all)//追加到alls里
+		}
 		// 获取所有班级
 		$.ajax({
 			type:'get',
@@ -334,10 +344,9 @@
 			success(data){
 				// console.log(obj)
 				for(var i=0; i<data.length;i++){
-					// console.log(alls)
-					// console.log(alls[i])
-					if(alls[i] == undefined){
-						alls[i] = 0
+					if(alls[i] == undefined || mbs[i] == undefined){
+						alls[i] = 0;
+						mbs[i] = 0;
 					}
 					$(`
 						<tr onclick="look(${data[i].class})" id="thisTr">
@@ -345,9 +354,9 @@
 							<td>${data[i].door}</td>
 							<td>${data[i].number}</td>
 							<td>${alls[i]}</td>
-							<td>${Math.round(alls[i] / data[i].number *100) + '%'}</td>
-							<td>111</td>
-							<td>${Math.round((data[i].number - alls[i]- 3) / data[i].number *100) + '%'}</td>
+							<td>${Math.round((data[i].number - alls[i]) / data[i].number *100) + '%'}</td>
+							<td>${mbs[i]}</td>
+							<td>${Math.round((data[i].number - alls[i]- mbs[i]) / data[i].number *100) + '%'}</td>
 							<td>111</td>
 						</tr>
 						`).appendTo('#cent_table')
@@ -361,9 +370,7 @@
 		// 查看每个班级请假名单
 		function look(index){
 			mytbody.innerHTML='';
-			stop_number.innerHTML='是否休学'
-			// mytable.style.opacity=0;
-			// console.log(index)
+			stop_number.innerHTML='是否休学';
 			$.ajax({
 				type:'get',
 				data:{
@@ -375,7 +382,6 @@
 						console.log(data)
 						mytable.style.opacity=1;
 						var len=data.length;
-						
 						var arr=[];
 						for(var i=0; i<len; i++){
 							if(data[i].ora=='true'){
@@ -389,15 +395,14 @@
 								<td>${data[i].namea}</td>
 								<td>${data[i].numbera}</td>
 								<td>${data[i].starta}</td>
-								<td>${data[i].enta}</td>
+								<td id="tx">${data[i].enta}</td>
 								<td>${data[i].resona}</td>
 								<td id="stop">${data[i].ora}</td>
 								<td><button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button></td>
-								
 								</tr>`).appendTo('#mytbody')
 						};
-						console.log(arr.length)
-						stop_number.innerHTML+='('+arr.length+')'
+						// console.log(arr.length);
+						stop_number.innerHTML+='('+arr.length+')';
 					}else{
 						mytable.style.opacity=1;
 						// $('#mytbody').text('该班级没人请假');

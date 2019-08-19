@@ -90,8 +90,6 @@ router.get('/state',function(req,res){
 		}
 	})
 })
-<<<<<<< HEAD
-=======
 // 请求后台有班级阶段
 router.get('/Read_class',function(req,res){
 	sql.con({
@@ -172,5 +170,4 @@ router.get('/reads',function(req,res){
 	   }
    })
 })
->>>>>>> e4cdf31472125e7009c79d73f70e6f519d31393a
 module.exports = router;
