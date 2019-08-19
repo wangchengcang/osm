@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+    <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .top{
+            width: 100%;
+            height: 60px;
+            background: #20b6ad;
+            color: #fff;
+        }
+        .top h4 {
+            line-height:60px;
+            border-bottom: 1px solid;
+            font-size: 22px;
+        }
+
+        .top h4 a {
+            text-decoration: none;
+            float: left;
+            line-height: 60px;
+            font-size: 16px;
+            margin-left: 5%;
+            margin-right: 20px;
+        }
+        .top h4 a {
+            color: #fff;
+        }
+
+        .demo {
+            width: 90%;
+            height: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #luru_btn {
+            float:right;
+            width:10%;
+            line-height: 34px;
+            font-size: 18px;
+            color: #fff;
+			background-color: #2CC9AA;
+            border-style: none;
+            margin: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table th {
+            text-align: center;
+            font-size:16px;
+            height: 50px;
+            border: none;
+            background: #2cc9aa;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background:#ebfcf6;
+        }
+        td {
+            text-align: center;
+            font-size: 16px;
+            height: 50px;
+            border: none;
+			color: #000;
+        }
+		
+        .luru {
+            width: 100%;
+			height: 50px;
+            transition: 1s;
+			position: relative;
+        }
+
+        .luru>a {
+            color: black;
+            font-size: 20px;
+            line-height: 50px;
+            margin-right: 20px;
+            float: right;
+            text-decoration: none;
+        }
+
+        .luru>div {
+            width: 20%;
+            height: 50px;
+            line-height: 50px;
+            float: left;
+        }
+
+        .luru>div input {
+            outline:none;
+            border: none;
+			height: 30px;
+            border-bottom: solid 1px #000;
+        }
+
+        .active {
+            height:0;
+        }
+        .show {
+            height:50px;
+        }
+		.btn{
+			width:60%;
+			height:55%;
+			border:none;
+			background-color: #2CC9AA;
+			color:#fff;
+		}
+		#submit{
+			width: 8%;
+			height: 30px;
+			margin: 10px;
+			background-color: #2CC9AA;
+			color: #fff;
+			border-style: none;
+			outline: none;
+			position: absolute;
+			bottom: 0px;
+			right: 110px;
+		}
+		#modifys{
+			width: 8%;
+			height: 30px;
+			margin: 10px;
+			background-color: #2CC9AA;
+			color:#fff;
+			border-style: none;
+			display:none;
+			position: absolute;
+			bottom:0px;
+			right: 110px;
+		}
+		#Close{
+			width:6%;
+			height:30px;
+			margin:10px;
+			background-color: #2CC9AA;
+			color:#fff;
+			border-style: none;
+			display:none;
+			position: absolute;
+			bottom: 0px;
+			right: 20px;
+		}
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <h4>
+            <a href="index.html">
+                <i class="iconfont">&#xe66f;</i></a>
+            课程安排
+        </h4>
+
+    </div>
+    <div class="demo">
+        <div class="luru ye">
+            <div>阶段：<input type="text" id="stage" placeholder="请输入阶段"></div>
+            <div>课程名称：<input type="text" id="curriculumName" placeholder="请输入课程名称"></div>
+            <div>任课老师：<input type="text" id="teacher" placeholder="请输入任课老师"></div>
+            <div>班主任：<input type="text" id="headmaster" placeholder="请输入班主任"></div>
+            <button id="submit">提交</button>
+            <button id="modifys">修改并保存</button>
+			<button id="Close">关闭</button>
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0" style="border:2px solid #2CC9AA;">
+            <thead>
+                <tr>
+                    <th scope="col">阶段</th>
+                    <th scope="col">课程名称</th>
+                    <th scope="col">任课老师</th>
+                    <th scope="col">班主任</th>
+                    <th class="ye">操作</th>
+                </tr>
+            </thead>
+            <tbody id="mytable">
+            </tbody>
+        </table>
+        </style>
+        </head>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+	//判断是否是管理者还是读者
+    function gl(){
+        $('.ye').css({'display':'none'})
+        if(localStorage.user){
+            var localStorageUser=JSON.parse(localStorage.user);
+            audi=localStorageUser.uid;
+        }
+        console.log(audi)
+		$.ajax({
+			type:'get',
+			url:'http://localhost:8000/indexs/state',
+			data:{
+				uid:audi,
+			},
+			success(data){
+				console.log(data)
+				if(data[0].AR=='yes'){
+					$('.ye').css({'display':'block'})
+                    $('.yes').css({'display':'table-cell'})
+				}else{
+					$('.ye').css({'display':'none'})
+                    $('.yes').css({'display':'none'})
+				}
+			}
+		})
+	}
+	
+	
+    // 新增课程
+    var href = 'http://localhost:8000';
+    $('#luru_btn').on('click', function () {
+        $('.luru').addClass('show')
+        $(this).addClass('active_btn');
+        $('#submit').removeClass('active_btn')
+    })
+    // 取消录入
+    $('.luru>a').on('click', function () {
+        stage.value = '';
+        curriculumName.value = '';
+        teacher.value = '';
+        headmaster.value = '';
+        $('.luru').removeClass('show')
+        $('#luru_btn').removeClass('active_btn');
+        $('#submit').addClass('active_btn')
+
+    })
+    // 提交发送ajax
+    $('#submit').on('click', function () {
+        luru();
+        setTimeout(function () {
+            window.location.reload();
+        }, 500)
+    })
+    function luru() {
+        if (stage.value == '') {
+            alert('阶段输入不能为空')
+        } else if (curriculumName.value == '') {
+            alert('请输入课程名称')
+        } else if (teacher.value == '') {
+            alert('请输入讲师')
+        } else if (headmaster.value == '') {
+            alert('请输入班主任')
+        } else {
+            $.ajax({
+                type: 'post',
+                url: href + '/users/l',
+                data: {
+                    stage: stage.value,
+                    curriculumName: curriculumName.value,
+                    teacher: teacher.value,
+                    headmaster: headmaster.value
+                },
+                success(data) {
+                    if (data == 'ok') {
+                        alert('提交成功')
+                        duqu()
+                    } else {
+                        alert('提交失败')
+                        stage.value = '';
+                        curriculumName.value = '';
+                        teacher.value = '';
+                        headmaster.value = '';
+                    }
+                }
+            })
+        }
+    }
+    // 读取课程信息
+    duqu()
+    function duqu() {
+        $.ajax({
+            type: 'get',
+            url: href + '/users/d',
+            success(data) {
+                console.log(data)
+                $.each(data, function (index, value) {
+                    $(`<tr>
+                        <td>${value.stage}</td>
+                        <td>${value.curriculumName}</td>
+                        <td>${value.teacher}</td>
+                        <td>${value.headmaster}</td>
+                        <td class="yes"><button class="btn" onClick="modify('${value.uid}','${value.stage}','${value.curriculumName}','${value.teacher}','${value.headmaster}')">修改</button></td>
+                        </tr>`).appendTo('#mytable')
+                })
+                gl()
+            }
+        })
+    }
+
+    //修改
+    function modify(uid, stages, curriculumNames, teachers, headmasters) {
+        console.log(uid, stages, curriculumNames, teachers, headmasters);
+		
+		submit.style.display='none';
+		modifys.style.display='block';
+		Close.style.display='block';
+		
+        $('.luru').addClass('show');
+        $(this).addClass('active_btn');
+        $('#submit').removeClass('active_btn');
+        stage.value = stages;
+        curriculumName.value = curriculumNames;
+        teacher.value = teachers;
+        headmaster.value = headmasters;
+        modifys.onclick = function () {
+            if (stage.value == '') {
+                alert('阶段输入不能为空');
+            } else if (curriculumName.value == '') {
+                alert('课程名称不能为空');
+            } else if (teacher.value == '') {
+                alert('讲师不能为空');
+            } else if (headmaster.value == '') {
+                alert('班主任不能为空');
+            } else {
+                $.ajax({
+                    type: 'get',
+                    url: href + '/users/modifys',
+                    data: {
+                        uid: uid,
+                        stage: stage.value,
+                        curriculumName: curriculumName.value,
+                        teacher: teacher.value,
+                        headmaster: headmaster.value
+                    },
+                    success(data) {
+                        console.log(data);
+                        alert('修改成功');
+                       
+                        $('.luru').removeClass('show')
+                        $('#luru_btn').removeClass('active_btn');
+                        $('#submit').addClass('active_btn')
+                        window.location.reload();
+                    }
+                })
+            }
+
+        }
+    }
+	Close.onclick=function(){
+		stage.value = '';
+		curriculumName.value = '';
+		teacher.value = '';
+		headmaster.value = '';
+		submit.style.display='block';
+		modifys.style.display='none';
+		Close.style.display='none';
+	}
+
+</script>
+
+</html>

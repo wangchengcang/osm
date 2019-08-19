@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="./stylesheets/index.css">
+	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+    <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+	<style>
+		#mask{
+			width:100%;
+			position: fixed;
+			left:0;
+			bottom:0;
+			background-color: red;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="mask">请先登录</div>
+    <div id="box">
+        <div class="header">
+            <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg" alt="">
+            <span>学生管理系统</span>
+            <a class="go" href="login.html">注册或登录</a>
+            <a class="out" href="#">退出登录</a>
+            <p id="user">
+                <span class="iconfont">&#xe511;</span> : <i>未登录</i>
+            </p>
+        </div>
+        <div id="content" class="clearfix">
+            <div id="left">
+                <ul>
+                    <li><a href="index.html"><i class="iconfont">&#xe602;</i> 首页</a></li>
+                    <li><a href="record.html"><i class="iconfont">&#xe513;</i> 新增学生</a></li>
+                    <li><a href="lecturer.html"><i class="iconfont">&#xe601;</i> 讲师</a></li>
+                    <li><a href="class.html"><i class="iconfont">&#xe686;</i> 班级</a></li>
+                    <li><a href="curriculum.html"><i class="iconfont">&#xe506;</i> 课程</a></li>
+                    <li id="student">
+                        <a href="javascript:;">
+                        <i class="iconfont">&#xe513;</i> 学生</a>
+                        <ul>
+                            <li><a href="student.html">基本信息</a></li>
+                            <li><a href="state.html">当前状态</a></li>
+                            <li><a href="achievement.html">成绩录入</a></li>
+                            <li><a href="http://z.cimns.com:8081/">作业上传</a></li>
+                            <li><a href="guanli.html">综合积分</a></li>
+                            <li><a href="fankui.html">学生反馈</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="sushe.html"><i class="iconfont">&#xe504;</i> 宿舍</a></li>
+                    <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
+                </ul>
+            </div>
+            <div id="right">
+				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;各个班级情况</p>
+                <table id="table" border="0" style="border: 2px solid #2CC9AA;" cellspacing="0">
+                    <tr>
+                        <th>各阶段</th>
+                        <th>在校人数</th>
+                        <th>休学人数</th>
+                        <th>退学人数</th>
+                        <th>末班人数</th>
+                        <th>本月成材率</th>
+                        <th>本周违纪人数</th>
+                        <th>上周违纪人数</th>
+                        <th>违纪类型细分</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="footer">
+            <p>学生管理委员会</p>
+            <p>学校学生工作汇报</p>
+            <ul>
+                <li>开发人员</li>
+                <li>帮助中心</li>
+                <li>关于我们</li>
+                <li>在线留言</li>
+                <li>联系我们</li>
+            </ul>
+            <p>@Copyright by htly 2000-2019 公司：系统管理应用有限公司 地址：北京市中关村</p>
+        </div>
+    </div>
+	<script src="font_ps99atp86ak/iconfont.js"></script>
+    <script src="js/jquery.js"></script>
+    <script>
+        $('#student a').on('click',function(){
+            if($('#student ul').css("height")=="0px"){
+                $('#student ul').css({
+                    // display:'block',
+                    "height":"300px",
+                    transition:'1s',
+                })
+            }else{
+                $('#student ul').css({
+                    // display:'none',
+                    "height":"0",
+                    transition:'1s',
+                })           
+            }
+        })
+		
+		//未登录是遮罩层
+		var audi='';
+		var h=$(document).height()-60;
+		console.log(h)
+		mask.style.height=h+'px';
+        if(localStorage.user){
+            $('.go').css({
+                display:'none',
+            });
+            $('.out').css({
+                display:'block'
+            });
+            var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+            console.log(localStorageUser)
+            $('#user i').html(localStorageUser.name)
+        }else{
+            $('.go').css({
+                display:'block'
+            });
+			$('#mask').css({
+			    display:'block'
+			});
+            $('.out').css({
+                display:'none'
+            });
+			 $('#box').css({
+			    display:'none'
+			});
+        }
+		//退出
+        $('.out').on('click',function(){
+            var a=confirm('欢迎下次再来')
+            if(a){
+                localStorage.clear();
+                location.href='./login.html'
+            }
+        })
+		//判断改用户是否是管理员
+		console.log(audi)
+		window.onload=function (){
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						console.log('管理者你好')
+					}else{
+						console.log('读者你好')
+					}
+				}
+			})
+        }
+        
+
+        var href = 'http://localhost:8000';
+        
+        //休学人数
+        $.ajax({
+            type: 'get',
+            async:false,
+            url: href + '/banji/read',
+            async: false,
+            success(data) {
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+                    datas = data;
+                }
+            }
+        })
+        //退学人数
+
+
+
+        //末班人数
+        $.ajax({
+            type:'get',
+            async:false,
+            url:'http://localhost:8000/indexs/reads',
+            success(data){
+                console.log(data);
+                for(var i=0;i<data.length;i++){
+                    // console.log(data[i].class)
+                    var adopt = [];
+                    if(data[i].calss = 'datas[i].class'){
+                        // console.log(data[i].adopt)
+                        adopt = data;
+                    }
+                }
+                
+            }
+        })
+
+        //违纪人数
+        $.ajax({
+            type: 'get',
+            async:false,
+            url: 'http://localhost:8000/indexs/read',
+            success(data) {
+                // console.log(data);
+                var arr=[];
+                reason = [];
+                for (var i = 0; i < data.length; i++) {
+                    // console.log(data[i].bj)
+                    arr.push(data[i].bj);
+                    reason.push(data[i].Reason);
+                }
+                obj = {};
+                for (var i = 0, l = arr.length; i < l; i++) {
+                    var item = arr[i];
+                    obj[item] = (obj[item] + 1) || 1;
+                }
+                // console.log(obj)
+            }
+            
+        })
+        // console.log(reason);
+        //把对象转化为字符串
+		var jsona = JSON.stringify(obj);
+		// console.log(jsona)
+		var en=jsona.split(',')
+		var alls =[];//截取到的数据放在这里
+		for(var i=0;i<en.length;i++){
+			all = en[i].split(':')[1][0]
+			// console.log(all)
+			alls.push(all)//追加到alls里
+        }
+        // console.log(alls);
+        
+        //违纪原因去重
+        var reasons=[];
+        reason.forEach(function(item){
+            if(reasons.indexOf(item)==-1){
+                reasons.push(item);
+            }
+        });
+        // console.log(reasons);
+
+        read();
+        //读取班级信息
+        function read() {
+            $.ajax({
+                type: 'get',
+                url: href + '/banji/read',
+                async: false,
+                success(data) {
+                    // console.log(datas)
+                    for (var i = 0; i < data.length; i++) {
+                        var tr = document.createElement('tr');
+                        if(alls[i] == undefined){
+                            alls[i] = 0
+                        }
+                        tr.innerHTML = `
+                            <td>${data[i].class}(${data[i].stage})</td>
+                            <td>${data[i].number}</td>
+                            <td>${datas[i].stage}</td>
+                            <td></td>
+                            <td></td>
+                            <td>${Math.round((data[i].number - 5 - 1 - 1) / data[i].number * 100) + '%'}</td>
+                            <td>${alls[i]}</td>
+                            <td>${alls[i]}</td>
+                            <td>${reasons}</td>
+                        `;
+                        table.appendChild(tr)
+                    }
+                }
+            })
+        }
+
+        
+        
+    </script>
+</body>
+</html>
