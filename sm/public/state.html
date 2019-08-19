@@ -306,7 +306,6 @@
 				}
 			})
 		}
-<<<<<<< HEAD
 		
 		
 
@@ -314,32 +313,7 @@
 
 
 
-		// 获取所有班级
-		function all(){
-			$.ajax({
-				type:'get',
-				url:href+'/state/class',
-				success(data){
-					console.log(data)
-					for(var i=0; i<data.length;i++){
-						$(`
-							<tr onclick="look(${data[i].class})" id="thisTr">
-							<td>${data[i].class}</td>
-							<td>${data[i].door}</td>
-							<td>${data[i].number}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							`).appendTo('#cent_table')
-					}
-				}
-			})
-		}
-		all();
-=======
+		
 		//把对象转化为字符串
 		var jsona = JSON.stringify(obj);
 		console.log(jsona)
@@ -384,7 +358,6 @@
 			}
 		})
 		
->>>>>>> e4cdf31472125e7009c79d73f70e6f519d31393a
 		// 查看每个班级请假名单
 		function look(index){
 			mytbody.innerHTML='';
@@ -426,13 +399,10 @@
 						console.log(arr.length)
 						stop_number.innerHTML+='('+arr.length+')'
 					}else{
-<<<<<<< HEAD
 						mytable.style.opacity=1;
 						// $('#mytbody').text('该班级没人请假');
 						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没人请假</td></tr>`).appendTo('#mytbody')
-=======
 						alert('该班级没人请假')
->>>>>>> e4cdf31472125e7009c79d73f70e6f519d31393a
 					}
 				}
 			})
