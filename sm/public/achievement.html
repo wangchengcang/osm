@@ -114,6 +114,8 @@
 	<script src="font_ps99atp86ak/iconfont.js"></script>
 	<script src="js/jquery.js"></script>
 	<script>
+
+		var href = 'http://localhost:8000';
 		var ali = document.querySelectorAll('#e>li')
 		console.log(ali)
 		for (var i = 0; i < ali.length; i++) {
@@ -133,7 +135,7 @@
 		function read() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/Read_class',
+				url: href+'/indexs/Read_class',
 				success(data) {
 					var str = '';
 					for (var i = 0; i < data.length; i++) {
@@ -163,7 +165,7 @@
 		function aj() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/stu_number',
+				url: href+'/indexs/stu_number',
 				data: {
 					stu: class_ban.value,
 					stunum: stu_number.value
@@ -183,7 +185,7 @@
 		function ajnum() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/num',
+				url: href+'/indexs/num',
 				data: {
 					stu: class_ban.value,
 					stunum: stu_number.value
@@ -230,7 +232,7 @@
 				
 					$.ajax({
 						type: 'get',
-						url: 'http://localhost:8000/indexs/Entry',
+						url: href+'/indexs/Entry',
 						data: {
 							class_ban: class_ban.value,
 							stu_number: stu_number.value,
@@ -258,7 +260,37 @@
 				
 
 			}
-
 		})
+
+		//读取
+		// $.ajax({
+        //     type:'get',
+        //     async:false,
+        //     url:href+'/indexs/reads',
+        //     success(data){
+		// 		console.log(data);
+		// 		var arr=[];
+        //         for(var i=0;i<data.length;i++){
+		// 			console.log(data[i].adopt)
+		// 			arr.push(data[i].class)
+        //         }
+        //         obj = {};
+		// 		for (var i = 0, l = arr.length; i < l; i++) {
+		// 			var item = arr[i];
+		// 			obj[item] = (obj[item] + 1) || 1;
+		// 		}
+		// 		console.log(obj)
+        //     }
+		// })
+		// //把对象转化为字符串
+		// var jsona = JSON.stringify(obj);
+		// console.log(jsona)
+		// var en=jsona.split(',')
+		// var alls =[];//截取到的数据放在这里
+		// for(var i=0;i<en.length;i++){
+		// 	all = en[i].split(':')[1][0]
+		// 	// console.log(all)
+		// 	alls.push(all)//追加到alls里
+		// }
 	</script>
 </html>

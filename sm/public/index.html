@@ -170,7 +170,6 @@
             url: href + '/banji/read',
             async: false,
             success(data) {
-                console.log(data)
                 for (var i = 0; i < data.length; i++) {
                     datas = data;
                 }
@@ -184,20 +183,32 @@
         $.ajax({
             type:'get',
             async:false,
-            url:'http://localhost:8000/indexs/reads',
+            url:href+'/indexs/reads',
             success(data){
-                console.log(data);
+				var adopt=[];
                 for(var i=0;i<data.length;i++){
-                    // console.log(data[i].class)
-                    var adopt = [];
-                    if(data[i].calss = 'datas[i].class'){
-                        // console.log(data[i].adopt)
-                        adopt = data;
-                    }
+                    // console.log(data[i].adopt)
+                    if(data[i].adopt == '否'){
+                        adopt.push(data[i].class)
+                    }					
                 }
-                
+                obj = {};
+				for (var i = 0, l = adopt.length; i < l; i++) {
+					var item = adopt[i];
+					obj[item] = (obj[item] + 1) || 1;
+				}
+				console.log(obj)
             }
-        })
+		})
+		//把对象转化为字符串
+		var jsons = JSON.stringify(obj);
+		// console.log(jsons)
+		var ens=jsons.split(',')
+		var adopts =[];//截取到的数据放在这里
+		for(var i=0;i<ens.length;i++){
+			all = ens[i].split(':')[1][0]
+			adopts.push(all)//追加到alls里
+		}
 
         //违纪人数
         $.ajax({
@@ -233,7 +244,6 @@
 			// console.log(all)
 			alls.push(all)//追加到alls里
         }
-        // console.log(alls);
         
         //违纪原因去重
         var reasons=[];
@@ -242,7 +252,6 @@
                 reasons.push(item);
             }
         });
-        // console.log(reasons);
 
         read();
         //读取班级信息
@@ -261,10 +270,10 @@
                         tr.innerHTML = `
                             <td>${data[i].class}(${data[i].stage})</td>
                             <td>${data[i].number}</td>
-                            <td>${datas[i].stage}</td>
                             <td></td>
                             <td></td>
-                            <td>${Math.round((data[i].number - 5 - 1 - 1) / data[i].number * 100) + '%'}</td>
+                            <td>${adopts[i]}</td>
+                            <td>${Math.round((data[i].number - adopts[i] - 1 - 1) / data[i].number * 100) + '%'}</td>
                             <td>${alls[i]}</td>
                             <td>${alls[i]}</td>
                             <td>${reasons}</td>
