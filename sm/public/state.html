@@ -107,7 +107,7 @@
 		opacity: 0;
 	}
 	#mytable caption{
-		background-color: black;
+		background-color: #16AC98;
 		color:#fff;
 		height: 30px;
 		line-height: 30px;
@@ -115,6 +115,7 @@
 	#mytable tr td,#mytable tr th{
 		border:solid 1px #000;
 		text-align: center;
+		border: 1px solid #16AC98;
 	}
 	#mytbody{
 		width: 100%;
@@ -139,18 +140,18 @@
 		</p>
 	</div>
 	<div class="con">
-		<div class="htop">
+		<div class="htop ye">
 			<h3>基本信息</h3>
 			班级：<input type="text" id="class_room" style="width:10%" placeholder="请输入班级">
 			学号：<input type="text" id="student_number" style="width:10%" placeholder="学员学号">
 			学生姓名：<input type="text" id="student_name" style="width:10%" placeholder="请输入学生姓名">
 			开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:6%"> 
 			结束时间：<input type="date" id="end_time" placeholder="请输入返校时间">
-			原因：<input type="text" id="reason" style="width:14%" placeholder="请填写请假原因">
+			状态：<input type="text" id="reason" style="width:14%;font-size: 16px;" placeholder="请假(超过三天算休学)或退学">
 			<button type="button" id="btn">提交</button>
 
 		</div>
-		<div class="cent">
+		<div class="cent" style="margin-top: 20px;">
 			<h3>统计信息</h3>
 			<table border="0" cellspacing="0" cellpadding="0" id="cent_table">
 				<tr>
@@ -269,7 +270,7 @@
 									numbera:stopNumber,
 								},
 								success(data){
-									console.log(data)
+									console.log(data);
 								}
 
 							})
@@ -307,8 +308,12 @@
 					//请假
 					obj = {};
 					for (var i = 0, l = arr.length; i < l; i++) {
-						var item = arr[i];
-						obj[item] = (obj[item] + 1) || 1;
+						// console.log(res[i].resona)
+						// if(res[i].resona == '请假'){
+							var item = arr[i];
+							obj[item] = (obj[item] + 1) || 1;
+						// }
+						
 					}
 					//末班
 					objs = {};
@@ -398,7 +403,9 @@
 								<td id="tx">${data[i].enta}</td>
 								<td>${data[i].resona}</td>
 								<td id="stop">${data[i].ora}</td>
-								<td><button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button></td>
+								<td class="ye">
+									<button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button>
+								</td>
 								</tr>`).appendTo('#mytbody')
 						};
 						// console.log(arr.length);
@@ -432,6 +439,39 @@
 				}
 			})
 		}
+
+
+		//判断是不是管理者
+		// function gl(){
+			$('.ye').css({'display':'none'})
+			if(localStorage.user){
+				var localStorageUser=JSON.parse(localStorage.user);
+				audi=localStorageUser.uid;
+			}
+			console.log(audi)
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'table-cell'}) || $('.ye').css({'display':'block'})
+					}
+					if(data.length){
+						if(data[0].AR=='yes'){
+							$('.ye').css({'display':'block'}) ||$('.ye').css({'display':'table-cell'})
+						}else{
+							$('.ye').css({'display':'none'})
+						}
+					}else{
+						console.log('您是学生，没有权限去操作页面')
+					}
+				}
+			})
+		// }
 
 	</script>
 	</html>

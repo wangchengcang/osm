@@ -104,7 +104,7 @@
 									<option value="否">否</option>
 								</select>
 							</td>
-							<td style="position: relative;"><button id="Submitment">提交</button></td>
+							<td class="ye" style="position: relative;"><button id="Submitment">提交</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -262,35 +262,34 @@
 			}
 		})
 
-		//读取
-		// $.ajax({
-        //     type:'get',
-        //     async:false,
-        //     url:href+'/indexs/reads',
-        //     success(data){
-		// 		console.log(data);
-		// 		var arr=[];
-        //         for(var i=0;i<data.length;i++){
-		// 			console.log(data[i].adopt)
-		// 			arr.push(data[i].class)
-        //         }
-        //         obj = {};
-		// 		for (var i = 0, l = arr.length; i < l; i++) {
-		// 			var item = arr[i];
-		// 			obj[item] = (obj[item] + 1) || 1;
-		// 		}
-		// 		console.log(obj)
-        //     }
-		// })
-		// //把对象转化为字符串
-		// var jsona = JSON.stringify(obj);
-		// console.log(jsona)
-		// var en=jsona.split(',')
-		// var alls =[];//截取到的数据放在这里
-		// for(var i=0;i<en.length;i++){
-		// 	all = en[i].split(':')[1][0]
-		// 	// console.log(all)
-		// 	alls.push(all)//追加到alls里
-		// }
+		//判断是否是管理者还是读者
+		$('.ye').css({'display':'none'})
+		if(localStorage.user){
+			var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
+		$.ajax({
+			type:'get',
+			url:'http://localhost:8000/indexs/state',
+			data:{
+				uid:audi,
+			},
+			success(data){
+				console.log(data)
+				if(data[0].AR=='yes'){
+					$('.ye').css({'display':'table-cell'}) || $('.ye').css({'display':'block'})
+				}
+				if(data.length){
+					if(data[0].AR=='yes'){
+						$('.ye').css({'display':'block'}) ||$('.ye').css({'display':'table-cell'})
+					}else{
+						$('.ye').css({'display':'none'})
+					}
+				}else{
+					console.log('您是学生，没有权限去操作页面')
+				}
+			}
+		})
 	</script>
 </html>
