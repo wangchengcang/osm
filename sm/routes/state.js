@@ -87,4 +87,22 @@ router.get('/yes',function(req,res){
 		}
 	})
 });
+
+
+// 判断该学生是否是休学
+router.post('/revise',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	var json=req.body;
+	console.log(json);
+	sql.con({
+		arr:[json.ora,json.numbera],
+		sql:'update leaves set ora=? where numbera=?',
+		success(data){
+			res.send('ok')
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
 module.exports = router;

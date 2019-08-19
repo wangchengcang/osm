@@ -102,7 +102,7 @@
 	#mytable{
 		width: 100%;
 		height: auto;
-		transition: 3s;
+		transition: .3s;
 		margin-top: 30px;
 		opacity: 0;
 	}
@@ -116,12 +116,17 @@
 		border:solid 1px #000;
 		text-align: center;
 	}
+	#mytbody{
+		width: 100%;
+		text-align: center;
+	}
 	#mytbody tr td button{
 		width: 50px;
 		height: 100%;
 		background-color:#8512;
 		border:none;
 		outline: none;
+
 	}
 </style>
 </head>
@@ -169,11 +174,12 @@
 						<th>请假日期</th>
 						<th>归校日期</th>
 						<th>请假原因</th>
+						<th id="stop_number">是否休学</th>
 						<th>是否已返校</th>
 					</tr>
 				</thead>
 				<tbody id="mytbody">
-					
+
 				</tbody>	
 			</table>
 		</div>
@@ -198,8 +204,8 @@
 			// var minutes = myDate.getMinutes();
 			// var seconds = myDate.getSeconds();"+hours+":"+minutes+":"+seconds
 			$("#start_time").val(date); //将值赋给div
-		}
 
+		}
 
 		var href = 'http://localhost:8000';
 		// 录入请假名单
@@ -227,20 +233,54 @@
 						areason:reason.value
 					},
 					success(data){
+						console.log(data)
+						// 计算请假时长，判断是否是休学
+						function DateDiff(sDate1, sDate2) { 
+							var aDate, oDate1, oDate2, iDays
+							aDate = sDate1.split("-")
+							oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])
+							aDate = sDate2.split("-")
+							oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])
+							iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24) 
+							return iDays
+						}
+						// 声明两个变量存入要计算的两个时间
+						s1  = start_time.value
+						s2  = end_time.value
+						console.log(s1,s2)
+						// 声明个变量等于请假时长
+						var time=DateDiff(s1,s2)
+						// console.log(time+"天")
+						var stopNumber=student_number.value;
+						var stopName=student_name.value;
+						// 判断请假时长大于三天的话 就归为休学 通过学生名字修改数据库信息
+						if(time>3){
+							console.log(stopName+'是休学')
+							var ora=true;
+							$.ajax({
+								type:'post',
+								url:href+'/state/revise',
+								data:{
+									ora:ora,
+									numbera:stopNumber,
+								},
+								success(data){
+									console.log(data)
+								}
+
+							})
+						}
 						class_room.value='';
 						student_name.value='';
 						student_number.value='';
 						start_time.value='';
 						end_time.value='';
 						reason.value='';
-						console.log(data)
 					}
 				})
 			}
 		})
-
-
-
+		
 
 
 		//获取请假名单
@@ -253,33 +293,43 @@
 					console.log(res)
 				}
 			})
-			
 		}
+		
+		
+
+
+
+
+
 		// 获取所有班级
-		$.ajax({
-			type:'get',
-			url:href+'/state/class',
-			success(data){
-				console.log(data)
-				for(var i=0; i<data.length;i++){
-					$(`
-						<tr onclick="look(${data[i].class})" id="thisTr">
-						<td>${data[i].class}</td>
-						<td>${data[i].door}</td>
-						<td>${data[i].number}</td>
-						<td></td>
-						<td></td>
-						<td>111</td>
-						<td>111</td>
-						<td>111</td>
-						</tr>
-						`).appendTo('#cent_table')
+		function all(){
+			$.ajax({
+				type:'get',
+				url:href+'/state/class',
+				success(data){
+					console.log(data)
+					for(var i=0; i<data.length;i++){
+						$(`
+							<tr onclick="look(${data[i].class})" id="thisTr">
+							<td>${data[i].class}</td>
+							<td>${data[i].door}</td>
+							<td>${data[i].number}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							`).appendTo('#cent_table')
+					}
 				}
-			}
-		})
+			})
+		}
+		all();
 		// 查看每个班级请假名单
 		function look(index){
 			mytbody.innerHTML='';
+			stop_number.innerHTML='是否休学'
 			// mytable.style.opacity=0;
 			console.log(index)
 			$.ajax({
@@ -292,7 +342,16 @@
 					if(data.length){
 						console.log(data)
 						mytable.style.opacity=1;
-						for(var i=0; i<data.length; i++){
+						var len=data.length;
+						
+						var arr=[];
+						for(var i=0; i<len; i++){
+							if(data[i].ora=='true'){
+								data[i].ora='是';
+								arr.push(data[i]);
+							}else{
+								data[i].ora='否'
+							}
 							$(`<tr>
 								<td>${data[i].classa}</td>
 								<td>${data[i].namea}</td>
@@ -300,11 +359,17 @@
 								<td>${data[i].starta}</td>
 								<td>${data[i].enta}</td>
 								<td>${data[i].resona}</td>
+								<td id="stop">${data[i].ora}</td>
 								<td><button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button></td>
+								
 								</tr>`).appendTo('#mytbody')
-						}
+						};
+						console.log(arr.length)
+						stop_number.innerHTML+='('+arr.length+')'
 					}else{
-						console.log('该班级没dddd人请假')
+						mytable.style.opacity=1;
+						// $('#mytbody').text('该班级没人请假');
+						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没人请假</td></tr>`).appendTo('#mytbody')
 					}
 				}
 			})
@@ -329,5 +394,6 @@
 				}
 			})
 		}
+
 	</script>
 	</html>
