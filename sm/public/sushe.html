@@ -88,13 +88,13 @@
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
 	//判断是否是管理者还是读者
-	$('.ye').css({'display':'none'})
-	if(localStorage.user){
-	    var localStorageUser=JSON.parse(localStorage.user);
-		audi=localStorageUser.uid;
-	}
-	console.log(audi)
-	window.onload=function (){
+	function gl(){
+		$('.ye').css({'display':'none'})
+		if(localStorage.user){
+			var localStorageUser=JSON.parse(localStorage.user);
+			audi=localStorageUser.uid;
+		}
+		console.log(audi)
 		$.ajax({
 			type:'get',
 			url:'http://localhost:8000/indexs/state',
@@ -244,11 +244,14 @@
 								<td>${data[i].qinshi}</td>
 								<td>${data[i].dh}</td>
 								<td>${data[i].bzr}</td>
-								<td class='ye'><button type="button" id="ton" onclick="yc('${data[i].uid}')">移除</button></td>
+								<td class="ye">
+									<button type="button" id="ton" onclick="yc('${data[i].uid}')">移除</button>
+								</td>
 							</tr>
 						`;
 				}
 				Absence.innerHTML = str
+				gl()
 			}
 		})
 	}

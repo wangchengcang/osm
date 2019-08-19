@@ -239,33 +239,7 @@
 
     <script src="js/jquery.js"></script>
     <script>
-        //判断是否是管理者
-        $('.ye').css({'display':'none'});
-        $('.yes').css({'display':'none'});
-        if(localStorage.user){
-		    var localStorageUser=JSON.parse(localStorage.user);
-			audi=localStorageUser.uid;
-		}
-		console.log(audi)
-        window.onload=function (){
-			$.ajax({
-				type:'get',
-				url:'http://localhost:8000/indexs/state',
-				data:{
-					uid:audi,
-				},
-				success(data){
-					console.log(data)
-					if(data[0].AR==='yes'){
-                        $('.ye').css({'display':'table-cell'})
-                        $('.yes').css({'display':'block'})
-					}else{
-                        $('.ye').css({'display':'none'})
-                        $('.yes').css({'display':'none'})
-					}
-				}
-			})
-		}
+        
         var href = 'http://localhost:8000';
         preservation.onclick = function () {
             data();
@@ -332,15 +306,18 @@
                             <td>${data[i].door}</td>
                             <td>${data[i].assets}</td>
                             <td>${data[i].number}</td>
-                            <td>
-                                <button class="ye" onClick="modify('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">修改信息</button>
+                            <td class="ye">
+                                <button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">修改信息</button>
                             </td>
-                            <td>
-                                <button class='ye onClick="del('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">删除</button>
+                            <td class="ye">
+                                <button onClick="del('${data[i].uid}','${data[i].class}','${data[i].stage}','${data[i].door}','${data[i].assets}','${data[i].number}')">删除</button>
                             </td>
                         `;
                         table.appendChild(tr)
                     }
+                    //调用
+                    gl()
+                    
                 }
             })
         }
@@ -460,6 +437,37 @@
             })
             window.location.reload();
         }
+
+
+        //判断是否是管理者
+        function gl(){
+            $('.ye').css({'display':'none'});
+            if(localStorage.user){
+                var localStorageUser=JSON.parse(localStorage.user);
+                audi=localStorageUser.uid;
+            }
+		    console.log(audi)
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8000/indexs/state',
+				data:{
+					uid:audi,
+				},
+				success(data){
+					console.log(data)
+                    console.log(data[0].AR);
+					if(data[0].AR==='yes'){
+                        $('.ye').css({'display':'table-cell'})
+					}else{
+                        console.log(222)
+                        $('#table tr td:last-child').css({'display':'none'})
+					}
+				}
+			})
+        }
+        
+        
+        
     </script>
 </body>
 
