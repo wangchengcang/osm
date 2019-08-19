@@ -251,6 +251,7 @@
 				url:href+'/state/getL',
 				success(res){
 					var arr=[];
+					console.log(res);
 					for(var i=0;i<res.length;i++){
 						datas = res;
 						arr.push(datas[i].classa);						
@@ -276,30 +277,40 @@
 			// console.log(all)
 			alls.push(all)//追加到alls里
 		}
+		
+		
 		// console.log(alls)
 		// 获取所有班级
 		$.ajax({
 			type:'get',
 			url:href+'/state/class',
 			success(data){
-				// console.log(obj)				
+				// console.log(obj)
 				for(var i=0; i<data.length;i++){
 					// console.log(alls)
+					// console.log(alls[i])
+					if(alls[i] == undefined){
+						alls[i] = 0
+					}
 					$(`
 						<tr onclick="look(${data[i].class})" id="thisTr">
-						<td>${data[i].class}</td>
-						<td>${data[i].door}</td>
-						<td>${data[i].number}</td>
-						<td>${alls[i]}</td>
-						<td>${Math.round(alls[i] / data[i].number *100) + '%'}</td>
-						<td>111</td>
-						<td>111</td>
-						<td>111</td>
+							<td>${data[i].class}</td>
+							<td>${data[i].door}</td>
+							<td>${data[i].number}</td>
+							<td>${alls[i]}</td>
+							<td>${Math.round(alls[i] / data[i].number *100) + '%'}</td>
+							<td>111</td>
+							<td>${Math.round((data[i].number - alls[i]- 3) / data[i].number *100) + '%'}</td>
+							<td>111</td>
 						</tr>
 						`).appendTo('#cent_table')
-				}
+				}		
+				
+				
+				
 			}
 		})
+		
 		// 查看每个班级请假名单
 		function look(index){
 			mytbody.innerHTML='';
@@ -327,7 +338,7 @@
 								</tr>`).appendTo('#mytbody')
 						}
 					}else{
-						console.log('该班级没dddd人请假')
+						alert('该班级没人请假')
 					}
 				}
 			})

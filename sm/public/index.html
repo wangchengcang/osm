@@ -161,20 +161,74 @@
         
 
         var href = 'http://localhost:8000';
-            
+        
+        //休学人数
         $.ajax({
             type: 'get',
+            async:false,
             url: href + '/banji/read',
             async: false,
             success(data) {
                 for (var i = 0; i < data.length; i++) {
-                    console.log(data);
                     datas = data;
-                    console.log(datas);
                 }
             }
         })
+        //退学人数
+
+
+
+        //末班人数
+        $.ajax({
+            type:'get',
+            async:false,
             
+        })
+
+        //违纪人数
+        $.ajax({
+            type: 'get',
+            async:false,
+            url: 'http://localhost:8000/indexs/read',
+            success(data) {
+                // console.log(data);
+                var arr=[];
+                reason = [];
+                for (var i = 0; i < data.length; i++) {
+                    // console.log(data[i].bj)
+                    arr.push(data[i].bj);
+                    reason.push(data[i].Reason);
+                }
+                obj = {};
+                for (var i = 0, l = arr.length; i < l; i++) {
+                    var item = arr[i];
+                    obj[item] = (obj[item] + 1) || 1;
+                }
+                // console.log(obj)
+            }
+            
+        })
+        // console.log(reason);
+        //把对象转化为字符串
+		var jsona = JSON.stringify(obj);
+		// console.log(jsona)
+		var en=jsona.split(',')
+		var alls =[];//截取到的数据放在这里
+		for(var i=0;i<en.length;i++){
+			all = en[i].split(':')[1][0]
+			// console.log(all)
+			alls.push(all)//追加到alls里
+        }
+        // console.log(alls);
+        
+        //违纪原因去重
+        var reasons=[];
+        reason.forEach(function(item){
+            if(reasons.indexOf(item)==-1){
+                reasons.push(item);
+            }
+        });
+        // console.log(reasons);
 
         read();
         //读取班级信息
@@ -184,19 +238,22 @@
                 url: href + '/banji/read',
                 async: false,
                 success(data) {
-                    console.log(datas)
+                    // console.log(datas)
                     for (var i = 0; i < data.length; i++) {
                         var tr = document.createElement('tr');
+                        if(alls[i] == undefined){
+                            alls[i] = 0
+                        }
                         tr.innerHTML = `
                             <td>${data[i].class}(${data[i].stage})</td>
                             <td>${data[i].number}</td>
                             <td>${datas[i].stage}</td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>123</td>
+                            <td>${Math.round((data[i].number - 5 - 1 - 1) / data[i].number * 100) + '%'}</td>
+                            <td>${alls[i]}</td>
+                            <td>${alls[i]}</td>
+                            <td>${reasons}</td>
                         `;
                         table.appendChild(tr)
                     }
@@ -204,6 +261,7 @@
             })
         }
 
+        
         
     </script>
 </body>

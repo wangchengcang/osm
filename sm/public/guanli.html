@@ -229,36 +229,33 @@
 				type: 'get',
 				url: 'http://localhost:8000/indexs/read',
 				success(data) {
-					var str =
-					`
+					var str = `
 					<tr style="height: 50px;">
-					<td>班级</td>
-					<td>扣除人</td>
-					<td>时间</td>
-					<td>周几</td>
-					<td>原因</td>
-					<td>扣除分值</td>
-					<td>总分值</td>
-					<td class="ye">操作</td>
-					</tr>
-					`
+						<td>班级</td>
+						<td>扣除人</td>
+						<td>时间</td>
+						<td>周几</td>
+						<td>原因</td>
+						<td>扣除分值</td>
+						<td>总分值</td>
+						<td class="ye">操作</td>
+					</tr>`;
 					for (var i = 0; i < data.length; i++) {
-						str +=`
-						<tr>
-						<td>${data[i].bj}</td>
-						<td>${data[i].name}</td>
-						<td>${data[i].date}</td>
-						<td>${data[i].getday}</td>
-						<td>${data[i].Reason}</td>
-						<td>${data[i].kf}</td>
-						<td>${data[i].f}</td>
-						<td class="ye"><button id="modify" onclick="update('${data[i].uid}','${data[i].bj}','${data[i].xh}','${data[i].name}','${data[i].Reason}','${data[i].f}','${data[i].kf}')">添加记录</button></td>
-						</tr>
-						`
+						str += `<tr>
+							<td>${data[i].bj}</td>
+							<td>${data[i].name}</td>
+							<td>${data[i].date}</td>
+							<td>${data[i].getday}</td>
+							<td>${data[i].Reason}</td>
+							<td>${data[i].kf}</td>
+							<td>${data[i].f}</td>
+							<td class="ye"><button id="modify" onclick="update('${data[i].uid}','${data[i].bj}','${data[i].xh}','${data[i].name}','${data[i].Reason}','${data[i].f}','${data[i].kf}')">添加记录</button></td>
+						</tr>`;
 					}
 					main_Violation.innerHTML = str
 					gl()
 				}
+				
 			})
 		}
 		//修改违规学员信息
