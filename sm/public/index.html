@@ -43,8 +43,14 @@
                         <a href="javascript:;">
                         <i class="iconfont">&#xe513;</i> 学生</a>
                         <ul>
+<<<<<<< HEAD
                             <li><a href="student.html">学生基本信息</a></li>
                             <li><a href="state.html">学生当前状态</a></li>
+=======
+                            <li><a href="student.html">基本信息</a></li>
+                            <li><a href="state.html">当前状态</a></li>
+                            <li><a href="achievement.html">成绩录入</a></li>
+>>>>>>> e4cdf31472125e7009c79d73f70e6f519d31393a
                             <li><a href="http://z.cimns.com:8081/">作业上传</a></li>
                             <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
                             <li><a href="fankui.html">学生反馈</a></li>
@@ -56,7 +62,7 @@
             </div>
             <div id="right">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;各个班级情况</p>
-                <table border="0" style="border: 2px solid #2CC9AA;" cellspacing="0">
+                <table id="table" border="0" style="border: 2px solid #2CC9AA;" cellspacing="0">
                     <tr>
                         <th>各阶段</th>
                         <th>在校人数</th>
@@ -67,97 +73,6 @@
                         <th>本周违纪人数</th>
                         <th>上周违纪人数</th>
                         <th>违纪类型细分</th>
-                    </tr>
-                    <tr>
-                        <td>1809(第一阶段)</td>
-                        <td>30</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>96%</td>
-                        <td>4</td>
-                        <td>6</td>
-                        <td rowspan='9'>迟到，违纪，扣分，检查</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第二阶段)</td>
-                        <td>30</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>96%</td>
-                        <td>4</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第三阶段)</td>
-                        <td>30</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>96%</td>
-                        <td>4</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第四阶段)</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>400</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第五阶段)</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>400</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第六阶段)</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>400</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第七阶段)</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>400</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第八阶段)</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>5</td>
-                    </tr>
-                    <tr>
-                        <td>1809(第九阶段)</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>400</td>
-                        <td>20</td>
-                        <td>40%</td>
-                        <td>20</td>
-                        <td>5</td>
                     </tr>
                 </table>
             </div>
@@ -250,7 +165,134 @@
 					}
 				}
 			})
+        }
+        
+
+        var href = 'http://localhost:8000';
+        
+        //休学人数
+        $.ajax({
+            type: 'get',
+            async:false,
+            url: href + '/banji/read',
+            async: false,
+            success(data) {
+                for (var i = 0; i < data.length; i++) {
+                    datas = data;
+                }
+            }
+        })
+        //退学人数
+
+
+
+        //末班人数
+        $.ajax({
+            type:'get',
+            async:false,
+            url:href+'/indexs/reads',
+            success(data){
+				var adopt=[];
+                for(var i=0;i<data.length;i++){
+                    // console.log(data[i].adopt)
+                    if(data[i].adopt == '否'){
+                        adopt.push(data[i].class)
+                    }					
+                }
+                obj = {};
+				for (var i = 0, l = adopt.length; i < l; i++) {
+					var item = adopt[i];
+					obj[item] = (obj[item] + 1) || 1;
+				}
+				console.log(obj)
+            }
+		})
+		//把对象转化为字符串
+		var jsons = JSON.stringify(obj);
+		// console.log(jsons)
+		var ens=jsons.split(',')
+		var adopts =[];//截取到的数据放在这里
+		for(var i=0;i<ens.length;i++){
+			all = ens[i].split(':')[1][0]
+			adopts.push(all)//追加到alls里
 		}
+
+        //违纪人数
+        $.ajax({
+            type: 'get',
+            async:false,
+            url: 'http://localhost:8000/indexs/read',
+            success(data) {
+                // console.log(data);
+                var arr=[];
+                reason = [];
+                for (var i = 0; i < data.length; i++) {
+                    // console.log(data[i].bj)
+                    arr.push(data[i].bj);
+                    reason.push(data[i].Reason);
+                }
+                obj = {};
+                for (var i = 0, l = arr.length; i < l; i++) {
+                    var item = arr[i];
+                    obj[item] = (obj[item] + 1) || 1;
+                }
+                // console.log(obj)
+            }
+            
+        })
+        // console.log(reason);
+        //把对象转化为字符串
+		var jsona = JSON.stringify(obj);
+		// console.log(jsona)
+		var en=jsona.split(',')
+		var alls =[];//截取到的数据放在这里
+		for(var i=0;i<en.length;i++){
+			all = en[i].split(':')[1][0]
+			// console.log(all)
+			alls.push(all)//追加到alls里
+        }
+        
+        //违纪原因去重
+        var reasons=[];
+        reason.forEach(function(item){
+            if(reasons.indexOf(item)==-1){
+                reasons.push(item);
+            }
+        });
+
+        read();
+        //读取班级信息
+        function read() {
+            $.ajax({
+                type: 'get',
+                url: href + '/banji/read',
+                async: false,
+                success(data) {
+                    // console.log(datas)
+                    for (var i = 0; i < data.length; i++) {
+                        var tr = document.createElement('tr');
+                        if(alls[i] == undefined){
+                            alls[i] = 0
+                        }
+                        tr.innerHTML = `
+                            <td>${data[i].class}(${data[i].stage})</td>
+                            <td>${data[i].number}</td>
+                            <td></td>
+                            <td></td>
+                            <td>${adopts[i]}</td>
+                            <td>${Math.round((data[i].number - adopts[i] - 1 - 1) / data[i].number * 100) + '%'}</td>
+                            <td>${alls[i]}</td>
+                            <td>${alls[i]}</td>
+                            <td>${reasons}</td>
+                        `;
+                        table.appendChild(tr)
+                    }
+                }
+            })
+        }
+
+        
+        
     </script>
 </body>
 </html>

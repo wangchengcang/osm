@@ -3,31 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<link rel="stylesheet" href="stylesheets/index.css">
+		<link rel="stylesheet" href="stylesheets/achievement.css">
 		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
-		<style type="text/css">
-			#tops p {
-				height: 60px;
-				line-height: 60px;
-				font-size: 26px;
-				font-family: bold;
-				background-color: #20b6ad;
-				color: #fff;
-				margin-bottom: 20px;
-			}
-			#tops p a {
-				text-decoration: none;
-				float: left;
-				margin-left: 5%;
-				margin-right: 15px;
-				line-height: 60px;
-			}
-
-			#tops a i {
-				color: #fff;
-
-			}
-		</style>
 	</head>
 	<body>
 		<div id="tops">
@@ -37,58 +14,108 @@
 			</p>
 		</div>
 		<div id="achievement">
-			<table border="1" class="one" cellspacing="0" cellpadding="0">
-				<tr>
-					<th>班级</th>
+			<!--<table border="0" class="one" style="border:2px solid #2CC9AA;" cellspacing="0" cellpadding="0">
+				<tr style="background-color: #2CC9AA;color: #fff;">
+					<th style="width:8%;">班级</th>
 					<th>学号</th>
 					<th>姓名</th>
-					<th>月考成绩</th>
-					<th>周考成绩</th>
+					<th width="10%">阶段</th>
+					<th style="border-left: 2px solid #fff;">月考成绩</th>
+					<th style="border-left: 2px solid #fff;border-right: 2px solid #fff;">周考成绩</th>
+					<th style="width: 10%;">综合积分</th>
 					<th>是否通过</th>
 				</tr>
 				<tr>
-					<td style="width:10%;">
-						<select class="z-text" id="class_ban" style="width:100%;height:100%;font-size:18px;border: none;">
-
-						</select>
-					</td>
-					<td><input type="text" id="stu_number" placeholder="学员学号"></td>
-					<td><input type="text" id="stu_name" placeholder="学员姓名"></td>
-					<td>
-						<table border="0" cellspacing="" cellpadding="">
+					 <td style="border: none;">
+						<table border="0" style="width:100%;height:100%;" cellspacing="0" cellpadding="0">
 							<tr>
-								<td style="border-right:1px solid #2cc9aa;"><input type="text" id="written" placeholder="笔试成绩"></td>
+								<td style="border-left:2px solid #fff;border-right:1px solid #2cc9aa;"><input type="text" id="written"
+									 placeholder="笔试成绩"></td>
 								<td style="border-right:1px solid #2cc9aa;"><input type="text" id="machine" placeholder="机试成绩"></td>
 								<td><input type="text" id="Interview" placeholder="面试成绩"></td>
 							</tr>
 						</table>
 					</td>
-					<td>
-						<table border="0" style="border:1px solid #2cc9aa;" cellspacing="" cellpadding="">
+					<td style="border: none;">
+						<table border="0" style="width:100%;height:100%;" cellspacing="0" cellpadding="0">
 							<tr>
-								<td style="border-right:1px solid #2cc9aa;"><input type="text" id="zhouone" placeholder="周考一成绩"></td>
+								<td style="border-left:2px solid #fff;border-right:1px solid #2cc9aa;"><input type="text" id="zhouone"
+									 placeholder="周考一成绩"></td>
 								<td style="border-right:1px solid #2cc9aa;"><input type="text" id="zhoutwo" placeholder="周考二成绩"></td>
-								<td><input type="text" id="thouthree" placeholder="周考三成绩"></td>
+								<td style="border-right:2px solid #fff;"><input type="text" id="thouthree" placeholder="周考三成绩"></td>
 							</tr>
 						</table>
 					</td>
-					<td style="width: 13%;text-align: center;">
+					<td><input type="text" placeholder="综合积分" id="integral"></td>
+					<td style="width: 10%;text-align: center;">
 						<select class="z-text" id="gender" style="width:100%;height:100%;font-size:18px;border: none;">
 							<option value="通过">通过</option>
 							<option value="否">否</option>
 						</select>
 					</td>
+					<td>
+						<select class="z-text" id="class_bana" style="width:100%;height:100%;font-size:18px;border: none;"></select>
+					</td>
 				</tr>
-			</table>
-			<div class="operation">
-				<button id="Submitment">提交</button>
+			</table> -->
+			<div id="l">
+				<table  border="1" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td>
+								<select class="z-text" id="class_ban" style="width:100%;height:100%;font-size:18px;border: none;"></select>
+							</td>
+							<td>&nbsp;&nbsp;学号:<input type="text" id="stu_number" style="width: 78%;float: right;border-left: 1px solid #000;" placeholder="学员学号"></td>
+							<td>&nbsp;&nbsp;姓名:<input type="text" id="stu_name" style="width: 78%;float: right;border-left: 1px solid #000;" placeholder="学员姓名"></td>
+							<td>
+								&nbsp;&nbsp;阶段:
+								<select class="z-text" id="stage" style="width: 78%;height:100%;float:right;border-left: 1px solid #000;">
+									<option value="一升二">一升二</option>
+									<option value="二升三">二升三</option>
+									<option value="三升四">三升四</option>
+									<option value="四升五">四升五</option>
+									<option value="五升六">五升六</option>
+									<option value="六升七">六升七</option>
+									<option value="七升八">七升八</option>
+									<option value="八升九">八升九</option>
+									<option value="升实训一">升实训一</option>
+									<option value="升实训二">升实训二</option>
+									<option value="升实训三">升实训三</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;月考成绩:</td>
+							<td><input type="text" id="written"  placeholder="笔试成绩"></td>
+							<td><input type="text" id="machine" placeholder="机试成绩"></td>
+							<td><input type="text" id="Interview" placeholder="面试成绩"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;周考成绩:</td>
+							<td><input type="text" id="zhouone"  placeholder="周考一成绩"></td>
+							<td><input type="text" id="zhoutwo" placeholder="周考二成绩"></td>
+							<td><input type="text" id="thouthree" placeholder="周考三成绩"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;综合积分:<input type="text" placeholder="综合积分" id="integral" style="width: 70%;float: right;border-left: 1px solid #000;"></td>
+							<td style="width: 10%;text-align: center;">
+								<select class="z-text" id="gender" style="width:100%;height:100%;font-size:18px;border: none;">
+									<option value="通过">通过</option>
+									<option value="否">否</option>
+								</select>
+							</td>
+							<td style="position: relative;"><button id="Submitment">提交</button></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-		</div>
 		</div>
 	</body>
 	<script src="font_ps99atp86ak/iconfont.js"></script>
 	<script src="js/jquery.js"></script>
 	<script>
+
+		var href = 'http://localhost:8000';
 		var ali = document.querySelectorAll('#e>li')
 		console.log(ali)
 		for (var i = 0; i < ali.length; i++) {
@@ -108,7 +135,7 @@
 		function read() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/Read_class',
+				url: href+'/indexs/Read_class',
 				success(data) {
 					var str = '';
 					for (var i = 0; i < data.length; i++) {
@@ -127,72 +154,143 @@
 		$('#stu_number').on('blur', function() {
 			if (stu_number.value == '') {
 				alert('请输入学员学号')
-			}else{
-				$.ajax({
-					type:'get',
-					url:'http://localhost:8000/indexs/stu_number',
-					data: {
-						stu: class_ban.value,
-						stunum: stu_number.value
-					},
-					success(data) {
-						console.log(data)
-						if (data == '') {
-							alert('未找到该学院')
-						} else {
-							stu_name.value = data[0].name;
-						}
-					}
-				})
+			} else if (/[\u4E00-\u9FA5]/g.test(stu_number.value)) {
+				alert('学院学号不得出现中文')
+				stu_number.value = ''
+			} else {
+				aj()
 			}
 		})
+		//检测该学员是否存在
+		function aj() {
+			$.ajax({
+				type: 'get',
+				url: href+'/indexs/stu_number',
+				data: {
+					stu: class_ban.value,
+					stunum: stu_number.value
+				},
+				success(data) {
+					if (data == '') {
+						alert('未找到该学院')
+						return false
+					} else {
+						stu_name.value = data[0].name;
+						ajnum()
+					}
+				}
+			})
+		}
+		//读取该学员的综合积分
+		function ajnum() {
+			$.ajax({
+				type: 'get',
+				url: href+'/indexs/num',
+				data: {
+					stu: class_ban.value,
+					stunum: stu_number.value
+				},
+				success(data) {
+					if (data == '') {
+						integral.value = 100;
+					} else {
+						integral.value = data[0].f;
+					}
+				}
+			})
+		}
+		
 		//提交学员成绩
-		$('#Submitment').on('click',function(){
-			if(stu_number.value==''){
+		$('#Submitment').on('click', function() {
+			if (stu_number.value == '') {
 				alert('请输入学员学号')
-			}else if(stu_name.value==''){
+			} else if (stu_name.value == '') {
 				alert('请输入学员姓名')
-			}else if(written.value==''){
+			} else if (written.value == '') {
 				alert('请输入学员笔试成绩')
-			}else if(machine.value==''){
+			} else if (machine.value == '') {
 				alert('请输入学员计试成绩')
-			}else if(Interview.value==''){
+			} else if (Interview.value == '') {
 				alert('请输入学员面试成绩')
-			}else if(zhouone.value==''){
+			} else if (zhouone.value == '') {
 				alert('请输入学员第一次周考成绩')
-			}else if(zhoutwo.value==''){
+			} else if (zhoutwo.value == '') {
 				alert('请输入学员第二次周考成绩')
-			}else if(thouthree.value==''){
+			} else if (thouthree.value == '') {
 				alert('请输入学员第三次周考成绩')
-			}else if(gender.value==''){
+			} else if (gender.value == '') {
 				alert('请选择是否通过')
-			}else{
-				$.ajax({
-					type:'get',
-					url:'http://localhost:8000/indexs/Entry',
-					data:{
-						class_ban:class_ban.value,
-						stu_number:stu_number.value,
-						stu_name:stu_name.value,
-						written:written.value,
-						machine:machine.value,
-						Interview:Interview.value,
-						zhouone:zhouone.value,
-						zhoutwo:zhoutwo.value,
-						thouthree:thouthree.value,
-						gender:gender.value
-					},
-					success(data){
-						console.log(data)
-						if(data=='ok'){
-							$('input').val('');
-						}else{
-							alert('该学员成绩已被录入')
+			} else if (/[\u4E00-\u9FA5]/g.test(stu_number.value)) {
+				alert('学院学号不得出现中文')
+			} else if (/[\u4E00-\u9FA5]/g.test(written.value) || /[\u4E00-\u9FA5]/g.test(machine.value) || /[\u4E00-\u9FA5]/g.test(
+					Interview.value)) {
+				alert('月考成绩内不得出现中文')
+			} else if (/[\u4E00-\u9FA5]/g.test(zhouone.value) || /[\u4E00-\u9FA5]/g.test(zhoutwo.value) || /[\u4E00-\u9FA5]/g.test(
+					thouthree.value)) {
+				alert('周考成绩内不得出现中文')
+			} else {
+				
+					$.ajax({
+						type: 'get',
+						url: href+'/indexs/Entry',
+						data: {
+							class_ban: class_ban.value,
+							stu_number: stu_number.value,
+							stu_name: stu_name.value,
+							stage: stage.value,
+							written: written.value,
+							machine: machine.value,
+							Interview: Interview.value,
+							zhouone: zhouone.value,
+							zhoutwo: zhoutwo.value,
+							thouthree: thouthree.value,
+							gender: gender.value
+						},
+						success(data) {
+							console.log(data)
+							if (data == 'ok') {
+								alert('该学员绩录入完毕')
+								$('input').val('');
+							} else {
+								alert('该学员成绩已被录入')
+								$('input').val('');
+							}
 						}
-					}
-				})
+					})
+				
+
 			}
-			
 		})
+
+		//读取
+		// $.ajax({
+        //     type:'get',
+        //     async:false,
+        //     url:href+'/indexs/reads',
+        //     success(data){
+		// 		console.log(data);
+		// 		var arr=[];
+        //         for(var i=0;i<data.length;i++){
+		// 			console.log(data[i].adopt)
+		// 			arr.push(data[i].class)
+        //         }
+        //         obj = {};
+		// 		for (var i = 0, l = arr.length; i < l; i++) {
+		// 			var item = arr[i];
+		// 			obj[item] = (obj[item] + 1) || 1;
+		// 		}
+		// 		console.log(obj)
+        //     }
+		// })
+		// //把对象转化为字符串
+		// var jsona = JSON.stringify(obj);
+		// console.log(jsona)
+		// var en=jsona.split(',')
+		// var alls =[];//截取到的数据放在这里
+		// for(var i=0;i<en.length;i++){
+		// 	all = en[i].split(':')[1][0]
+		// 	// console.log(all)
+		// 	alls.push(all)//追加到alls里
+		// }
 	</script>
 </html>
