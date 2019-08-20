@@ -96,7 +96,7 @@
 			}
 
 			#end_time {
-				width: 150px;
+				width: 15%;
 			}
 
 			.htop input {
@@ -146,6 +146,11 @@
 			table tr:nth-child(event) {
 				background-color: #2CC9AA;
 			}
+			.z-text{
+				height: 34px;
+				width: 100px;
+				font-size: 18px;
+			}
 		</style>
 	</head>
 
@@ -160,11 +165,11 @@
 			<div class="htop ye">
 				<h3>基本信息</h3>
 				班级：<select class="z-text" id="class_room"></select>
-				学号：<input type="text" id="student_number" style="width:10%" placeholder="学员学号">
-				学生姓名：<input type="text" id="student_name" style="width:10%" placeholder="学员姓名">
+				学号：<input type="text" id="student_number" style="width:15%" placeholder="学员学号">
+				学生姓名：<input type="text" id="student_name" style="width:15%" placeholder="学员姓名">
 				开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:10%;">
 				结束时间：<input type="date" id="end_time" placeholder="请输入返校时间"><br>
-				状态：<input type="text" id="reason" style="width:19%;font-size: 16px;" placeholder="请假(超过三天算休学)或退学">
+				状态：<input type="text" id="reason" style="width:25%;font-size: 16px;" placeholder="请假(超过三天自动算休学)、退学或不就业">
 				<button type="button" id="btn">提交</button>
 
 			</div>
@@ -191,7 +196,7 @@
 							<th>学号</th>
 							<th>请假日期</th>
 							<th>归校日期</th>
-							<th>请假原因</th>
+							<th>状态</th>
 							<th id="stop_number">是否休学</th>
 							<th>是否已返校</th>
 						</tr>
@@ -330,24 +335,24 @@
 				url: href + '/state/getL',
 				success(res) {
 					// console.log(res);
-					var arr = [];
+					var arr=[];
 					var mb = [];
-					for (var i = 0; i < res.length; i++) {
+					var jy = [];
+					for(var i=0;i<res.length;i++){
 						datas = res;
 						arr.push(datas[i].classa);
-						if (datas[i].ora == 'true') {
+						if(datas[i].ora == 'true'){
 							mb.push(res[i].classa);
+						}else if(res[i].resona == '不就业'){
+							jy.push(res[i].classa)
 						}
 					}
+					console.log(jy);
 					//请假
 					obj = {};
 					for (var i = 0, l = arr.length; i < l; i++) {
-						// console.log(res[i].resona)
-						// if(res[i].resona == '请假'){
 						var item = arr[i];
-						obj[item] = (obj[item] + 1) || 1;
-						// }
-
+						obj[item] = (obj[item] + 1) || 1;						
 					}
 					//末班
 					objs = {};
@@ -355,10 +360,18 @@
 						var item = mb[i];
 						objs[item] = (objs[item] + 1) || 1;
 					}
+
+					//不就业
+					bjy = {};
+					for (var i = 0, l = jy.length; i < l; i++) {
+						var item = jy[i];
+						bjy[item] = (bjy[item] + 1) || 1;
+					}
+					console.log(bjy);
 				}
 			})
 		}
-
+		//请假
 		//把对象转化为字符串
 		var jsona = JSON.stringify(obj);
 		var en = jsona.split(',')
@@ -367,7 +380,7 @@
 			all = en[i].split(':')[1][0]
 			alls.push(all) //追加到alls里
 		}
-
+		//末班
 		//把对象转化为字符串
 		var jsons = JSON.stringify(objs);
 		var en = jsons.split(',')
@@ -376,6 +389,17 @@
 			all = en[i].split(':')[1][0]
 			mbs.push(all) //追加到alls里
 		}
+		//不就业
+		//把对象转化为字符串
+		var jsons = JSON.stringify(bjy);
+		var en=jsons.split(',')
+		var bjys =[];//截取到的数据放在这里
+		for(var i=0;i<en.length;i++){
+			all = en[i].split(':')[1][0]
+			bjys.push(all)//追加到alls里
+		}
+		// console.log(bjys);
+
 		// 获取所有班级
 		$.ajax({
 			type: 'get',
@@ -387,6 +411,9 @@
 						alls[i] = 0;
 						mbs[i] = 0;
 					}
+					if(bjys[i] == undefined){
+							bjys[i]= 0;	
+					}
 					$(
 						`
 						<tr onclick="look(${data[i].class})" id="thisTr" style="height:40px;">
@@ -397,7 +424,7 @@
 							<td>${Math.round((data[i].number - alls[i]) / data[i].number *100) + '%'}</td>
 							<td>${mbs[i]}</td>
 							<td>${Math.round((data[i].number - alls[i]- mbs[i]) / data[i].number *100) + '%'}</td>
-							<td>111</td>
+							<td>${bjys[i]}</td>
 						</tr>
 						`
 					).appendTo('#cent_table')
