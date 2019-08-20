@@ -552,7 +552,7 @@
 							
 						};
 						
-						stop_number.innerHTML += '(' + arr.length + ')';
+						// stop_number.innerHTML += '(' + arr.length + ')';
 					} else {
 						leave.style.opacity = 1;
 						suspen.style.opacity = 1;
@@ -561,10 +561,10 @@
 							'#mytbody');
 						alert('该班级没人请假');
 						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没有人休学</td></tr>`).appendTo(
-							'#mytbody');
+							'#mysuspen');
 						alert('该班级没有人休学');
 						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没有人签不就业协议</td></tr>`).appendTo(
-							'#mytbody');
+							'#myment');
 						alert('该班级没有人签不就业协议');
 					}
 				}
