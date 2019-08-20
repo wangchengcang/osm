@@ -44,7 +44,7 @@
 }
 .box{
 	width: 100%;
-	background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565333386&di=2703372ce654131ba82657ffb89d00ae&imgtype=jpg&er=1&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2017-10-18%2F59e6f1d9d4063.jpg') no-repeat;
+	background: url('http://b-ssl.duitang.com/uploads/item/201607/28/20160728171425_fTrjV.jpeg') no-repeat;
 	background-position:0 0;
 	background-size: 100% 100%;
 }
@@ -58,8 +58,8 @@ main{
 .box_box{
 	position: absolute;
 	top: 120px;
-	left:200px;
-	width: 70%;
+	left:300px;
+	width: 60%;
 	height: 50%;
 	padding-top: 40px;
 	text-align: center;
@@ -77,6 +77,7 @@ main{
 }
 .logon div,.login div{
 	color:#fff;
+	font-size: 20px;
 }
 .logon input,.login input{
 	width: 60%;
@@ -84,9 +85,10 @@ main{
 	outline: none;
 	border:none;
 	border-bottom:solid 1px #fff;
-	color:#fff;
+	color:#000;
 	background-color: rgba(0,0,0,0);
 	margin-top: 20px;
+	font-size: 16px;
 }
 .logon button,.login button{
 	width: 15%;
@@ -97,6 +99,7 @@ main{
 	border:none;
 	border-radius: 20px;
 	color:#fff;
+	font-size: 16px;
 }
 /*去注册按钮*/
 .a{
