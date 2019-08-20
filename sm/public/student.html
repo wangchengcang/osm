@@ -184,7 +184,7 @@
 								<td>${data[i].bj}</td>
                                 <td>
                                     <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
-                                    <buttuon id="see" class="ye" onClick="del('${data[i].uid}')">删除</buttuon>
+                                    <buttuon id="see" class="ye" onClick="del('${data[i].uid},${data[i].id}')">删除</buttuon>
                                 </td>	
 							</tr>
 						`;
@@ -254,6 +254,7 @@
                                     <td>${data[i].bj}</td>
                                     <td>
                                         <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
+                                        <buttuon id="see" class="ye" onClick="del('${data[i].uid},${data[i].id}')">删除</buttuon>
                                     </td>	
                                 </tr>
 						        `;
@@ -266,7 +267,7 @@
             })
         })
         //删除
-        function del(uid) {
+        function del(uid,id) {
             console.log(uid);
             $.ajax({
                 type: 'get',
@@ -280,6 +281,17 @@
                     }
                 }
             })
+            // 存入历史学生记录
+            // $.ajax({
+            //     type:'get',
+            //     url:href+'/users/history',
+            //     data:{
+            //         id:id,
+            //     },
+            //     success(data){
+            //         console.log(data)
+            //     }
+            // })
             window.location.reload();
         }
         //判断是否是管理者

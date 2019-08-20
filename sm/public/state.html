@@ -105,7 +105,7 @@
 				border-bottom: solid 1px #000;
 			}
 
-			#leave,#suspen,#ment {
+			#mytable {
 				width: 100%;
 				height: auto;
 				transition: .3s;
@@ -114,7 +114,7 @@
 				opacity: 0;
 			}
 
-			#leave caption,#suspen caption,#ment caption {
+			#mytable caption {
 				background-color: #16AC98;
 				color: #fff;
 				height: 50px;
@@ -122,12 +122,8 @@
 				font-size: 20px;
 			}
 
-			#leave tr td,
-			#leave tr th,
-			#suspen tr td,
-			#suspen tr th,
-			#ment tr td,
-			#ment tr th {
+			#mytable tr td,
+			#mytable tr th {
 				border: solid 1px #000;
 				text-align: center;
 				border:1px solid #16AC98;
@@ -138,14 +134,14 @@
 				text-align: center;
 			}
 
-			#mytbody tr td button,#mysuspen tr td button,#myment tr td button {
-				width:100%;
+			#mytbody tr td button {
+				width:71px;
 				padding:5px 0px;
 				background-color: #2CC9AA;
 				color: #fff;
 				border: none;
 				outline: none;
-				/* display: none; */
+		
 			}
 			table tr:nth-child(event) {
 				background-color: #2CC9AA;
@@ -191,7 +187,7 @@
 						<td>不就业人数</td>
 					</tr>
 				</table>
-				<table border="0" cellspacing="0" cellpadding="0" id="leave">
+				<table border="0" cellspacing="0" cellpadding="0" id="mytable">
 					<caption>班级请假详情</caption>
 					<thead>
 						<tr style="height:40px;">
@@ -206,42 +202,6 @@
 						</tr>
 					</thead>
 					<tbody id="mytbody" style="border: none;">
-
-					</tbody>
-				</table>
-				<table border="0" cellspacing="0" cellpadding="0" id="suspen">
-					<caption>班级退学详情</caption>
-					<thead>
-						<tr style="height:40px;">
-							<th style="width:10%;">班级</th>
-							<th>姓名</th>
-							<th>学号</th>
-							<th>请假日期</th>
-							<th>归校日期</th>
-							<th>状态</th>
-							<th>是否休学</th>
-							<th>是否已返校</th>
-						</tr>
-					</thead>
-					<tbody id="mysuspen" style="border: none;">
-
-					</tbody>
-				</table>
-				<table border="0" cellspacing="0" cellpadding="0" id="ment">
-					<caption>班级不就业详情</caption>
-					<thead>
-						<tr style="height:40px;">
-							<th style="width:10%;">班级</th>
-							<th>姓名</th>
-							<th>学号</th>
-							<th>请假日期</th>
-							<th>归校日期</th>
-							<th>状态</th>
-							<th>是否休学</th>
-							<th>是否已返校</th>
-						</tr>
-					</thead>
-					<tbody id="myment" style="border: none;">
 
 					</tbody>
 				</table>
@@ -378,7 +338,6 @@
 					var arr=[];
 					var mb = [];
 					var jy = [];
-					var tx = [];
 					for(var i=0;i<res.length;i++){
 						datas = res;
 						arr.push(datas[i].classa);
@@ -386,10 +345,9 @@
 							mb.push(res[i].classa);
 						}else if(res[i].resona == '不就业'){
 							jy.push(res[i].classa)
-						}else if(res[i].resona == '退学'){
-							tx.push(res[i].classa)
 						}
 					}
+					console.log(jy);
 					//请假
 					obj = {};
 					for (var i = 0, l = arr.length; i < l; i++) {
@@ -402,18 +360,14 @@
 						var item = mb[i];
 						objs[item] = (objs[item] + 1) || 1;
 					}
+
 					//不就业
 					bjy = {};
 					for (var i = 0, l = jy.length; i < l; i++) {
 						var item = jy[i];
 						bjy[item] = (bjy[item] + 1) || 1;
 					}
-					//不就业
-					txs = {};
-					for (var i = 0, l = tx.length; i < l; i++) {
-						var item = tx[i];
-						txs[item] = (txs[item] + 1) || 1;
-					}
+					console.log(bjy);
 				}
 			})
 		}
@@ -440,33 +394,12 @@
 		//把对象转化为字符串
 		var jsons = JSON.stringify(bjy);
 		var en=jsons.split(',')
-		console.log(en);
 		var bjys =[];//截取到的数据放在这里
 		for(var i=0;i<en.length;i++){
-<<<<<<< HEAD
 			all = en[i].split(':')[1]
-=======
-			if(en == '{}'){
-				all = en[i].split(':')[1]
-			}else{
-				all = en[i].split(':')[1][0]
-			}
->>>>>>> 704e558f9b58f85a24ad6f863bf0c28c6ed039b9
 			bjys.push(all)//追加到alls里
 		}
-		//退学
-		//把对象转化为字符串
-		var jsons = JSON.stringify(bjy);
-		var en=jsons.split(',')
-		var txs =[];//截取到的数据放在这里
-		for(var i=0;i<en.length;i++){
-			if(en == '{}'){
-				all = en[i].split(':')[1]
-			}else{
-				all = en[i].split(':')[1][0]
-			}
-			txs.push(all)//追加到alls里
-		}
+		// console.log(bjys);
 
 		// 获取所有班级
 		$.ajax({
@@ -479,9 +412,8 @@
 						alls[i] = 0;
 						mbs[i] = 0;
 					}
-					if(bjys[i] == undefined || txs[i] == undefined){
+					if(bjys[i] == undefined){
 							bjys[i]= 0;	
-							txs[i] = 0;
 					}
 					$(
 						`
@@ -489,7 +421,7 @@
 							<td>${data[i].class}</td>
 							<td>${data[i].door}</td>
 							<td>${data[i].number}</td>
-							<td>${alls[i] - mbs[i] - bjys[i] - txs[i]}</td>
+							<td>${alls[i]}</td>
 							<td>${Math.round((data[i].number - alls[i]) / data[i].number *100) + '%'}</td>
 							<td>${mbs[i]}</td>
 							<td>${Math.round((data[i].number - alls[i]- mbs[i]) / data[i].number *100) + '%'}</td>
@@ -507,8 +439,6 @@
 		// 查看每个班级请假名单
 		function look(index) {
 			mytbody.innerHTML = '';
-			mysuspen.innerHTML = '';
-			myment.innerHTML = '';
 			stop_number.innerHTML = '是否休学';
 			$.ajax({
 				type: 'get',
@@ -519,9 +449,7 @@
 				success(data) {
 					if (data.length) {
 						console.log(data)
-						leave.style.opacity = 1;
-						suspen.style.opacity = 1;
-						ment.style.opacity = 1;
+						mytable.style.opacity = 1;
 						var len = data.length;
 						var arr = [];
 						for (var i = 0; i < len; i++) {
@@ -531,8 +459,8 @@
 							} else {
 								data[i].ora = '否'
 							}
-							var tr = document.createElement('tr');
-							tr.innerHTML = `
+							$(
+								`<tr style="height:40px;">
 								<td>${data[i].classa}</td>
 								<td>${data[i].namea}</td>
 								<td>${data[i].numbera}</td>
@@ -541,33 +469,19 @@
 								<td>${data[i].resona}</td>
 								<td id="stop">${data[i].ora}</td>
 								<td class="ye">
-									<button id="confirm" onclick="queren(${data[i].numbera},${data[i].classa})">确认</button>
+									<button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button>
 								</td>
-							`;
-							if(data[i].resona == '退学'){
-								mysuspen.appendChild(tr);
-								$('#mysuspen tr td button').css({'display':'none'})
-							}else if(data[i].resona == '不就业'){
-								myment.appendChild(tr);
-								$('#myment tr td button').css({'display':'none'})
-							}else{
-								mytbody.appendChild(tr);
-								// $('#mytbody tr td button').css({'display':'block'})
-							}
-							
+								</tr>`
+							).appendTo('#mytbody')
 						};
-						
-						// stop_number.innerHTML += '(' + arr.length + ')';
+						// console.log(arr.length);
+						stop_number.innerHTML += '(' + arr.length + ')';
 					} else {
-						leave.style.opacity = 1;
-						suspen.style.opacity = 1;
-						ment.style.opacity = 1;
-						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没人请假</td></tr>`).appendTo('#mytbody');
-						alert('该班级没人请假');
-						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没有人休学</td></tr>`).appendTo('#mysuspen');
-						alert('该班级没有人休学');
-						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没有人签不就业协议</td></tr>`).appendTo('#myment');
-						alert('该班级没有人签不就业协议');
+						mytable.style.opacity = 1;
+						// $('#mytbody').text('该班级没人请假');
+						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没人请假</td></tr>`).appendTo(
+							'#mytbody')
+						alert('该班级没人请假')
 					}
 				}
 			})
@@ -603,6 +517,7 @@
 			var localStorageUser = JSON.parse(localStorage.user);
 			audi = localStorageUser.uid;
 		}
+		console.log(audi)
 		$.ajax({
 			type: 'get',
 			url: 'http://localhost:8000/indexs/state',
@@ -610,6 +525,7 @@
 				uid: audi,
 			},
 			success(data) {
+				console.log(data)
 				if (data[0].AR == 'yes') {
 					$('.ye').css({
 						'display': 'table-cell'

@@ -228,7 +228,7 @@ router.get('/s',function(req,res){
 		}
 	})
 });	
-//删除
+//删除学生
 router.get('/del',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json = req.query;
@@ -243,6 +243,23 @@ router.get('/del',function(req,res){
 		}
 	})
 })
+// 存入离校学校
+
+// router.get('/history',function(req,res){
+// 	res.setHeader('Access-Control-Allow-Origin','*');
+// 	var json = req.query;
+// 	console.log(json);
+// 	sql.con({
+// 		arr:[json.id],
+// 		sql:'select * from mydata where id=?',
+// 		success(data){
+// 			res.send(data);
+// 		},
+// 		error(err){
+// 			res.send(err);
+// 		}
+// 	})
+// })
 //新学员入住寝室录入
 router.get('/dorm',function(req,res){
 	var json=req.query;
