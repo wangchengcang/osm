@@ -1,392 +1,430 @@
 <!DOCTYPE html>
 <html lang="zh">
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>新增学员信息</title>
-	<link rel="stylesheet" href="stylesheets/record.css">
-	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
-	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>新增学员信息</title>
+		<link rel="stylesheet" href="stylesheets/record.css">
+		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+		<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+	</head>
 
-<body>
-	<div class="main">
-		<div class="title">
-			<a href="index.html" class="return"><i class="iconfont">&#xe66f;</i></a>
-			<h3>新增学员记录</h3>
-		</div>
-		<div class="mian-table">
-			<div class="select">
-				<input type="search" id="search" placeholder="请输入学员姓名">
-				<button id="search_name">搜索</button>
-			</div>
-			<span class="returna" style="font-size: 25px;">←</span>
-			<button type="button" class="add" id="newadd">学员录入</button>
-			<table cellspacing="0" class="newtrainees" id="biao">
-				<tr style="background-color: #2cc9aa; color: #fff;height:50px;">
-					<th>学号</th>
-					<th>姓名</th>
-					<th>班级</th>
-					<th>年龄</th>
-					<th>身份证号</th>
-					<th>父母电话</th>
-					<th>籍贯</th>
-					<th>大区</th>
-					<th>学籍</th>
-					<th>班级</th>
-					<th>详情</th>
-				</tr>
-			</table>
-		</div>
-		<div class="box" id="anewadd">
+	<body>
+		<div class="main">
 			<div class="title">
-				<h3>录入学生基本信息</h3>
+				<a href="index.html" class="return"><i class="iconfont">&#xe66f;</i></a>
+				<h3>新增学员记录</h3>
 			</div>
-			<div class="xinx">基本信息</div>
-			<table border="0" cellspacing="1" cellpadding="" style="background:#d1e2f9;">
-				<tr>
-					<td>
-						<p>学号</p><input type="text" class="z-text" id="id">
-					</td>
-					<td>
-						<p>姓名</p><input type="text" class="z-text" id="aname">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>性别</p>
-						<select class="z-text" id="gender">
-							<option value="男">男</option>
-							<option value="女">女</option>
-						</select>
-					</td>
-					<td>
-						<p>身份证号</p><input type="text" class="z-text" id="idsf">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>年龄</p><input type="number" class="z-text" id="age">
-					</td>
-					<td>
-						<p>出生日期</p>*<input type="date" class="z-text" id="cs">
-					</td>
-
-				</tr>
-				<tr>
-					<td>
-						<p>民族</p>
-						<select class="z-text" id="mz"></select>
-					</td>
-					<td>
-						<p>籍贯</p><input type="text" class="z-text" id="jg">
-					</td>
-
-				</tr>
-				<tr>
-					<td>
-						<p>政治面貌</p><input type="text" class="z-text" id="mmao">
-					</td>
-					<td>
-						<p>照片</p><input type="file" class="z-text" id="myimg">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>本人电话</p><input type="tel" class="z-text" id="mydh">
-					</td>
-					<td>
-						<p>学籍</p><input type="tel" class="z-text" id="xj">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>所在班级</p><input type="tel" class="z-text" id="bj">
-					</td>
-					<td>
-						<p>大区</p><input type="tel" class="z-text" id="dq">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>学制</p>
-						<select class="z-text" id="system">
-							<option value="15个月">15个月</option>
-							<option value="2+1">2+1学制</option>
-							<option value="3+1">3+1学制</option>
-						</select>
-					</td>
-					<td>
-						<p>班级</p><select class="z-text" id="class_ban">
-							
-						</select>
-					</td>
-				</tr>
-			</table>
-			</table>
-			<div class="xinx">家庭信息</div>
-			<table border="0" cellspacing="1" cellpadding="" style="padding-bottom:20px;background:#d1e2f9;">
-				<tr>
-					<td>
-						<p>家长姓名</p><input type="text" class="z-text" id="jzname">
-					</td>
-					<td>
-						<p>家长所在单位</p><input type="text" class="z-text" id="jzdw">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>家长任职职位</p><input type="text" class="z-text" id="zjzw">
-					</td>
-					<td>
-						<p>家长联系电话</p><input type="tel" class="z-text" id="jzdh">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>家庭住址</p><input type="text" class="z-text" id="zhuzhi">
-					</td>
-					<td>
-						<p>邮政编码</p><input type="text" class="z-text" id="yz">
-					</td>
-				</tr>
-			</table>
-			<p class="zy">注意:每个附件的大小不得超出 3072K字节，否则系统拒绝接收。</p>
-			<div class="btn">
-				<button class="open" id="aopen">保存并关闭</button>
-				<button class="input" id="anextopen">保存并录入下一条</button>
-				<button class="close" id="aclose">关闭</button>
+			<div class="mian-table">
+				<div class="select">
+					<input type="search" id="search" placeholder="请输入学员姓名">
+					<button id="search_name">搜索</button>
+				</div>
+				<span class="returna" style="font-size: 25px;">←</span>
+				<button type="button" class="add" id="newadd">学员录入</button>
+				<table cellspacing="0" class="newtrainees" id="biao">
+					<tr style="background-color: #2cc9aa; color: #fff;height:50px;">
+						<th>学号</th>
+						<th>姓名</th>
+						<th>班级</th>
+						<th>年龄</th>
+						<th>身份证号</th>
+						<th>父母电话</th>
+						<th>籍贯</th>
+						<th>大区</th>
+						<th>学籍</th>
+						<th>班级</th>
+						<th>详情</th>
+					</tr>
+				</table>
 			</div>
+			<div class="box" id="anewadd">
+				<div class="title">
+					<h3>录入学生基本信息</h3>
+				</div>
+				<div class="xinx">基本信息</div>
+				<table border="0" cellspacing="1" cellpadding="" style="background:#d1e2f9;">
+					<tr>
+						<td>
+							<p>学号</p><input type="text" class="z-text" id="id">
+						</td>
+						<td>
+							<p>姓名</p><input type="text" class="z-text" id="aname">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>性别</p>
+							<select class="z-text" id="gender">
+								<option value="男">男</option>
+								<option value="女">女</option>
+							</select>
+						</td>
+						<td>
+							<p>身份证号</p><input type="text" class="z-text" id="idsf">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>年龄</p><input type="number" class="z-text" id="age">
+						</td>
+						<td>
+							<p>出生日期</p>*<input type="date" class="z-text" id="cs">
+						</td>
 
+					</tr>
+					<tr>
+						<td>
+							<p>民族</p>
+							<select class="z-text" id="mz"></select>
+						</td>
+						<td>
+							<p>籍贯</p><input type="text" class="z-text" id="jg">
+						</td>
+
+					</tr>
+					<tr>
+						<td>
+							<p>政治面貌</p><input type="text" class="z-text" id="mmao">
+						</td>
+						<td>
+							<p>照片</p><input type="file" class="z-text" id="myimg">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>本人电话</p><input type="tel" class="z-text" id="mydh">
+						</td>
+						<td>
+							<p>学籍</p><input type="tel" class="z-text" id="xj">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>所在班级</p><select class="z-text" id="class_ban"></select>
+						</td>
+						<td>
+							<p>大区</p><input type="tel" class="z-text" id="dq">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>学制</p>
+							<select class="z-text" id="system">
+								<option value="15个月">15个月</option>
+								<option value="2+1">2+1学制</option>
+								<option value="3+1">3+1学制</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				</table>
+				<div class="xinx">家庭信息</div>
+				<table border="0" cellspacing="1" cellpadding="" style="padding-bottom:20px;background:#d1e2f9;">
+					<tr>
+						<td>
+							<p>家长姓名</p><input type="text" class="z-text" id="jzname">
+						</td>
+						<td>
+							<p>家长所在单位</p><input type="text" class="z-text" id="jzdw">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>家长任职职位</p><input type="text" class="z-text" id="zjzw">
+						</td>
+						<td>
+							<p>家长联系电话</p><input type="tel" class="z-text" id="jzdh">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>家庭住址</p><input type="text" class="z-text" id="zhuzhi">
+						</td>
+						<td>
+							<p>邮政编码</p><input type="text" class="z-text" id="yz">
+						</td>
+					</tr>
+				</table>
+				<p class="zy">注意:每个附件的大小不得超出 3072K字节，否则系统拒绝接收。</p>
+				<div class="btn">
+					<button class="open" id="aopen">保存并关闭</button>
+					<button class="input" id="anextopen">保存并录入下一条</button>
+					<button class="close" id="aclose">关闭</button>
+				</div>
+
+			</div>
+			<div class="search_display">
+				<li id="warning">未找到结果</li>
+				<table cellspacing="0" class="trainees" id="search_display">
+					<tr style="background: #2cc9aa; color: #fff;height:50px;" id="one">
+						<th>学号</th>
+						<th>姓名</th>
+						<th>班级</th>
+						<th>年龄</th>
+						<th>身份证号</th>
+						<th>父母电话</th>
+						<th>籍贯</th>
+						<th>大区</th>
+						<th>学籍</th>
+						<th>班级</th>
+						<th>详情</th>
+					</tr>
+				</table>
+			</div>
 		</div>
-		<div class="search_display">
-			<li id="warning">未找到结果</li>
-			<table cellspacing="0" class="trainees" id="search_display">
-				<tr style="background: #2cc9aa; color: #fff;height:50px;" id="one">
-					<th>学号</th>
-					<th>姓名</th>
-					<th>班级</th>
-					<th>年龄</th>
-					<th>身份证号</th>
-					<th>父母电话</th>
-					<th>籍贯</th>
-					<th>大区</th>
-					<th>学籍</th>
-					<th>班级</th>
-					<th>详情</th>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<div class="footer"></div>
-</body>
-<script src="js/jquery.js"></script>
-<script>
-	//请求后台有班级阶段
-	readclass()
-	function readclass() {
-		$.ajax({
-			type: 'get',
-			url: 'http://localhost:8000/indexs/Read_class',
-			success(data) {
-				var str = '';
-				for (var i = 0; i < data.length; i++) {
-					str += `
+		<div class="footer"></div>
+	</body>
+	<script src="js/jquery.js"></script>
+	<script>
+		//请求后台有班级阶段
+		readclass()
+
+		function readclass() {
+			$.ajax({
+				type: 'get',
+				url: 'http://localhost:8000/indexs/Read_class',
+				success(data) {
+					var str = '';
+					for (var i = 0; i < data.length; i++) {
+						str += `
 						<option value="${data[i].class}">${data[i].class}</option>
 					`
+					}
+					class_ban.innerHTML = str
 				}
-				class_ban.innerHTML = str
-			}
-		})
-	}
-	//判断读者还是管理者
-	function gl(){
-		$('.eea').css({'display':'none'})
-		$('#newadd').css({'display':'none'})
-		$('#anewadd').css({'display':'none'})
-		if(localStorage.user){
-			var localStorageUser=JSON.parse(localStorage.user);
-			audi=localStorageUser.uid;
+			})
 		}
-		console.log(audi)
-		$.ajax({
-			type:'get',
-			url:'http://localhost:8000/indexs/state',
-			data:{
-				uid:audi,
-			},
-			success(data){
-				console.log(data)
-				if(data[0].AR=='yes'){
-					$('.eea').css({'display':'initial'})
-					$('#newadd').css({'display':'initial'})
-					$('#anewadd').css({'display':'initial'})
-				}else{
-					$('.eea').css({'display':'none'})
-					$('#newadd').css({'display':'none'})
-					$('#anewadd').css({'display':'none'})
-				}
+		//判断读者还是管理者
+		function gl() {
+			$('.eea').css({
+				'display': 'none'
+			})
+			$('#newadd').css({
+				'display': 'none'
+			})
+			$('#anewadd').css({
+				'display': 'none'
+			})
+			if (localStorage.user) {
+				var localStorageUser = JSON.parse(localStorage.user);
+				audi = localStorageUser.uid;
 			}
-		})
-	}
-	// 民族下拉列框开始
-
-	var nations = ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
-		"土家族", "哈尼族", "哈萨克族", "傣族", "黎族", "傈僳族", "佤族", "畲族", "高山族", "拉祜族", "水族", "东乡族", "纳西族", "景颇族", "柯尔克孜族", "土族",
-		"达斡尔族", "仫佬族", "羌族", "布朗族", "撒拉族", "毛南族", "仡佬族", "锡伯族", "阿昌族", "普米族", "塔吉克族", "怒族", "乌孜别克族", "俄罗斯族", "鄂温克族",
-		"德昂族", "保安族", "裕固族", "京族", "塔塔尔族", "独龙族", "鄂伦春族", "赫哲族", "门巴族", "珞巴族", "基诺族"];
-	var option = "";
-	for (var i = 0; i < nations.length; i++) {
-		option += '<option value="' + nations[i] + '">' + nations[i] + '</option>';
-	}
-	$(option).appendTo("#mz");
-
-	// 民族下拉列框结束
-	aclose.onclick = function () {
-		anewadd.style.top = -800 + 'px';
-		anewadd.style.transition = 0.5 + 's';
-		setTiemout(function () {
-			window.location.reload();
-		}, 500)
-	}
-	newadd.onclick = function () {
-		anewadd.style.top = 0 + 'px';
-		anewadd.style.transition = 0.5 + 's';
-	}
-	var href = 'http://localhost:8000';
-	//本人图片
-	var ximg = '';
-	myimg.onchange = function () {
-		var a = myimg.files[0];
-		var b = new FormData;
-		b.append('img', a)
-		$.ajax({
-			type: 'post',
-			url: href + '/users/img',
-			data: b,
-			contentType: false,
-			processData: false,
-			success(data) {
-				ximg = href + data
-				console.log(ximg)
-			}
-		})
-	}
-	//保存按钮
-	aopen.onclick = function () {
-		data()
-		setTimeout(function () {
-			window.location.reload();
-		})
-	}
-	//保存按钮并录入下一名学员
-	anextopen.onclick = function () {
-		data()
-	}
-	//录入学员信息
-	function data() {
-		if (id.value == '') {
-			alert('学号不能为空')
-		} else if (/[\u4E00-\u9FA5]/g.test(id.value)) {
-			alert('学号不能为中文')
-			id.value = '';
-		} else if (aname.value == '') {
-			alert('姓名不得为空')
-		} else if (gender.value == '') {
-			alert('性别不能为空')
-		} else if (idsf.value == '' || /[\u4E00-\u9FA5]/g.test(idsf.value)) {
-			alert('身份证号不得为空')
-			idsf.value = '';
-		} else if (age == '') {
-			alert('年龄不得为空')
-		} else if (cs == '') {
-			alert('出生日期不得为空')
-		} else if (mz == '') {
-			alert('民族不得为空')
-		} else if (jg == '') {
-			alert('籍贯不得为空')
-		} else if (mmao == '') {
-			alert('请输入政治面貌')
-		} else if (ximg == '') {
-			alert('请上传本人图片')
-		} else if (mydh == '') {
-			alert('请输入本人电话号码')
-		} else if (/[\u4E00-\u9FA5]/g.test(mydh.value)) {
-			alert('本人电话不得出现中文');
-			mydh.value = '';
-		} else if (xj == '') {
-			alert('请输入学籍')
-		} else if (bj == '') {
-			alert('请输入目前所在班级')
-		} else if (dq == '') {
-			alert('请输入大区')
-		} else if (system == '') {
-			alert('学制不能为空')
-		} else if (jzname == '') {
-			alert('请输入父亲或母亲姓名');
-		} else if (jzdw == '') {
-			alert('请输入父亲或母亲所在单位');
-		} else if (zjzw == '') {
-			alert('请输入父亲或母亲职位');
-		} else if (jzdh == '') {
-			alert('请输入父亲或母亲电话');
-		} else if (zhuzhi == '') {
-			alert('请输入家庭住址')
-		} else if (yz == '') {
-			alert('请输入邮政编码')
-		} else {
+			console.log(audi)
 			$.ajax({
-				type: 'post',
-				url: href + '/users/arr',
+				type: 'get',
+				url: 'http://localhost:8000/indexs/state',
 				data: {
-					id: id.value,
-					aname: aname.value,
-					class: classs.value,
-					gender: gender.value,
-					idsf: idsf.value,
-					age: age.value,
-					cs: cs.value,
-					mz: mz.value,
-					jg: jg.value,
-					mmao: mmao.value,
-					myimg: ximg,
-					mydh: mydh.value,
-					jzname: jzname.value,
-					jzdw: jzdw.value,
-					jzzw: zjzw.value,
-					jzdh: jzdh.value,
-					zhuzhi: zhuzhi.value,
-					yz: yz.value,
-					xj: xj.value,
-					bj: bj.value,
-					dq: dq.value,
-					system: system.value,
+					uid: audi,
 				},
 				success(data) {
-					if (data == 'ok') {
-						alert('录入成功')
-						$("input").val('');
-						read()
+					console.log(data)
+					if (data[0].AR == 'yes') {
+						$('.eea').css({
+							'display': 'initial'
+						})
+						$('#newadd').css({
+							'display': 'initial'
+						})
+						$('#anewadd').css({
+							'display': 'initial'
+						})
 					} else {
-						alert('该学员已被录入')
+						$('.eea').css({
+							'display': 'none'
+						})
+						$('#newadd').css({
+							'display': 'none'
+						})
+						$('#anewadd').css({
+							'display': 'none'
+						})
 					}
 				}
 			})
 		}
-	}
-	//读取新学员信息
-	read()
-	function read() {
-		$.ajax({
-			type: 'get',
-			url: href + '/users/read',
-			success(data) {
-				for (var i = 0; i < data.length; i++) {
-					var otr = document.createElement('tr')
-					otr.className = 'one-odd'
-					otr.innerHTML = `
+		// 民族下拉列框开始
+
+		var nations = ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
+			"土家族", "哈尼族", "哈萨克族", "傣族", "黎族", "傈僳族", "佤族", "畲族", "高山族", "拉祜族", "水族", "东乡族", "纳西族", "景颇族", "柯尔克孜族", "土族",
+			"达斡尔族", "仫佬族", "羌族", "布朗族", "撒拉族", "毛南族", "仡佬族", "锡伯族", "阿昌族", "普米族", "塔吉克族", "怒族", "乌孜别克族", "俄罗斯族", "鄂温克族",
+			"德昂族", "保安族", "裕固族", "京族", "塔塔尔族", "独龙族", "鄂伦春族", "赫哲族", "门巴族", "珞巴族", "基诺族"
+		];
+		var option = "";
+		for (var i = 0; i < nations.length; i++) {
+			option += '<option value="' + nations[i] + '">' + nations[i] + '</option>';
+		}
+		$(option).appendTo("#mz");
+
+		// 民族下拉列框结束
+		aclose.onclick = function() {
+			anewadd.style.top = -800 + 'px';
+			anewadd.style.transition = 0.5 + 's';
+			setTiemout(function() {
+				window.location.reload();
+			}, 500)
+		}
+		newadd.onclick = function() {
+			anewadd.style.top = 0 + 'px';
+			anewadd.style.transition = 0.5 + 's';
+		}
+		var href = 'http://localhost:8000';
+		//本人图片
+		var ximg = '';
+		myimg.onchange = function() {
+			var a = myimg.files[0];
+			var b = new FormData;
+			b.append('img', a)
+			$.ajax({
+				type: 'post',
+				url: href + '/users/img',
+				data: b,
+				contentType: false,
+				processData: false,
+				success(data) {
+					ximg = href + data
+					console.log(ximg)
+				}
+			})
+		}
+		//保存按钮
+		aopen.onclick = function() {
+			data()
+			setTimeout(function() {
+				window.location.reload();
+			})
+		}
+		//保存按钮并录入下一名学员
+		anextopen.onclick = function() {
+			data()
+		}
+		//录入学员信息
+		// 手机正则表达式
+		// / if(!(/^1[3456789]\d{9}$/.test(phone))){ 
+		//        alert("手机号码有误，请重填");  
+		//        return false; 
+		//    } 
+		//身份证正则表达式
+		// var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		// if (reg.test(card) === false) {
+		// 	alert("身份证输入不合法");
+		// 	return false;
+		// }
+		// return true
+		var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		function data() {
+			if (id.value == '') {
+				alert('学号不能为空')
+			} else if (/[\u4E00-\u9FA5]/g.test(id.value)) {
+				alert('学号不能为中文')
+				id.value = '';
+			} else if (aname.value == '') {
+				alert('姓名不得为空')
+			} else if (gender.value == '') {
+				alert('性别不能为空')
+			} else if (idsf.value == '' || /[\u4E00-\u9FA5]/g.test(idsf.value)) {
+				alert('身份证号不得为空')
+				idsf.value = '';
+			} else if (reg.test(idsf.value) === false) {
+				alert("身份证输入不合法");
+				return false;
+			}else if (age == '') {
+				alert('年龄不得为空')
+			} else if (cs == '') {
+				alert('出生日期不得为空')
+			} else if (mz == '') {
+				alert('民族不得为空')
+			} else if (jg == '') {
+				alert('籍贯不得为空')
+			} else if (mmao == '') {
+				alert('请输入政治面貌')
+			} else if (ximg == '') {
+				alert('请上传本人图片')
+			} else if (mydh == '') {
+				alert('请输入本人电话号码')
+			} else if (!(/^1[3456789]\d{9}$/.test(mydh.value))) {
+				alert('本人电话号码不规范')
+			} else if (/[\u4E00-\u9FA5]/g.test(mydh.value)) {
+				alert('本人电话不得出现中文');
+				mydh.value = '';
+			} else if (xj == '') {
+				alert('请输入学籍')
+			} else if (class_ban == '') {
+				alert('请输入目前所在班级')
+			} else if (dq == '') {
+				alert('请输入大区')
+			} else if (system == '') {
+				alert('学制不能为空')
+			} else if (jzname == '') {
+				alert('请输入父亲或母亲姓名');
+			} else if (jzdw == '') {
+				alert('请输入父亲或母亲所在单位');
+			} else if (zjzw == '') {
+				alert('请输入父亲或母亲职位');
+			} else if (jzdh == '') {
+				alert('请输入父亲或母亲电话');
+			} else if (!(/^1[3456789]\d{9}$/.test(jzdh.value))) {
+				alert('父母电话不规范');
+			}
+			if (zhuzhi == '') {
+				alert('请输入家庭住址')
+			} else if (yz == '') {
+				alert('请输入邮政编码')
+			} else {
+				$.ajax({
+					type: 'post',
+					url: href + '/users/arr',
+					data: {
+						id: id.value,
+						aname: aname.value,
+						class: classs.value,
+						gender: gender.value,
+						idsf: idsf.value,
+						age: age.value,
+						cs: cs.value,
+						mz: mz.value,
+						jg: jg.value,
+						mmao: mmao.value,
+						myimg: ximg,
+						mydh: mydh.value,
+						jzname: jzname.value,
+						jzdw: jzdw.value,
+						jzzw: zjzw.value,
+						jzdh: jzdh.value,
+						zhuzhi: zhuzhi.value,
+						yz: yz.value,
+						xj: xj.value,
+						bj: class_ban.value,
+						dq: dq.value,
+						system: system.value,
+					},
+					success(data) {
+						if (data == 'ok') {
+							alert('录入成功')
+							$("input").val('');
+							read()
+						} else {
+							alert('该学员已被录入')
+						}
+					}
+				})
+			}
+		}
+		//读取新学员信息
+		read()
+
+		function read() {
+			$.ajax({
+				type: 'get',
+				url: href + '/users/read',
+				success(data) {
+					for (var i = 0; i < data.length; i++) {
+						var otr = document.createElement('tr')
+						otr.className = 'one-odd'
+						otr.innerHTML =
+							`
 							<td style="width:7%;">${data[i].id}</td>
 							<td style="width:8%;">${data[i].name}</td>
 							<td style="width:8%;">${data[i].class}</td>
@@ -400,64 +438,77 @@
 							<td style="width:13%;">
 								<buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see eea">删除</buttuon>
 							</td>	
-					`;	
-					biao.appendChild(otr)
-				}
-				gl()
+					`;
+						biao.appendChild(otr)
+					}
+					gl()
 
-			}
-		})
-	}
-	// 查看学生资料
-	function chakan(msg) {
-		location.href = './essentialinformation.html';
-		localStorage.setItem("which", JSON.stringify(msg));
-	}
-	// 搜索框
-	$('#search').on('focus', function () {
-		$('.select').css({ 'width': '300px' });
-		$('.search_display').css({ 'display': 'block' });
-		// $('#biao').css({'display':'none'});
-		// $('.return').css({ 'display': 'none' })
-		$('.returna').css({ 'display': 'block' });
-	})
-	//返回
-	$('.returna').on('click', function () {
-		$('#search_display').css({ 'display': 'block' })
-		setTimeout(function () {
-			window.location.reload();
-		})
-		$('.returna').css({ 'display': 'none' });
-		$('.return').css({ 'display': 'block' })
-	})
-	$('#search').on('blur', function () {
-		$('.select').css({ 'width': '161px' })
-	})
-	//搜索
-	$('#search_name').on('click', function () {
-		$.ajax({
-			type: 'get',
-			url: href + '/users/s',
-			data: {
-				id: $("#search").val(),
-				name: $('#search').val(),
-				class: $('#search').val(),
-				gender: $("#search").val(),
-				myage: $("#search").val(),
-				place: $('#search').val(),
-				dq: $("#search").val()
-			},
-			success(data) {
-				console.log(data);
-				$('#one').nextAll().remove();
-				if (search == '') {
-					biao.style.display = 'inline-table';
-				} else {
-					biao.style.display = 'none';
 				}
-				// $('.newtrainees').css({ 'display': 'none' })
-				for (var i = 0; i < data.length; i++) {
-					$(`
+			})
+		}
+		// 查看学生资料
+		function chakan(msg) {
+			location.href = './essentialinformation.html';
+			localStorage.setItem("which", JSON.stringify(msg));
+		}
+		// 搜索框
+		$('#search').on('focus', function() {
+			$('.select').css({
+				'width': '300px'
+			});
+			$('.returna').css({
+				'display': 'block'
+			});
+		})
+		//返回
+		$('.returna').on('click', function() {
+			$('#search_display').css({
+				'display': 'block'
+			})
+			setTimeout(function() {
+				window.location.reload();
+			})
+			$('.returna').css({
+				'display': 'none'
+			});
+			$('.return').css({
+				'display': 'block'
+			})
+		})
+		$('#search').on('blur', function() {
+			$('.select').css({
+				'width': '161px'
+			})
+		})
+		//搜索
+		$('#search_name').on('click', function() {
+			$('.search_display').css({
+				'display': 'block'
+			});
+			$.ajax({
+				type: 'get',
+				url: href + '/users/s',
+				data: {
+					id: $("#search").val(),
+					name: $('#search').val(),
+					class: $('#search').val(),
+					gender: $("#search").val(),
+					myage: $("#search").val(),
+					place: $('#search').val(),
+					dq: $("#search").val()
+				},
+				success(data) {
+					console.log(data);
+					$('#one').nextAll().remove();
+					if (search == '') {
+						biao.style.display = 'inline-table';
+					} else {
+						biao.style.display = 'none';
+					}
+					// $('.newtrainees').css({ 'display': 'none' })
+					for (var i = 0; i < data.length; i++) {
+						$(
+							`
 						<tr class="one-odd">
 							<td style="width:7%;">${data[i].id}</td>
 							<td style="width:8%;">${data[i].name}</td>
@@ -473,50 +524,51 @@
 								<buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
 							</td>
 						</tr>
-					`).appendTo('#search_display')
+					`
+						).appendTo('#search_display')
+					}
+
 				}
 
-			}
-
+			})
 		})
-	})
-	//删除
-	function del(uid) {
-		console.log(uid);
-		$.ajax({
-			type: 'get',
-			url: href + '/users/del',
-			data: {
-				uid: uid,
-			},
-			success(data) {
-				if (data == 'ok') {
-					alert('删除成功');
+		//删除
+		function del(uid) {
+			console.log(uid);
+			$.ajax({
+				type: 'get',
+				url: href + '/users/del',
+				data: {
+					uid: uid,
+				},
+				success(data) {
+					if (data == 'ok') {
+						alert('删除成功');
+					}
 				}
-			}
-		})
-		window.location.reload();
-	}
-	// id
-	// name
-	// xb
-	// idsf
-	// age
-	// cs
-	// mz
-	// jg
-	// mmao
-	// myimg
-	// mydh
-	// jzname
-	// jzdw
-	// zjzw
-	// jzdh
-	// zhuzhi
-	// yz
-	// xj
-	// bj
-	// dq
-</script>
+			})
+			window.location.reload();
+		}
+		// id
+		// name
+		// xb
+		// idsf
+		// age
+		// cs
+		// mz
+		// jg
+		// mmao
+		// myimg
+		// mydh
+		// jzname
+		// jzdw
+		// zjzw
+		// jzdh
+		// zhuzhi
+		// yz
+		// xj
+		// bj
+		// dq
+	</script>
 
 </html>

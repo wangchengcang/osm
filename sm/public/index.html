@@ -20,7 +20,10 @@
 	</style>
 </head>
 <body>
-	<div id="mask">请先登录</div>
+	<div id="mask">
+		<p>请先登录</p>
+		<a href="login.html">去登陆</a>
+	</div>
 	
     <div id="box">
 
@@ -47,8 +50,8 @@
                         <ul id="enl">
                             <li><a href="student.html"><i class="iconfont">&#xe603;</i> 基本信息</a></li>
                             <li><a href="state.html"><i class="iconfont">&#xe61e;</i> 当前状态</a></li>
-                			<li><a href="achievement.html"><i class="iconfont">&#xe63d;</i> 成绩录入</a></li>
-                            <li><a href="guanli.html"><i class="iconfont">&#xe76a;</i> 综合积分</a></li>
+                			<li class="ye"><a href="achievement.html"><i class="iconfont">&#xe63d;</i> 成绩录入</a></li>
+                            <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
                 			<li><a href="http://z.cimns.com:8081/"><i class="iconfont">&#xe65e;</i> 作业上传</a></li>
                             <li><a href="fankui.html"><i class="iconfont">&#xe608;</i> 学生反馈</a></li>
                         </ul>
@@ -90,7 +93,7 @@
                 <li>在线留言</li>
                 <li>联系我们</li>
             </ul>
-            <p>@Copyright by htly 2000-2019 公司：系统管理应用有限公司 地址：北京市中关村</p>
+            <p>@Copyright by htly 2000-2019 公司：系统管理应用有限公司 地址：北京市窦店镇百草洼村</p>
         </div>
     </div>
 	<script src="font/iconfont.js"></script>
@@ -351,7 +354,7 @@
                         }
                         str+= `
 							<tr>
-								<td>${data[i].class}(${data[i].stage})</td>
+								<td style="text-align:left;text-indent:2em;">${data[i].class}(${data[i].stage})</td>
 								<td>${data[i].number}</td>
 								<td>${suspend[i]}</td>
 								<td>${outs[i]}</td>
@@ -367,8 +370,33 @@
                 }
             })
         }
-<!-- <td>${reasons}</td> -->
-        
+		//管理员判断
+        $('.ye').css({'display':'none'});
+        $('.yes').css({'display':'none'});
+        if(localStorage.user){
+            var localStorageUser=JSON.parse(localStorage.user);
+        	audi=localStorageUser.uid;
+        }
+        console.log(audi)
+        window.onload=function (){
+        	$.ajax({
+        		type:'get',
+        		url:'http://localhost:8000/indexs/state',
+        		data:{
+        			uid:audi,
+        		},
+        		success(data){
+        			console.log(data)
+        			if(data[0].AR==='yes'){
+                        $('.ye').css({'display':'table-cell'})
+                        $('.yes').css({'display':'block'})
+        			}else{
+                        $('.ye').css({'display':'none'})
+                        $('.yes').css({'display':'none'})
+        			}
+        		}
+        	})
+        }
         
     </script>
 </body>

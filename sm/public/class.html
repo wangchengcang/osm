@@ -208,7 +208,7 @@
         <div id="middle">
             <input type="search" id="search" placeholder="班级信息搜索">
         </div>
-		<div id="content" class="yes">
+		<div id="content" class="yes ye">
 		    <p style="width:15%;">班级： <input type="text" id="bj" placeholder="班级" style="width:50%;"></p>
 		    <p style="width:15%;">阶段： <input type="text" id="jd" placeholder="阶段" style="width:50%;"></p>
 		    <p style="width:15%;">门牌号： <input type="text" id='mph' placeholder="门牌号" style="width:50%;"></p>
@@ -240,7 +240,33 @@
 
     <script src="js/jquery.js"></script>
     <script>
-        
+		//判断是否是管理者
+        $('.ye').css({'display':'none'});
+        $('.yes').css({'display':'none'});
+        if(localStorage.user){
+            var localStorageUser=JSON.parse(localStorage.user);
+        	audi=localStorageUser.uid;
+        }
+        console.log(audi)
+        window.onload=function (){
+        	$.ajax({
+        		type:'get',
+        		url:'http://localhost:8000/indexs/state',
+        		data:{
+        			uid:audi,
+        		},
+        		success(data){
+        			console.log(data)
+        			if(data[0].AR==='yes'){
+                        $('.ye').css({'display':'table-cell'})
+                        $('.yes').css({'display':'block'})
+        			}else{
+                        $('.ye').css({'display':'none'})
+                        $('.yes').css({'display':'none'})
+        			}
+        		}
+        	})
+        }
         var href = 'http://localhost:8000';
         preservation.onclick = function () {
             data();
