@@ -1,198 +1,232 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="utf-8">
-	<title>学生当前状态</title>
-	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
-	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
-	<style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;
-	}
+	<head>
+		<meta charset="utf-8">
+		<title>学生当前状态</title>
+		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+		<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
 
-	#tops p {
-		height: 60px;
-		line-height: 60px;
-		font-size: 26px;
-		font-family: bold;
-		border-bottom: 1px solid black;
-		background-color: #20b6ad;
-		color: #fff;
-	}
+			#tops p {
+				height: 60px;
+				line-height: 60px;
+				font-size: 26px;
+				font-family: bold;
+				border-bottom: 1px solid black;
+				background-color: #20b6ad;
+				color: #fff;
+			}
 
-	#tops p a {
-		text-decoration: none;
-		float: left;
-		margin-left: 5%;
-		margin-right: 15px;
-		line-height: 60px;
-	}
-	#tops a i{
-		color: #fff;
+			#tops p a {
+				text-decoration: none;
+				float: left;
+				margin-left: 5%;
+				margin-right: 15px;
+				line-height: 60px;
+			}
 
-	}
-	.con {
-		width: 90%;
-		min-height: 500px;
-		margin: 0 auto;
-	}
+			#tops a i {
+				color: #fff;
 
-	.htop {
-		width: 100%;
-		height: 100px;
-		margin-top: 20px;
-	}
-	.htop input{
-		width:100px;
-		height: 30px;
-		margin-top: 20px;
-		font-size: 18px;
-	}
-	h3 {
-		border-left: 5px solid #000;
-		padding-left: 10px;
-		margin-bottom: 10px;
-	}
+			}
 
-	#btn{
-		width: 100px;
-		height: 33px;
-		background: #16ac98;
-		border: none;
-		color: #fff;
-		text-align: center;
-		line-height: 30px;
-		margin-top: 10px;
-	}
+			.con {
+				width: 90%;
+				min-height: 500px;
+				margin: 0 auto;
+			}
 
-	#cent_table {
-		width: 100%;
-	}
+			.htop {
+				width: 100%;
+				height: 100px;
+				margin-top: 20px;
+			}
 
-	#cent_table tr td {
-		height: 30px;
-		text-align: center;
-	}
+			.htop input {
+				width: 100px;
+				height: 30px;
+				margin-top: 20px;
+				font-size: 18px;
+			}
 
-	#cent_table tr:nth-child(1) {
-		background: #16AC98;
-		color: #fff;
-		font-size: 14px;
-	}
+			h3 {
+				border-left: 5px solid #000;
+				padding-left: 10px;
+				margin-bottom: 10px;
+			}
 
-	#cent_table tr td:nth-child(1) {
-		width: 30px;
-		text-align: center;
-	}
+			#btn {
+				width: 100px;
+				height: 33px;
+				background: #16ac98;
+				border: none;
+				color: #fff;
+				text-align: center;
+				line-height: 30px;
+				margin-top: 10px;
+			}
 
+			#cent_table {
+				width: 100%;
+				border: 2px solid #16ac98;
+			}
 
-	#end_time{
-		width: 150px;
-	}
-	.htop input{
-		border:none;
-		outline: none;
-		border-bottom:solid 1px #000;
-	}
-	#thisTr td{
-		border: solid 1px #000;
-	}
-	#mytable{
-		width: 100%;
-		height: auto;
-		transition: .3s;
-		margin-top: 30px;
-		opacity: 0;
-	}
-	#mytable caption{
-		background-color: #16AC98;
-		color:#fff;
-		height: 30px;
-		line-height: 30px;
-	}
-	#mytable tr td,#mytable tr th{
-		border:solid 1px #000;
-		text-align: center;
-		border: 1px solid #16AC98;
-	}
-	#mytbody{
-		width: 100%;
-		text-align: center;
-	}
-	#mytbody tr td button{
-		width: 50px;
-		height: 100%;
-		background-color:#8512;
-		border:none;
-		outline: none;
+			#cent_table tr td {
+				height: 30px;
+				text-align: center;
+			}
 
-	}
-</style>
-</head>
+			#cent_table tr:nth-child(1) {
+				background: #16AC98;
+				color: #fff;
+				font-size: 14px;
+			}
 
-<body>
-	<div id="tops">
-		<p>
-			<a href="index.html"><i class="iconfont"></i></a>
-			当前学生信息
-		</p>
-	</div>
-	<div class="con">
-		<div class="htop ye">
-			<h3>基本信息</h3>
-			班级：<input type="text" id="class_room" style="width:10%" placeholder="请输入班级">
-			学号：<input type="text" id="student_number" style="width:10%" placeholder="学员学号">
-			学生姓名：<input type="text" id="student_name" style="width:10%" placeholder="请输入学生姓名">
-			开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:6%"> 
-			结束时间：<input type="date" id="end_time" placeholder="请输入返校时间">
-			状态：<input type="text" id="reason" style="width:14%;font-size: 16px;" placeholder="请假(超过三天算休学)或退学">
-			<button type="button" id="btn">提交</button>
+			#cent_table tr td:nth-child(1) {
+				width: 30px;
+				text-align: center;
+			}
+			#cent_table tr:nth-child(even){
+				background-color: #ebfcf6;
+			}
 
+			#end_time {
+				width: 150px;
+			}
+
+			.htop input {
+				border: none;
+				outline: none;
+				border-bottom: solid 1px #000;
+			}
+
+			#mytable {
+				width: 100%;
+				height: auto;
+				transition: .3s;
+				border: 2px solid #16AC98;
+				margin-top: 30px;
+				opacity: 0;
+			}
+
+			#mytable caption {
+				background-color: #16AC98;
+				color: #fff;
+				height: 50px;
+				line-height: 50px;
+				font-size: 20px;
+			}
+
+			#mytable tr td,
+			#mytable tr th {
+				border: solid 1px #000;
+				text-align: center;
+				border:1px solid #16AC98;
+			}
+
+			#mytbody {
+				width: 100%;
+				text-align: center;
+			}
+
+			#mytbody tr td button {
+				width:71px;
+				padding:5px 0px;
+				background-color: #2CC9AA;
+				color: #fff;
+				border: none;
+				outline: none;
+		
+			}
+			table tr:nth-child(event) {
+				background-color: #2CC9AA;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="tops">
+			<p>
+				<a href="index.html"><i class="iconfont"></i></a>
+				当前学生信息
+			</p>
 		</div>
-		<div class="cent" style="margin-top: 20px;">
-			<h3>统计信息</h3>
-			<table border="0" cellspacing="0" cellpadding="0" id="cent_table">
-				<tr>
-					<td>班级</td>
-					<td>门牌</td>
-					<td>总人数</td>
-					<td>请假人数</td>
-					<td>出勤率（假）</td>
-					<td>休学人数</td>
-					<td>出勤率（请假加休学）</td>
-					<td>不就业人数</td>
-				</tr>
-			</table>
-			<table border="0" cellspacing="0" cellpadding="0" id="mytable">
-				<caption>班级请假详情</caption>
-				<thead>
-					<tr>
-						<th>班级</th>
-						<th>姓名</th>
-						<th>学号</th>
-						<th>请假日期</th>
-						<th>归校日期</th>
-						<th>请假原因</th>
-						<th id="stop_number">是否休学</th>
-						<th>是否已返校</th>
+		<div class="con">
+			<div class="htop ye">
+				<h3>基本信息</h3>
+				班级：<select class="z-text" id="class_room"></select>
+				学号：<input type="text" id="student_number" style="width:10%" placeholder="学员学号">
+				学生姓名：<input type="text" id="student_name" style="width:10%" placeholder="学员姓名">
+				开始时间：<input type="text" id="start_time" style="border:none;outline: none;width:10%;">
+				结束时间：<input type="date" id="end_time" placeholder="请输入返校时间"><br>
+				状态：<input type="text" id="reason" style="width:19%;font-size: 16px;" placeholder="请假(超过三天算休学)或退学">
+				<button type="button" id="btn">提交</button>
+
+			</div>
+			<div class="cent" style="margin-top: 70px;">
+				<h3>统计信息</h3>
+				<table border="0" cellspacing="0" cellpadding="0" id="cent_table">
+					<tr style="height: 50px;">
+						<td style="width:10%;">班级</td>
+						<td>门牌</td>
+						<td>总人数</td>
+						<td>请假人数</td>
+						<td>出勤率（假）</td>
+						<td>休学人数</td>
+						<td>出勤率（请假加休学）</td>
+						<td>不就业人数</td>
 					</tr>
-				</thead>
-				<tbody id="mytbody">
+				</table>
+				<table border="0" cellspacing="0" cellpadding="0" id="mytable">
+					<caption>班级请假详情</caption>
+					<thead>
+						<tr style="height:40px;">
+							<th style="width:10%;">班级</th>
+							<th>姓名</th>
+							<th>学号</th>
+							<th>请假日期</th>
+							<th>归校日期</th>
+							<th>请假原因</th>
+							<th id="stop_number">是否休学</th>
+							<th>是否已返校</th>
+						</tr>
+					</thead>
+					<tbody id="mytbody" style="border: none;">
 
-				</tbody>	
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
-
-</body>
-<script src="js/jquery.js"> </script>
-<script>
+		<div style="height: 200px;"></div>
+	</body>
+	<script src="js/jquery.js"> </script>
+	<script>
+		//请求后台有班级阶段
+		readclass()
+		function readclass() {
+			$.ajax({
+				type: 'get',
+				url: 'http://localhost:8000/indexs/Read_class',
+				success(data) {
+					var str = '';
+					for (var i = 0; i < data.length; i++) {
+						str += `
+						<option value="${data[i].class}">${data[i].class}</option>
+					`
+					}
+					class_room.innerHTML = str
+				}
+			})
+		}
 		//计算当前时间和日期
-		var mydate=new Date();
-		var myddy=mydate.getDay();//获取存储当前日期
-		var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+		var mydate = new Date();
+		var myddy = mydate.getDay(); //获取存储当前日期
+		var weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
 		$('#getday').val(weekday[myddy])
 		$(function() {
 			setInterval("getTime();", 1000); //每隔一秒运行一次
@@ -210,98 +244,98 @@
 
 		var href = 'http://localhost:8000';
 		// 录入请假名单
-		$('#btn').on('click',function(){
-			if(class_room.value==''){
+		$('#btn').on('click', function() {
+			if (class_room.value == '') {
 				alert('请输入班级')
-			}else if(student_name.value==''){
+			} else if (student_name.value == '') {
 				alert('请输入姓名')
-			}else if(student_number.value==''){
+			} else if (student_number.value == '') {
 				alert('请输入学号')
-			}else if(reason.value==''){
+			} else if (reason.value == '') {
 				alert('请输入请假原因')
-			}else if(!reason.value){
-				if(reason.value == '退学'){
-					end_time.value=='';	
-				}else{
+			} else if (!reason.value) {
+				if (reason.value == '退学') {
+					end_time.value == '';
+				} else {
 					alert('请输入返校时间')
 				}
-			}else{
+			} else {
 				$.ajax({
-					type:'get',
-					url:href+'/state/luru',
-					data:{
-						aclass:class_room.value,
-						aname:student_name.value,
-						anumber:student_number.value,
-						astart:start_time.value,
-						aend:end_time.value,
-						areason:reason.value
+					type: 'get',
+					url: href + '/state/luru',
+					data: {
+						aclass: class_room.value,
+						aname: student_name.value,
+						anumber: student_number.value,
+						astart: start_time.value,
+						aend: end_time.value,
+						areason: reason.value
 					},
-					success(data){
+					success(data) {
 						console.log(data)
 						// 计算请假时长，判断是否是休学
-						function DateDiff(sDate1, sDate2) { 
+						function DateDiff(sDate1, sDate2) {
 							var aDate, oDate1, oDate2, iDays
 							aDate = sDate1.split("-")
 							oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])
 							aDate = sDate2.split("-")
 							oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])
-							iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24) 
+							iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24)
 							return iDays
 						}
 						// 声明两个变量存入要计算的两个时间
-						s1  = start_time.value
-						s2  = end_time.value
-						console.log(s1,s2)
+						s1 = start_time.value
+						s2 = end_time.value
+						console.log(s1, s2)
 						// 声明个变量等于请假时长
-						var time=DateDiff(s1,s2)
+						var time = DateDiff(s1, s2)
 						// console.log(time+"天")
-						var stopNumber=student_number.value;
-						var stopName=student_name.value;
+						var stopNumber = student_number.value;
+						var stopName = student_name.value;
 						// 判断请假时长大于三天的话 就归为休学 通过学生名字修改数据库信息
-						if(30>time>3){
-							console.log(stopName+'是休学')
-							var ora=true;
+						if (30 > time > 3) {
+							console.log(stopName + '是休学')
+							var ora = true;
 							$.ajax({
-								type:'post',
-								url:href+'/state/revise',
-								data:{
-									ora:ora,
-									numbera:stopNumber,
+								type: 'post',
+								url: href + '/state/revise',
+								data: {
+									ora: ora,
+									numbera: stopNumber,
 								},
-								success(data){
+								success(data) {
 									console.log(data);
 								}
 
 							})
 						}
-						class_room.value='';
-						student_name.value='';
-						student_number.value='';
-						start_time.value='';
-						end_time.value='';
-						reason.value='';
+						class_room.value = '';
+						student_name.value = '';
+						student_number.value = '';
+						start_time.value = '';
+						end_time.value = '';
+						reason.value = '';
 					}
 				})
 			}
 		})
 
-		
+
 		getLeave()
 		//获取请假名单
-		function getLeave(){
+		function getLeave() {
 			$.ajax({
-				type:'get',
-				async:false,
-				url:href+'/state/getL',
-				success(res){
+				type: 'get',
+				async: false,
+				url: href + '/state/getL',
+				success(res) {
 					// console.log(res);
-					var arr=[];
+					var arr = [];
 					var mb = [];
-					for(var i=0;i<res.length;i++){
+					for (var i = 0; i < res.length; i++) {
 						datas = res;
 						arr.push(datas[i].classa);
-						if(datas[i].ora == 'true'){
+						if (datas[i].ora == 'true') {
 							mb.push(res[i].classa);
 						}
 					}
@@ -310,10 +344,10 @@
 					for (var i = 0, l = arr.length; i < l; i++) {
 						// console.log(res[i].resona)
 						// if(res[i].resona == '请假'){
-							var item = arr[i];
-							obj[item] = (obj[item] + 1) || 1;
+						var item = arr[i];
+						obj[item] = (obj[item] + 1) || 1;
 						// }
-						
+
 					}
 					//末班
 					objs = {};
@@ -324,37 +358,38 @@
 				}
 			})
 		}
-		
+
 		//把对象转化为字符串
 		var jsona = JSON.stringify(obj);
-		var en=jsona.split(',')
-		var alls =[];//截取到的数据放在这里
-		for(var i=0;i<en.length;i++){
+		var en = jsona.split(',')
+		var alls = []; //截取到的数据放在这里
+		for (var i = 0; i < en.length; i++) {
 			all = en[i].split(':')[1][0]
-			alls.push(all)//追加到alls里
+			alls.push(all) //追加到alls里
 		}
 
 		//把对象转化为字符串
 		var jsons = JSON.stringify(objs);
-		var en=jsons.split(',')
-		var mbs =[];//截取到的数据放在这里
-		for(var i=0;i<en.length;i++){
+		var en = jsons.split(',')
+		var mbs = []; //截取到的数据放在这里
+		for (var i = 0; i < en.length; i++) {
 			all = en[i].split(':')[1][0]
-			mbs.push(all)//追加到alls里
+			mbs.push(all) //追加到alls里
 		}
 		// 获取所有班级
 		$.ajax({
-			type:'get',
-			url:href+'/state/class',
-			success(data){
+			type: 'get',
+			url: href + '/state/class',
+			success(data) {
 				// console.log(obj)
-				for(var i=0; i<data.length;i++){
-					if(alls[i] == undefined || mbs[i] == undefined){
+				for (var i = 0; i < data.length; i++) {
+					if (alls[i] == undefined || mbs[i] == undefined) {
 						alls[i] = 0;
 						mbs[i] = 0;
 					}
-					$(`
-						<tr onclick="look(${data[i].class})" id="thisTr">
+					$(
+						`
+						<tr onclick="look(${data[i].class})" id="thisTr" style="height:40px;">
 							<td>${data[i].class}</td>
 							<td>${data[i].door}</td>
 							<td>${data[i].number}</td>
@@ -364,38 +399,40 @@
 							<td>${Math.round((data[i].number - alls[i]- mbs[i]) / data[i].number *100) + '%'}</td>
 							<td>111</td>
 						</tr>
-						`).appendTo('#cent_table')
-				}		
-				
-				
-				
+						`
+					).appendTo('#cent_table')
+				}
+
+
+
 			}
 		})
-		
+
 		// 查看每个班级请假名单
-		function look(index){
-			mytbody.innerHTML='';
-			stop_number.innerHTML='是否休学';
+		function look(index) {
+			mytbody.innerHTML = '';
+			stop_number.innerHTML = '是否休学';
 			$.ajax({
-				type:'get',
-				data:{
-					class:index
+				type: 'get',
+				data: {
+					class: index
 				},
-				url:href+'/state/read',
-				success(data){
-					if(data.length){
+				url: href + '/state/read',
+				success(data) {
+					if (data.length) {
 						console.log(data)
-						mytable.style.opacity=1;
-						var len=data.length;
-						var arr=[];
-						for(var i=0; i<len; i++){
-							if(data[i].ora=='true'){
-								data[i].ora='是';
+						mytable.style.opacity = 1;
+						var len = data.length;
+						var arr = [];
+						for (var i = 0; i < len; i++) {
+							if (data[i].ora == 'true') {
+								data[i].ora = '是';
 								arr.push(data[i]);
-							}else{
-								data[i].ora='否'
+							} else {
+								data[i].ora = '否'
 							}
-							$(`<tr>
+							$(
+								`<tr style="height:40px;">
 								<td>${data[i].classa}</td>
 								<td>${data[i].namea}</td>
 								<td>${data[i].numbera}</td>
@@ -406,36 +443,38 @@
 								<td class="ye">
 									<button onclick="queren(${data[i].numbera},${data[i].classa})">确认</button>
 								</td>
-								</tr>`).appendTo('#mytbody')
+								</tr>`
+							).appendTo('#mytbody')
 						};
 						// console.log(arr.length);
-						stop_number.innerHTML+='('+arr.length+')';
-					}else{
-						mytable.style.opacity=1;
+						stop_number.innerHTML += '(' + arr.length + ')';
+					} else {
+						mytable.style.opacity = 1;
 						// $('#mytbody').text('该班级没人请假');
-						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没人请假</td></tr>`).appendTo('#mytbody')
+						$(`<tr><td colspan="8" style="border:none;font-size:30px;padding-top:10px;color:#ccc;">该班级没人请假</td></tr>`).appendTo(
+							'#mytbody')
 						alert('该班级没人请假')
 					}
 				}
 			})
 		}
 		// 确认返校
-		function queren(num,thisclass){
-			console.log(num,thisclass);
+		function queren(num, thisclass) {
+			console.log(num, thisclass);
 			$.ajax({
-				type:'get',
-				url:href+'/state/yes',
-				data:{
+				type: 'get',
+				url: href + '/state/yes',
+				data: {
 					num,
 				},
-				success(data){
+				success(data) {
 					console.log(data)
-					if(data=='ok'){
+					if (data == 'ok') {
 						look(thisclass)
-					}else{
+					} else {
 						alert('嘿!你报错了')
 					}
-					
+
 				}
 			})
 		}
@@ -443,35 +482,46 @@
 
 		//判断是不是管理者
 		// function gl(){
-			$('.ye').css({'display':'none'})
-			if(localStorage.user){
-				var localStorageUser=JSON.parse(localStorage.user);
-				audi=localStorageUser.uid;
-			}
-			console.log(audi)
-			$.ajax({
-				type:'get',
-				url:'http://localhost:8000/indexs/state',
-				data:{
-					uid:audi,
-				},
-				success(data){
-					console.log(data)
-					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'table-cell'}) || $('.ye').css({'display':'block'})
-					}
-					if(data.length){
-						if(data[0].AR=='yes'){
-							$('.ye').css({'display':'block'}) ||$('.ye').css({'display':'table-cell'})
-						}else{
-							$('.ye').css({'display':'none'})
-						}
-					}else{
-						console.log('您是学生，没有权限去操作页面')
-					}
+		$('.ye').css({
+			'display': 'none'
+		})
+		if (localStorage.user) {
+			var localStorageUser = JSON.parse(localStorage.user);
+			audi = localStorageUser.uid;
+		}
+		console.log(audi)
+		$.ajax({
+			type: 'get',
+			url: 'http://localhost:8000/indexs/state',
+			data: {
+				uid: audi,
+			},
+			success(data) {
+				console.log(data)
+				if (data[0].AR == 'yes') {
+					$('.ye').css({
+						'display': 'table-cell'
+					}) || $('.ye').css({
+						'display': 'block'
+					})
 				}
-			})
+				if (data.length) {
+					if (data[0].AR == 'yes') {
+						$('.ye').css({
+							'display': 'block'
+						}) || $('.ye').css({
+							'display': 'table-cell'
+						})
+					} else {
+						$('.ye').css({
+							'display': 'none'
+						})
+					}
+				} else {
+					console.log('您是学生，没有权限去操作页面')
+				}
+			}
+		})
 		// }
-
 	</script>
-	</html>
+</html>

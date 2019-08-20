@@ -12,18 +12,7 @@
 	<div class="con">
 		<div class="header ye">
 			<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;基本信息</p>
-			班级：<select class="z-text" id="gender" style="width: 100px;height:40px;font-size: 18px;border: none;">
-				<option value="1809">1809</option>
-				<option value="1809">1810</option>
-				<option value="1809">1811</option>
-				<option value="1809">1812</option>
-				<option value="1809">1901</option>
-				<option value="1809">1902</option>
-				<option value="1809">1903</option>
-				<option value="1809">1904</option>
-				<option value="1809">1905</option>
-				<option value="1809">1906</option>
-			</select>
+			班级：<select class="z-text" id="class_ban" style="width: 100px;height:40px;font-size: 18px;border: none;"></select>
 			学号：<input type="text" id="xha" placeholder="学员学号" />
 			<span class="Tips">未匹配到该学员学号(请从新输入)</span>
 			姓名：<input type="text" id="xm" placeholder="学员姓名" />
@@ -55,6 +44,23 @@
 	<script src="font_ps99atp86ak/iconfont.js"></script>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
+		//请求后台有班级阶段
+		readclass()
+		function readclass() {
+			$.ajax({
+				type: 'get',
+				url: 'http://localhost:8000/indexs/Read_class',
+				success(data) {
+					var str = '';
+					for (var i = 0; i < data.length; i++) {
+						str += `
+							<option value="${data[i].class}">${data[i].class}</option>
+						`
+					}
+					class_ban.innerHTML = str
+				}
+			})
+		}
 		//判断是否是管理者还是读者
 		function gl(){
 			$('.ye').css({'display':'none'})

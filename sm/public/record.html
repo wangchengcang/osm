@@ -119,7 +119,9 @@
 						</select>
 					</td>
 					<td>
-						<p>班级</p><input type="text" class="z-text" id="class">
+						<p>班级</p><select class="z-text" id="class_ban">
+							
+						</select>
 					</td>
 				</tr>
 			</table>
@@ -182,6 +184,23 @@
 </body>
 <script src="js/jquery.js"></script>
 <script>
+	//请求后台有班级阶段
+	readclass()
+	function readclass() {
+		$.ajax({
+			type: 'get',
+			url: 'http://localhost:8000/indexs/Read_class',
+			success(data) {
+				var str = '';
+				for (var i = 0; i < data.length; i++) {
+					str += `
+						<option value="${data[i].class}">${data[i].class}</option>
+					`
+				}
+				class_ban.innerHTML = str
+			}
+		})
+	}
 	//判断读者还是管理者
 	function gl(){
 		$('.eea').css({'display':'none'})
@@ -373,12 +392,12 @@
 							<td style="width:8%;">${data[i].class}</td>
 							<td style="width:8%;">${data[i].myage}</td>
 							<td style="width:15%;">${data[i].idcard}</td>
-							<td style="width:14%;">${data[i].parentelephone}</td>
+							<td style="width:10%;">${data[i].parentelephone}</td>
 							<td style="width:8%;">${data[i].place}</td>
 							<td style="width:8%;">${data[i].dq}</td>
 							<td style="width:8%;">${data[i].xj}</td>
 							<td style="width:8%;">${data[i].bj}</td>
-							<td>
+							<td style="width:13%;">
 								<buttuon class="see" onclick='chakan(${data[i].uid})'>查看</buttuon> <buttuon class="see eea">删除</buttuon>
 							</td>	
 					`;	

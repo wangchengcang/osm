@@ -3,9 +3,11 @@
 <head>
 	<meta charset="UTF-8">
     <title>首页</title>
-    <link rel="stylesheet" href="./stylesheets/index.css">
+	<link rel="stylesheet" href="stylesheets/index.css">
 	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
     <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+	<link rel="stylesheet" href="font/iconfont.css">
 	<style>
 		#mask{
 			width:100%;
@@ -26,15 +28,15 @@
             <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg" alt="">
             <span>学生管理系统</span>
             <a class="go" href="login.html">注册或登录</a>
-            <a class="out" href="#">退出登录</a>
+            <a class="out iconfont" href="#" style="font-size:20px;">&#xe6dd;</a>
             <p id="user">
                 <span class="iconfont">&#xe511;</span> : <i>未登录</i>
             </p>
         </div>
         <div id="content" class="clearfix">
             <div id="left">
-                <ul>
-                    <li><a href="index.html"><i class="iconfont">&#xe602;</i> 首页</a></li>
+                 <ul>
+                    <li class="active"><a href="index.html"><i class="iconfont">&#xe602;</i> 首页</a></li>
                     <li><a href="record.html"><i class="iconfont">&#xe513;</i> 新增学生</a></li>
                     <li><a href="lecturer.html"><i class="iconfont">&#xe601;</i> 讲师</a></li>
                     <li><a href="class.html"><i class="iconfont">&#xe686;</i> 班级</a></li>
@@ -42,33 +44,39 @@
                     <li id="student">
                         <a href="javascript:;">
                         <i class="iconfont">&#xe513;</i> 学生</a>
-                        <ul>
-                            <li><a href="student.html">基本信息</a></li>
-                            <li><a href="state.html">当前状态</a></li>
-                            <li><a href="achievement.html">成绩录入</a></li>
-                            <li><a href="http://z.cimns.com:8081/">作业上传</a></li>
-                            <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
-                            <li><a href="fankui.html">学生反馈</a></li>
+                        <ul id="enl">
+                            <li><a href="student.html"><i class="iconfont">&#xe603;</i> 基本信息</a></li>
+                            <li><a href="state.html"><i class="iconfont">&#xe61e;</i> 当前状态</a></li>
+                			<li><a href="achievement.html"><i class="iconfont">&#xe63d;</i> 成绩录入</a></li>
+                            <li><a href="guanli.html"><i class="iconfont">&#xe76a;</i> 综合积分</a></li>
+                			<li><a href="http://z.cimns.com:8081/"><i class="iconfont">&#xe65e;</i> 作业上传</a></li>
+                            <li><a href="fankui.html"><i class="iconfont">&#xe608;</i> 学生反馈</a></li>
                         </ul>
                     </li>
                     <li><a href="sushe.html"><i class="iconfont">&#xe504;</i> 宿舍</a></li>
                     <li><a href="guanli.html"><i class="iconfont">&#xe64a;</i> 综合积分</a></li>
                 </ul>
+                </ul>
             </div>
             <div id="right">
 				<p class="classification"><span></span>&nbsp;&nbsp;&nbsp;各个班级情况</p>
                 <table id="table" border="0" style="border: 2px solid #2CC9AA;" cellspacing="0">
-                    <tr>
-                        <th>各阶段</th>
-                        <th>在校人数</th>
-                        <th>休学人数</th>
-                        <th>退学人数</th>
-                        <th>末班人数</th>
-                        <th>本月成材率</th>
-                        <th>本周违纪人数</th>
-                        <th>上周违纪人数</th>
-                        <th>违纪类型细分</th>
-                    </tr>
+                    <thead>
+						<tr>
+						    <th>各阶段</th>
+						    <th>在校人数</th>
+						    <th>休学人数</th>
+						    <th>退学人数</th>
+						    <th>末班人数</th>
+						    <th>本月成材率</th>
+						    <th>本周违纪人数</th>
+						    <th>上周违纪人数</th>
+						    <th>违纪类型细分</th>
+						</tr>
+					</thead>
+					<tbody id="iall">
+						
+					</tbody>
                 </table>
             </div>
         </div>
@@ -85,14 +93,38 @@
             <p>@Copyright by htly 2000-2019 公司：系统管理应用有限公司 地址：北京市中关村</p>
         </div>
     </div>
+	<script src="font/iconfont.js"></script>
 	<script src="font_ps99atp86ak/iconfont.js"></script>
     <script src="js/jquery.js"></script>
     <script>
+		//提示鼠标所在导航条
+		var oli=document.querySelectorAll('#left>ul>li');
+		var ali=document.querySelectorAll('#enl>li');
+		for(var i=0;i<oli.length;i++){
+			oli[i].index=i;
+			oli[i].onclick=function(){
+				for(var i=0;i<oli.length;i++){
+					oli[i].className=''
+				}
+				oli[this.index].className='active'
+			}
+		}
+		for(var i=0;i<ali.length;i++){
+			ali[i].index=i;
+			ali[i].onclick=function(){
+				for(var i=0;i<ali.length;i++){
+					ali[i].className=''
+				}
+				ali[this.index].className='active'
+			}
+		}
+		
+		//学生下拉框增加高度
         $('#student a').on('click',function(){
             if($('#student ul').css("height")=="0px"){
                 $('#student ul').css({
                     // display:'block',
-                    "height":"350px",
+                    "height":"360px",
                     transition:'1s',
                 })
             }else{
@@ -308,9 +340,8 @@
                 url: href + '/banji/read',
                 async: false,
                 success(data) {
-                    // console.log(datas)
+					var str=``
                     for (var i = 0; i < data.length; i++) {
-                        var tr = document.createElement('tr');
                         if(alls[i] == undefined || suspend[i] == undefined){
                             alls[i] = 0;
                             suspend[i] = 0;
@@ -318,23 +349,25 @@
                         if(outs[i] == undefined){
                             outs[i] = 0;
                         }
-                        tr.innerHTML = `
-                            <td>${data[i].class}(${data[i].stage})</td>
-                            <td>${data[i].number}</td>
-                            <td>${suspend[i]}</td>
-                            <td>${outs[i]}</td>
-                            <td>${adopts[i]}</td>
-                            <td>${Math.round((data[i].number - suspend[i] -outs[i] - adopts[i]) / data[i].number * 100) + '%'}</td>
-                            <td>${alls[i]}</td>
-                            <td>${alls[i]}</td>
-                            <td>${reasons}</td>
+                        str+= `
+							<tr>
+								<td>${data[i].class}(${data[i].stage})</td>
+								<td>${data[i].number}</td>
+								<td>${suspend[i]}</td>
+								<td>${outs[i]}</td>
+								<td>${adopts[i]}</td>
+								<td>${Math.round((data[i].number - suspend[i] -outs[i] - adopts[i]) / data[i].number * 100) + '%'}</td>
+								<td>${alls[i]}</td>
+								<td>${alls[i]}</td>
+								<td>${reason}</td>
+							</tr>
                         `;
-                        table.appendChild(tr)
                     }
+					iall.innerHTML=str
                 }
             })
         }
-
+<!-- <td>${reasons}</td> -->
         
         
     </script>
