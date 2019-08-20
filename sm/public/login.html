@@ -22,14 +22,18 @@
 			<div class="login">
 				<h4>注册</h4>
 				<main>
-					<label class="fl">
-						<input type="radio" name="ARadio" value="yes" id="teacher">
-						<p>管理者</p>
-					</label>
-					<label class="fr">
-						<input type="radio" name="ARadio" value="not" id="student">
-						<p>读者</p>
-					</label>
+					<div class="explain">
+						<label>
+							<input type="radio" name="ARadio" value="yes" id="teacher">
+							管理者
+						</label>
+					</div>
+					<div class="readers">
+						<label>
+							<input type="radio" name="ARadio" value="not" id="student">
+							读者
+						</label>
+					</div>
 				</main>
 				<div>名字：<input type="text" id="login_name" placeholder="请输入昵称"></div>
 				<div>账号：<input type="text" id="login_user" placeholder="请输入账号"></div>
@@ -64,8 +68,10 @@
 				login_btn.onclick=function(){
 					if(state==''){
 						alert('请选择以什么身份进入')
-					}else if(/[\u4E00-\u9FA5]/g.test(login_user.value)||/[\u4E00-\u9FA5]/g.test(login_pass.value)){
-						alert('账号或密码不得为中文')
+					}else if(/\D/g.test(login_user.value)){
+						alert('账号必须为纯数字')
+					}else if(/[\u4E00-\u9FA5]/g.test(login_pass.value)){
+						alert('密码不得为中文')
 					}else if(login_name.value==''){
 						alert('请编辑昵称')
 					}else if(login_user.value==''){
@@ -111,12 +117,12 @@
 			})
 		})
 		$('#gotologon').on('click',function(){
-				$('.logon').css({
-					'display':'block'
-				})
-				$('.login').css({
-					'display':'none'
-				})
+			$('.logon').css({
+				'display':'block'
+			})
+			$('.login').css({
+				'display':'none'
+			})
 		})
 		var href='http://localhost:8000';
 		//注册

@@ -379,6 +379,7 @@
 		for (var i = 0; i < en.length; i++) {
 			all = en[i].split(':')[1][0]
 			alls.push(all) //追加到alls里
+			console.log(alls)
 		}
 		//末班
 		//把对象转化为字符串
@@ -389,13 +390,13 @@
 			all = en[i].split(':')[1][0]
 			mbs.push(all) //追加到alls里
 		}
-		//不就业
+		//休学
 		//把对象转化为字符串
 		var jsons = JSON.stringify(bjy);
 		var en=jsons.split(',')
 		var bjys =[];//截取到的数据放在这里
 		for(var i=0;i<en.length;i++){
-			all = en[i].split(':')[1][0]
+			all = en[i].split(':')[1]
 			bjys.push(all)//追加到alls里
 		}
 		// console.log(bjys);
