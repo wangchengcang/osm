@@ -44,12 +44,13 @@
 	<script src="font_ps99atp86ak/iconfont.js"></script>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
+		var href = 'http://localhost:8000';
 		//请求后台有班级阶段
 		readclass()
 		function readclass() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/Read_class',
+				url: href+'/indexs/Read_class',
 				success(data) {
 					var str = '';
 					for (var i = 0; i < data.length; i++) {
@@ -71,7 +72,7 @@
 			console.log(audi)
 			$.ajax({
 				type:'get',
-				url:'http://localhost:8000/indexs/state',
+				url:href+'/indexs/state',
 				data:{
 					uid:audi,
 				},
@@ -146,7 +147,7 @@
 		function oblur() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/testing',
+				url: href+'/indexs/testing',
 				data: {
 					xh: xha.value
 				},
@@ -197,7 +198,7 @@
 			} else {
 				$.ajax({
 					type: 'get',
-					url: 'http://localhost:8000/indexs/integral',
+					url: href+'/indexs/integral',
 					data: {
 						bj: gender.value,
 						xh: xha.value,
@@ -233,7 +234,7 @@
 		function read() {
 			$.ajax({
 				type: 'get',
-				url: 'http://localhost:8000/indexs/read',
+				url: href+'/indexs/read',
 				success(data) {
 					var str = `
 					<tr style="height: 50px;">
@@ -288,7 +289,7 @@
 			Submission_a.onclick = function() {
 				$.ajax({
 					type: 'get',
-					url: 'http://localhost:8000/indexs/updatea',
+					url: href+'/indexs/updatea',
 					data: {
 						uid: uid,
 						bj: gender.value,

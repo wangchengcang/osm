@@ -268,7 +268,7 @@
                 type:'get',
                 url:href +'/users/fkdq',
                 success(data){
-                    console.log(data);
+                    // console.log(data);
                     for(var i=0;i<data.length;i++){
                         var tr = document.createElement('tr');
                         tr.innerHTML = `
@@ -278,7 +278,7 @@
                             <td>${data[i].yijian}</td>
                         `;
                         // nmTable.appendChild(tr)
-                        console.log(data[i].nm);
+                        // console.log(data[i].nm);
                         if(data[i].nm){
                             nmTable.appendChild(tr)
                         }else{

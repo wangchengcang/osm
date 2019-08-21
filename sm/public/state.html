@@ -201,7 +201,7 @@
 							<th>请假日期</th>
 							<th>归校日期</th>
 							<th>状态</th>
-							<th id="stop_number">是否休学</th>
+							<th>是否休学<span id="stop_number"></span></t>
 							<th>是否已返校</th>
 						</tr>
 					</thead>
@@ -280,9 +280,6 @@
 		function getTime() {
 			var myDate = new Date();
 			var date = myDate.toLocaleDateString();
-			// var hours = myDate.getHours();
-			// var minutes = myDate.getMinutes();
-			// var seconds = myDate.getSeconds();"+hours+":"+minutes+":"+seconds
 			$("#start_time").val(date); //将值赋给div
 
 		}
@@ -376,96 +373,49 @@
 				success(res) {
 					// console.log(res);
 					var arr=[];
-					var mb = [];
+					var xiuxue = [];
 					var jy = [];
 					var tx = [];
 					for(var i=0;i<res.length;i++){
-						datas = res;
-						arr.push(datas[i].classa);
-						if(datas[i].ora == 'true'){
-							mb.push(res[i].classa);
+						// console.log(res);
+						arr.push(res[i].classa);
+						if(res[i].ora == 'true'){
+							xiuxue.push(res[i].classa);
 						}else if(res[i].resona == '不就业'){
 							jy.push(res[i].classa)
 						}else if(res[i].resona == '退学'){
 							tx.push(res[i].classa)
 						}
 					}
-					//请假
+					//总数(为了拿请假人数)
 					obj = {};
 					for (var i = 0, l = arr.length; i < l; i++) {
 						var item = arr[i];
 						obj[item] = (obj[item] + 1) || 1;						
 					}
-					//末班
+					// console.log(obj)
+					//休学
 					objs = {};
-					for (var i = 0, l = mb.length; i < l; i++) {
-						var item = mb[i];
+					for (var i = 0, l = xiuxue.length; i < l; i++) {
+						var item = xiuxue[i];
 						objs[item] = (objs[item] + 1) || 1;
 					}
+					// console.log(objs);
 					//不就业
 					bjy = {};
 					for (var i = 0, l = jy.length; i < l; i++) {
 						var item = jy[i];
 						bjy[item] = (bjy[item] + 1) || 1;
 					}
-					//不就业
+					//退学
 					txs = {};
 					for (var i = 0, l = tx.length; i < l; i++) {
 						var item = tx[i];
 						txs[item] = (txs[item] + 1) || 1;
 					}
+					// console.log(txs);
 				}
 			})
-		}
-		//请假
-		//把对象转化为字符串
-		var jsona = JSON.stringify(obj);
-		var en = jsona.split(',')
-		var alls = []; //截取到的数据放在这里
-		for (var i = 0; i < en.length; i++) {
-			all = en[i].split(':')[1][0]
-			alls.push(all) //追加到alls里
-			console.log(alls)
-		}
-		//末班
-		//把对象转化为字符串
-		var jsons = JSON.stringify(objs);
-		var en = jsons.split(',')
-		var mbs = []; //截取到的数据放在这里
-		for (var i = 0; i < en.length; i++) {
-			all = en[i].split(':')[1][0]
-			mbs.push(all) //追加到alls里
-		}
-		//休学
-		//把对象转化为字符串
-		var jsons = JSON.stringify(bjy);
-		var en=jsons.split(',')
-		console.log(en);
-		var bjys =[];//截取到的数据放在这里
-		for(var i=0;i<en.length;i++){
-<<<<<<< HEAD
-			all = en[i].split(':')[1]
-=======
-			if(en == '{}'){
-				all = en[i].split(':')[1]
-			}else{
-				all = en[i].split(':')[1][0]
-			}
->>>>>>> 704e558f9b58f85a24ad6f863bf0c28c6ed039b9
-			bjys.push(all)//追加到alls里
-		}
-		//退学
-		//把对象转化为字符串
-		var jsons = JSON.stringify(bjy);
-		var en=jsons.split(',')
-		var txs =[];//截取到的数据放在这里
-		for(var i=0;i<en.length;i++){
-			if(en == '{}'){
-				all = en[i].split(':')[1]
-			}else{
-				all = en[i].split(':')[1][0]
-			}
-			txs.push(all)//追加到alls里
 		}
 
 		// 获取所有班级
@@ -475,32 +425,18 @@
 			success(data) {
 				// console.log(obj)
 				for (var i = 0; i < data.length; i++) {
-					if (alls[i] == undefined || mbs[i] == undefined) {
-						alls[i] = 0;
-						mbs[i] = 0;
-					}
-					if(bjys[i] == undefined || txs[i] == undefined){
-							bjys[i]= 0;	
-							txs[i] = 0;
-					}
-					$(
-						`
-						<tr onclick="look(${data[i].class})" id="thisTr" style="height:40px;">
+					
+					$(`<tr onclick="look(${data[i].class})" id="thisTr" style="height:40px;">
 							<td>${data[i].class}</td>
 							<td>${data[i].door}</td>
 							<td>${data[i].number}</td>
-							<td>${alls[i] - mbs[i] - bjys[i] - txs[i]}</td>
-							<td>${Math.round((data[i].number - alls[i]) / data[i].number *100) + '%'}</td>
-							<td>${mbs[i]}</td>
-							<td>${Math.round((data[i].number - alls[i]- mbs[i]) / data[i].number *100) + '%'}</td>
-							<td>${bjys[i]}</td>
-						</tr>
-						`
-					).appendTo('#cent_table')
+							<td>${(obj[data[i].class] || 0) - (bjy[data[i].class] || 0) -(txs[data[i].class] || 0) }</td>
+							<td>${((data[i].number - (obj[data[i].class] || 0) - (bjy[data[i].class] || 0)) / data[i].number *100).toFixed(2) + '%'}</td>
+							<td>${(objs[data[i].class] || 0)}</td>
+							<td>${((data[i].number - (obj[data[i].class] || 0) - (bjy[data[i].class] || 0)) / data[i].number *100).toFixed(2) + '%'}</td>
+							<td>${bjy[data[i].class] || 0}</td>
+						</tr>`).appendTo('#cent_table');
 				}
-
-
-
 			}
 		})
 
@@ -509,7 +445,8 @@
 			mytbody.innerHTML = '';
 			mysuspen.innerHTML = '';
 			myment.innerHTML = '';
-			stop_number.innerHTML = '是否休学';
+			// stop_number.innerHTML = '是否休学';
+			stop_number.innerHTML = '';
 			$.ajax({
 				type: 'get',
 				data: {
@@ -557,7 +494,9 @@
 							
 						};
 						
-						// stop_number.innerHTML += '(' + arr.length + ')';
+						stop_number.innerHTML += arr.length;
+						// console.log(stop_number);
+						// console.log($('span').text())
 					} else {
 						leave.style.opacity = 1;
 						suspen.style.opacity = 1;

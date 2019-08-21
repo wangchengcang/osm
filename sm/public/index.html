@@ -38,8 +38,8 @@
                  <ul>
                     <li class="active"><a href="index.html"><i class="iconfont">&#xe602;</i> 首页</a></li>
                     <li><a href="record.html"><i class="iconfont">&#xe513;</i> 新增学生</a></li>
-                    <li><a href="lecturer.html"><i class="iconfont">&#xe601;</i> 讲师</a></li>
                     <li><a href="class.html"><i class="iconfont">&#xe686;</i> 班级</a></li>
+                    <li><a href="lecturer.html"><i class="iconfont">&#xe601;</i> 讲师</a></li>
                     <li><a href="curriculum.html"><i class="iconfont">&#xe506;</i> 课程</a></li>
                     <li id="student">
                         <a href="javascript:;">
@@ -139,7 +139,7 @@
 		//未登录是遮罩层
 		var audi='';
 		var h=$(document).height()-60;
-		console.log(h)
+		// console.log(h)
 		mask.style.height=h+'px';
         if(localStorage.user){
             $('.go').css({
@@ -150,7 +150,7 @@
             });
             var localStorageUser=JSON.parse(localStorage.user);
 			audi=localStorageUser.uid;
-            console.log(localStorageUser)
+            // console.log(localStorageUser)
             $('#user i').html(localStorageUser.name)
         }else{
             $('.go').css({
@@ -175,7 +175,7 @@
             }
         })
 		//判断改用户是否是管理员
-		console.log(audi)
+		// console.log(audi)
 		window.onload=function (){
 			$.ajax({
 				type:'get',
@@ -193,137 +193,92 @@
 				}
 			})
         }
-        
-
         var href = 'http://localhost:8000';
-        
-        //休学人数
         $.ajax({
             type:'get',
             async:false,
             url:href+'/state/getL',
             success(res){
-                // console.log(res);
-                var mb = [];
+                var xiuxue = [];
+                var tuixue = [];
                 for(var i=0;i<res.length;i++){
+                    // console.log(res[i])
+                    //休学
                     if(res[i].ora == 'true'){
-                        mb.push(res[i].classa);
-                    }					
+                        xiuxue.push(res[i].classa);
+                    }				
+                    //退学
+                    if(res[i].resona == '退学'){
+                        tuixue.push(res[i].classa);
+                    }
+                    
                 }
-                // console.log(mb);
+                //休学
                 objs = {};
-                for (var i = 0, l = mb.length; i < l; i++) {
-                    var item = mb[i];
+                for (var i = 0, l = xiuxue.length; i < l; i++) {
+                    var item = xiuxue[i];
                     objs[item] = (objs[item] + 1) || 1;
                 }
-                // console.log(objs)
-                }
-            })
-            var jsons = JSON.stringify(objs);
-            // console.log(jsons)
-            var ens=jsons.split(',')
-            var suspend =[];//截取到的数据放在这里
-            for(var i=0;i<ens.length;i++){
-                all = ens[i].split(':')[1][0]
-                suspend.push(all)//追加到alls里
-            }
-        //退学人数
-        $.ajax({
-            type:'get',
-            async:false,
-            url:href+'/state/getL',
-            success(res){
-                // console.log(res);
-                var mb = [];
-                for(var i=0;i<res.length;i++){
-                    if(res[i].resona == '退学'){
-                        mb.push(res[i].classa);
-                    }					
-                }
-                // console.log(arr);
-                // console.log(mb);
+                // console.log(objs);
+                //退学
                 tx = {};
-                for (var i = 0, l = mb.length; i < l; i++) {
-                    var item = mb[i];
+                for (var i = 0, l = tuixue.length; i < l; i++) {
+                    var item = tuixue[i];
                     tx[item] = (tx[item] + 1) || 1;
                 }
+                // console.log(tx);
+                
             }
         })
-        var jsons = JSON.stringify(tx);
-        var txs=jsons.split(',')
-        var outs =[];//截取到的数据放在这里
-        for(var i=0;i<txs.length;i++){
-            all = txs[i].split(':')[1][0]
-            outs.push(all)//追加到outs里
-        }
-
-
-        //末班人数
-        $.ajax({
+        //末班
+        $.ajax ({
             type:'get',
             async:false,
             url:href+'/indexs/reads',
             success(data){
-				var adopt=[];
+                var moban=[];
+                var arr=[];
+                var reason = [];
                 for(var i=0;i<data.length;i++){
-                    // console.log(data[i].adopt)
+                    // console.log(data);
+                    //末班
                     if(data[i].adopt == '否'){
-                        adopt.push(data[i].class)
-                    }					
+                        moban.push(data[i].class)
+                    }				
                 }
-                obj = {};
-				for (var i = 0, l = adopt.length; i < l; i++) {
-					var item = adopt[i];
-					obj[item] = (obj[item] + 1) || 1;
-				}
-				// console.log(obj)
+                //末班
+                mb = {};
+                for (var i = 0, l = moban.length; i < l; i++) {
+                    var item = moban[i];
+                    mb[item] = (mb[item] + 1) || 1;
+                }
+                // console.log(mb);
+                
             }
-		})
-		//把对象转化为字符串
-		var jsons = JSON.stringify(obj);
-		// console.log(jsons)
-		var ens=jsons.split(',')
-		var adopts =[];//截取到的数据放在这里
-		for(var i=0;i<ens.length;i++){
-			all = ens[i].split(':')[1][0]
-			adopts.push(all)//追加到alls里
-		}
-
-        //违纪人数
+        })
+        
+        //违纪人数和原因
         $.ajax({
             type: 'get',
             async:false,
-            url: 'http://localhost:8000/indexs/read',
+            url: href+'/indexs/read',
             success(data) {
-                // console.log(data);
-                var arr=[];
+                var weiji=[];
                 reason = [];
                 for (var i = 0; i < data.length; i++) {
-                    // console.log(data[i].bj)
-                    arr.push(data[i].bj);
+                    // console.log(data[i])
+                    weiji.push(data[i].bj);
                     reason.push(data[i].Reason);
                 }
-                obj = {};
-                for (var i = 0, l = arr.length; i < l; i++) {
-                    var item = arr[i];
-                    obj[item] = (obj[item] + 1) || 1;
+                wj = {};
+                for (var i = 0, l = weiji.length; i < l; i++) {
+                    var item = weiji[i];
+                    wj[item] = (wj[item] + 1) || 1;
                 }
-                // console.log(obj)
+                // console.log(wj);
             }
             
         })
-        // console.log(reason);
-        //把对象转化为字符串
-		var jsona = JSON.stringify(obj);
-		// console.log(jsona)
-		var en=jsona.split(',')
-		var alls =[];//截取到的数据放在这里
-		for(var i=0;i<en.length;i++){
-			all = en[i].split(':')[1][0]
-			// console.log(all)
-			alls.push(all)//追加到alls里
-        }
-        
         //违纪原因去重
         var reasons=[];
         reason.forEach(function(item){
@@ -332,7 +287,10 @@
             }
         });
 
+
+
         read();
+        
         //读取班级信息
         function read() {
             $.ajax({
@@ -342,24 +300,17 @@
                 success(data) {
 					var str=``
                     for (var i = 0; i < data.length; i++) {
-                        if(alls[i] == undefined || suspend[i] == undefined){
-                            alls[i] = 0;
-                            suspend[i] = 0;
-                        }
-                        if(outs[i] == undefined){
-                            outs[i] = 0;
-                        }
                         str+= `
 							<tr>
 								<td>${data[i].class}(${data[i].stage})</td>
 								<td>${data[i].number}</td>
-								<td>${suspend[i]}</td>
-								<td>${outs[i]}</td>
-								<td>${adopts[i]}</td>
-								<td>${Math.round((data[i].number - suspend[i] -outs[i] - adopts[i]) / data[i].number * 100) + '%'}</td>
-								<td>${alls[i]}</td>
-								<td>${alls[i]}</td>
-								<td>${reason}</td>
+								<td>${(objs[data[i].class] || 0)}</td>
+								<td>${(tx[data[i].class] || 0)}</td>
+								<td>${(mb[data[i].class] || 0)}</td>
+								<td>${((data[i].number - (objs[data[i].class] || 0) - (tx[data[i].class] || 0) - (mb[data[i].class] || 0)) / (data[i].number - (objs[data[i].class] || 0) - (tx[data[i].class] || 0)) * 100).toFixed(2) + '%'}</td>
+								<td>${(wj[data[i].class] || 0)}</td>
+								<td>${(wj[data[i].class] || 0)}</td>
+								<td>${reasons}</td>
 							</tr>
                         `;
                     }
@@ -367,7 +318,6 @@
                 }
             })
         }
-<!-- <td>${reasons}</td> -->
         
         
     </script>
