@@ -233,8 +233,8 @@ router.get('/del',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json = req.query;
 	sql.con({
-		arr:[json.uid],
-		sql:'delete from mydata where uid=?',
+		arr:[json.id],
+		sql:'delete from mydata where id=?',
 		success(data){
 			res.send('ok');
 		},
@@ -243,23 +243,37 @@ router.get('/del',function(req,res){
 		}
 	})
 })
-// 存入离校学校
-
-// router.get('/history',function(req,res){
-// 	res.setHeader('Access-Control-Allow-Origin','*');
-// 	var json = req.query;
-// 	console.log(json);
-// 	sql.con({
-// 		arr:[json.id],
-// 		sql:'select * from mydata where id=?',
-// 		success(data){
-// 			res.send(data);
-// 		},
-// 		error(err){
-// 			res.send(err);
-// 		}
-// 	})
-// })
+// 存入被开除的学生
+router.get('/history',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json = req.query;
+	console.log(json);
+	sql.con({
+		arr:[json.id,json.namea,json.classs,json.gender,json.idsf,json.cs,json.mz,json.jg,json.mmao,json.myimg,json.mydh,json.jzname,json.jzdw,json.jzzw,json.jzdh,json.zhuzhi,json.yz,json.age,json.xj,json.bj,json.dq,json.system,json.time,json.reason],
+		sql:'insert into history(id,name,class,gender,idcard,birth,nation,place,face,photo,mytelephone,parentname,parentwark,parentposition,parentelephone,address,code,myage,xj,bj,dq,system,time,reason) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+		success(data){
+			res.send('ok');
+		},
+		error(err){
+			res.send(err);
+		}
+	})
+})
+// 搜索被开除的学生
+router.get('/h',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	var json=req.query
+	sql.con({
+		arr:[json.id,json.name],
+		sql:'select * from history where id like "%"?"%" or name like "%"?"%"',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});	
 //新学员入住寝室录入
 router.get('/dorm',function(req,res){
 	var json=req.query;

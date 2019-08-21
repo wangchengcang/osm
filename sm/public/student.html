@@ -9,114 +9,117 @@
     <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
     <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-        .main {
-            width: 100%;
-            margin: 0 auto;
-        }
+    .main {
+        width: 100%;
+        margin: 0 auto;
+    }
 
-        .title {
-            width: 100%;
-            height: 60px;
-            line-height: 60px;
-            border-bottom: 1px solid black;
-            background-color: #20b6ad;
-        }
+    .title {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        border-bottom: 1px solid black;
+        background-color: #20b6ad;
+    }
 
-        .title a {
-            float: left;
-            text-decoration: none;
-            color: black;
-            margin: 0 15px 0 5%;
-        }
+    .title a {
+        float: left;
+        text-decoration: none;
+        color: black;
+        margin: 0 15px 0 5%;
+    }
 
-        .title a i {
-            color: #fff;
-        }
+    .title a i {
+        color: #fff;
+    }
 
-        .title p {
-            font-size: 24px;
-            color: #fff;
-        }
+    .title p {
+        font-size: 24px;
+        color: #fff;
+    }
 
-        .mian-table {
-            width: 90%;
-            margin: 0 auto;
-        }
+    .mian-table {
+        width: 90%;
+        margin: 0 auto;
+    }
 
-        .select {
-            width: 100%;
-            height: 60px;
-        }
+    .select {
+        float: left;
+        height: 60px;
+    }
 
-        .select input {
-            height: 30px;
-            line-height: 30px;
-            border-radius: 15px;
-            padding-left: 10px;
-            margin: 15px 0 15px 15px;
-            float: left;
-            border-style: none;
-            border: 1px solid #ccc;
-            outline: none;
-        }
+    .select input {
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        padding-left: 10px;
+        margin: 15px 0 15px 15px;
+        float: left;
+        border-style: none;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+    .select_h {
+        float: right;
+        height: 60px;
+    }
 
-        .select button {
-            float: right;
-            border-radius: 20px;
-            background: #7cb1fe;
-            color: #fff;
-            padding: 6px 15px;
-            border-style: none;
-            font-size: 20px;
-            margin: 10px 15px;
-            outline: none;
-        }
+    .select_h input {
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        padding-left: 10px;
+        margin: 15px 0 15px 15px;
+        float: left;
+        border-style: none;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+    #table {
+        width: 100%;
+    }
 
-        #table {
-            width: 100%;
-        }
+    #table tr td {
+        line-height: 50px;
+        border-bottom: 1px solid black;
+        text-align: center;
+    }
 
-        #table tr td {
-            line-height: 50px;
-            border-bottom: 1px solid black;
-            text-align: center;
-        }
+    .main table {
+        width: 100%;
+        margin-top: 25px;
+    }
 
-        .main table {
-            width: 100%;
-            margin-top: 25px;
-        }
+    .main table tr th {
+        height: 35px;
+        line-height: 35px;
+        background: #20b6ad;
+        color: #fff;
+        border: none;
+    }
 
-        .main table tr th {
-            height: 35px;
-            line-height: 35px;
-            background: #20b6ad;
-            color: #fff;
-            border: none;
-        }
+    .main table tr td {
+        text-align: center;
+        line-height: 50px;
+        border: none;
+    }
 
-        .main table tr td {
-            text-align: center;
-            line-height: 50px;
-            border: none;
-        }
+    .main table tr:nth-child(odd) {
+        background: #ebfcf6;
+    }
 
-        .main table tr:nth-child(odd) {
-            background: #ebfcf6;
-        }
-
-        #see {
-            padding: 3px 13px;
-            background-color: #2CC9AA;
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
+    #see {
+        padding: 3px 13px;
+        background-color: #2CC9AA;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
 </head>
 
 <body>
@@ -128,6 +131,10 @@
         <div class="mian-table">
             <div class="select">
                 <input type="search" id="search" placeholder="学生信息搜索">
+                <!-- <button type="button" class="add" id="newadd">学员录入</button> -->
+            </div>
+            <div class="select_h">
+                <input type="search" id="search_h" placeholder="历史学生信息搜索">
                 <!-- <button type="button" class="add" id="newadd">学员录入</button> -->
             </div>
             <table id="table"  cellspacing="0" cellpadding="0">
@@ -155,39 +162,39 @@
                 url: href + '/users/read',
                 success(data) {
                     var str = `
-						<tr>
-						    <th>学号</th>
-                            <th>姓名</th>
-                            <th>班级</th>
-						    <th>年龄</th>
-						    <th>身份证号</th>
-						    <th>父母电话</th>
-						    <th>籍贯</th>
-						    <th>大区</th>
-						    <th>学籍</th>
-						    <th>班级</th>
-						    <th>详情</th>
-						</tr>
-					`;
+                    <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>班级</th>
+                    <th>年龄</th>
+                    <th>身份证号</th>
+                    <th>父母电话</th>
+                    <th>籍贯</th>
+                    <th>大区</th>
+                    <th>学籍</th>
+                    <th>班级</th>
+                    <th>详情</th>
+                    </tr>
+                    `;
                     for (var i = 0; i < data.length; i++) {
                         str += `
-							<tr>
-								<td>${data[i].id}</td>
-                                <td>${data[i].name}</td>
-                                <td>${data[i].class}</td>
-								<td>${data[i].myage}</td>
-								<td>${data[i].idcard}</td>
-								<td>${data[i].parentelephone}</td>
-								<td>${data[i].place}</td>
-								<td>${data[i].dq}</td>
-								<td>${data[i].xj}</td>
-								<td>${data[i].bj}</td>
-                                <td>
-                                    <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
-                                    <buttuon id="see" class="ye" onClick="del('${data[i].uid},${data[i].id}')">删除</buttuon>
-                                </td>	
-							</tr>
-						`;
+                        <tr>
+                        <td>${data[i].id}</td>
+                        <td>${data[i].name}</td>
+                        <td>${data[i].class}</td>
+                        <td>${data[i].myage}</td>
+                        <td>${data[i].idcard}</td>
+                        <td>${data[i].parentelephone}</td>
+                        <td>${data[i].place}</td>
+                        <td>${data[i].dq}</td>
+                        <td>${data[i].xj}</td>
+                        <td>${data[i].bj}</td>
+                        <td>
+                        <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
+                        <buttuon id="see" class="ye" onClick="del('${data[i].id}','${data[i].name}','${data[i].class}','${data[i].gender}','${data[i].idcard}','${data[i].birth}','${data[i].nation}','${data[i].place}','${data[i].face}','${data[i].photo}','${data[i].mytelephone}','${data[i].parentname}','${data[i].parentwark}','${data[i].parentposition}','${data[i].parentelephone}','${data[i].address}','${data[i].code}','${data[i].myage}','${data[i].xj}','${data[i].bj}','${data[i].dq}','${data[i].system}')">开除</buttuon>
+                        </td>	
+                        </tr>
+                        `;
                     }
                     biao.innerHTML = str
                     gl()
@@ -213,7 +220,7 @@
                     if (data == '') {
                         table.innerHTML = '';
                         var tr = document.createElement('tr');
-                        tr.innerHTML = `<td style="color:red">没有该班级,请重新输入</td>`;
+                        tr.innerHTML = `<td style="color:red">没有该学生,请重新输入</td>`;
                         // $('#search').val('');
                         table.appendChild(tr);
 
@@ -225,39 +232,39 @@
                         } else {
                             biao.style.display = 'none';
                             var str = `
-                                    <tr>
-                                        <th>学号</th>
-                                        <th>姓名</th>
-                                        <th>班级</th>
-                                        <th>年龄</th>
-                                        <th>身份证号</th>
-                                        <th>父母电话</th>
-                                        <th>籍贯</th>
-                                        <th>大区</th>
-                                        <th>学籍</th>
-                                        <th>班级</th>
-                                        <th>详情</th>
-                                    </tr>
-                                `;
+                            <tr>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>班级</th>
+                            <th>年龄</th>
+                            <th>身份证号</th>
+                            <th>父母电话</th>
+                            <th>籍贯</th>
+                            <th>大区</th>
+                            <th>学籍</th>
+                            <th>班级</th>
+                            <th>详情</th>
+                            </tr>
+                            `;
                             for (var i = 0; i < data.length; i++) {
                                 str += `
-							        <tr>
-                                    <td>${data[i].id}</td>
-                                    <td>${data[i].name}</td>
-                                    <td>${data[i].class}</td>
-                                    <td>${data[i].myage}</td>
-                                    <td>${data[i].idcard}</td>
-                                    <td>${data[i].parentelephone}</td>
-                                    <td>${data[i].place}</td>
-                                    <td>${data[i].dq}</td>
-                                    <td>${data[i].xj}</td>
-                                    <td>${data[i].bj}</td>
-                                    <td>
-                                        <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
-                                        <buttuon id="see" class="ye" onClick="del('${data[i].uid},${data[i].id}')">删除</buttuon>
-                                    </td>	
+                                <tr>
+                                <td>${data[i].id}</td>
+                                <td>${data[i].name}</td>
+                                <td>${data[i].class}</td>
+                                <td>${data[i].myage}</td>
+                                <td>${data[i].idcard}</td>
+                                <td>${data[i].parentelephone}</td>
+                                <td>${data[i].place}</td>
+                                <td>${data[i].dq}</td>
+                                <td>${data[i].xj}</td>
+                                <td>${data[i].bj}</td>
+                                <td>
+                                <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
+                                <buttuon id="see" class="ye" onClick="del('${data[i].id}','${data[i].name}','${data[i].class}','${data[i].gender}','${data[i].idcard}','${data[i].birth}','${data[i].nation}','${data[i].place}','${data[i].face}','${data[i].photo}','${data[i].mytelephone}','${data[i].parentname}','${data[i].parentwark}','${data[i].parentposition}','${data[i].parentelephone}','${data[i].address}','${data[i].code}','${data[i].myage}','${data[i].xj}','${data[i].bj}','${data[i].dq}','${data[i].system}')">开除</buttuon>
+                                </td>	
                                 </tr>
-						        `;
+                                `;
                             }
                             table.innerHTML = str
                         }
@@ -266,34 +273,93 @@
 
             })
         })
+        $('#search').on('blur',function(){
+            window.location.reload(); 
+        })
         //删除
-        function del(uid,id) {
-            console.log(uid);
+        function del(id,namea,classs,gender,idsf,cs, mz,jg,mmao,myimg,mydh,jzname,jzdw,jzzw,jzdh,zhuzhi,yz,age,xj,bj,dq,system){
+            console.log(id,namea,classs,gender,idsf,cs, mz,jg,mmao,myimg,mydh,jzname,jzdw,jzzw,jzdh,zhuzhi,yz,age,xj,bj,dq,system)
+            // 输入该学生开除原因
+            var reason=prompt("请输入该学生开除原因");
+            if (reason!=null && reason!=""){ 
+                console.log(reason) 
+                // 记录该学生被开除当前时间
+                function timestampToTime() {
+                    var date = new Date();
+                    var Y = date.getFullYear() + '-';
+                    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate() + ' ';
+                    return Y + M + D ;
+                }
+                var time=timestampToTime()
+                console.log(time)
+                // 删除数据库记录
+                // $.ajax({
+                //     type: 'get',
+                //     url: href + '/users/del',
+                //     data: {
+                //         id: id,
+                //     },
+                //     success(data) {
+                //         if (data == 'ok') {
+                //             console.log('开除成功')
+                //         }
+                //     }
+                // })
+                // 存入历史学生记录
+                $.ajax({
+                    type:'get',
+                    url:href+'/users/history',
+                    data:{
+                        id,
+                        namea,
+                        classs,
+                        gender,
+                        idsf,
+                        cs,
+                        mz,
+                        jg,
+                        mmao,
+                        myimg,
+                        mydh,
+                        jzname,
+                        jzdw,
+                        jzzw,
+                        jzdh,
+                        zhuzhi,
+                        yz,
+                        age,
+                        xj,
+                        bj,
+                        dq,
+                        system,
+                        time,
+                        reason,
+                    },
+                    success(data){
+                        console.log(data)
+                    }
+                })
+                
+            } 
+            
+        }
+         //历史学生搜索
+        $('#search_h').on('input', function () {
+            console.log(1)
             $.ajax({
                 type: 'get',
-                url: href + '/users/del',
+                url: href + '/users/h',
                 data: {
-                    uid: uid,
+                    id: search_h.value,
+                    name: search_h.value,
                 },
                 success(data) {
-                    if (data == 'ok') {
-                        alert('删除成功');
-                    }
+                    console.log(data)
                 }
+
             })
-            // 存入历史学生记录
-            // $.ajax({
-            //     type:'get',
-            //     url:href+'/users/history',
-            //     data:{
-            //         id:id,
-            //     },
-            //     success(data){
-            //         console.log(data)
-            //     }
-            // })
-            window.location.reload();
-        }
+        })
         //判断是否是管理者
         function gl(){
             $('.ye').css({'display':'none'});
@@ -302,22 +368,22 @@
                 audi=localStorageUser.uid;
             }
             console.log(audi)
-			$.ajax({
-				type:'get',
-				url:'http://localhost:8000/indexs/state',
-				data:{
-					uid:audi,
-				},
-				success(data){
-					console.log(data)
-					if(data[0].AR=='yes'){
-						$('.ye').css({'display':'initial'}) || $('.ye').css({'display':'block'})
-					}else{
-						$('.ye').css({'display':'none'})
-					}
-				}
-			})
-		}
+            $.ajax({
+                type:'get',
+                url:'http://localhost:8000/indexs/state',
+                data:{
+                 uid:audi,
+             },
+             success(data){
+                 console.log(data)
+                 if(data[0].AR=='yes'){
+                  $('.ye').css({'display':'initial'}) || $('.ye').css({'display':'block'})
+              }else{
+                  $('.ye').css({'display':'none'})
+              }
+          }
+      })
+        }
     </script>
 </body>
 
