@@ -141,8 +141,8 @@ router.get('/Entry',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.class_ban,json.stu_number,json.stu_name,json.stage,json.written,json.machine,json.Interview,json.zhouone,json.zhoutwo,json.thouthree,json.gender],
-					sql:'insert into achievement(class,xh,name,stage,written,machine,Interview,zhouone,zhoutwo,zhouthree,adopt) values(?,?,?,?,?,?,?,?,?,?,?)',
+					arr:[json.class_ban,json.stu_number,json.stu_name,json.stage,json.written,json.machine,json.Interview,json.zhouone,json.zhoutwo,json.thouthree,json.gender,json.jf],
+					sql:'insert into achievement(class,xh,name,stage,written,machine,Interview,zhouone,zhoutwo,zhouthree,adopt,jf) values(?,?,?,?,?,?,?,?,?,?,?,?)',
 					success(data){
 						res.send('ok')
 					},
