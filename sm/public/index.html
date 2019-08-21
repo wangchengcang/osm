@@ -13,14 +13,23 @@
 			width:100%;
 			position: fixed;
 			left:0;
-			bottom:0;
-			background-color: red;
-			display: none;
-		}
+            bottom:0;
+            text-align: center;
+            font-size: 40px;
+            display: none;
+            line-height: 300px;
+        }
+        #mask a{
+            text-decoration: underline;
+            color:red;
+        }
 	</style>
 </head>
 <body>
-	<div id="mask">请先登录</div>
+	<div id="mask">
+        请先登录账号↓
+        <a class="go" href="login.html">注册或登录</a>
+    </div>
 	
     <div id="box">
 
@@ -266,7 +275,7 @@
                 var weiji=[];
                 reason = [];
                 for (var i = 0; i < data.length; i++) {
-                    // console.log(data[i])
+                    // console.log(data[i]);
                     weiji.push(data[i].bj);
                     reason.push(data[i].Reason);
                 }
@@ -276,6 +285,7 @@
                     wj[item] = (wj[item] + 1) || 1;
                 }
                 // console.log(wj);
+                // console.log(reason);
             }
             
         })

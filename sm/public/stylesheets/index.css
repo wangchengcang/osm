@@ -154,7 +154,7 @@
 	/* background: #e2e1e1; */
 	background-color: rgb(40, 44, 52);
 	color: #999;
-	user-select: none;
+	/* user-select: none; */
 	padding: 10px 0;
 }
 
