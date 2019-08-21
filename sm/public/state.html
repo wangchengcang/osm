@@ -202,14 +202,14 @@
 							<th>归校日期</th>
 							<th>状态</th>
 							<th>是否休学<span id="stop_number"></span></t>
-							<th>是否已返校</th>
+							<th class="ye">是否已返校</th>
 						</tr>
 					</thead>
 					<tbody id="mytbody" style="border: none;">
 
 					</tbody>
 				</table>
-				<table border="0" cellspacing="0" cellpadding="0" id="suspen">
+				<table border="0" cellspacing="0" cellpadding="0" id="suspen" class="ye">
 					<caption>班级退学详情</caption>
 					<thead>
 						<tr style="height:40px;">
@@ -227,7 +227,7 @@
 
 					</tbody>
 				</table>
-				<table border="0" cellspacing="0" cellpadding="0" id="ment">
+				<table border="0" cellspacing="0" cellpadding="0" id="ment" class="ye">
 					<caption>班级不就业详情</caption>
 					<thead>
 						<tr style="height:40px;">
@@ -493,10 +493,8 @@
 							}
 							
 						};
-						
-						stop_number.innerHTML += arr.length;
-						// console.log(stop_number);
-						// console.log($('span').text())
+						gl();
+						// stop_number.innerHTML += arr.length;
 					} else {
 						leave.style.opacity = 1;
 						suspen.style.opacity = 1;
@@ -534,45 +532,30 @@
 
 
 		//判断是不是管理者
-		// function gl(){
-		$('.ye').css({
-			'display': 'none'
-		})
-		if (localStorage.user) {
-			var localStorageUser = JSON.parse(localStorage.user);
-			audi = localStorageUser.uid;
-		}
-		$.ajax({
-			type: 'get',
-			url: 'http://localhost:8000/indexs/state',
-			data: {
-				uid: audi,
-			},
-			success(data) {
-				if (data[0].AR == 'yes') {
-					$('.ye').css({
-						'display': 'table-cell'
-					}) || $('.ye').css({
-						'display': 'block'
-					})
-				}
-				if (data.length) {
-					if (data[0].AR == 'yes') {
-						$('.ye').css({
-							'display': 'block'
-						}) || $('.ye').css({
-							'display': 'table-cell'
-						})
-					} else {
-						$('.ye').css({
-							'display': 'none'
-						})
-					}
-				} else {
-					console.log('您是学生，没有权限去操作页面')
-				}
+		function gl(){
+			$('.ye').css({'display':'none'});
+			if(localStorage.user){
+				var localStorageUser=JSON.parse(localStorage.user);
+				audi=localStorageUser.uid;
 			}
-		})
-		// }
+			console.log(audi)
+			window.onload=function (){
+				$.ajax({
+					type:'get',
+					url:'http://localhost:8000/indexs/state',
+					data:{
+						uid:audi,
+					},
+					success(data){
+						console.log(data)
+						if(data[0].AR==='yes'){
+							$('.ye').css({'display':'table-cell'})
+						}else{
+							$('.ye').css({'display':'none'})
+						}
+					}
+				})
+			}
+		}
 	</script>
 </html>

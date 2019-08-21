@@ -201,7 +201,9 @@
         var href = 'http://localhost:8000';
         //匿名
         nmBtn.onclick = function () {
-            if (nmxm.value == '') {
+            if(nmxm.value == '' && nmbj.value == '' && nmjs.value == '' && nmyj.value == ''){
+                alert('请输入内容');
+            }else if (nmxm.value == '') {
                 alert('匿名必须得输入');
             }else if(nmbj.value == ''){
                 alert('班级不得为空');
@@ -232,7 +234,9 @@
         }
         //实名
         smBtn.onclick = function () {
-            if(smxm.value == ''){
+            if(smxm.value == '' && smbj.value == '' && smjs.value == '' && smyj.value == ''){
+                alert('请输入内容');
+            }else if(smxm.value == ''){
                 alert('必须得输入真实姓名');
             }else if(smbj.value == ''){
                 alert('班级不得为空');
