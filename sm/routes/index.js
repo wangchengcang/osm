@@ -170,4 +170,19 @@ router.get('/reads',function(req,res){
 	   }
    })
 })
+
+//读取班级门牌号
+router.get('/Door',function(req,res){
+	var json=req.query;
+	sql.con({
+		arr:[json.door],
+		sql:'select * from class where class=?',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+})
 module.exports = router;

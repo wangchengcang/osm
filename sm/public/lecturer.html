@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>课程</title>
-    <link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
-    <link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
-    <style>
-        * {
+		<title>课程</title>
+		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+		<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+		<style>
+			* {
             margin: 0;
             padding: 0;
         }
@@ -151,6 +151,7 @@
             outline: none;
             border: none;
             border-bottom: 1px solid;
+			background-color: #fff;
         }
 
         #content h6 {
@@ -177,168 +178,212 @@
             display: none;
         }
     </style>
-</head>
+	</head>
 
-<body>
-    <div class="box">
-        <div class="top">
-            <p>
-                <a href="index.html"><i class="iconfont">&#xe66f;</i></a>
-                讲师信息
-            </p>
-        </div>
-        
-        <div id="xinzeng">
-            <button id="btn" class="ye">新增讲师信息</button>
-            <input type="search" id="search" placeholder="搜索讲师信息">
-        </div>
-        <div id="content" class="ye">
-            <table cellspacing="0" cellpadding="0">
-                <tr>
-                    <td>班级：<input type="text" id="classroom" placeholder="请输入班级"></td>
-                    <td>门牌号：<input type="text" id="door" placeholder="请输入门牌号"></td>
-                    <td>讲师：<input type="text" id="lecturer" placeholder="请输入讲师"></td>
-                    <td>课程：<input type="text" id="curriculum" placeholder="请输入课程"></td>
-                    <td>人数：<input type="text" id="people" placeholder="请输入人数"></td>
-                    <td><button id="submit">提交</button></td>
-                    <td><button id="modifys">修改</button></td>
-                    <td><button id="aclose">关闭</button></td>
-                </tr>
-            </table>
-        </div>
-        <!-- 搜索 -->
-        <table id='ul' cellspacing="0" cellpadding="0"></table>
-        <div id="con">
-            <table border="0" style="border: 2px solid #20b6ad;" cellspacing="0" id="exhibition">
-                <tr>
-                    <th>班级</th>
-                    <th>门牌号</th>
-                    <th>讲师</th>
-                    <th>课程</th>
-                    <th>人数</th>
-                    <th class="ye">修改</th>
-                    <th class="ye">删除</th>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <script src="js/jquery.js"></script>
-    <script>
-		
-        var href = 'http://localhost:8000';
+	<body>
+		<div class="box">
+			<div class="top">
+				<p>
+					<a href="index.html"><i class="iconfont">&#xe66f;</i></a>
+					讲师信息
+				</p>
+			</div>
 
-        //点击新增讲师
-        btn.onclick=function(){
-            content.style.opacity='1';
-            content.style.display='block';
-            content.style.transition=0.5+'s';
-        }
+			<div id="xinzeng">
+				<button id="btn" class="ye">新增讲师信息</button>
+				<input type="search" id="search" placeholder="搜索讲师信息">
+			</div>
+			<div id="content" class="ye">
+				<table cellspacing="0" cellpadding="0">
+					<tr>
+						<td>班级：
+							<select class="z-text" id="classroom" style="width:60%;height: 30px;font-size: 18px;;"></select>
+						</td>
+						<td>门牌号：<input type="text" id="door" placeholder="请输入门牌号" style="width: 60%;"></td>
+						<td>讲师：<input type="text" id="lecturer" placeholder="请输入讲师"></td>
+						<td>课程：<input type="text" id="curriculum" placeholder="请输入课程"></td>
+						<td>人数：<input type="text" id="people" placeholder="请输入人数"></td>
+						<td><button id="submit">提交</button></td>
+						<td><button id="modifys">修改</button></td>
+						<td><button id="aclose">关闭</button></td>
+					</tr>
+				</table>
+			</div>
+			<!-- 搜索 -->
+			<table id='ul' cellspacing="0" cellpadding="0"></table>
+			<div id="con">
+				<table border="0" style="border: 2px solid #20b6ad;" cellspacing="0" id="exhibition">
+				
+				</table>
+			</div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script>
+			var href = 'http://localhost:8000';
+			//读取班级号码
+			readclass()
 
-        //关闭
-        aclose.onclick=function(){
-            content.style.opacity='0';
-            content.style.display='none';
-            content.style.transition=0.5+'s';
-			$('input').val('');
-        }
-        // 点击录入
-        submit.onclick = function () {
-            luru();
-            content.style.opacity='1';
-            content.style.display='block';
-        }
+			function readclass() {
+				$.ajax({
+					type: 'get',
+					url: 'http://localhost:8000/indexs/Read_class',
+					success(data) {
+						var str = '';
+						for (var i = 0; i < data.length; i++) {
+							str += `
+						<option value="${data[i].class}">${data[i].class}</option>
+					`
+						}
+						classroom.innerHTML = str
+					}
+				})
+			}
+			//读取但前班级门牌号
+			$('#door').attr('disabled',true);
+			$('#curriculum').attr('disabled',true);
+			$('#people').attr('disabled',true);
+			classroom.onblur=function(){
+				$.ajax({
+					type:'get',
+					url:href+"/indexs/Door",
+					data:{
+						door:classroom.value,
+					},
+					success(data){
+						console.log(data)
+						door.value=data[0].door;
+						curriculum.value=data[0].stage;
+						people.value=data[0].number;
+					}
+				})
+			}
+			//点击新增讲师
+			btn.onclick = function() {
+				content.style.opacity = '1';
+				content.style.display = 'block';
+				submit.style.display='block';
+				modifys.style.display='none';
+				content.style.transition = 0.5 + 's';
+			}
 
-        duqu();
-        // 录入
-        function luru() {
-            if (/[\u4E00-\u9FA5]/g.test(classroom.value)) {
-                alert('班级号不能为中文')
-            } else if (classroom.value == '') {
-                alert('班级号不能为空')
-            } else if (door.value == '') {
-                alert('门牌号不能为空')
-            } else if (lecturer.value == '') {
-                alert('讲师不能为空')
-            } else if (curriculum.value == '') {
-                alert('课程不能为空')
-            } else if (people.value == '') {
-                alert('人数不能为空')
-            } else {
-                $.ajax({
-                    type: 'post',
-                    url: href + '/users/teacher',
-                    data: {
-                        classroom: classroom.value,//班级
-                        door: door.value,//门牌号
-                        lecturer: lecturer.value,//讲师
-                        curriculum: curriculum.value,//阶段
-                        people: people.value,//人数
-                    },
-                    success(data) {
-                        console.log(data);
-                        if (data == 'ok') {
-                            alert('录入成功');
-                            duqu();
-                            $('input').val('');
-                            window.location.reload();
-                        } else {
-                            alert('该班级已存在');
-                        }
-                    }
-                })
-            }
-        }
-        // 读取
-        function duqu() {
-            $.ajax({
-                type: 'get',
-                url: href + '/users/r',
-                success(data) {
-                    console.log(data)
-                    for (var i = 0; i < data.length; i++) {
-                        var otr = document.createElement('tr');
-                        otr.innerHTML = `
-                            <td>${data[i].class}</td>
-                            <td>${data[i].door}</td>
-                            <td>${data[i].lecturer}</td>
-                            <td>${data[i].curriculum}</td>
-                            <td>${data[i].number}</td>
-                            <td class="ye">
-                                <button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
-                            </td> 
-                            <td class="ye">
-                                <button onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
-                        `;
-                        exhibition.appendChild(otr)
-                    }
-                    gl()
-                }
-            })
-        }
-        //搜索
-        $('#search').on('input',function(){
-            $.ajax({
-                type:'post',
-                url:href+'/users/sousuo',
-                data:{
-                    lecturer:$("#search").val(),
-                },
-                success(data){
-                    // console.log(data);
-                    if(data==''){
-                        ul.innerHTML='';
-                        var tr=document.createElement('tr');
-                        tr.innerHTML=`<td style="color:red">没有该老师,请重新输入</td>`;
-                        // $('#search').val('');
-                        ul.appendChild(tr);
-                    }else{
-                        ul.innerHTML=''
-                        if(search.value ==''){
-                            ul.innerHTML='';
-                            con.style.display = 'flex';
-                        }else{
-                            con.style.display = 'none';
-                            var tr = `
+			//关闭
+			aclose.onclick = function() {
+				content.style.opacity = '0';
+				content.style.display = 'none';
+				content.style.transition = 0.5 + 's';
+				$('input').val('');
+			}
+			// 点击录入
+			submit.onclick = function() {
+				luru();
+				content.style.opacity = '1';
+				content.style.display = 'block';
+			}
+
+			duqu();
+			// 录入
+			function luru() {
+				if (/[\u4E00-\u9FA5]/g.test(classroom.value)) {
+					alert('班级号不能为中文')
+				} else if (classroom.value == '') {
+					alert('班级号不能为空')
+				} else if (door.value == '') {
+					alert('门牌号不能为空')
+				} else if (lecturer.value == '') {
+					alert('讲师不能为空')
+				} else if (curriculum.value == '') {
+					alert('课程不能为空')
+				} else if (people.value == '') {
+					alert('人数不能为空')
+				} else {
+					$.ajax({
+						type: 'post',
+						url: href + '/users/teacher',
+						data: {
+							classroom: classroom.value, //班级
+							door: door.value, //门牌号
+							lecturer: lecturer.value, //讲师
+							curriculum: curriculum.value, //阶段
+							people: people.value, //人数
+						},
+						success(data) {
+							console.log(data);
+							if (data == 'ok') {
+								alert('录入成功');
+								duqu();
+								$('input').val('');
+							} else {
+								alert('该班级已存在');
+							}
+						}
+					})
+				}
+			}
+			// 读取
+			function duqu() {
+				$.ajax({
+					type: 'get',
+					url: href + '/users/r',
+					success(data) {
+						console.log(data)
+						var str=`
+							<tr>
+								<th>班级</th>
+								<th>门牌号</th>
+								<th>讲师</th>
+								<th>课程</th>
+								<th>人数</th>
+								<th class="ye">修改</th>
+								<th class="ye">删除</th>
+							</tr>
+						`
+						for (var i = 0; i < data.length; i++) {
+							
+							str+=`
+								<tr>
+									<td>${data[i].class}</td>
+									<td>${data[i].door}</td>
+									<td>${data[i].lecturer}</td>
+									<td>${data[i].curriculum}</td>
+									<td>${data[i].number}</td>
+									<td class="ye">
+										<button onClick="modify('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">修改</button>
+									</td> 
+									<td class="ye">
+										<button onClick="del('${data[i].uid}','${data[i].class}','${data[i].door}','${data[i].lecturer}','${data[i].curriculum}','${data[i].number}')">删除</button>
+								</tr>
+							`;
+							exhibition.innerHTML=str
+						}
+						gl()
+					}
+				})
+			}
+			//搜索
+			$('#search').on('input', function() {
+				$.ajax({
+					type: 'post',
+					url: href + '/users/sousuo',
+					data: {
+						lecturer: $("#search").val(),
+					},
+					success(data) {
+						// console.log(data);
+						if (data == '') {
+							ul.innerHTML = '';
+							var tr = document.createElement('tr');
+							tr.innerHTML = `<td style="color:red">没有该老师,请重新输入</td>`;
+							// $('#search').val('');
+							ul.appendChild(tr);
+						} else {
+							ul.innerHTML = ''
+							if (search.value == '') {
+								ul.innerHTML = '';
+								con.style.display = 'flex';
+							} else {
+								con.style.display = 'none';
+								var tr =
+									`
                                 <tr>
                                     <th>班级</th>
                                     <th>门牌号</th>
@@ -347,8 +392,9 @@
                                     <th>人数</th>
                                 </tr>
                             `;
-                            for(var i=0;i<data.length;i++){
-                                tr +=`
+								for (var i = 0; i < data.length; i++) {
+									tr +=
+										`
                                         <tr>
                                             <td>${data[i].class}</td>
                                             <td>${data[i].door}</td>
@@ -357,104 +403,114 @@
                                             <td>${data[i].number}</td>
                                         </tr>
                                 `;
-                                ul.innerHTML = tr;
-                            }
-                        }
-                    }
-                }
-            })
-        })
-        
-        //修改
-        function modify(uid,classrooms,doors,lecturers,curriculums,number){
-            console.log(uid,classrooms,doors,lecturers,curriculums,number);
-            content.style.opacity = '1';
-            content.style.display = 'block';
-            submit.style.display = 'none';
-            modifys.style.display = 'block';
-            classroom.value = classrooms;
-            door.value = doors;
-            lecturer.value = lecturers;
-            curriculum.value = curriculums;
-            people.value = number;
-            modifys.onclick=function(){
-                $.ajax({
-                    type: 'get',
-                    url: href + '/users/modify',
-                    data:{
-                        uid:uid,
-                        classroom: classroom.value,//班级
-                        door: door.value,//门牌号
-                        lecturer: lecturer.value,//讲师
-                        curriculum: curriculum.value,//阶段
-                        people: people.value,//人数
-                    },
-                    success(data){
-                        console.log(data);
-                        $('#content input').val('');
-                        duqu();
-                        alert('修改完成');
-                        window.location.reload();
-                    }
-                })
-            }
-        }
-
-        //删除讲师
-        function del(uid){
-            console.log(uid);
-            $.ajax({
-                type:'get',
-                url:href+'/users/dels',
-                data:{
-                    uid:uid,
-                },
-                success(data){
-                    console.log(data);
-                    if(data == data){
-                        alert('删除成功');
-                    }
-                    
-                    
-                    
-                }
-            })
-            window.location.reload();
-        }   
-
-
-        //判断是否是管理者还是读者
-        function gl(){
-            $('.ye').css({'display':'none'})
-            if(localStorage.user){
-                var localStorageUser=JSON.parse(localStorage.user);
-                audi=localStorageUser.uid;
-            }
-            console.log(audi)
-			$.ajax({
-				type:'get',
-				url:'http://localhost:8000/indexs/state',
-				data:{
-					uid:audi,
-				},
-				success(data){
-                    console.log(data);
-                    console.log(data[0].AR);
-					if(data[0].AR==='yes'){
-                        $('.ye').css({'display':'table-cell','opacity':'1'})
-                        $('#content').css({'display':'none','opacity':'0'})
-					}else{
-                        $('.ye').css({'display':'none'})
+									ul.innerHTML = tr;
+								}
+							}
+						}
 					}
-				}
+				})
 			})
-		}
-    </script>
-</body>
-<!-- classroom班级 -->
-<!-- door门牌号 -->
-<!-- lecturer 讲师-->
-<!-- curriculum 课程 -->
-<!-- Number人数-->
+
+			//修改
+			function modify(uid, classrooms, doors, lecturers, curriculums, number) {
+				console.log(uid, classrooms, doors, lecturers, curriculums, number);
+				content.style.opacity = '1';
+				content.style.display = 'block';
+				submit.style.display = 'none';
+				modifys.style.display = 'block';
+				classroom.value = classrooms;
+				door.value = doors;
+				lecturer.value = lecturers;
+				curriculum.value = curriculums;
+				people.value = number;
+				modifys.onclick = function() {
+					$.ajax({
+						type: 'get',
+						url: href + '/users/modify',
+						data: {
+							uid: uid,
+							classroom: classroom.value, //班级
+							door: door.value, //门牌号
+							lecturer: lecturer.value, //讲师
+							curriculum: curriculum.value, //阶段
+							people: people.value, //人数
+						},
+						success(data) {
+							console.log(data);
+							$('#content input').val('');
+							duqu();
+							alert('修改完成');
+							window.location.reload();
+						}
+					})
+				}
+			}
+
+			//删除讲师
+			function del(uid) {
+				console.log(uid);
+				$.ajax({
+					type: 'get',
+					url: href + '/users/dels',
+					data: {
+						uid: uid,
+					},
+					success(data) {
+						console.log(data);
+						if (data == data) {
+							alert('删除成功');
+						}
+
+
+
+					}
+				})
+				window.location.reload();
+			}
+
+
+			//判断是否是管理者还是读者
+			function gl() {
+				$('.ye').css({
+					'display': 'none'
+				})
+				if (localStorage.user) {
+					var localStorageUser = JSON.parse(localStorage.user);
+					audi = localStorageUser.uid;
+				}
+				console.log(audi)
+				$.ajax({
+					type: 'get',
+					url: 'http://localhost:8000/indexs/state',
+					data: {
+						uid: audi,
+					},
+					success(data) {
+						console.log(data);
+						console.log(data[0].AR);
+						if (data[0].AR === 'yes') {
+							$('.ye').css({
+								'display': 'table-cell',
+								'opacity': '1'
+							})
+							$('#content').css({
+								'display': 'none',
+								'opacity': '0'
+							})
+						} else {
+							$('.ye').css({
+								'display': 'none'
+							})
+						}
+					}
+				})
+			}
+		</script>
+	</body>
+	<!-- classroom班级 -->
+	<!-- door门牌号 -->
+	<!-- lecturer 讲师-->
+	<!-- curriculum 课程 -->
+	<!-- Number人数-->
 
 </html>
