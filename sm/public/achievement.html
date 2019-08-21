@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>学生成绩录入</title>
 		<link rel="stylesheet" href="stylesheets/achievement.css">
 		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
 	</head>
@@ -104,7 +104,9 @@
 									<option value="否">否</option>
 								</select>
 							</td>
-							<td class="ye" style="position: relative;"><button id="Submitment">提交</button></td>
+							<td class="ye">
+								<button id="Submitment">提交</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -244,7 +246,8 @@
 							zhouone: zhouone.value,
 							zhoutwo: zhoutwo.value,
 							thouthree: thouthree.value,
-							gender: gender.value
+							gender: gender.value,
+							jf:integral.value
 						},
 						success(data) {
 							console.log(data)

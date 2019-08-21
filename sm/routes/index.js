@@ -141,8 +141,8 @@ router.get('/Entry',function(req,res){
 				res.send('no')
 			}else{
 				sql.con({
-					arr:[json.class_ban,json.stu_number,json.stu_name,json.stage,json.written,json.machine,json.Interview,json.zhouone,json.zhoutwo,json.thouthree,json.gender],
-					sql:'insert into achievement(class,xh,name,stage,written,machine,Interview,zhouone,zhoutwo,zhouthree,adopt) values(?,?,?,?,?,?,?,?,?,?,?)',
+					arr:[json.class_ban,json.stu_number,json.stu_name,json.stage,json.written,json.machine,json.Interview,json.zhouone,json.zhoutwo,json.thouthree,json.gender,json.jf],
+					sql:'insert into achievement(class,xh,name,stage,written,machine,Interview,zhouone,zhoutwo,zhouthree,adopt,jf) values(?,?,?,?,?,?,?,?,?,?,?,?)',
 					success(data){
 						res.send('ok')
 					},
@@ -169,5 +169,20 @@ router.get('/reads',function(req,res){
 		   res.send(err)
 	   }
    })
+})
+
+//读取班级门牌号
+router.get('/Door',function(req,res){
+	var json=req.query;
+	sql.con({
+		arr:[json.door],
+		sql:'select * from class where class=?',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
 })
 module.exports = router;

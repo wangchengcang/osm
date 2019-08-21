@@ -1,183 +1,280 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
-	<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
-	<style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;
-	}
-
-	.con {
-		width: 80%;
-		margin: 0 auto;
-	}
-	.con p{
-		text-align: center;
-		line-height: 60px;
-		font-size: 28px;
-	}
-
-	table {
-		width: 100%;
-	}
-
-	table tr td {
-		height: 30px;
-		line-height: 30px;
-		font-size: 14px;
-	}
-
-	table tr td:nth-child(1) {
-		text-align: right;
-		width: 200px;
-		background: #d2e1ef;
-		padding-right: 20px;
-	}
-
-	table tr td:nth-child(2) {
-		width: 300px;
-		padding-left: 25px;
-	}
-
-	table tr td:nth-child(3) {
-		width: 200px;
-		text-align: right;
-		background: #d2e1ef;
-	}
-
-	table tr td:nth-child(4) {
-		width: 300px;
-	}
-	table tr td input {
-		font-size: 12px;
-	}
-	#img_box{
-		width: 200px;
-		height: 200px;
-		border: none;
-	}
-	#img_box img{
-		width: 94%;
-		height: 94%;
-		margin-top: 3%;
-		margin-right: 3%;
-	}
-	#back_record{
-		position: absolute;
-		text-decoration: none;
-		top: 20px;
-		font-size: 20px;
-		color:#000;
-	}
-</style>
-</head>
-<body>
-	<div class="con">
-		<a href="student.html" id="back_record">返回</a>
-		<p>学生基本信息</p>
-		<table border="2" cellspacing="0" cellpadding="0" id="msg_box"></table>
-	</div>
-	<script src="js/jquery.js"></script>
-	<script type="text/javascript">
-		
-		
-		
-		
-		if(localStorage.which){
-			var thisUid=localStorage.which;
-			console.log(thisUid)
-		}
-		var href='http://localhost:8000';
-		$.ajax({
-			type:'get',
-			url:href+'/users/msg',
-			data:{
-				i:thisUid
-			},
-			success(data){
-				console.log(data)
-				msg_box.innerHTML=
-				`<tr>
-				<td>学号</td>
-				<td colspan="2">${data[0].id}</td>
-				<td rowspan="6" style="background: #fff;" id="img_box"><img src="${data[0].photo}" alt=""></td>
-				</tr>
-				<tr>
-				<td>姓名</td>
-				<td colspan="2">${data[0].name}</td>
-				</tr>
-				<tr>
-				<td>班级</td>
-				<td colspan="2">${data[0].class}</td>
-				</tr>
-				<tr>
-				<td>性别</td>
-				<td colspan="2">${data[0].gender}</td>
-				</tr>
-				<tr>
-				<td>年龄</td>
-				<td colspan="2">${data[0].myage}</td>
-				</tr>
-				<tr>
-				<td>出生日期</td>
-				<td colspan="2">${data[0].birth}</td>
-				</tr>
-				<tr>
-				<td>民族</td>
-				<td colspan="3">${data[0].nation}</td>
-				</tr>
-				<tr>
-				<td>学历</td>
-				<td colspan="3">${data[0].xj}</td>
-				</tr>
-				<tr>
-				<td>身份证号</td>
-				<td colspan="3">${data[0].idcard}</td>
-				</tr>
-				<tr>
-				<td>政治面貌</td>
-				<td colspan="3">${data[0].face}</td>
-				</tr>
-
-				<tr>
-				<td>本人电话</td>
-				<td colspan="3">${data[0].mytelephone}</td>
-				</tr>
-				<tr>
-				<td>所在班级</td>
-				<td colspan="3">${data[0].bj}</td>
-				</tr>
-				<tr>
-				<td>籍贯</td>
-				<td colspan="3">${data[0].place}</td>
-				</tr>
-				<tr>
-				<td>父母名字</td>
-				<td colspan="3">${data[0].parentname}</td>
-				</tr>
-				<tr>
-				<td>父母电话</td>
-				<td colspan="3">${data[0].parentelephone}</td>
-				</tr>
-				<tr>
-				<td>家庭住址</td>
-				<td colspan="3">${data[0].address}</td>
-				</tr>
-				<tr>
-				<td>邮政编码</td>
-				<td colspan="3">${data[0].code}</td>
-				</tr>
-				<tr>
-					<td>学制</td>
-					<td colspan="3">${data[0].system}</td>	
-				</tr>
-				`
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="font_ps99atp86ak/iconfont.css">
+		<link rel="icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=427901597,3540167180&fm=26&gp=0.jpg">
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
 			}
-		})
-	</script>
-</body>
+
+			.con {
+				width:90%;
+				margin: 0 auto;
+			}
+
+			.con p {
+				text-align: center;
+				line-height: 60px;
+				font-size: 28px;
+			}
+
+			#msg_box {
+				width: 100%;
+			}
+
+			#msg_box tr td {
+				height: 30px;
+				line-height: 30px;
+				font-size: 14px;
+			}
+
+			#msg_box tr td:nth-child(1) {
+				text-align: right;
+				width: 200px;
+				background: #d2e1ef;
+				padding-right: 20px;
+			}
+
+			#msg_box tr td:nth-child(2) {
+				width: 300px;
+				padding-left: 25px;
+			}
+
+			#msg_box tr td:nth-child(3) {
+				width: 200px;
+				text-align: right;
+				background: #d2e1ef;
+			}
+
+			#msg_box tr td:nth-child(4) {
+				width: 300px;
+			}
+			#img_box {
+				width: 200px;
+				height: 200px;
+				border: none;
+			}
+
+			#img_box img {
+				width: 94%;
+				height: 94%;
+				margin-top: 3%;
+				margin-right: 3%;
+			}
+
+			#back_record {
+				position: absolute;
+				text-decoration: none;
+				top: 20px;
+				font-size: 20px;
+				color: #000;
+			}
+			#e_achievement{
+				width:100%;
+				margin: 0 auto;
+				border: 2px solid #2CC9AA;
+				display: none;
+			}
+			#e_achievement tr{
+				height: 40px;
+			}
+			#e_achievement tr td{
+				text-align: center;
+			}
+			#e_achievement tr:nth-child(even){
+				background-color:#ebfcf6;
+			}
+			.aael{
+				width: 100%;
+				border: 1px solid #2CC9AA;
+			}
+			.aael tr td{
+				border: 1px solid #2CC9AA;
+				text-align: center;
+			}
+			.aael tr{
+				width: 100%;
+				
+			}
+			.w{
+				width: 17%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="con">
+			<a href="student.html" id="back_record">返回</a>
+			<p>学生基本信息</p>
+			<table border="2" cellspacing="0" cellpadding="0" id="msg_box"></table>
+			
+			<h3 style="width:100%;margin-top:20px;margin-bottom:20px;text-align: center;">成绩单</h3>
+			<table border="0" cellspacing="0" cellpadding="0" id="e_achievement">
+					
+			</table>
+			<div id="tishi" style="display: none;">
+				<h3 colspan="8" style="width:100%; text-align: center;font-size: 20px;color: #ccc;">该学生成绩未完善</h3>
+			</div>
+			<div style="height: 200px;"></div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript">
+			if (localStorage.which) {
+				var thisUid = localStorage.which;
+				console.log(thisUid)
+			}
+			var href = 'http://localhost:8000';
+			var enl='';
+			$.ajax({
+				type: 'get',
+				url: href + '/users/msg',
+				data: {
+					i: thisUid
+				},
+				success(data){
+					console.log(data)
+					msg_box.innerHTML =
+						`
+						<td>学号</td>
+							<td colspan="2">${data[0].id}</td>
+							<td rowspan="6" style="background: #fff;" id="img_box"><img src="${data[0].photo}" alt=""></td>
+						</tr>
+						<tr>
+							<td>姓名</td>
+							<td colspan="2">${data[0].name}</td>
+						</tr>
+						<tr>
+							<td>班级</td>
+							<td colspan="2">${data[0].class}</td>
+						</tr>
+						<tr>
+							<td>性别</td>
+							<td colspan="2">${data[0].gender}</td>
+						</tr>
+						<tr>
+							<td>年龄</td>
+							<td colspan="2">${data[0].myage}</td>
+						</tr>
+						<tr>
+							<td>出生日期</td>
+							<td colspan="2">${data[0].birth}</td>
+						</tr>
+						<tr>
+							<td>民族</td>
+							<td colspan="3">${data[0].nation}</td>
+						</tr>
+						<tr>
+							<td>学历</td>
+							<td colspan="3">${data[0].xj}</td>
+						</tr>
+						<tr>
+							<td>身份证号</td>
+							<td colspan="3">${data[0].idcard}</td>
+						</tr>
+						<tr>
+							<td>政治面貌</td>
+							<td colspan="3">${data[0].face}</td>
+						</tr>
+						<tr>
+							<td>本人电话</td>
+							<td colspan="3">${data[0].mytelephone}</td>
+						</tr>
+						<tr>
+							<td>所在班级</td>
+							<td colspan="3">${data[0].bj}</td>
+						</tr>
+						<tr>
+							<td>籍贯</td>
+							<td colspan="3">${data[0].place}</td>
+						</tr>
+						<tr>
+							<td>父母名字</td>
+							<td colspan="3">${data[0].parentname}</td>
+						</tr>
+						<tr>
+							<td>父母电话</td>
+							<td colspan="3">${data[0].parentelephone}</td>
+						</tr>
+						<tr>
+							<td>家庭住址</td>
+							<td colspan="3">${data[0].address}</td>
+						</tr>
+						<tr>
+							<td>邮政编码</td>
+							<td colspan="3">${data[0].code}</td>
+						</tr>
+						<tr>
+							<td>学制</td>
+							<td colspan="3">${data[0].system}</td>	
+						</tr>
+					`
+					$.ajax({
+						type:'get',
+						url:href + '/users/achievement',
+						data:{
+							i:data[0].id,
+						},
+						success(data) {
+							console.log(data)
+							if(data==''){
+								tishi.style.display='block';
+								e_achievement.style.display='none'
+							}else{
+								tishi.style.display='none';
+								e_achievement.style.display='block'
+								var str=`
+									<tr style="background-color: #2CC9AA;color: #fff;">
+										<th style="width:8%;">班级</th>
+										<th style="width:8%;">学号</th>
+										<th style="width:10%;">姓名</th>
+										<th style="width:8%;">阶段</th>
+										<th class="w">月考成绩</th>
+										<th class="w">周考成绩</th>
+										<th>综合积分</th>
+										<th>是否通过</th>
+									</tr>
+								`;
+								for(var i=0;i<data.length;i++){
+									str+=`
+										<tr>
+											<td>${data[i].class}</td>
+											<td>${data[i].xh}</td>
+											<td>${data[i].name}</td>
+											<td>${data[i].stage}</td>
+											<td>
+												<table border="0" cellspacing="0" cellpadding="0" class="aael">
+													<tr>
+														<td>笔试：${data[i].written}</td>
+														<td>机试：${data[i].machine}</td>
+														<td>面试：${data[i].Interview}</td>
+													</tr>
+												</table>
+											</td>
+											<td>
+												<table border="0" cellspacing="0" cellpadding="0" class="aael">
+													<tr>
+														<td>周一：${data[i].zhouone}</td>
+														<td>周二：${data[i].zhoutwo}</td>
+														<td>周三：${data[i].zhouthree}</td>
+													</tr>
+												</table>
+											</td>
+											<td style="width:8%;">${data[i].jf}</td>
+											<td style="width:8%;">${data[i].adopt}</td>
+										</tr>
+									`
+								}
+								e_achievement.innerHTML=str
+							}
+							
+						}
+					})
+				}
+			})
+			//读取个人成绩
+		</script>
+	</body>
 </html>
