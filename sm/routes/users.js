@@ -243,6 +243,21 @@ router.get('/del',function(req,res){
 		}
 	})
 })
+//读取被开除的学生
+router.get('/reads',function(req,res){
+	res.setHeader('Access-Control-Allow-Origin','*')
+	sql.con({
+		arr:[],
+		sql:'select * from history',
+		success(data){
+			res.send(data)
+		},
+		error(err){
+			res.send(err)
+		}
+	})
+});
+
 // 存入被开除的学生
 router.get('/history',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
@@ -264,8 +279,8 @@ router.get('/h',function(req,res){
 	res.setHeader('Access-Control-Allow-Origin','*');
 	var json=req.query
 	sql.con({
-		arr:[json.id,json.name],
-		sql:'select * from history where id like "%"?"%" or name like "%"?"%"',
+		arr:[json.id,json.name,json.class],
+		sql:'select * from history where id like "%"?"%" or name like "%"?"%" or class like "%"?"%"',
 		success(data){
 			res.send(data)
 		},

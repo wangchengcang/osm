@@ -141,6 +141,8 @@
             </table>
             <table border="2" cellspacing="0" class="newtrainees" id="biao">
             </table>
+            <table border="2" cellspacing="0" class="newtrainees yes" id="kaichu">
+            </table>
         </div>
     </div>
 
@@ -161,6 +163,7 @@
                 type: 'get',
                 url: href + '/users/read',
                 success(data) {
+                    // console.log(data)
                     var str = `
                     <tr>
                     <th>学号</th>
@@ -177,30 +180,71 @@
                     </tr>
                     `;
                     for (var i = 0; i < data.length; i++) {
-                        str += `
-                        <tr>
-                        <td>${data[i].id}</td>
-                        <td>${data[i].name}</td>
-                        <td>${data[i].class}</td>
-                        <td>${data[i].myage}</td>
-                        <td>${data[i].idcard}</td>
-                        <td>${data[i].parentelephone}</td>
-                        <td>${data[i].place}</td>
-                        <td>${data[i].dq}</td>
-                        <td>${data[i].xj}</td>
-                        <td>${data[i].bj}</td>
-                        <td>
-                        <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
-                        <buttuon id="see" class="ye" onClick="del('${data[i].id}','${data[i].name}','${data[i].class}','${data[i].gender}','${data[i].idcard}','${data[i].birth}','${data[i].nation}','${data[i].place}','${data[i].face}','${data[i].photo}','${data[i].mytelephone}','${data[i].parentname}','${data[i].parentwark}','${data[i].parentposition}','${data[i].parentelephone}','${data[i].address}','${data[i].code}','${data[i].myage}','${data[i].xj}','${data[i].bj}','${data[i].dq}','${data[i].system}')">开除</buttuon>
-                        </td>	
-                        </tr>
-                        `;
+                        str += `<tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].class}</td>
+                            <td>${data[i].myage}</td>
+                            <td>${data[i].idcard}</td>
+                            <td>${data[i].parentelephone}</td>
+                            <td>${data[i].place}</td>
+                            <td>${data[i].dq}</td>
+                            <td>${data[i].xj}</td>
+                            <td>${data[i].bj}</td>
+                            <td>
+                            <buttuon id="see" onclick='chakan(${data[i].uid})'>查看</buttuon>
+                            <buttuon id="see" class="ye" onClick="del('${data[i].id}','${data[i].name}','${data[i].class}','${data[i].gender}','${data[i].idcard}','${data[i].birth}','${data[i].nation}','${data[i].place}','${data[i].face}','${data[i].photo}','${data[i].mytelephone}','${data[i].parentname}','${data[i].parentwark}','${data[i].parentposition}','${data[i].parentelephone}','${data[i].address}','${data[i].code}','${data[i].myage}','${data[i].xj}','${data[i].bj}','${data[i].dq}','${data[i].system}')">开除</buttuon>
+                            </td>	
+                        </tr>`;
                     }
                     biao.innerHTML = str
                     gl()
                 }
             })
         }
+        //读取开除学生名单
+        reads()
+        function reads() {
+            $.ajax({
+                type: 'get',
+                url: href + '/users/reads',
+                success(data) {
+                    console.log(data);
+                    var str = `
+                    <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>班级</th>
+                    <th>年龄</th>
+                    <th>身份证号</th>
+                    <th>父母电话</th>
+                    <th>籍贯</th>
+                    <th>大区</th>
+                    <th>学籍</th>
+                    <th>班级</th>
+                    <th>原因</th>
+                    </tr>
+                    `;
+                    for (var i = 0; i < data.length; i++) {
+                        str += `<tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].class}</td>
+                            <td>${data[i].myage}</td>
+                            <td>${data[i].idcard}</td>
+                            <td>${data[i].parentelephone}</td>
+                            <td>${data[i].place}</td>
+                            <td>${data[i].dq}</td>
+                            <td>${data[i].xj}</td>
+                            <td>${data[i].bj}</td>
+                            <td>${data[i].reason}</td>
+                        </tr>`;
+                    }
+                    kaichu.innerHTML = str
+                }
+            })
+        }
+
 
         //搜索
         $('#search').on('input', function () {
@@ -208,7 +252,7 @@
                 type: 'get',
                 url: href + '/users/s',
                 data: {
-                    id: search.value,
+                    id: search_h.value,
                     name: search.value,
                     gender: search.value,
                     myage: search.value,
@@ -294,18 +338,18 @@
                 var time=timestampToTime()
                 console.log(time)
                 // 删除数据库记录
-                // $.ajax({
-                //     type: 'get',
-                //     url: href + '/users/del',
-                //     data: {
-                //         id: id,
-                //     },
-                //     success(data) {
-                //         if (data == 'ok') {
-                //             console.log('开除成功')
-                //         }
-                //     }
-                // })
+                $.ajax({
+                    type: 'get',
+                    url: href + '/users/del',
+                    data: {
+                        id: id,
+                    },
+                    success(data) {
+                        if (data == 'ok') {
+                            console.log('开除成功')
+                        }
+                    }
+                })
                 // 存入历史学生记录
                 $.ajax({
                     type:'get',
@@ -340,7 +384,7 @@
                         console.log(data)
                     }
                 })
-                
+                window.location.reload();
             } 
             
         }
@@ -353,9 +397,56 @@
                 data: {
                     id: search_h.value,
                     name: search_h.value,
+                    class: search_h.value,
                 },
                 success(data) {
                     console.log(data)
+                    if (data == '') {
+                        table.innerHTML = '';
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = `<td style="color:red">没有该学生,请重新输入</td>`;
+                        table.appendChild(tr);
+
+                    } else {
+                        table.innerHTML = '';
+                        if (search_h.value == '') {
+                            table.innerHTML = '';
+                            biao.style.display = 'inline-table';
+                        } else {
+                            biao.style.display = 'none';
+                            var str = `
+                            <tr>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>班级</th>
+                            <th>年龄</th>
+                            <th>身份证号</th>
+                            <th>父母电话</th>
+                            <th>籍贯</th>
+                            <th>大区</th>
+                            <th>学籍</th>
+                            <th>班级</th>
+                            <th>原因</th>
+                            </tr>
+                            `;
+                            for (var i = 0; i < data.length; i++) {
+                                str += `<tr>
+                                    <td>${data[i].id}</td>
+                                    <td>${data[i].name}</td>
+                                    <td>${data[i].class}</td>
+                                    <td>${data[i].myage}</td>
+                                    <td>${data[i].idcard}</td>
+                                    <td>${data[i].parentelephone}</td>
+                                    <td>${data[i].place}</td>
+                                    <td>${data[i].dq}</td>
+                                    <td>${data[i].xj}</td>
+                                    <td>${data[i].bj}</td>
+                                    <td>${data[i].reason}</td>
+                                </tr>`;
+                            }
+                            table.innerHTML = str
+                        }
+                    }
                 }
 
             })
@@ -363,6 +454,7 @@
         //判断是否是管理者
         function gl(){
             $('.ye').css({'display':'none'});
+            $('.yes').css({'display':'none'});
             if(localStorage.user){
                 var localStorageUser=JSON.parse(localStorage.user);
                 audi=localStorageUser.uid;
@@ -377,9 +469,11 @@
              success(data){
                  console.log(data)
                  if(data[0].AR=='yes'){
-                  $('.ye').css({'display':'initial'}) || $('.ye').css({'display':'block'})
+                  $('.ye').css({'display':'initial'})
+                  $('.yes').css({"display": "inline-table"});
               }else{
                   $('.ye').css({'display':'none'})
+                  $('.yes').css({'display':'none'});
               }
           }
       })
